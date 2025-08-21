@@ -107,55 +107,64 @@ const Navbar = () => {
   );
 };
 
+
 // === Hero ===
 const Hero = () => (
   <section
     id="home"
-    className="relative min-h-[80vh] grid place-items-center text-white"
+    className="relative min-h-[90vh] md:min-h-screen text-white"
   >
+    {/* Fondo (queda detrás) */}
     <div
       className="absolute inset-0 -z-10 bg-cover bg-center"
       style={{
         backgroundImage:
-          "url(https://images.unsplash.com/photo-1520975916090-3105956dac38?q=80&w=1974&auto=format&fit=crop)",
+          "url('https://images.squarespace-cdn.com/content/v1/5fa4b5ace41c003a0a498fe3/197e92d0-085e-45f5-841f-0c5ecae4c9fc/internal_artificial-intelligence-ai-and-security-a-match-made-in-the-soc.jpeg')",
       }}
     />
-    <div className="absolute inset-0 -z-10 bg-black/50" />
+    {/* Overlay por delante del fondo */}
+    <div className="absolute inset-0 bg-black/45 z-0" />
 
-    <Container className="pt-24 pb-16 grid md:grid-cols-2 items-center gap-10">
+    {/* Contenido por encima de todo */}
+    <Container className="relative z-10 pt-24 md:pt-28 pb-16 grid md:grid-cols-2 items-center gap-10">
       <div className="space-y-6">
-        <p className="text-lg text-white/80">Hello, I'm</p>
-        <h1 className="text-5xl sm:text-6xl font-extrabold tracking-tight">
-          Yayady S
+        <p className="text-xl md:text-2xl text-white/85">Hello, I'm</p>
+
+        <h1 className="leading-tight">
+          <span
+            className="block text-[48px] sm:text-[64px] md:text-[80px] lg:text-[92px] font-extrabold tracking-tight"
+            style={{ color: '#0b1b55' }}
+          >
+            Yayady S
+          </span>
         </h1>
-        <p className="text-3xl font-semibold text-blue-200">Web Developer</p>
+
+        <p
+          className="text-3xl sm:text-4xl md:text-5xl font-extrabold"
+          style={{ color: '#64a7ff' }}
+        >
+          Web Developer
+        </p>
+
         <a
           href="#projects"
           className="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 transition text-white font-semibold shadow-lg"
         >
           SEE MY WORK
         </a>
-        <div className="flex items-center gap-6 text-2xl pt-2">
-          {[
-            { href: "#", label: "Facebook" },
-            { href: "#", label: "Instagram" },
-            { href: "#", label: "LinkedIn" },
-          ].map((s) => (
-            <a
-              key={s.label}
-              href={s.href}
-              aria-label={s.label}
-              className="hover:text-white/80"
-            >
-              <span>•</span>
-            </a>
-          ))}
+
+        <div className="flex items-center gap-8 pt-2 text-2xl">
+          <a href="#" aria-label="Facebook" className="hover:text-white/80"></a>
+          <a href="#" aria-label="Instagram" className="hover:text-white/80"></a>
+          <a href="#" aria-label="LinkedIn" className="hover:text-white/80"></a>
         </div>
       </div>
+
       <div className="hidden md:block" />
     </Container>
   </section>
 );
+
 
 // === About ===
 const About = () => (
@@ -166,7 +175,7 @@ const About = () => (
         <img
           alt="Yayady portrait"
           className="w-full max-w-md mx-auto rounded-2xl shadow-2xl object-cover"
-          src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=1887&auto=format&fit=crop"
+          src="https://www.redseguridad.com/wp-content/uploads/sites/2/2021/12/soc-centro-de-operaciones-de-seguridad.jpg"
         />
         <div className="space-y-5 text-gray-700">
           <h3 className="text-3xl font-extrabold text-gray-900">
@@ -191,6 +200,8 @@ const About = () => (
     </Container>
   </section>
 );
+
+
 
 // === Skills ===
 const Skills = () => (
@@ -369,9 +380,8 @@ const ScrollTop = () => {
   );
 };
 
-export default function PortfolioYayady() {
+export default function PortfolioDante() {
   useEffect(() => {
-    // Smooth anchor offset for fixed navbar
     const anchorHandler = (e) => {
       const a = e.target.closest('a[href^="#"]');
       if (!a) return;
@@ -389,13 +399,7 @@ export default function PortfolioYayady() {
   }, []);
 
   return (
-    <div className="font-sans antialiased">
-      {/* Tailwind base via CDN for Canvas preview */}
-      <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
-      />
-
+    <>
       <Navbar />
       <main className="pt-16">
         <Hero />
@@ -410,7 +414,8 @@ export default function PortfolioYayady() {
         © {new Date().getFullYear()} YAYADY — All rights reserved.
       </footer>
       <ScrollTop />
-    </div>
+    </>
   );
 }
+
 
