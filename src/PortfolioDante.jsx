@@ -639,9 +639,9 @@ const About = () => {
     pointer-events-none select-none
     absolute z-0
     top-0 md:-top-2 lg:-top-10       /* un poquito hacia abajo */
-    left-0 md:left-6 lg:left-40   /* margen izquierdo */
+    left-10 sm:left-16 md:left-24 lg:left-52   /* margen izquierdo */
     -translate-x-1/4              /* lo movemos un poco hacia fuera */
-    w-19 md:w-20 lg:w-40          /* más chico que el de la derecha */
+    w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-32 lg:h-32          /* más chico que el de la derecha */
     object-contain
     opacity-90
   "
