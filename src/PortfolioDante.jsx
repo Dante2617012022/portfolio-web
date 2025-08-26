@@ -291,19 +291,19 @@ return (
 // === Cursor Binary Trail (canvas) ===
 const BinaryTrail = ({
   targetRef,
-  color = "rgba(100,167,255,0.9)",   // #64a7ff con alpha
+  color = "rgba(100,167,255,0.9)",
   maxParticles = 160,
   spawnCount = 6,
   fadeMs = 1200,
-  sizeRange = [12, 20],               // px
-  enableOnTouch = false,              // evita gastar batería en móviles
-  mixBlendMode = "screen"             // "normal" si lo prefieres
+  sizeRange = [12, 20],
+  enableOnTouch = false,
+  mixBlendMode = "screen",
+  listen = "window", // "window" | "element"
 }) => {
   const canvasRef = useRef(null);
   const ctxRef = useRef(null);
   const particlesRef = useRef([]);
   const rafRef = useRef(null);
-  const lastMoveRef = useRef({ x: 0, y: 0, t: 0 });
 
   useEffect(() => {
     const prefersReduced =
@@ -314,8 +314,8 @@ const BinaryTrail = ({
       typeof window !== "undefined" &&
       window.matchMedia?.("(pointer: fine)")?.matches;
 
-    if (prefersReduced) return;                   // respeta accesibilidad
-    if (!enableOnTouch && !finePointer) return;   // desactiva en touch por defecto
+    if (prefersReduced) return;
+    if (!enableOnTouch && !finePointer) return;
 
     const el = targetRef?.current;
     const cvs = canvasRef.current;
@@ -324,30 +324,31 @@ const BinaryTrail = ({
     const ctx = cvs.getContext("2d");
     ctxRef.current = ctx;
 
-    let rect = el.getBoundingClientRect();
     let running = true;
 
+    // Ajusta tamaño del canvas al elemento
     const resize = () => {
-      rect = el.getBoundingClientRect();
+      const r = el.getBoundingClientRect();
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      cvs.style.width = rect.width + "px";
-      cvs.style.height = rect.height + "px";
-      cvs.width = Math.max(1, Math.floor(rect.width * dpr));
-      cvs.height = Math.max(1, Math.floor(rect.height * dpr));
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0); // DPI-correct
-      ctx.clearRect(0, 0, rect.width, rect.height);
+      cvs.style.width = r.width + "px";
+      cvs.style.height = r.height + "px";
+      cvs.width = Math.max(1, Math.floor(r.width * dpr));
+      cvs.height = Math.max(1, Math.floor(r.height * dpr));
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, r.width, r.height);
     };
 
     resize();
     const ro = new ResizeObserver(resize);
     ro.observe(el);
+    window.addEventListener("scroll", resize, { passive: true });
 
     const spawn = (mx, my, vx, vy) => {
       const arr = particlesRef.current;
       for (let i = 0; i < spawnCount; i++) {
-        if (arr.length >= maxParticles) arr.shift(); // pool
+        if (arr.length >= maxParticles) arr.shift();
         const speedJitter = 0.5 + Math.random() * 0.8;
-        const angle = (Math.random() - 0.5) * Math.PI / 2; // abanico
+        const angle = (Math.random() - 0.5) * Math.PI / 2;
         const cos = Math.cos(angle), sin = Math.sin(angle);
         const svx = (vx * cos - vy * sin) * speedJitter;
         const svy = (vx * sin + vy * cos) * speedJitter;
@@ -356,43 +357,53 @@ const BinaryTrail = ({
           x: mx,
           y: my,
           vx: svx * 0.06,
-          vy: svy * 0.06 - (Math.random() * 0.4 + 0.1), // un poco hacia arriba
+          vy: svy * 0.06 - (Math.random() * 0.4 + 0.1),
           born: performance.now(),
           ttl: fadeMs,
           rot: (Math.random() - 0.5) * 0.6,
           size: Math.floor(sizeRange[0] + Math.random() * (sizeRange[1] - sizeRange[0])),
-          char: Math.random() < 0.5 ? "0" : "1"
+          char: Math.random() < 0.5 ? "0" : "1",
         });
       }
     };
 
-    const onMove = (e) => {
+    let last = { x: 0, y: 0, t: 0 };
+
+    const handleMove = (clientX, clientY) => {
+      const r = el.getBoundingClientRect(); // siempre fresco (considera scroll)
+      // Solo dibujar si el cursor está sobre el Hero
+      if (
+        clientX < r.left || clientX > r.right ||
+        clientY < r.top  || clientY > r.bottom
+      ) return;
+
       const now = performance.now();
-      const mx = e.clientX - rect.left;
-      const my = e.clientY - rect.top;
-
-      const { x: px, y: py, t: pt } = lastMoveRef.current;
-      const dt = Math.max(16, now - pt || 16);
-      const vx = (mx - (px || mx)) / dt;
-      const vy = (my - (py || my)) / dt;
-
+      const mx = clientX - r.left;
+      const my = clientY - r.top;
+      const dt = Math.max(16, now - (last.t || now));
+      const vx = (mx - (last.x || mx)) / dt;
+      const vy = (my - (last.y || my)) / dt;
       spawn(mx, my, vx, vy);
-      lastMoveRef.current = { x: mx, y: my, t: now };
+      last = { x: mx, y: my, t: now };
     };
 
-    const onLeave = () => {
-      lastMoveRef.current = { x: 0, y: 0, t: 0 };
-    };
+    const onMoveWindow = (e) => handleMove(e.clientX, e.clientY);
+    const onMoveEl = (e) => handleMove(e.clientX, e.clientY);
+    const onLeave = () => { last = { x: 0, y: 0, t: 0 }; };
 
-    el.addEventListener("mousemove", onMove);
-    el.addEventListener("mouseleave", onLeave);
+    if (listen === "window") {
+      window.addEventListener("mousemove", onMoveWindow);
+      window.addEventListener("mouseleave", onLeave);
+    } else {
+      el.addEventListener("mousemove", onMoveEl);
+      el.addEventListener("mouseleave", onLeave);
+    }
 
-    // Loop
     const loop = () => {
       if (!running) return;
+      const r = el.getBoundingClientRect();
       const ctx = ctxRef.current;
-      if (!ctx) return;
-      ctx.clearRect(0, 0, rect.width, rect.height);
+      ctx.clearRect(0, 0, r.width, r.height);
 
       const now = performance.now();
       const arr = particlesRef.current;
@@ -400,11 +411,8 @@ const BinaryTrail = ({
       for (let i = arr.length - 1; i >= 0; i--) {
         const p = arr[i];
         const life = now - p.born;
-        if (life > p.ttl) {
-          arr.splice(i, 1);
-          continue;
-        }
-        // física simple
+        if (life > p.ttl) { arr.splice(i, 1); continue; }
+
         p.x += p.vx * 16;
         p.y += p.vy * 16;
         p.vx *= 0.98;
@@ -416,26 +424,30 @@ const BinaryTrail = ({
         ctx.translate(p.x, p.y);
         ctx.rotate(p.rot);
         ctx.fillStyle = color;
-        ctx.font = `${p.size}px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace`;
+        ctx.font = `${p.size}px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Courier New", monospace`;
         ctx.fillText(p.char, 0, 0);
         ctx.restore();
       }
 
       rafRef.current = requestAnimationFrame(loop);
     };
-
     rafRef.current = requestAnimationFrame(loop);
 
     return () => {
       running = false;
       cancelAnimationFrame(rafRef.current);
-      el.removeEventListener("mousemove", onMove);
-      el.removeEventListener("mouseleave", onLeave);
       ro.disconnect();
+      window.removeEventListener("scroll", resize);
+      if (listen === "window") {
+        window.removeEventListener("mousemove", onMoveWindow);
+        window.removeEventListener("mouseleave", onLeave);
+      } else {
+        el.removeEventListener("mousemove", onMoveEl);
+        el.removeEventListener("mouseleave", onLeave);
+      }
       particlesRef.current = [];
-      ctx && ctx.clearRect(0, 0, rect.width, rect.height);
     };
-  }, [targetRef, color, maxParticles, spawnCount, fadeMs, sizeRange, enableOnTouch]);
+  }, [targetRef, color, maxParticles, spawnCount, fadeMs, sizeRange, enableOnTouch, listen]);
 
   return (
     <canvas
@@ -453,9 +465,9 @@ const Hero = () => {
 
   return (
     <section
-      id="home"
-      ref={heroRef}
-      className="relative min-h-[90vh] md:min-h-screen text-white"
+   id="home"
+   ref={heroRef}
+   className="relative z-20 min-h-[90vh] md:min-h-screen text-white"
     >
       {/* Fondo */}
       <div
@@ -467,7 +479,7 @@ const Hero = () => {
       />
 
       {/* Overlay por delante del fondo */}
-      <div className="absolute inset-0 bg-black/45 z-0" />
+      <div className="absolute inset-0 bg-black/45 z-0 pointer-events-none" />
 
       {/* 🔥 Rastro binario (sobre el overlay, debajo del contenido) */}
       <BinaryTrail
@@ -478,6 +490,7 @@ const Hero = () => {
         spawnCount={7}
         fadeMs={1300}
         sizeRange={[12, 22]}
+        listen="window"
         // enableOnTouch={true}      // activa en móviles si querés
       />
 
@@ -580,24 +593,67 @@ const Tilt = ({ className = "", children, max = 6 }) => {
 const About = () => {
   const reduce = useReducedMotion();
 
-  // Variants para stagger del texto
   const list = {
     hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: { staggerChildren: 0.08 }
-    }
+    show: { opacity: 1, transition: { staggerChildren: 0.08 } }
   };
   const item = {
     hidden: reduce ? { opacity: 0 } : { opacity: 0, y: 12 },
-    show:   reduce ? { opacity: 1 } : { opacity: 1, y: 0 }
+    show: reduce ? { opacity: 1 } : { opacity: 1, y: 0 }
   };
 
   return (
     <section id="about" className="py-20 bg-white">
-      <Container>
-        {/* Título + subrayado animado */}
-        <div className="text-center">
+      {/* 👇 el Container es relative para posicionar el GIF */}
+      <Container className="relative">
+        {/* GIF a la derecha, DEBAJO del contenido */}
+        <motion.img
+          alt="GIF Cyber Joy"
+          src="https://media1.tenor.com/m/zn8iyusePtgAAAAC/joy.gif"
+          loading="lazy"
+          aria-hidden="true"
+          className="
+            hidden md:block                      /* evita móviles */
+            pointer-events-none select-none
+            absolute z-0                         /* debajo del texto */
+            top-0 md:-top-4 lg:-top-16
+            right-0 md:right-8 lg:right-12 xl:right-16
+            translate-x-1/3 md:translate-x-1/2
+            w-40 md:w-48 lg:w-56 xl:w-64
+            object-contain
+            opacity-95                           /* sutil para que el texto contraste */
+          "
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, margin: "-10% 0px" }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        />
+        {/* GIF arriba a la izquierda */}
+<motion.img
+  alt="GIF Locked In"
+  src="https://media1.tenor.com/m/9Ez46wr-voMAAAAd/lock.gif"
+  loading="lazy"
+  aria-hidden="true"
+  className="
+    hidden md:block
+    pointer-events-none select-none
+    absolute z-0
+    top-0 md:-top-2 lg:-top-10       /* un poquito hacia abajo */
+    left-0 md:left-6 lg:left-40   /* margen izquierdo */
+    -translate-x-1/4              /* lo movemos un poco hacia fuera */
+    w-19 md:w-20 lg:w-40          /* más chico que el de la derecha */
+    object-contain
+    opacity-90
+  "
+  initial={{ opacity: 0, scale: 0.9 }}
+  whileInView={{ opacity: 1, scale: 1 }}
+  viewport={{ once: true, margin: "-10% 0px" }}
+  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+/>
+
+
+        {/* Título */}
+        <div className="text-center relative z-10">
           <motion.h2
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -628,11 +684,14 @@ const About = () => {
           </div>
         </div>
 
-        <div className="mt-12 grid md:grid-cols-2 gap-10 items-center">
+        {/* Contenido */}
+        <div className="mt-12 grid md:grid-cols-2 items-center gap-12 lg:gap-16">
           {/* Imagen con glow + tilt */}
-          <div className="relative">
-            {/* glow detrás */}
-            <div className="absolute -inset-4 rounded-3xl bg-gradient-to-tr from-blue-500/20 to-indigo-500/10 blur-2xl" aria-hidden />
+          <div className="relative z-10">
+            <div
+              className="absolute -inset-4 rounded-3xl bg-gradient-to-tr from-blue-500/20 to-indigo-500/10 blur-2xl"
+              aria-hidden
+            />
             <Tilt className="rounded-2xl">
               <motion.img
                 alt="Dante - ciberseguridad"
@@ -646,13 +705,13 @@ const About = () => {
             </Tilt>
           </div>
 
-          {/* Texto con stagger */}
+          {/* Texto ENCIMA del GIF */}
           <motion.div
             variants={list}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: "-10% 0px" }}
-            className="space-y-5 text-gray-700"
+            className="relative z-10 space-y-6 text-gray-700 leading-relaxed max-w-prose"
           >
             <motion.p variants={item}>
               Estudiante de Ciberseguridad con experiencia práctica en soporte técnico,
@@ -662,7 +721,6 @@ const About = () => {
               Formación en seguridad operativa, cumplimiento normativo y herramientas
               ofensivas/defensivas.
             </motion.p>
-            {/* CTA opcional */}
             <motion.div variants={item} className="pt-2">
               <a
                 href="#projects"
@@ -670,7 +728,13 @@ const About = () => {
               >
                 Ver proyectos
                 <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none">
-                  <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path
+                    d="M5 12h14M13 5l7 7-7 7"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
               </a>
             </motion.div>
@@ -680,6 +744,7 @@ const About = () => {
     </section>
   );
 };
+
 
 
 // === Skills ===
