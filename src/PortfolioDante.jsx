@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useRef, useLayoutEffect } from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import FloatingLogos from "./components/FloatingLogos";
+
 // === Icons (SVG inline) ===
 const IconGitHub = ({ className = "w-5 h-5" }) => (
   <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
@@ -18,6 +20,38 @@ const IconPhone = ({ className = "w-5 h-5" }) => (
     <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24 11.36 11.36 0 0 0 3.56.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A16 16 0 0 1 3 9a1 1 0 0 1 1-1h2.5a1 1 0 0 1 1 1 11.36 11.36 0 0 0 .57 3.56 1 1 0 0 1-.24 1.02l-2.21 2.21Z"/>
   </svg>
 );
+
+// === Arrays de logos ===
+const techLogosAvanzado = [
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg", radius: 28 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/debian/debian-original.svg", radius: 26 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg", radius: 26 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", radius: 30 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg", radius: 28 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg", radius: 28 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg", radius: 28 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg", radius: 28 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg", radius: 28 },
+];
+
+const techLogosIntermedio = [
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg", radius: 28 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg", radius: 28 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg", radius: 28 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg", radius: 28 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original.svg", radius: 28 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg", radius: 28 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg", radius: 28 },
+];
+
+// Básico / en progreso
+const techLogosBasico = [
+  { src: "https://cdn.simpleicons.org/wireshark/4EA1F2", radius: 28 }, // Wireshark
+  { src: "https://cdn.simpleicons.org/burpsuite/F16221", radius: 28 }, // Burp Suite
+  { src: "https://cdn.simpleicons.org/virustotal/4285F4", radius: 28 }, // YARA (usa marca VirusTotal)
+  { src: "https://cdn.simpleicons.org/tenable/00A1E0", radius: 28 },   // Nessus (marca Tenable)
+  { src: "https://cdn.simpleicons.org/rapid/FF5522", radius: 28 },     // Metasploit (marca Rapid7)
+];
 
 // === Helpers ===
 const Container = ({ children, className = "" }) => (
@@ -761,37 +795,46 @@ const Skills = () => (
 
       <div className="mt-12 grid md:grid-cols-3 gap-6">
         {/* Avanzado */}
-        <Card className="bg-gray-800 text-white border border-white border-opacity-10 shadow-xl">
-          <h3 className="text-xl font-bold">Avanzado / uso frecuente</h3>
-          <ul className="mt-3 space-y-2 text-white text-opacity-90 break-words">
-            <li>Linux (Debian), Windows</li>
-            <li>VirtualBox, Citrix</li>
-            <li>JavaScript, Node.js, Python, React</li>
-            <li>HTML, CSS, UX/UI</li>
-            <li>MySQL/MariaDB, Apache</li>
-            <li>Git &amp; GitHub, Docker</li>
-          </ul>
+        <Card className="bg-gray-800 text-white border border-white/10 shadow-xl overflow-hidden">
+          <h3 className="text-xl font-bold px-6 pt-6">Avanzado / uso frecuente</h3>
+          <div className="mt-4 h-72 px-2 pb-2">
+            <FloatingLogos
+              logos={techLogosAvanzado}
+              className="w-full h-full rounded-2xl"
+              restitution={0.92}
+              maxSpeed={1.0}
+              density={1.0}
+            />
+          </div>
         </Card>
 
         {/* Intermedio */}
-        <Card className="bg-gray-800 text-white border border-white border-opacity-10 shadow-xl">
-          <h3 className="text-xl font-bold">Intermedio / proyectos</h3>
-          <ul className="mt-3 space-y-2 text-white text-opacity-90 break-words">
-            <li>MITRE ATT&amp;CK, OWASP, OSINT</li>
-            <li>VPN, VLAN, DMZ, Firewalls</li>
-            <li>ISO 27001, NIST, GDPR, Leyes AR</li>
-            <li>Wazuh, Graylog, Snort, Suricata</li>
-          </ul>
+        <Card className="bg-gray-800 text-white border border-white/10 shadow-xl overflow-hidden">
+          <h3 className="text-xl font-bold px-6 pt-6">Intermedio / proyectos</h3>
+          <div className="mt-4 h-72 px-2 pb-2">
+            <FloatingLogos
+              logos={techLogosIntermedio}
+              className="w-full h-full rounded-2xl"
+              restitution={0.9}
+              maxSpeed={0.9}
+              density={1.0}
+            />
+          </div>
         </Card>
 
         {/* Básico */}
-        <Card className="bg-gray-800 text-white border border-white border-opacity-10 shadow-xl">
-          <h3 className="text-xl font-bold">Básico / en progreso</h3>
-          <ul className="mt-3 space-y-2 text-white text-opacity-90 break-words">
-            <li>Burp Suite, Hydra</li>
-            <li>Wireshark, VirusTotal, YARA</li>
-            <li>(Nessus, Metasploit – plan de práctica)</li>
-          </ul>
+        <Card className="bg-gray-800 text-white border border-white/10 shadow-xl overflow-hidden">
+          <h3 className="text-xl font-bold px-6 pt-6">Básico / en progreso</h3>
+          <div className="mt-4 h-72 px-2 pb-2">
+            <FloatingLogos
+  logos={techLogosBasico}
+  className="w-full h-full rounded-2xl"
+  restitution={0.88}
+  maxSpeed={0.8}
+  density={1.0}
+/>
+
+          </div>
         </Card>
       </div>
     </Container>
@@ -799,45 +842,142 @@ const Skills = () => (
 );
 
 
-const Experience = () => (
-  <section id="experience" className="py-20 bg-white">
-    <Container>
-      <SectionTitle>Experiencia</SectionTitle>
 
-      <div className="mt-12 grid gap-6">
-        <Card>
-          <div className="flex items-start justify-between gap-4">
-            <div>
-              <h3 className="text-2xl font-bold">Automatización Digital – Camdis</h3>
-              <p className="text-gray-600">2025 – Actualidad</p>
-            </div>
-          </div>
-          <ul className="mt-4 list-disc list-inside text-gray-700 space-y-2">
-            <li>Desarrollo de herramientas de automatización con JavaScript y Node.js.</li>
-            <li>Soporte técnico y optimización de procesos internos.</li>
-          </ul>
-        </Card>
+// === Experience (timeline pro) ===
+const Experience = () => {
+  const reduce = useReducedMotion();
 
-        <Card>
-          <div className="flex items-start justify-between gap-4">
-            <div>
-              <h3 className="text-2xl font-bold">
-                Agente telefónico (Soporte Técnico / Gestión de Incidentes) – CityTech S.A. / Teleperformance
-              </h3>
-              <p className="text-gray-600">2019 – 2025</p>
-            </div>
+  const items = [
+    {
+      title: "Automatización Digital – Camdis",
+      period: "2025 – Actualidad",
+      points: [
+        "Desarrollo de herramientas de automatización con JavaScript y Node.js.",
+        "Soporte técnico y optimización de procesos internos."
+      ],
+    },
+    {
+      title:
+        "Agente telefónico (Soporte Técnico / Gestión de Incidentes) – CityTech S.A. / Teleperformance",
+      period: "2019 – 2025",
+      points: [
+        "Soporte en XDSL, HFC, FTTH y 5G.",
+        "Gestión de incidentes técnicos en entornos críticos, escalamiento y documentación.",
+        "Uso de Citrix, Salesforce, Oracle (Siebel, Watchdog, CC&B), Avaya, Office y herramientas internas.",
+        "Capacitación periódica en ciberseguridad (e-learning).",
+      ],
+    },
+  ];
+
+  const list = {
+    hidden: { opacity: 0 },
+    show: { opacity: 1, transition: { staggerChildren: 0.12 } },
+  };
+  const item = {
+    hidden: reduce ? { opacity: 0 } : { opacity: 0, y: 50, filter: "blur(4px)" },
+    show:  reduce ? { opacity: 1 } : { opacity: 1, y: 0, filter: "blur(0px)" },
+  };
+
+  return (
+    <section id="experience" className="py-24 bg-white">
+      <Container>
+        {/* Título */}
+        <div className="text-center mb-14">
+          <h2 className="text-4xl font-extrabold tracking-tight text-gray-900">
+            Experiencia
+          </h2>
+          <div className="mt-3 flex items-center justify-center gap-2">
+            <span className="h-1 w-16 rounded-full bg-blue-600" />
+            <span className="h-1 w-5 rounded-full bg-blue-400" />
           </div>
-          <ul className="mt-4 list-disc list-inside text-gray-700 space-y-2">
-            <li>Soporte en XDSL, HFC, FTTH y 5G.</li>
-            <li>Gestión de incidentes técnicos en entornos críticos, escalamiento y documentación.</li>
-            <li>Uso de Citrix, Salesforce, Oracle (Siebel, Watchdog, CC&amp;B), Avaya, Office y herramientas internas.</li>
-            <li>Capacitación periódica en ciberseguridad (e-learning).</li>
-          </ul>
-        </Card>
-      </div>
-    </Container>
-  </section>
-);
+        </div>
+
+        {/* Timeline */}
+        <div className="relative">
+          {/* línea vertical */}
+          <span
+            aria-hidden
+            className="absolute left-4 md:left-6 top-0 bottom-0 w-px bg-gradient-to-b from-blue-300/60 via-blue-200/40 to-transparent"
+          />
+
+          <motion.ol
+            variants={list}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-10% 0px" }}
+            className="space-y-10"
+          >
+            {items.map((exp, i) => (
+              <motion.li
+                key={i}
+                variants={item}
+                className="relative pl-14 md:pl-20"
+              >
+                {/* Punto + pulso */}
+                <span
+                  aria-hidden
+                  className="absolute left-0 md:left-2 top-6 grid place-items-center"
+                >
+                  <span className="relative">
+                    <span className="absolute inset-0 rounded-full bg-blue-400/25 blur-md" />
+                    <span className="block h-3.5 w-3.5 rounded-full bg-blue-600 ring-4 ring-blue-100" />
+                  </span>
+                </span>
+
+                {/* Card */}
+                <motion.div
+                  whileHover={reduce ? {} : { y: -4, scale: 1.01 }}
+                  transition={{ type: "spring", stiffness: 260, damping: 22 }}
+                  className="group rounded-2xl border border-slate-200/70 bg-white/80 backdrop-blur-md shadow-xl"
+                  style={{
+                    boxShadow:
+                      "0 10px 30px -10px rgba(2,6,23,0.12), 0 1px 0 rgba(255,255,255,0.4) inset",
+                  }}
+                >
+                  {/* Borde gradiente al hover */}
+                  <div className="rounded-2xl p-[1px] bg-gradient-to-r from-blue-200/40 via-indigo-200/40 to-transparent group-hover:from-blue-300/70 group-hover:via-indigo-300/70">
+                    <div className="rounded-2xl bg-white">
+                      <div className="p-6 md:p-8">
+                        {/* Header */}
+                        <div className="flex flex-wrap items-baseline justify-between gap-3">
+                          <h3 className="text-2xl font-extrabold text-slate-900 leading-tight">
+                            {exp.title}
+                          </h3>
+                          {/* Badge flotante de fechas */}
+                          <span className="shrink-0 rounded-full bg-blue-50 text-blue-700 px-3 py-1 text-sm font-semibold ring-1 ring-blue-200">
+                            {exp.period}
+                          </span>
+                        </div>
+
+                        {/* Bullets */}
+                        <ul className="mt-4 space-y-2 text-slate-700">
+                          {exp.points.map((p, k) => (
+                            <li key={k} className="flex gap-3">
+                              <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-blue-500/80" />
+                              <span>{p}</span>
+                            </li>
+                          ))}
+                        </ul>
+
+                        {/* CTA opcional */}
+                        {/* <div className="mt-5">
+                          <a className="text-sm font-semibold text-blue-600 hover:underline" href="#">
+                            Ver más detalles →
+                          </a>
+                        </div> */}
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              </motion.li>
+            ))}
+          </motion.ol>
+        </div>
+      </Container>
+    </section>
+  );
+};
+
 const Education = () => (
   <section id="education" className="py-20 bg-gray-50">
     <Container>
