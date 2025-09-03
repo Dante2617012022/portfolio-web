@@ -846,47 +846,145 @@ const Skills = () => (
 
 
 
-// === Experience (timeline pro) ===
+/* === Experience (tilt 3D + reveal on scroll) === */
 const Experience = () => {
-  const reduce = useReducedMotion();
+  // ---- Card con tilt 3D dinámico ----
+  const TiltCard = ({ children, className = "" }) => {
+    const ref = React.useRef(null);
+    const rafRef = React.useRef(null);
+    const target = React.useRef({ rx: 0, ry: 0, tz: 0 });
+    const state  = React.useRef({ rx: 0, ry: 0, tz: 0 });
 
-  const items = [
-    {
-      title: "Automatización Digital – Camdis",
-      period: "2025 – Actualidad",
-      points: [
-        "Desarrollo de herramientas de automatización con JavaScript y Node.js.",
-        "Soporte técnico y optimización de procesos internos."
-      ],
-    },
-    {
-      title:
-        "Agente telefónico (Soporte Técnico / Gestión de Incidentes) – CityTech S.A. / Teleperformance",
-      period: "2019 – 2025",
-      points: [
-        "Soporte en XDSL, HFC, FTTH y 5G.",
-        "Gestión de incidentes técnicos en entornos críticos, escalamiento y documentación.",
-        "Uso de Citrix, Salesforce, Oracle (Siebel, Watchdog, CC&B), Avaya, Office y herramientas internas.",
-        "Capacitación periódica en ciberseguridad (e-learning).",
-      ],
-    },
-  ];
+    const MAX = 8;      // grados máx
+    const Z   = -6;     // pequeño lift
+    const EASING = 0.12;
 
-  const list = {
-    hidden: { opacity: 0 },
-    show: { opacity: 1, transition: { staggerChildren: 0.12 } },
+    React.useEffect(() => {
+      const el = ref.current;
+      if (!el) return;
+
+      const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+      const fine   = window.matchMedia?.("(pointer: fine)")?.matches;
+      if (reduce || !fine) return;
+
+      let hovering = false;
+
+      const animate = () => {
+        state.current.rx += (target.current.rx - state.current.rx) * EASING;
+        state.current.ry += (target.current.ry - state.current.ry) * EASING;
+        state.current.tz += (target.current.tz - state.current.tz) * EASING;
+
+        el.style.transform = `
+          perspective(1000px)
+          rotateX(${state.current.rx}deg)
+          rotateY(${state.current.ry}deg)
+          translateZ(${state.current.tz}px)
+        `;
+
+        const glare = el.querySelector(".tilt-glare");
+        if (glare) {
+          const gx = (state.current.ry / MAX) * 50 + 50;
+          const gy = (state.current.rx / MAX) * -50 + 50;
+          glare.style.background = `radial-gradient(600px at ${gx}% ${gy}%, rgba(255,255,255,0.18), transparent 60%)`;
+        }
+
+        if (hovering) rafRef.current = requestAnimationFrame(animate);
+      };
+
+      const onMove = (e) => {
+        const r = el.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width;
+        const y = (e.clientY - r.top)  / r.height;
+        target.current.rx = (0.5 - y) * (MAX * 2);
+        target.current.ry = (x - 0.5) * (MAX * 2);
+        target.current.tz = Z;
+      };
+
+      const onEnter = () => { hovering = true; rafRef.current = requestAnimationFrame(animate); };
+      const onLeave = () => {
+        hovering = false;
+        cancelAnimationFrame(rafRef.current);
+        target.current = { rx: 0, ry: 0, tz: 0 };
+        rafRef.current = requestAnimationFrame(function settle() {
+          const near =
+            Math.abs(state.current.rx) < 0.05 &&
+            Math.abs(state.current.ry) < 0.05 &&
+            Math.abs(state.current.tz) < 0.1;
+          if (!near) {
+            state.current.rx += (0 - state.current.rx) * EASING;
+            state.current.ry += (0 - state.current.ry) * EASING;
+            state.current.tz += (0 - state.current.tz) * EASING;
+            el.style.transform = `
+              perspective(1000px)
+              rotateX(${state.current.rx}deg)
+              rotateY(${state.current.ry}deg)
+              translateZ(${state.current.tz}px)
+            `;
+            rafRef.current = requestAnimationFrame(settle);
+          } else {
+            el.style.transform = "";
+          }
+        });
+      };
+
+      el.addEventListener("mouseenter", onEnter);
+      el.addEventListener("mousemove", onMove);
+      el.addEventListener("mouseleave", onLeave);
+      return () => {
+        cancelAnimationFrame(rafRef.current);
+        el.removeEventListener("mouseenter", onEnter);
+        el.removeEventListener("mousemove", onMove);
+        el.removeEventListener("mouseleave", onLeave);
+      };
+    }, []);
+
+    return (
+      <div
+        ref={ref}
+        className={`relative rounded-2xl border border-slate-200 bg-white/90 backdrop-blur p-6 md:p-8 shadow-lg transition-[box-shadow,border-color] duration-300 will-change-transform ${className}`}
+      >
+        <div className="tilt-glare pointer-events-none absolute inset-0 rounded-2xl" />
+        {children}
+      </div>
+    );
   };
-  const item = {
-    hidden: reduce ? { opacity: 0 } : { opacity: 0, y: 50, filter: "blur(4px)" },
-    show:  reduce ? { opacity: 1 } : { opacity: 1, y: 0, filter: "blur(0px)" },
-  };
+
+  // ---- Reveal on scroll (como About) + oscilación de títulos ----
+  React.useEffect(() => {
+    const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+    if (reduce) {
+      document.querySelectorAll(".reveal").forEach((n) => n.classList.add("is-in"));
+      return;
+    }
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) e.target.classList.add("is-in");
+        });
+      },
+      { rootMargin: "0px 0px -10% 0px", threshold: 0.1 }
+    );
+    document.querySelectorAll(".reveal").forEach((n) => io.observe(n));
+    return () => io.disconnect();
+  }, []);
 
   return (
-    <section id="experience" className="py-24 bg-white">
+    <section id="experience" aria-labelledby="exp-title" className="py-24 bg-white">
+      {/* estilos locales: reveal + título oscilante */}
+      <style>{`
+        .reveal{opacity:0; transform:translateY(24px)}
+        .reveal.is-in{opacity:1; transform:none; transition:opacity .6s cubic-bezier(.22,1,.36,1), transform .6s cubic-bezier(.22,1,.36,1)}
+        @media (prefers-reduced-motion: no-preference){
+          @keyframes oscillateTitle{0%{transform:rotate(0)}25%{transform:rotate(.8deg)}50%{transform:rotate(0)}75%{transform:rotate(-.8deg)}100%{transform:rotate(0)}}
+          .animate-oscillate{animation:oscillateTitle 2.2s ease-in-out infinite; transform-origin:0% 60%}
+        }
+      `}</style>
+
       <Container>
         {/* Título */}
-        <div className="text-center mb-14">
-          <h2 className="text-4xl font-extrabold tracking-tight text-gray-900">
+        <div className="text-center mb-10 reveal" style={{ transitionDelay: "60ms" }}>
+          <h2 id="exp-title" className="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900">
             Experiencia
           </h2>
           <div className="mt-3 flex items-center justify-center gap-2">
@@ -895,91 +993,90 @@ const Experience = () => {
           </div>
         </div>
 
-        {/* Timeline */}
-        <div className="relative">
-          {/* línea vertical */}
-          <span
-            aria-hidden
-            className="absolute left-4 md:left-6 top-0 bottom-0 w-px bg-gradient-to-b from-blue-300/60 via-blue-200/40 to-transparent"
-          />
+        {/* Grid */}
+        <div className="grid gap-6 md:grid-cols-2">
+          {/* Camdis */}
+          <div className="reveal" style={{ transitionDelay: "120ms" }}>
+            <TiltCard className="hover:shadow-2xl hover:border-blue-400/60">
+              <header className="mb-3">
+                <h3 className="text-2xl font-extrabold leading-tight text-slate-900 animate-oscillate">
+                  Automatización Digital – Camdis
+                </h3>
+                <p className="text-sm text-slate-500">
+                  Rol: Automatización · Período: 2025 – Actualidad
+                </p>
+              </header>
 
-          <motion.ol
-            variants={list}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: "-10% 0px" }}
-            className="space-y-10"
-          >
-            {items.map((exp, i) => (
-              <motion.li
-                key={i}
-                variants={item}
-                className="relative pl-14 md:pl-20"
-              >
-                {/* Punto + pulso */}
-                <span
-                  aria-hidden
-                  className="absolute left-0 md:left-2 top-6 grid place-items-center"
-                >
-                  <span className="relative">
-                    <span className="absolute inset-0 rounded-full bg-blue-400/25 blur-md" />
-                    <span className="block h-3.5 w-3.5 rounded-full bg-blue-600 ring-4 ring-blue-100" />
+              <p className="text-slate-700">
+                Desarrollo de herramientas de automatización con JavaScript y Node.js. Soporte técnico y
+                optimización de procesos internos.
+              </p>
+
+              <ul className="mt-4 space-y-2 text-slate-700">
+                <li className="flex gap-3 reveal" style={{ transitionDelay: "200ms" }}>
+                  <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-blue-500/80" />
+                  <span>Scripts y utilidades en Node.js para automatizar tareas operativas.</span>
+                </li>
+                <li className="flex gap-3 reveal" style={{ transitionDelay: "240ms" }}>
+                  <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-blue-500/80" />
+                  <span>Mejora de flujos internos y soporte técnico a equipos.</span>
+                </li>
+              </ul>
+
+              <p className="mt-5 text-sm text-slate-600 reveal" style={{ transitionDelay: "280ms" }}>
+                <strong className="font-semibold text-slate-800">Stack:</strong> JavaScript, Node.js
+              </p>
+            </TiltCard>
+          </div>
+
+          {/* CityTech / Teleperformance */}
+          <div className="reveal" style={{ transitionDelay: "180ms" }}>
+            <TiltCard className="hover:shadow-2xl hover:border-blue-400/60">
+              <header className="mb-3">
+                <h3 className="text-2xl font-extrabold leading-tight text-slate-900 animate-oscillate">
+                  Agente telefónico – Soporte técnico y Gestión de Incidentes – CityTech S.A. / Teleperformance
+                </h3>
+                <p className="text-sm text-slate-500">
+                  Rol: Soporte técnico / Gestión de incidentes · Período: 2019 – 2025
+                </p>
+              </header>
+
+              <p className="text-slate-700">
+                Atención y resolución de incidentes técnicos en entornos críticos. Escalamiento según criticidad
+                y documentación de soluciones.
+              </p>
+
+              <ul className="mt-4 space-y-2 text-slate-700">
+                <li className="flex gap-3 reveal" style={{ transitionDelay: "260ms" }}>
+                  <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-blue-500/80" />
+                  <span>Soporte en tecnologías XDSL, HFC, FTTH y 5G.</span>
+                </li>
+                <li className="flex gap-3 reveal" style={{ transitionDelay: "300ms" }}>
+                  <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-blue-500/80" />
+                  <span>
+                    Uso de herramientas de monitoreo y CRMs corporativos: Citrix, Salesforce, Oracle (Siebel,
+                    Watchdog, CC&amp;B), Avaya, Microsoft Office y otras internas.
                   </span>
-                </span>
+                </li>
+                <li className="flex gap-3 reveal" style={{ transitionDelay: "340ms" }}>
+                  <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-blue-500/80" />
+                  <span>Capacitación periódica en ciberseguridad mediante e-learning.</span>
+                </li>
+              </ul>
 
-                {/* Card */}
-                <motion.div
-                  whileHover={reduce ? {} : { y: -4, scale: 1.01 }}
-                  transition={{ type: "spring", stiffness: 260, damping: 22 }}
-                  className="group rounded-2xl border border-slate-200/70 bg-white/80 backdrop-blur-md shadow-xl"
-                  style={{
-                    boxShadow:
-                      "0 10px 30px -10px rgba(2,6,23,0.12), 0 1px 0 rgba(255,255,255,0.4) inset",
-                  }}
-                >
-                  {/* Borde gradiente al hover */}
-                  <div className="rounded-2xl p-[1px] bg-gradient-to-r from-blue-200/40 via-indigo-200/40 to-transparent group-hover:from-blue-300/70 group-hover:via-indigo-300/70">
-                    <div className="rounded-2xl bg-white">
-                      <div className="p-6 md:p-8">
-                        {/* Header */}
-                        <div className="flex flex-wrap items-baseline justify-between gap-3">
-                          <h3 className="text-2xl font-extrabold text-slate-900 leading-tight">
-                            {exp.title}
-                          </h3>
-                          {/* Badge flotante de fechas */}
-                          <span className="shrink-0 rounded-full bg-blue-50 text-blue-700 px-3 py-1 text-sm font-semibold ring-1 ring-blue-200">
-                            {exp.period}
-                          </span>
-                        </div>
-
-                        {/* Bullets */}
-                        <ul className="mt-4 space-y-2 text-slate-700">
-                          {exp.points.map((p, k) => (
-                            <li key={k} className="flex gap-3">
-                              <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-blue-500/80" />
-                              <span>{p}</span>
-                            </li>
-                          ))}
-                        </ul>
-
-                        {/* CTA opcional */}
-                        {/* <div className="mt-5">
-                          <a className="text-sm font-semibold text-blue-600 hover:underline" href="#">
-                            Ver más detalles →
-                          </a>
-                        </div> */}
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              </motion.li>
-            ))}
-          </motion.ol>
+              <p className="mt-5 text-sm text-slate-600 reveal" style={{ transitionDelay: "380ms" }}>
+                <strong className="font-semibold text-slate-800">Herramientas:</strong> Citrix, Salesforce,
+                Oracle (Siebel, Watchdog, CC&amp;B), Avaya, Office
+              </p>
+            </TiltCard>
+          </div>
         </div>
       </Container>
     </section>
   );
 };
+
+
 
 const Education = () => (
   <section id="education" className="py-20 bg-gray-50">
