@@ -58,39 +58,41 @@ export default function FloatingLogos({
 
     // --- cargar imágenes (tolerante a fallos) ---
 const bodies: Body[] = [];
-let done = 0;
-const tryStart = () => {
-  done++;
-  if (done >= logos.length) {
-    // cuando todas hayan cargado o fallado
-    const { width, height } = R();
-    bodies.forEach((b) => {
-      b.x = rand(b.r, width - b.r);
-      b.y = rand(b.r, height - b.r);
-      b.vx = rand(-0.25, 0.25);
-      b.vy = rand(-0.25, 0.25);
-    });
-    loop(performance.now());
-  }
-};
+    let started = false;
+    const startLoop = () => {
+      if (!started) {
+        started = true;
+        loop(performance.now());
+      }
+    };
+
 
 logos.forEach((l) => {
-  const img = new Image();
-  img.decoding = "async";
-  img.src = l.src;
-  const r = Math.max(16, (l.radius ?? 28) * density);
-  const m = l.mass ?? r * r;
+      const img = new Image();
+      img.decoding = "async";
+      img.src = l.src;
+      const r = Math.max(16, (l.radius ?? 28) * density);
+      const m = l.mass ?? r * r;
 
-  img.onload = () => {
-    bodies.push({ x: 0, y: 0, vx: 0, vy: 0, r, m, img });
-    tryStart();
-  };
-  img.onerror = () => {
-    // si falla, simplemente no lo incluimos pero seguimos
-    console.warn("[FloatingLogos] No se pudo cargar:", l.src);
-    tryStart();
-  };
-});
+      img.onload = () => {
+        const { width, height } = R();
+        bodies.push({
+          x: rand(r, width - r),
+          y: rand(r, height - r),
+          vx: rand(-0.25, 0.25),
+          vy: rand(-0.25, 0.25),
+          r,
+          m,
+          img,
+        });
+        startLoop();
+      };
+      img.onerror = () => {
+        // si falla, no lo incluimos pero iniciamos el loop
+        console.warn("[FloatingLogos] No se pudo cargar:", l.src);
+        startLoop();
+      };
+    });
 
 
     // --- grilla espacial (para evitar O(n^2)) ---
