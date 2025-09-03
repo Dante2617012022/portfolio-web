@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef, useLayoutEffect } from "react";
-/* eslint-disable-next-line no-unused-vars */
-import { motion, useReducedMotion } from "framer-motion"; 
+import { motion, useReducedMotion } from "framer-motion"; // eslint-disable-line no-unused-vars
 import FloatingLogos from "./components/FloatingLogos";
 import logoWireshark from "./assets/logos/wireshark.svg";
 import logoBurpSuite from "./assets/logos/burpsuite.svg";
@@ -51,18 +50,13 @@ const techLogosIntermedio = [
 
 // Básico / en progreso
 const techLogosBasico = [
-  { src: logoWireshark, radius: 28 }, // Wireshark
+ { src: logoWireshark, radius: 28 }, // Wireshark
   { src: logoBurpSuite, radius: 28 }, // Burp Suite
   { src: logoVirusTotal, radius: 28 }, // YARA (usa marca VirusTotal)
   { src: logoTenable, radius: 28 },   // Nessus (marca Tenable)
-  { src: logoRapid, radius: 28 },     // Metasploit (marca Rapid7)
+  { src: logoRapid, radius: 28 },    
 ];
-// Animación de flotación para imágenes al hacer hover
-const hoverFloat = {
-  y: ['0%', '-12%', '0%'],
-  rotate: ['-2deg', '2deg', '-2deg'],
-  transition: { repeat: Infinity, duration: 3, ease: 'easeInOut' }
-};
+
 // === Helpers ===
 const Container = ({ children, className = "" }) => (
   <div className={`max-w-6xl mx-auto px-4 sm:px-6 ${className}`}>{children}</div>
@@ -272,7 +266,7 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  
+
 
   const links = [
   { href: "#home", label: "Home" },
@@ -297,7 +291,7 @@ return (
       <nav className="hidden md:flex items-center gap-8">
         {links.map((l) => (
           <a key={l.href} href={l.href}
-             className={linkCls}>
+             className="text-sm font-semibold text-white hover:text-blue-200 transition-colors">
             {l.label}
           </a>
         ))}
@@ -319,7 +313,7 @@ return (
         <Container className="py-4 grid gap-4">
           {links.map((l) => (
             <a key={l.href} href={l.href}
-               className={linkCls}>
+               className="text-sm font-semibold text-white hover:text-blue-200 transition-colors">
               {l.label}
             </a>
           ))}
@@ -529,7 +523,7 @@ const Hero = () => {
         targetRef={heroRef}
         color="rgba(100,167,255,0.9)" // ajusta a tu paleta
         mixBlendMode="screen"        // prueba "normal" si no querés brillo
-        maxParticles={130}
+        maxParticles={120}
         spawnCount={4}
         fadeMs={1300}
         sizeRange={[12, 22]}
@@ -644,10 +638,7 @@ const About = () => {
     hidden: reduce ? { opacity: 0 } : { opacity: 0, y: 12 },
     show: reduce ? { opacity: 1 } : { opacity: 1, y: 0 }
   };
-const hoverFloat = {
-    y: [-4, -8, -4],
-    transition: { repeat: Infinity, duration: 2, ease: 'easeInOut' }
-  };
+
   return (
     <section id="about" className="py-20 bg-white">
       {/* 👇 el Container es relative para posicionar el GIF */}
@@ -660,7 +651,7 @@ const hoverFloat = {
           aria-hidden="true"
           className="
             hidden md:block                      /* evita móviles */
-            select-none
+            pointer-events-none select-none
             absolute z-0                         /* debajo del texto */
             top-0 md:-top-4 lg:-top-16
             right-0 md:right-8 lg:right-12 xl:right-16
@@ -671,10 +662,8 @@ const hoverFloat = {
           "
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
-          whileHover={hoverFloat}
           viewport={{ once: true, margin: "-10% 0px" }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          whileHover={hoverFloat}
         />
         {/* GIF arriba a la izquierda */}
 <motion.img
@@ -684,7 +673,7 @@ const hoverFloat = {
   aria-hidden="true"
   className="
     hidden md:block
-    select-none
+    pointer-events-none select-none
     absolute z-0
     top-0 md:-top-2 lg:-top-10       /* un poquito hacia abajo */
     left-10 sm:left-16 md:left-24 lg:left-52   /* margen izquierdo */
@@ -695,10 +684,8 @@ const hoverFloat = {
   "
   initial={{ opacity: 0, scale: 0.9 }}
   whileInView={{ opacity: 1, scale: 1 }}
-    whileHover={hoverFloat}
   viewport={{ once: true, margin: "-10% 0px" }}
   transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-    whileHover={hoverFloat}
 />
 
 
@@ -749,10 +736,8 @@ const hoverFloat = {
                 className="w-full max-w-md mx-auto rounded-2xl shadow-2xl object-cover"
                 initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.98 }}
                 whileInView={reduce ? { opacity: 1 } : { opacity: 1, scale: 1 }}
-                whileHover={hoverFloat}
                 viewport={{ once: true, margin: "-10% 0px" }}
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                whileHover={hoverFloat}
               />
             </Tilt>
           </div>
@@ -1204,6 +1189,5 @@ export default function PortfolioDante() {
     </>
   );
 }
-
 
 
