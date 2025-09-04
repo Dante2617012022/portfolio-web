@@ -65,9 +65,33 @@ const bodies: Body[] = [];
         loop(performance.now());
       }
     };
+ // manejar clicks (se añade al final cuando las imágenes están listas)
+    const onClick = (e: MouseEvent) => {
+      const r = R();
+      const mx = e.clientX - r.left;
+      const my = e.clientY - r.top;
+      bodies.forEach((b) => {
+        const dx = b.x - mx, dy = b.y - my;
+        const d2 = dx * dx + dy * dy;
+        if (d2 < (b.r + 120) * (b.r + 120)) {
+          const d = Math.max(10, Math.sqrt(d2));
+          b.vx += (dx / d) * 0.9;
+          b.vy += (dy / d) * 0.9;
+        }
+      });
+    };
 
 
-logos.forEach((l) => {
+const total = logos.length;
+    let done = 0;
+    const maybeStart = () => {
+      if (done === total) {
+        wrap.addEventListener("click", onClick);
+        startLoop();
+      }
+    };
+
+    logos.forEach((l) => {
       const img = new Image();
       img.decoding = "async";
       img.src = l.src;
@@ -85,12 +109,14 @@ logos.forEach((l) => {
           m,
           img,
         });
-        startLoop();
+        done++;
+        maybeStart();
       };
       img.onerror = () => {
-        // si falla, no lo incluimos pero iniciamos el loop
+        // si falla, no lo incluimos pero contamos igualmente
         console.warn("[FloatingLogos] No se pudo cargar:", l.src);
-        startLoop();
+        done++;
+        maybeStart();
       };
     });
 
@@ -153,22 +179,7 @@ logos.forEach((l) => {
       if (b.y + b.r > height) { b.y = height - b.r; b.vy = -Math.abs(b.vy) * 0.95; }
     };
 
-    // --- click = impulso tipo “taco” ---
-    const onClick = (e: MouseEvent) => {
-      const r = R();
-      const mx = e.clientX - r.left;
-      const my = e.clientY - r.top;
-      bodies.forEach((b) => {
-        const dx = b.x - mx, dy = b.y - my;
-        const d2 = dx * dx + dy * dy;
-        if (d2 < (b.r + 120) * (b.r + 120)) { // cerca ⇒ empujar
-          const d = Math.max(10, Math.sqrt(d2));
-          b.vx += (dx / d) * 0.9;
-          b.vy += (dy / d) * 0.9;
-        }
-      });
-    };
-    wrap.addEventListener("click", onClick);
+
 
     // --- loop ---
     let last = 0;
@@ -230,7 +241,8 @@ logos.forEach((l) => {
         ctx.stroke();
       });
     };
-
+    maybeStart(); 
+    
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
       ro.disconnect();
@@ -241,7 +253,7 @@ logos.forEach((l) => {
 
   return (
     <div ref={wrapRef} className={`relative ${className}`}>
-      <canvas ref={canvasRef} className="absolute inset-0" />
+      <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none" />
     </div>
   );
 }
