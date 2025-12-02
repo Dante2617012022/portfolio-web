@@ -132,6 +132,93 @@ const ProjectCard = ({ title, description, linkHref, linkLabel }) => {
     </div>
   );
 };
+const CertificatesBackground = () => {
+  const canvasRef = useRef(null);
+  const prefersReducedMotion = useReducedMotion();
+
+  useEffect(() => {
+    if (prefersReducedMotion) return undefined;
+
+    const canvas = canvasRef.current;
+    if (!canvas) return undefined;
+
+    const ctx = canvas.getContext("2d");
+    const pixels = [];
+    let animationId;
+    let W = 0;
+    let H = 0;
+    const fov = 250;
+
+    const populatePixels = () => {
+      pixels.length = 0;
+      for (let x = -400; x < 400; x += 5) {
+        for (let z = -250; z < 250; z += 5) {
+          pixels.push({ x, y: 100, z });
+        }
+      }
+    };
+
+    const resize = () => {
+      W = canvas.width = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+      populatePixels();
+    };
+
+    const render = (ts = 0) => {
+      if (!ctx) return;
+      const imageData = ctx.getImageData(0, 0, W, H);
+      const { data, width } = imageData;
+      const len = pixels.length;
+
+      for (let i = 0; i < len; i += 1) {
+        const pixel = pixels[i];
+        const scale = fov / (fov + pixel.z);
+        const x2d = pixel.x * scale + W / 2;
+        const y2d = pixel.y * scale + H / 2;
+
+        if (x2d >= 0 && x2d <= W && y2d >= 0 && y2d <= H) {
+          const c = (Math.round(y2d) * width + Math.round(x2d)) * 4;
+          data[c] = 0;
+          data[c + 1] = 255;
+          data[c + 2] = 80;
+          data[c + 3] = 255;
+        }
+
+        pixel.z -= 0.4;
+        pixel.y = H / 14 + Math.sin((i / len) * 15 + ts / 450) * 10;
+        if (pixel.z < -fov) pixel.z += 2 * fov;
+      }
+
+      ctx.putImageData(imageData, 0, 0);
+    };
+
+    const drawFrame = (ts) => {
+      ctx.fillStyle = "#0f172a";
+      ctx.fillRect(0, 0, W, H);
+      render(ts);
+      animationId = requestAnimationFrame(drawFrame);
+    };
+
+    resize();
+    animationId = requestAnimationFrame(drawFrame);
+    window.addEventListener("resize", resize);
+
+    return () => {
+      cancelAnimationFrame(animationId);
+      window.removeEventListener("resize", resize);
+    };
+  }, [prefersReducedMotion]);
+
+  if (prefersReducedMotion) return null;
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="absolute inset-0 h-full w-full opacity-80"
+      aria-hidden
+    />
+  );
+};
 const IconCircle = ({ children }) => (
   <div className="w-16 h-16 rounded-full bg-blue-600/10 text-blue-600 grid place-items-center text-3xl mx-auto" aria-hidden>
     {children}
@@ -1304,11 +1391,19 @@ const Education = () => {
   );
 };
 const Certificates = () => (
-  <section id="certs" className="py-20 bg-white">
-    <Container>
-      <SectionTitle>Certificados</SectionTitle>
-      <div className="mt-12 grid md:grid-cols-2 gap-6">
-        <Card>
+  <section
+    id="certs"
+    className="relative overflow-hidden py-20 bg-slate-950 text-white"
+    aria-labelledby="certificates-title"
+  >
+    <div className="absolute inset-0 bg-gradient-to-b from-blue-900/30 via-slate-950 to-slate-950" aria-hidden />
+    <CertificatesBackground />
+    <Container className="relative z-10">
+      <SectionTitle id="certificates-title" colorClass="text-white">
+        Certificados
+      </SectionTitle>
+      <div className="mt-12 grid gap-6 md:grid-cols-2">
+        <Card className="bg-white/90 text-slate-900 backdrop-blur border border-white/10 shadow-2xl">
           <h3 className="text-xl font-bold">Newbie Security Auditor – Diosdelared.com</h3>
           <p className="text-gray-600">2025</p>
           <p className="mt-2 text-gray-700">
@@ -1318,7 +1413,7 @@ const Certificates = () => (
             href="https://cert.ddlr.org/cert.php?id=55"
             target="_blank"
             rel="noreferrer"
-            className="inline-block mt-3 text-blue-600 hover:underline"
+            className="mt-3 inline-block font-semibold text-blue-700 hover:underline"
           >
             Verificación: cert.ddlr.org/cert.php?id=55
           </a>
