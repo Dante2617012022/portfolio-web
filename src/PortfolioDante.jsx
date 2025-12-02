@@ -193,7 +193,7 @@ const CertificatesBackground = () => {
     };
 
     const drawFrame = (ts) => {
-      ctx.fillStyle = "#0f172a";
+      ctx.fillStyle = "#111827";
       ctx.fillRect(0, 0, W, H);
       render(ts);
       animationId = requestAnimationFrame(drawFrame);
@@ -1393,10 +1393,10 @@ const Education = () => {
 const Certificates = () => (
   <section
     id="certs"
-    className="relative overflow-hidden py-20 bg-slate-950 text-white"
+    className="relative overflow-hidden py-20 bg-gray-900 text-white"
     aria-labelledby="certificates-title"
   >
-    <div className="absolute inset-0 bg-gradient-to-b from-blue-900/30 via-slate-950 to-slate-950" aria-hidden />
+    <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-900/95 to-gray-900" aria-hidden />
     <CertificatesBackground />
     <Container className="relative z-10">
       <SectionTitle id="certificates-title" colorClass="text-white">
