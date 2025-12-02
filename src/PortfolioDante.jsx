@@ -1152,7 +1152,7 @@ const Education = () => {
           transform:translateX(-50%);
           border-radius:999px;
         }
-        .timeline-item{position:static;padding-left:3.75rem;}
+        .timeline-item{position:relative;padding-left:3.75rem;}
         .timeline-node{position:absolute;left:var(--line-left);top:1rem;transform:translateX(-50%);}
         .timeline-card{transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease;}
         .timeline-card:hover{transform:translateY(-2px) scale(1.01);box-shadow:0 20px 40px rgba(15,23,42,.12);}
