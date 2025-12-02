@@ -1081,19 +1081,6 @@ const Experience = () => {
 const Education = () => {
   const educationMilestones = [
     {
-      title: "Tecnicatura en Ciberseguridad",
-      date: "2024 – en curso",
-      institution: "Universidad Gastón Dachary (UGR)",
-      duration: "3 años (avance 73%)",
-      achievements: [
-        "1º y 2º año completos con promedio ≥ 8",
-        "Redes, seguridad defensiva, gestión de incidentes",
-        "Prácticas con laboratorios y simulaciones",
-      ],
-      icon: "🛡️",
-      accent: "from-blue-500/10 via-blue-400/10 to-blue-300/20",
-    },
-    {
       title: "Título Secundario",
       date: "2014",
       institution: "Colegio Gral. Don José de San Martín",
@@ -1105,6 +1092,19 @@ const Education = () => {
       ],
       icon: "🎓",
       accent: "from-amber-500/10 via-amber-400/10 to-amber-300/20",
+    },
+    {
+      title: "Tecnicatura en Ciberseguridad",
+      date: "2024 – en curso",
+      institution: "Universidad Gastón Dachary (UGR)",
+      duration: "3 años (avance 73%)",
+      achievements: [
+        "1º y 2º año completos con promedio ≥ 8",
+        "Redes, seguridad defensiva, gestión de incidentes",
+        "Prácticas con laboratorios y simulaciones",
+      ],
+      icon: "🛡️",
+      accent: "from-blue-500/10 via-blue-400/10 to-blue-300/20",
     },
   ];
 
@@ -1179,8 +1179,8 @@ const Education = () => {
               style={{ transitionDelay: `${idx * 80 + 60}ms` }}
             >
               <div className="timeline-node" aria-hidden>
-                <span className="grid h-10 w-10 place-items-center rounded-full bg-white shadow ring-2 ring-blue-200 text-xl">
-                  {milestone.icon}
+                <span className="grid h-10 w-10 place-items-center rounded-full bg-white shadow ring-2 ring-blue-200">
+                  <span className="h-2.5 w-2.5 rounded-full bg-blue-500 shadow-inner" />
                 </span>
               </div>
 
