@@ -1194,7 +1194,7 @@ const Education = () => {
               <div
                 tabIndex={0}
                 aria-describedby={`edu-tip-${idx}`}
-                className={`timeline-card group relative overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br ${milestone.accent} backdrop-blur p-6 md:p-7`}
+                className="timeline-card group relative overflow-hidden rounded-2xl border border-slate-200 bg-white backdrop-blur p-6 md:p-7"
               >
                 <div className="flex flex-col gap-3">
                   <div className="flex items-center justify-between gap-3">
