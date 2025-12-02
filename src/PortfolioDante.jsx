@@ -76,8 +76,8 @@ const SectionTitle = ({ children, id, colorClass = "text-gray-900" }) => (
 );
 
 const Card = ({ children, className = "", transparent = false }) => {
-  const backgroundClass = transparent ? "bg-transparent" : "bg-white";
-  const shadowClass = transparent ? "" : "shadow-lg";
+   const backgroundClass = transparent ? "bg-white/10 backdrop-blur" : "bg-white";
+  const shadowClass = transparent ? "shadow-lg shadow-white/10" : "shadow-lg";
 
   return (
     <div className={`${backgroundClass} ${shadowClass} rounded-2xl p-6 ${className}`}>
