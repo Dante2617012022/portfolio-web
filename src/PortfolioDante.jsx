@@ -698,7 +698,7 @@ const Hero = () => {
                 fontSize: "clamp(30px, 10vw, 60px)",
               }}
             >
-              Dante Gabriel Balbuena Atar
+              Dante Balbuena
             </span>
           </h1>
 
