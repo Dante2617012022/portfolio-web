@@ -1050,7 +1050,7 @@ const Experience = () => {
               <ul className="mt-4 space-y-2 text-slate-700">
                 <li className="flex gap-3 reveal" style={{ transitionDelay: "260ms" }}>
                   <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-blue-500/80" />
-                  <span>Soporte en tecnologías XDSL, HFC, FTTH y 5G.</span>
+                  <span>Soporte en tecnologías XDSL, HFC, FTTH, CATV, 5G.</span>
                 </li>
                 <li className="flex gap-3 reveal" style={{ transitionDelay: "300ms" }}>
                   <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-blue-500/80" />
@@ -1078,27 +1078,170 @@ const Experience = () => {
 
 
 
-const Education = () => (
-  <section id="education" className="py-20 bg-gray-50">
-    <Container>
-      <SectionTitle>Educación</SectionTitle>
-      <div className="mt-12 grid md:grid-cols-2 gap-6">
-        <Card>
-          <h3 className="text-xl font-bold">Tecnicatura en Ciberseguridad – UGR</h3>
-          <p className="text-gray-600">2024 – en curso</p>
-          <p className="mt-2 text-gray-700">
-            1º y 2º año completos (promedio ≥ 8). Avance: 73%.
-          </p>
-        </Card>
-        <Card>
-          <h3 className="text-xl font-bold">Título Secundario</h3>
-          <p className="text-gray-600">Colegio Gral. Don José de San Martín – 2014</p>
-          <p className="mt-2 text-gray-700">Economía y Gestión de las Organizaciones.</p>
-        </Card>
-      </div>
-    </Container>
-  </section>
-);
+const Education = () => {
+  const educationMilestones = [
+    {
+      title: "Tecnicatura en Ciberseguridad",
+      date: "2024 – en curso",
+      institution: "Universidad Gastón Dachary (UGR)",
+      duration: "3 años (avance 73%)",
+      achievements: [
+        "1º y 2º año completos con promedio ≥ 8",
+        "Redes, seguridad defensiva, gestión de incidentes",
+        "Prácticas con laboratorios y simulaciones",
+      ],
+      icon: "🛡️",
+      accent: "from-blue-500/10 via-blue-400/10 to-blue-300/20",
+    },
+    {
+      title: "Título Secundario",
+      date: "2014",
+      institution: "Colegio Gral. Don José de San Martín",
+      duration: "Economía y Gestión de las Organizaciones",
+      achievements: [
+        "Orientación en administración y gestión",
+        "Proyectos finales con foco en procesos y finanzas",
+        "Trabajo en equipo y organización de eventos",
+      ],
+      icon: "🎓",
+      accent: "from-amber-500/10 via-amber-400/10 to-amber-300/20",
+    },
+  ];
+
+  React.useEffect(() => {
+    const prefersReduce = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+    const nodes = document.querySelectorAll(".edu-reveal");
+
+    if (prefersReduce) {
+      nodes.forEach((n) => n.classList.add("edu-in"));
+      return undefined;
+    }
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("edu-in");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.2, rootMargin: "0px 0px -8% 0px" }
+    );
+
+    nodes.forEach((n) => io.observe(n));
+    return () => io.disconnect();
+  }, []);
+
+  return (
+    <section id="education" className="py-20 bg-gray-50">
+      <style>{`
+        .timeline-grid::before{
+          content:"";
+          position:absolute;
+          inset:0;
+          width:3px;
+          background:linear-gradient(180deg,#cbd5e1 0%,#94a3b8 50%,#cbd5e1 100%);
+          left:1.4rem;
+          border-radius:999px;
+        }
+        .timeline-item{position:relative;padding-left:3.75rem;}
+        .timeline-node{position:absolute;left:0.85rem;top:1rem;}
+        .timeline-card{transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease;}
+        .timeline-card:hover{transform:translateY(-2px) scale(1.01);box-shadow:0 20px 40px rgba(15,23,42,.12);}
+        .timeline-card:focus-visible{outline:3px solid #2563eb; outline-offset:6px;}
+        .edu-reveal{opacity:0; transform:translateY(20px);}
+        .edu-reveal.edu-in{opacity:1; transform:none; transition:opacity .6s cubic-bezier(.22,1,.36,1), transform .6s cubic-bezier(.22,1,.36,1);}
+        .edu-tooltip{pointer-events:none; opacity:0; transform:translateY(4px) scale(.98); transition:opacity .25s ease, transform .25s ease;}
+        .timeline-card:hover .edu-tooltip, .timeline-card:focus-within .edu-tooltip{opacity:1; transform:translateY(0) scale(1);}
+        @media (min-width:768px){
+          .timeline-grid{padding-inline:1rem;}
+          .timeline-grid::before{left:50%; transform:translateX(-50%);}
+          .timeline-item{width:50%; padding-left:3.5rem;}
+          .timeline-item:nth-child(odd){text-align:right; padding-right:3.5rem; padding-left:0; margin-left:0;}
+          .timeline-item:nth-child(odd) .timeline-node{left:calc(50% - 10px); right:auto;}
+          .timeline-item:nth-child(even){margin-left:50%;}
+          .timeline-item:nth-child(even) .timeline-node{left:-10px;}
+          .timeline-item:nth-child(odd) .timeline-card{margin-left:auto;}
+        }
+      `}</style>
+      <Container>
+        <SectionTitle>Educación</SectionTitle>
+        <div className="relative mt-14 timeline-grid">
+          <div className="sr-only" aria-live="polite">
+            Línea de tiempo de educación con dos hitos principales.
+          </div>
+
+          {educationMilestones.map((milestone, idx) => (
+            <article
+              key={milestone.title}
+              className="timeline-item edu-reveal mb-10"
+              style={{ transitionDelay: `${idx * 80 + 60}ms` }}
+            >
+              <div className="timeline-node" aria-hidden>
+                <span className="grid h-10 w-10 place-items-center rounded-full bg-white shadow ring-2 ring-blue-200 text-xl">
+                  {milestone.icon}
+                </span>
+              </div>
+
+              <div
+                tabIndex={0}
+                aria-describedby={`edu-tip-${idx}`}
+                className={`timeline-card group relative overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br ${milestone.accent} backdrop-blur p-6 md:p-7`}
+              >
+                <div className="flex flex-col gap-3">
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="inline-flex items-center gap-2">
+                      <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/80 text-lg shadow-inner">
+                        {milestone.icon}
+                      </span>
+                      <h3 className="text-xl font-bold text-slate-900 leading-tight">{milestone.title}</h3>
+                    </div>
+                    <span className="text-sm font-semibold uppercase tracking-wide text-blue-700 bg-white/80 px-3 py-1 rounded-full shadow-sm">
+                      {milestone.date}
+                    </span>
+                  </div>
+
+                  <div className="text-sm text-slate-700">
+                    <p className="font-semibold text-slate-900">{milestone.institution}</p>
+                    <p className="mt-1 text-slate-700">{milestone.duration}</p>
+                  </div>
+
+                  <ul className="mt-3 space-y-2 text-slate-700">
+                    {milestone.achievements.map((item) => (
+                      <li key={item} className="flex items-start gap-2">
+                        <span className="mt-1 h-1.5 w-1.5 rounded-full bg-blue-500" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div
+                    id={`edu-tip-${idx}`}
+                    role="tooltip"
+                    className="edu-tooltip absolute left-1/2 top-full z-10 mt-3 w-full min-w-[240px] max-w-[320px] -translate-x-1/2 rounded-2xl bg-white p-4 text-sm text-slate-700 shadow-2xl ring-1 ring-slate-200 md:left-auto md:right-0 md:translate-x-4"
+                  >
+                    <p className="font-semibold text-slate-900">Más detalles</p>
+                    <p className="mt-1">{milestone.institution}</p>
+                    <p className="mt-1 text-xs text-slate-500">Duración: {milestone.duration}</p>
+                    <div className="mt-2 flex flex-wrap gap-2">
+                      <span className="inline-flex items-center gap-1 rounded-full bg-blue-50 px-3 py-1 text-[11px] font-semibold text-blue-700 ring-1 ring-blue-100">
+                        <span aria-hidden>✨</span>Enfoque práctico
+                      </span>
+                      <span className="inline-flex items-center gap-1 rounded-full bg-slate-50 px-3 py-1 text-[11px] font-semibold text-slate-700 ring-1 ring-slate-200">
+                        <span aria-hidden>🧭</span>Trayectoria
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </Container>
+    </section>
+  );
+};
 const Certificates = () => (
   <section id="certs" className="py-20 bg-white">
     <Container>
