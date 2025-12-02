@@ -75,9 +75,16 @@ const SectionTitle = ({ children, id, colorClass = "text-gray-900" }) => (
   </div>
 );
 
-const Card = ({ children, className = "" }) => (
-  <div className={`bg-white rounded-2xl shadow-lg p-6 ${className}`}>{children}</div>
-);
+const Card = ({ children, className = "", transparent = false }) => {
+  const backgroundClass = transparent ? "bg-transparent" : "bg-white";
+  const shadowClass = transparent ? "" : "shadow-lg";
+
+  return (
+    <div className={`${backgroundClass} ${shadowClass} rounded-2xl p-6 ${className}`}>
+      {children}
+    </div>
+  );
+};
 const ProjectCard = ({ title, description, linkHref, linkLabel }) => {
   const cardRef = useRef(null);
   const [spotlight, setSpotlight] = useState({ x: 0, y: 0, opacity: 0 });
@@ -1403,7 +1410,10 @@ const Certificates = () => (
         Certificados
       </SectionTitle>
       <div className="mt-12 flex justify-center">
-        <Card className="bg-transparent text-white border border-white/30 shadow-xl max-w-md w-full text-center">
+       <Card
+          transparent
+          className="text-white border border-white/30 shadow-xl max-w-md w-full text-center"
+        >
           <h3 className="text-xl font-bold text-white">Newbie Security Auditor – Diosdelared.com</h3>
           <p className="text-white/80">2025</p>
           <p className="mt-2 text-white/80">
