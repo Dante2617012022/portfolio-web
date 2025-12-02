@@ -1187,7 +1187,7 @@ const Education = () => {
             >
               <div className="timeline-node" aria-hidden>
                 <span className="grid h-10 w-10 place-items-center rounded-full bg-white shadow ring-2 ring-blue-200">
-                  <span className="h-2.5 w-2.5 rounded-full bg-blue-500 shadow-inner" />
+                  
                 </span>
               </div>
 
@@ -1210,18 +1210,17 @@ const Education = () => {
                   </div>
 
                   <div className="text-sm text-slate-700">
-                    <p className="font-semibold text-slate-900">{milestone.institution}</p>
-                    <p className="mt-1 text-slate-700">{milestone.duration}</p>
-                  </div>
+                  <p className="font-semibold text-slate-900">{milestone.institution}</p>
+                  <p className="mt-1 text-slate-700">{milestone.duration}</p>
+                </div>
 
-                  <ul className="mt-3 space-y-2 text-slate-700">
-                    {milestone.achievements.map((item) => (
-                      <li key={item} className="flex items-start gap-2">
-                        <span className="mt-1 h-1.5 w-1.5 rounded-full bg-blue-500" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <ul className="mt-3 space-y-2 text-slate-700 list-none">
+                  {milestone.achievements.map((item) => (
+                    <li key={item} className="text-slate-700">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
 
                   <div
                     id={`edu-tip-${idx}`}
