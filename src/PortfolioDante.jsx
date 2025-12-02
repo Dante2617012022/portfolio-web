@@ -78,7 +78,60 @@ const SectionTitle = ({ children, id, colorClass = "text-gray-900" }) => (
 const Card = ({ children, className = "" }) => (
   <div className={`bg-white rounded-2xl shadow-lg p-6 ${className}`}>{children}</div>
 );
+const ProjectCard = ({ title, description, linkHref, linkLabel }) => {
+  const cardRef = useRef(null);
+  const [spotlight, setSpotlight] = useState({ x: 0, y: 0, opacity: 0 });
 
+  const updateSpotlight = (event) => {
+    const rect = cardRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    setSpotlight({ x, y, opacity: 1 });
+  };
+
+  return (
+    <div
+      ref={cardRef}
+      onMouseMove={updateSpotlight}
+      onMouseEnter={updateSpotlight}
+      onMouseLeave={() => setSpotlight((prev) => ({ ...prev, opacity: 0 }))}
+      className="relative group bg-white rounded-2xl shadow-lg p-6 overflow-hidden transition-transform duration-200"
+      style={{ boxShadow: "0 18px 40px rgba(0, 0, 0, 0.08)" }}
+    >
+      <div
+        className="pointer-events-none absolute inset-0 transition-opacity duration-200"
+        style={{
+          background: `radial-gradient(160px circle at ${spotlight.x}px ${spotlight.y}px, rgba(59,130,246,0.18), transparent 55%)`,
+          opacity: spotlight.opacity,
+        }}
+        aria-hidden
+      />
+      <div
+        className="absolute inset-0 bg-gradient-to-br from-blue-50/0 via-blue-50/40 to-blue-100/0 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none"
+        aria-hidden
+      />
+      <div className="relative z-10 space-y-3">
+        <h3 className="text-2xl font-extrabold text-gray-900">{title}</h3>
+        <p className="text-gray-700 leading-relaxed">{description}</p>
+        <a
+          href={linkHref}
+          target="_blank"
+          rel="noreferrer"
+          className="group inline-flex items-center gap-2 text-blue-600 font-semibold transition-transform duration-200 hover:translate-x-0.5"
+        >
+          <span className="relative">
+            <span className="block">{linkLabel}</span>
+            <span className="block h-0.5 bg-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-left" aria-hidden />
+          </span>
+          <span className="text-lg transform transition-transform duration-200 group-hover:translate-x-1" aria-hidden>
+            ↗
+          </span>
+        </a>
+      </div>
+    </div>
+  );
+};
 const IconCircle = ({ children }) => (
   <div className="w-16 h-16 rounded-full bg-blue-600/10 text-blue-600 grid place-items-center text-3xl mx-auto" aria-hidden>
     {children}
@@ -1284,36 +1337,21 @@ const Projects = () => (
     <Container>
       <SectionTitle>Proyectos</SectionTitle>
       <div className="mt-12 grid md:grid-cols-2 gap-6">
-        <Card>
-          <h3 className="text-2xl font-extrabold">Chatbot con IA y Automatización de Pedidos</h3>
-          <p className="text-gray-700 mt-3">
-            Node.js, Baileys, APIs, JavaScript. Integración con GitHub/Codex IA.
-          </p>
-          <a
-            href="https://github.com/Dante2617012022"
-            target="_blank"
-            rel="noreferrer"
-            className="inline-block mt-3 text-blue-600 hover:underline"
-          >
-            Ver en GitHub
-          </a>
-        </Card>
+         <ProjectCard
+          title="Chatbot con IA y Automatización de Pedidos"
+          description="Node.js, Baileys, APIs, JavaScript. Integración con GitHub/Codex IA."
+          linkHref="https://github.com/Dante2617012022"
+          linkLabel="Ver en GitHub"
+          
+        />
 
-        <Card>
-          <h3 className="text-2xl font-extrabold">Integración de herramientas de seguridad Open Source</h3>
-          <p className="text-gray-700 mt-3">
-            Wazuh, Graylog, Snort/Suricata, VirusTotal/YARA, MikroTik. 
-            Documentación y prácticas orientadas a PyME.
-          </p>
-          <a
-            href="https://github.com/Dante2617012022"
-            target="_blank"
-            rel="noreferrer"
-            className="inline-block mt-3 text-blue-600 hover:underline"
-          >
-            Ver documentación / repos
-          </a>
-        </Card>
+
+         <ProjectCard
+          title="Integración de herramientas de seguridad Open Source"
+          description="Wazuh, Graylog, Snort/Suricata, VirusTotal/YARA, MikroTik. Documentación y prácticas orientadas a PyME."
+          linkHref="https://github.com/Dante2617012022"
+          linkLabel="Ver documentación / repos"
+        />
       </div>
     </Container>
   </section>
