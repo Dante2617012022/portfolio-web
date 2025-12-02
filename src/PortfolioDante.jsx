@@ -1402,18 +1402,18 @@ const Certificates = () => (
       <SectionTitle id="certificates-title" colorClass="text-white">
         Certificados
       </SectionTitle>
-      <div className="mt-12 grid gap-6 md:grid-cols-2">
-        <Card className="bg-white/90 text-slate-900 backdrop-blur border border-white/10 shadow-2xl">
-          <h3 className="text-xl font-bold">Newbie Security Auditor – Diosdelared.com</h3>
-          <p className="text-gray-600">2025</p>
-          <p className="mt-2 text-gray-700">
+      <div className="mt-12 flex justify-center">
+        <Card className="bg-transparent text-white border border-white/30 shadow-xl max-w-md w-full text-center">
+          <h3 className="text-xl font-bold text-white">Newbie Security Auditor – Diosdelared.com</h3>
+          <p className="text-white/80">2025</p>
+          <p className="mt-2 text-white/80">
             Fundamentos de auditoría, pentesting básico y hardening.
           </p>
           <a
             href="https://cert.ddlr.org/cert.php?id=55"
             target="_blank"
             rel="noreferrer"
-            className="mt-3 inline-block font-semibold text-blue-700 hover:underline"
+             className="mt-3 inline-block font-semibold text-blue-200 hover:text-white transition-colors"
           >
             Verificación: cert.ddlr.org/cert.php?id=55
           </a>
