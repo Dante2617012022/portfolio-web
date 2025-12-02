@@ -1136,17 +1136,23 @@ const Education = () => {
   return (
     <section id="education" className="py-20 bg-gray-50">
       <style>{`
+      .timeline-grid{
+          --line-left:1.4rem;
+          --line-translate:0;
+          --node-size:2.5rem;
+        }
         .timeline-grid::before{
           content:"";
           position:absolute;
           inset:0;
           width:3px;
           background:linear-gradient(180deg,#cbd5e1 0%,#94a3b8 50%,#cbd5e1 100%);
-          left:1.4rem;
+          left:var(--line-left);
+          transform:translateX(var(--line-translate));
           border-radius:999px;
         }
         .timeline-item{position:relative;padding-left:3.75rem;}
-        .timeline-node{position:absolute;left:0.85rem;top:1rem;}
+        .timeline-node{position:absolute;left:calc(var(--line-left) - (var(--node-size)/2));top:1rem;}
         .timeline-card{transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease;}
         .timeline-card:hover{transform:translateY(-2px) scale(1.01);box-shadow:0 20px 40px rgba(15,23,42,.12);}
         .timeline-card:focus-visible{outline:3px solid #2563eb; outline-offset:6px;}
@@ -1155,13 +1161,13 @@ const Education = () => {
         .edu-tooltip{pointer-events:none; opacity:0; transform:translateY(4px) scale(.98); transition:opacity .25s ease, transform .25s ease;}
         .timeline-card:hover .edu-tooltip, .timeline-card:focus-within .edu-tooltip{opacity:1; transform:translateY(0) scale(1);}
         @media (min-width:768px){
-          .timeline-grid{padding-inline:1rem;}
-          .timeline-grid::before{left:50%; transform:translateX(-50%);}
+          .timeline-grid{padding-inline:1rem; --line-left:50%; --line-translate:-50%;}
+          .timeline-grid::before{left:var(--line-left); transform:translateX(var(--line-translate));}
           .timeline-item{width:50%; padding-left:3.5rem;}
           .timeline-item:nth-child(odd){text-align:right; padding-right:3.5rem; padding-left:0; margin-left:0;}
-          .timeline-item:nth-child(odd) .timeline-node{left:calc(50% - 10px); right:auto;}
+          .timeline-item:nth-child(odd) .timeline-node{left:calc(var(--line-left) - (var(--node-size)/2)); right:auto;}
           .timeline-item:nth-child(even){margin-left:50%;}
-          .timeline-item:nth-child(even) .timeline-node{left:-10px;}
+          .timeline-item:nth-child(even) .timeline-node{left:calc(-1 * (var(--node-size)/2));}
           .timeline-item:nth-child(odd) .timeline-card{margin-left:auto;}
         }
       `}</style>
