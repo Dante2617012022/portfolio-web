@@ -1096,8 +1096,8 @@ const Education = () => {
     {
       title: "Tecnicatura en Ciberseguridad",
       date: "2024 – en curso",
-      institution: "Universidad Gastón Dachary (UGR)",
-      duration: "3 años (avance 73%)",
+      institution: "Universidad del Gran Rosario (UGR)",
+      duration: "Dos años y medio (avance 73%)",
       achievements: [
         "1º y 2º año completos con promedio ≥ 8",
         "Redes, seguridad defensiva, gestión de incidentes",
@@ -1136,9 +1136,10 @@ const Education = () => {
   return (
     <section id="education" className="py-20 bg-gray-50">
       <style>{`
+      
       .timeline-grid{
+          position:relative;
           --line-left:1.4rem;
-          --line-translate:0;
           --node-size:2.5rem;
         }
         .timeline-grid::before{
@@ -1148,11 +1149,11 @@ const Education = () => {
           width:3px;
           background:linear-gradient(180deg,#cbd5e1 0%,#94a3b8 50%,#cbd5e1 100%);
           left:var(--line-left);
-          transform:translateX(var(--line-translate));
+          transform:translateX(-50%);
           border-radius:999px;
         }
-        .timeline-item{position:relative;padding-left:3.75rem;}
-        .timeline-node{position:absolute;left:calc(var(--line-left) - (var(--node-size)/2));top:1rem;}
+        .timeline-item{position:static;padding-left:3.75rem;}
+        .timeline-node{position:absolute;left:var(--line-left);top:1rem;transform:translateX(-50%);}
         .timeline-card{transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease;}
         .timeline-card:hover{transform:translateY(-2px) scale(1.01);box-shadow:0 20px 40px rgba(15,23,42,.12);}
         .timeline-card:focus-visible{outline:3px solid #2563eb; outline-offset:6px;}
@@ -1161,13 +1162,13 @@ const Education = () => {
         .edu-tooltip{pointer-events:none; opacity:0; transform:translateY(4px) scale(.98); transition:opacity .25s ease, transform .25s ease;}
         .timeline-card:hover .edu-tooltip, .timeline-card:focus-within .edu-tooltip{opacity:1; transform:translateY(0) scale(1);}
         @media (min-width:768px){
-          .timeline-grid{padding-inline:1rem; --line-left:50%; --line-translate:-50%;}
-          .timeline-grid::before{left:var(--line-left); transform:translateX(var(--line-translate));}
+          .timeline-grid{padding-inline:1rem; --line-left:50%;}
+          .timeline-grid::before{left:var(--line-left);}
           .timeline-item{width:50%; padding-left:3.5rem;}
           .timeline-item:nth-child(odd){text-align:right; padding-right:3.5rem; padding-left:0; margin-left:0;}
-          .timeline-item:nth-child(odd) .timeline-node{left:calc(var(--line-left) - (var(--node-size)/2)); right:auto;}
+          .timeline-item:nth-child(odd) .timeline-node{left:var(--line-left); right:auto;}
           .timeline-item:nth-child(even){margin-left:50%;}
-          .timeline-item:nth-child(even) .timeline-node{left:calc(-1 * (var(--node-size)/2));}
+                    .timeline-item:nth-child(even) .timeline-node{left:var(--line-left);}
           .timeline-item:nth-child(odd) .timeline-card{margin-left:auto;}
         }
       `}</style>
