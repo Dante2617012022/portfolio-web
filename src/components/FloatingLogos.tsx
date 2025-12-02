@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 
 type Logo = {
   src: string;
+  name: string;          // nombre visible en el tooltip
   radius?: number;       // px (opcional, default 28)
   mass?: number;         // opcional, default proporcional al área
 };
@@ -26,7 +27,12 @@ export default function FloatingLogos({
   const wrapRef = useRef<HTMLDivElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const rafRef = useRef<number | null>(null);
-
+  const [hoverInfo, setHoverInfo] = React.useState<{
+    x: number;
+    y: number;
+    name: string;
+  } | null>(null);
+  
   useEffect(() => {
     const wrap = wrapRef.current!;
     const cvs = canvasRef.current!;
@@ -53,12 +59,13 @@ export default function FloatingLogos({
 
     type Body = {
       x: number; y: number; vx: number; vy: number;
-      r: number; m: number; img: HTMLImageElement;
+      r: number; m: number; img: HTMLImageElement; name: string;
     };
 
     // --- cargar imágenes (tolerante a fallos) ---
-const bodies: Body[] = [];
+    const bodies: Body[] = [];
     let started = false;
+    let listenersBound = false;
     const startLoop = () => {
       if (!started) {
         started = true;
@@ -80,13 +87,41 @@ const bodies: Body[] = [];
         }
       });
     };
+    const onMove = (e: MouseEvent) => {
+      const r = R();
+      const mx = e.clientX - r.left;
+      const my = e.clientY - r.top;
+
+      let target: Body | null = null;
+      let bestDist = Infinity;
+
+      bodies.forEach((b) => {
+        const dx = b.x - mx;
+        const dy = b.y - my;
+        const dist2 = dx * dx + dy * dy;
+        if (dist2 <= b.r * b.r && dist2 < bestDist) {
+          bestDist = dist2;
+          target = b;
+        }
+      });
+
+      if (target) setHoverInfo({ x: mx, y: my, name: target.name });
+      else setHoverInfo(null);
+    };
+
+    const onLeave = () => setHoverInfo(null);
 
 
-const total = logos.length;
+    const total = logos.length;
     let done = 0;
     const maybeStart = () => {
       if (done === total) {
-        wrap.addEventListener("click", onClick);
+        if (!listenersBound) {
+          wrap.addEventListener("click", onClick);
+          wrap.addEventListener("mousemove", onMove);
+          wrap.addEventListener("mouseleave", onLeave);
+          listenersBound = true;
+        }
         startLoop();
       }
     };
@@ -108,6 +143,7 @@ const total = logos.length;
           r,
           m,
           img,
+          name: l.name,
         });
         done++;
         maybeStart();
@@ -248,12 +284,28 @@ const total = logos.length;
       ro.disconnect();
       window.removeEventListener("resize", resize);
       wrap.removeEventListener("click", onClick);
+      wrap.removeEventListener("mousemove", onMove);
+      wrap.removeEventListener("mouseleave", onLeave);
     };
-  }, [logos, restitution, maxSpeed, density, bg]);
+  }, [logos, restitution, maxSpeed, density, bg, setHoverInfo]);
 
   return (
     <div ref={wrapRef} className={`relative ${className}`}>
       <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none" />
+            {hoverInfo && (
+        <div
+          className="absolute pointer-events-none"
+          style={{
+            left: hoverInfo.x,
+            top: hoverInfo.y,
+            transform: "translate(-50%, -140%)",
+          }}
+        >
+          <div className="px-3 py-1 rounded-full bg-black/80 text-xs text-white border border-white/10 shadow-lg whitespace-nowrap">
+            {hoverInfo.name}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

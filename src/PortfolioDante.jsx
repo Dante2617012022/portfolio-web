@@ -27,34 +27,35 @@ const IconPhone = ({ className = "w-5 h-5" }) => (
 
 // === Arrays de logos ===
 const techLogosAvanzado = [
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg", radius: 28 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/debian/debian-original.svg", radius: 26 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg", radius: 26 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", radius: 30 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg", radius: 28 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg", radius: 28 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg", radius: 28 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg", radius: 28 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg", radius: 28 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg", name: "Linux", radius: 28 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/debian/debian-original.svg", name: "Debian", radius: 26 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg", name: "Windows", radius: 26 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", name: "JavaScript", radius: 30 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg", name: "React", radius: 28 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg", name: "Node.js", radius: 28 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg", name: "Python", radius: 28 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg", name: "Docker", radius: 28 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg", name: "MySQL", radius: 28 },
 ];
 
 const techLogosIntermedio = [
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg", radius: 28 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg", radius: 28 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg", radius: 28 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg", radius: 28 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original.svg", radius: 28 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg", radius: 28 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg", radius: 28 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg", name: "Git", radius: 28 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg", name: "GitHub", radius: 28 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg", name: "Redis", radius: 28 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg", name: "Nginx", radius: 28 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original.svg", name: "Apache", radius: 28 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg", name: "VS Code", radius: 28 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg", name: "Express", radius: 28 },
 ];
 
 // Básico / en progreso
 const techLogosBasico = [
- { src: logoWireshark, radius: 28 }, // Wireshark
-  { src: logoBurpSuite, radius: 28 }, // Burp Suite
-  { src: logoVirusTotal, radius: 28 }, // YARA (usa marca VirusTotal)
-  { src: logoTenable, radius: 28 },   // Nessus (marca Tenable)
-  { src: logoRapid, radius: 28 },    
+ { src: logoWireshark, name: "Wireshark", radius: 28 }, // Wireshark
+  { src: logoBurpSuite, name: "Burp Suite", radius: 28 }, // Burp Suite
+  { src: logoVirusTotal, name: "VirusTotal", radius: 28 }, // YARA (usa marca VirusTotal)
+  { src: logoTenable, name: "Tenable Nessus", radius: 28 },   // Nessus (marca Tenable)
+  { src: logoRapid, name: "Rapid7 InsightVM", radius: 28 },
+
 ];
 
 // === Helpers ===
@@ -1065,8 +1066,7 @@ const Experience = () => {
               </ul>
 
               <p className="mt-5 text-sm text-slate-600 reveal" style={{ transitionDelay: "380ms" }}>
-                <strong className="font-semibold text-slate-800">Herramientas:</strong> Citrix, Salesforce,
-                Oracle (Siebel, Watchdog, CC&amp;B), Avaya, Office
+                <strong className="font-semibold text-slate-800">Herramientas y plataformas:</strong> Citrix · Salesforce (CRM corporativo / monitoreo) · Oracle Siebel / Watchdog / CC&B · Avaya · Microsoft Office · Herramientas internas de monitoreo y gestión
               </p>
             </TiltCard>
           </div>
@@ -1087,7 +1087,7 @@ const Education = () => (
           <h3 className="text-xl font-bold">Tecnicatura en Ciberseguridad – UGR</h3>
           <p className="text-gray-600">2024 – en curso</p>
           <p className="mt-2 text-gray-700">
-            1º año y mitad de 2º año completos (promedio ≥ 8). Avance: 57,69%.
+            1º y 2º año completos (promedio ≥ 8). Avance: 73%.
           </p>
         </Card>
         <Card>
