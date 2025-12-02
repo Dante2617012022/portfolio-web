@@ -1134,7 +1134,7 @@ const Education = () => {
   }, []);
 
   return (
-    <section id="education" className="py-20 bg-gray-900 text-white">
+<section id="education" className="py-20 bg-gray-900">
       <style>{`
       
       .timeline-grid{
@@ -1175,7 +1175,7 @@ const Education = () => {
       `}</style>
       <Container>
         <SectionTitle colorClass="text-white">Educación</SectionTitle>
-        <div className="relative mt-14 timeline-grid">
+<div className="relative mt-14 timeline-grid text-slate-800">
           <div className="sr-only" aria-live="polite">
             Línea de tiempo de educación con dos hitos principales.
           </div>
@@ -1196,6 +1196,7 @@ const Education = () => {
                 tabIndex={0}
                 aria-describedby={`edu-tip-${idx}`}
                 className="timeline-card group relative overflow-hidden rounded-2xl border border-slate-200 bg-white backdrop-blur p-6 md:p-7"
+                
               >
                 <div className="flex flex-col gap-3">
                   <div className="flex items-center justify-between gap-3">
