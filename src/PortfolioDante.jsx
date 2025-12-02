@@ -63,9 +63,9 @@ const Container = ({ children, className = "" }) => (
   <div className={`max-w-6xl mx-auto px-4 sm:px-6 ${className}`}>{children}</div>
 );
 
-const SectionTitle = ({ children, id }) => (
+const SectionTitle = ({ children, id, colorClass = "text-gray-900" }) => (
   <div id={id} className="text-center">
-    <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900">
+     <h2 className={`text-3xl sm:text-4xl font-extrabold tracking-tight ${colorClass}`}>
       {children}
     </h2>
     <div className="mt-3 flex items-center justify-center gap-2">
@@ -1134,7 +1134,7 @@ const Education = () => {
   }, []);
 
   return (
-    <section id="education" className="py-20 bg-gray-50">
+    <section id="education" className="py-20 bg-gray-900 text-white">
       <style>{`
       
       .timeline-grid{
@@ -1174,7 +1174,7 @@ const Education = () => {
         }
       `}</style>
       <Container>
-        <SectionTitle>Educación</SectionTitle>
+        <SectionTitle colorClass="text-white">Educación</SectionTitle>
         <div className="relative mt-14 timeline-grid">
           <div className="sr-only" aria-live="polite">
             Línea de tiempo de educación con dos hitos principales.
