@@ -1166,6 +1166,7 @@ const Education = () => {
           .timeline-grid::before{left:var(--line-left);}
           .timeline-item{width:50%; padding-left:3.5rem;}
           .timeline-item:nth-child(odd){text-align:right; padding-right:3.5rem; padding-left:0; margin-left:0;}
+                    .timeline-item:nth-child(odd) .timeline-card{ text-align:left; }
           .timeline-item:nth-child(odd) .timeline-node{left:var(--line-left); right:auto;}
           .timeline-item:nth-child(even){margin-left:50%;}
                     .timeline-item:nth-child(even) .timeline-node{left:var(--line-left);}
