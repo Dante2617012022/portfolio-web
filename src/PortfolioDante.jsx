@@ -43,24 +43,11 @@ const createTextLogo = (label) => {
   return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
 };
 
-const projectBubbleLabels = [
-  "Openssl",
-  "VirtualBox",
-  "MITRE ATT&CK",
-  "OWASP",
-  "OSINT",
-  "ISO 27001",
-  "NIST",
-  "GDPR",
-  "iptables",
-  "AWS",
-];
+
 const techLogosAvanzado = [
   { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/debian/debian-original.svg", name: "Linux (Debian)", radius: 26 },
   { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg", name: "Windows", radius: 26 },
-  
   { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", name: "JavaScript", radius: 30 },
-  
   { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg", name: "Node.js", radius: 28 },
   { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg", name: "Python", radius: 28 },
   { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg", name: "HTML", radius: 28 },
