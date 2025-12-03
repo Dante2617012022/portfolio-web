@@ -2,11 +2,21 @@ import React, { useEffect, useState, useRef, useLayoutEffect } from "react";
 import { motion, useReducedMotion } from "framer-motion"; // eslint-disable-line no-unused-vars
 import FloatingLogos from "./components/FloatingLogos";
 
-import logoWireshark from "./assets/logos/wireshark.svg";
-import logoBurpSuite from "./assets/logos/burpsuite.svg";
-import logoVirusTotal from "./assets/logos/virustotal.svg";
-import logoTenable from "./assets/logos/tenable.svg";
-import logoRapid from "./assets/logos/rapid.svg";
+// === Tools Logos ===
+import reactLogo from "./assets/logos/react.svg";
+import wazuhLogo from "./assets/logos/wazuh.png";
+import graylogLogo from "./assets/logos/graylog.svg";
+import snortLogo from "./assets/logos/snort.png";
+import suricataLogo from "./assets/logos/suricata.jpg";
+import yaraLogo from "./assets/logos/yara.webp";
+import hydraLogo from "./assets/logos/Hydra.jpeg";
+import virustotalLogo from "./assets/logos/virustotal.svg";
+import flaskLogo from "./assets/logos/flask.png";
+import viteLogo from "./assets/logos/vite.jpeg";
+import tailwindLogo from "./assets/logos/tailwind.jpeg";
+import nmapLogo from "./assets/logos/nmap.jpeg";
+import wiresharkLogo from "./assets/logos/wireshark.svg";
+
 
 import opensslLogo from "./assets/logos/OpenSSL.png";
 import virtualboxLogo from "./assets/logos/VirtualBox.png";
@@ -56,43 +66,48 @@ const createTextLogo = (label) => {
 };
 
 const techLogosAvanzado = [
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/debian/debian-original.svg", name: "Linux (Debian)", radius: 26 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg", name: "Windows", radius: 26 },
-  
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", name: "JavaScript", radius: 30 },
-  
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg", name: "Node.js", radius: 28 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg", name: "Python", radius: 28 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg", name: "HTML", radius: 28 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg", name: "CSS", radius: 28 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg", name: "MySQL", radius: 28 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mariadb/mariadb-original.svg", name: "MariaDB", radius: 28 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original.svg", name: "Apache", radius: 28 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg", name: "GitHub", radius: 28 },
- 
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/debian/debian-original.svg", name: "Linux (Debian)", radius: 24 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg", name: "Windows", radius: 24 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", name: "JavaScript", radius: 24 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg", name: "Python", radius: 24 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg", name: "HTML", radius: 24 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg", name: "CSS", radius: 24 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg", name: "MySQL", radius: 24 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mariadb/mariadb-original.svg", name: "MariaDB", radius: 24 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original.svg", name: "Apache", radius: 24 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg", name: "GitHub", radius: 24 },
+   { src: virtualboxLogo, name: "VirtualBox", radius: 24 },
 ];
-
+//intermedio
 const techLogosIntermedio = [
-  { src: opensslLogo, name: "OpenSSL", radius: 28 },
-  { src: virtualboxLogo, name: "VirtualBox", radius: 28 },
-  { src: mitreLogo, name: "MITRE ATT&CK", radius: 28 },
-  { src: owaspLogo, name: "OWASP", radius: 28 },
-  { src: isoLogo, name: "ISO 27001", radius: 28 },
-  { src: nistLogo, name: "NIST", radius: 28 },
-  { src: gdprLogo, name: "GDPR", radius: 28 },
-  { src: awsLogo, name: "AWS", radius: 28 },
+  { src: opensslLogo, name: "OpenSSL", radius: 24 },
+  { src: mitreLogo, name: "MITRE ATT&CK", radius: 24 },
+  { src: owaspLogo, name: "OWASP", radius: 24 },
+  { src: isoLogo, name: "ISO 27001", radius: 24 },
+  { src: nistLogo, name: "NIST", radius: 24 },
+  { src: gdprLogo, name: "GDPR", radius: 24 },
+  { src: awsLogo, name: "AWS", radius: 24 },
+  { src: viteLogo, name: "Vite", radius: 24 },
+  { src: reactLogo, name: "React", radius: 24 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg", name: "Node.js", radius: 24 },
+  { src: tailwindLogo, name: "TailwindCSS", radius: 24 },
 ];
 
 
-// Básico / en progreso
+//en progreso
 const techLogosBasico = [
- { src: logoWireshark, name: "Wireshark", radius: 28 }, // Wireshark
-  { src: logoBurpSuite, name: "Burp Suite", radius: 28 }, // Burp Suite
-  { src: logoVirusTotal, name: "VirusTotal", radius: 28 }, // YARA (usa marca VirusTotal)
-  { src: logoTenable, name: "Tenable Nessus", radius: 28 },   // Nessus (marca Tenable)
-  { src: logoRapid, name: "Rapid7 InsightVM", radius: 28 },
-
+  { src: wazuhLogo, name: "Wazuh", radius: 24 },
+  { src: graylogLogo, name: "Graylog", radius: 24 },
+  { src: snortLogo, name: "Snort", radius: 24 },
+  { src: suricataLogo, name: "Suricata", radius: 24 },
+  { src: yaraLogo, name: "YARA", radius: 24 },
+  { src: hydraLogo, name: "Hydra", radius: 24 },
+  { src: virustotalLogo, name: "VirusTotal", radius: 24 },
+  { src: flaskLogo, name: "Flask", radius: 24 },
+  { src: nmapLogo, name: "Nmap", radius: 24 },
+  { src: wiresharkLogo, name: "Wireshark", radius: 24 },
 ];
+
 
 // === Helpers ===
 const Container = ({ children, className = "" }) => (
@@ -997,7 +1012,7 @@ const Skills = () => (
 
         {/* Intermedio */}
         <Card className="bg-gray-800 text-white border border-white/10 shadow-xl overflow-hidden">
-          <h3 className="text-xl font-bold px-6 pt-6">Proyectos</h3>
+          <h3 className="text-xl font-bold px-6 pt-6">   Uso regular</h3>
           <div className="mt-4 h-72 px-2 pb-2">
             <FloatingLogos
               logos={techLogosIntermedio}
