@@ -26,10 +26,39 @@ const IconPhone = ({ className = "w-5 h-5" }) => (
 );
 
 // === Arrays de logos ===
+const createTextLogo = (label) => {
+  const svg = `
+    <svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'>
+      <defs>
+        <linearGradient id='g' x1='0%' x2='100%' y1='0%' y2='100%'>
+          <stop offset='0%' stop-color='%230ea5e9'/>
+          <stop offset='100%' stop-color='%231d4ed8'/>
+        </linearGradient>
+      </defs>
+      <rect x='0' y='0' width='160' height='160' rx='32' fill='url(%23g)'/>
+      <text x='50%' y='52%' fill='white' font-size='26' font-family='Inter, Arial, sans-serif' font-weight='700' text-anchor='middle' dominant-baseline='middle'>${label}</text>
+    </svg>
+  `;
+
+  return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+};
+
+const projectBubbleLabels = [
+  "Openssl",
+  "VirtualBox",
+  "MITRE ATT&CK",
+  "OWASP",
+  "OSINT",
+  "ISO 27001",
+  "NIST",
+  "GDPR",
+  "iptables",
+  "AWS",
+];
 const techLogosAvanzado = [
   { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/debian/debian-original.svg", name: "Linux (Debian)", radius: 26 },
   { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg", name: "Windows", radius: 26 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/virtualbox/virtualbox-original.svg", name: "VirtualBox", radius: 28 },
+  
   { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", name: "JavaScript", radius: 30 },
   
   { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg", name: "Node.js", radius: 28 },
@@ -40,7 +69,7 @@ const techLogosAvanzado = [
   { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mariadb/mariadb-original.svg", name: "MariaDB", radius: 28 },
   { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original.svg", name: "Apache", radius: 28 },
   { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg", name: "GitHub", radius: 28 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg", name: "VS Code", radius: 28 },
+ 
 ];
 
 const techLogosIntermedio = [
@@ -50,7 +79,7 @@ const techLogosIntermedio = [
   { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg", name: "Nginx", radius: 28 },
   { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original.svg", name: "Apache", radius: 28 },
   { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg", name: "VS Code", radius: 28 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg", name: "Express", radius: 28 },
+ 
 ];
 
 // Básico / en progreso
