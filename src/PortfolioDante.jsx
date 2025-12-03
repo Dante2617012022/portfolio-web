@@ -1,11 +1,15 @@
 import React, { useEffect, useState, useRef, useLayoutEffect } from "react";
 import { motion, useReducedMotion } from "framer-motion"; // eslint-disable-line no-unused-vars
 import FloatingLogos from "./components/FloatingLogos";
+
+
+
 import logoWireshark from "./assets/logos/wireshark.svg";
 import logoBurpSuite from "./assets/logos/burpsuite.svg";
 import logoVirusTotal from "./assets/logos/virustotal.svg";
 import logoTenable from "./assets/logos/tenable.svg";
 import logoRapid from "./assets/logos/rapid.svg";
+
 // === Icons (SVG inline) ===
 const IconGitHub = ({ className = "w-5 h-5" }) => (
   <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
@@ -43,18 +47,6 @@ const createTextLogo = (label) => {
   return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
 };
 
-const projectBubbleLabels = [
-  "Openssl",
-  "VirtualBox",
-  "MITRE ATT&CK",
-  "OWASP",
-  "OSINT",
-  "ISO 27001",
-  "NIST",
-  "GDPR",
-  "iptables",
-  "AWS",
-];
 const techLogosAvanzado = [
   { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/debian/debian-original.svg", name: "Linux (Debian)", radius: 26 },
   { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg", name: "Windows", radius: 26 },
