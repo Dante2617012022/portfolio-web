@@ -2,13 +2,21 @@ import React, { useEffect, useState, useRef, useLayoutEffect } from "react";
 import { motion, useReducedMotion } from "framer-motion"; // eslint-disable-line no-unused-vars
 import FloatingLogos from "./components/FloatingLogos";
 
-
-
 import logoWireshark from "./assets/logos/wireshark.svg";
 import logoBurpSuite from "./assets/logos/burpsuite.svg";
 import logoVirusTotal from "./assets/logos/virustotal.svg";
 import logoTenable from "./assets/logos/tenable.svg";
 import logoRapid from "./assets/logos/rapid.svg";
+
+import opensslLogo from "./assets/logos/OpenSSL.png";
+import virtualboxLogo from "./assets/logos/VirtualBox.png";
+import mitreLogo from "./assets/logos/mitre-attack.png";
+import owaspLogo from "./assets/logos/OWASP.png";
+import isoLogo from "./assets/logos/ISO 27001.png";
+import nistLogo from "./assets/logos/NIST-Logo.png";
+import gdprLogo from "./assets/logos/GDPR.png";
+import awsLogo from "./assets/logos/AWS.png";
+
 
 // === Icons (SVG inline) ===
 const IconGitHub = ({ className = "w-5 h-5" }) => (
@@ -65,14 +73,16 @@ const techLogosAvanzado = [
 ];
 
 const techLogosIntermedio = [
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg", name: "Git", radius: 28 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg", name: "GitHub", radius: 28 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg", name: "Redis", radius: 28 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg", name: "Nginx", radius: 28 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original.svg", name: "Apache", radius: 28 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg", name: "VS Code", radius: 28 },
- 
+  { src: opensslLogo, name: "OpenSSL", radius: 28 },
+  { src: virtualboxLogo, name: "VirtualBox", radius: 28 },
+  { src: mitreLogo, name: "MITRE ATT&CK", radius: 28 },
+  { src: owaspLogo, name: "OWASP", radius: 28 },
+  { src: isoLogo, name: "ISO 27001", radius: 28 },
+  { src: nistLogo, name: "NIST", radius: 28 },
+  { src: gdprLogo, name: "GDPR", radius: 28 },
+  { src: awsLogo, name: "AWS", radius: 28 },
 ];
+
 
 // Básico / en progreso
 const techLogosBasico = [
