@@ -27,15 +27,20 @@ const IconPhone = ({ className = "w-5 h-5" }) => (
 
 // === Arrays de logos ===
 const techLogosAvanzado = [
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg", name: "Linux", radius: 28 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/debian/debian-original.svg", name: "Debian", radius: 26 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/debian/debian-original.svg", name: "Linux (Debian)", radius: 26 },
   { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg", name: "Windows", radius: 26 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/virtualbox/virtualbox-original.svg", name: "VirtualBox", radius: 28 },
   { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", name: "JavaScript", radius: 30 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg", name: "React", radius: 28 },
+  
   { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg", name: "Node.js", radius: 28 },
   { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg", name: "Python", radius: 28 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg", name: "Docker", radius: 28 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg", name: "HTML", radius: 28 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg", name: "CSS", radius: 28 },
   { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg", name: "MySQL", radius: 28 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mariadb/mariadb-original.svg", name: "MariaDB", radius: 28 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original.svg", name: "Apache", radius: 28 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg", name: "GitHub", radius: 28 },
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg", name: "VS Code", radius: 28 },
 ];
 
 const techLogosIntermedio = [
@@ -947,7 +952,7 @@ const Skills = () => (
       <div className="mt-12 grid md:grid-cols-3 gap-6">
         {/* Avanzado */}
         <Card className="bg-gray-800 text-white border border-white/10 shadow-xl overflow-hidden">
-          <h3 className="text-xl font-bold px-6 pt-6">Avanzado / uso frecuente</h3>
+          <h3 className="text-xl font-bold px-6 pt-6">Uso frecuente</h3>
           <div className="mt-4 h-72 px-2 pb-2">
             <FloatingLogos
               logos={techLogosAvanzado}
@@ -961,7 +966,7 @@ const Skills = () => (
 
         {/* Intermedio */}
         <Card className="bg-gray-800 text-white border border-white/10 shadow-xl overflow-hidden">
-          <h3 className="text-xl font-bold px-6 pt-6">Intermedio / proyectos</h3>
+          <h3 className="text-xl font-bold px-6 pt-6">Proyectos</h3>
           <div className="mt-4 h-72 px-2 pb-2">
             <FloatingLogos
               logos={techLogosIntermedio}
@@ -975,7 +980,7 @@ const Skills = () => (
 
         {/* Básico */}
         <Card className="bg-gray-800 text-white border border-white/10 shadow-xl overflow-hidden">
-          <h3 className="text-xl font-bold px-6 pt-6">Básico / en progreso</h3>
+          <h3 className="text-xl font-bold px-6 pt-6">En progreso</h3>
           <div className="mt-4 h-72 px-2 pb-2">
             <FloatingLogos
   logos={techLogosBasico}
