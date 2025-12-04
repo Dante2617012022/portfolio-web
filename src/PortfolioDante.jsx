@@ -111,7 +111,9 @@ const techLogosBasico = [
 
 // === Helpers ===
 const Container = ({ children, className = "" }) => (
-  <div className={`max-w-6xl mx-auto px-4 sm:px-6 ${className}`}>{children}</div>
+<div className={`w-full max-w-6xl mx-auto px-4 sm:px-6 ${className}`}>
+    {children}
+  </div>
 );
 
 const SectionTitle = ({ children, id, colorClass = "text-gray-900" }) => (

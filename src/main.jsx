@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import PortfolioDante from './PortfolioDante.jsx'
-
+import './index.css'
 const redirectPath = sessionStorage.getItem('redirect')
 
 if (redirectPath) {
