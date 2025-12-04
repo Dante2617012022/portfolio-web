@@ -24,10 +24,9 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  display: block; /* <--- CORREGIDO */
 }
 
 h1 {
@@ -66,3 +65,12 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+/* === Fix: evitar scroll horizontal en mobile === */
+html,
+body,
+#root {
+  width: 100%;
+  overflow-x: hidden;
+}
+
