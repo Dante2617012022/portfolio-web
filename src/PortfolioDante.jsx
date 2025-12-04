@@ -1198,7 +1198,11 @@ const Experience = () => {
   }, []);
 
   return (
-    <section id="experience" aria-labelledby="exp-title" className="py-24 bg-white">
+    <section
+      id="experience"
+      aria-labelledby="exp-title"
+      className="py-24 bg-white experience-section"
+    >
       {/* estilos locales: reveal + título oscilante */}
       <style>{`
         .reveal{opacity:0; transform:translateY(24px)}
@@ -1207,6 +1211,11 @@ const Experience = () => {
           @keyframes oscillateTitle{0%{transform:rotate(0)}25%{transform:rotate(.8deg)}50%{transform:rotate(0)}75%{transform:rotate(-.8deg)}100%{transform:rotate(0)}}
           .animate-oscillate{animation:oscillateTitle 2.2s ease-in-out infinite; transform-origin:0% 60%}
         }
+                .experience-section{color:#0f172a;}
+        .experience-section p,
+        .experience-section li{color:#334155;}
+        .experience-section .exp-meta{color:#475569;}
+        .experience-section h3{color:#0f172a;}
       `}</style>
 
       <Container>
@@ -1230,7 +1239,7 @@ const Experience = () => {
                 <h3 className="text-2xl font-extrabold leading-tight text-slate-900 animate-oscillate">
                   Automatización Digital – Camdis
                 </h3>
-                <p className="text-sm text-slate-500">
+                <p className="text-sm text-slate-500 exp-meta">
                   Rol: Automatización · Período: 2025 – Actualidad
                 </p>
               </header>
@@ -1251,7 +1260,7 @@ const Experience = () => {
                 </li>
               </ul>
 
-              <p className="mt-5 text-sm text-slate-600 reveal" style={{ transitionDelay: "280ms" }}>
+             <p className="mt-5 text-sm text-slate-600 reveal exp-meta" style={{ transitionDelay: "280ms" }}>
                 <strong className="font-semibold text-slate-800">Stack:</strong> JavaScript, Node.js
               </p>
             </TiltCard>
@@ -1264,7 +1273,7 @@ const Experience = () => {
                 <h3 className="text-2xl font-extrabold leading-tight text-slate-900 animate-oscillate">
                   Agente telefónico – Soporte técnico y Gestión de Incidentes – CityTech S.A. / Teleperformance
                 </h3>
-                <p className="text-sm text-slate-500">
+                <p className="text-sm text-slate-500 exp-meta">
                   Rol: Soporte técnico / Gestión de incidentes · Período: 2019 – 2025
                 </p>
               </header>
@@ -1292,7 +1301,7 @@ const Experience = () => {
                 </li>
               </ul>
 
-              <p className="mt-5 text-sm text-slate-600 reveal" style={{ transitionDelay: "380ms" }}>
+             <p className="mt-5 text-sm text-slate-600 reveal exp-meta" style={{ transitionDelay: "380ms" }}>
                 <strong className="font-semibold text-slate-800">Herramientas y plataformas:</strong> Citrix · Salesforce (CRM corporativo / monitoreo) · Oracle Siebel / Watchdog / CC&B · Avaya · Microsoft Office · Herramientas internas de monitoreo y gestión
               </p>
             </TiltCard>
@@ -1361,7 +1370,7 @@ const Education = () => {
   }, []);
 
   return (
-<section id="education" className="py-20 bg-gray-900">
+    <section id="education" className="py-20 bg-gray-900 education-section">
       <style>{`
       
       .timeline-grid{
@@ -1388,6 +1397,12 @@ const Education = () => {
         .edu-reveal.edu-in{opacity:1; transform:none; transition:opacity .6s cubic-bezier(.22,1,.36,1), transform .6s cubic-bezier(.22,1,.36,1);}
         .edu-tooltip{pointer-events:none; opacity:0; transform:translateY(4px) scale(.98); transition:opacity .25s ease, transform .25s ease;}
         .timeline-card:hover .edu-tooltip, .timeline-card:focus-within .edu-tooltip{opacity:1; transform:translateY(0) scale(1);}
+        .education-section{color:#e2e8f0;}
+        .education-section .timeline-card{color:#0f172a;}
+        .education-section .timeline-card p,
+        .education-section .timeline-card li{color:#334155;}
+        .education-section .timeline-card h3{color:#0f172a;}
+        .education-section .edu-badge{color:#1d4ed8;}
         @media (min-width:768px){
           .timeline-grid{padding-inline:1rem; --line-left:50%;}
           .timeline-grid::before{left:var(--line-left);}
@@ -1433,7 +1448,7 @@ const Education = () => {
                       </span>
                       <h3 className="text-xl font-bold text-slate-900 leading-tight">{milestone.title}</h3>
                     </div>
-                    <span className="text-sm font-semibold uppercase tracking-wide text-blue-700 bg-white/80 px-3 py-1 rounded-full shadow-sm">
+                    <span className="text-sm font-semibold uppercase tracking-wide text-blue-700 bg-white/80 px-3 py-1 rounded-full shadow-sm edu-badge">
                       {milestone.date}
                     </span>
                   </div>
