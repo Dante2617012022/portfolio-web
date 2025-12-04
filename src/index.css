@@ -1,8 +1,17 @@
+/* === Reset básico para evitar desbordes === */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* === Configuración general === */
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
+  /* Podés dejar esto si querés modo claro/oscuro automático */
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
@@ -22,11 +31,29 @@ a:hover {
   color: #535bf2;
 }
 
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;       /* 👈 importante */
+}
+
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  display: block; /* <--- CORREGIDO */
+  display: block;
+
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;       /* 👈 importante */
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;       /* 👈 importante */
 }
 
 h1 {
@@ -53,6 +80,7 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+/* Modo claro */
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -64,13 +92,5 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
-}
-
-/* === Fix: evitar scroll horizontal en mobile === */
-html,
-body,
-#root {
-  width: 100%;
-  overflow-x: hidden;
 }
 
