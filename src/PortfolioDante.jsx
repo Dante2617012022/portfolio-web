@@ -699,15 +699,31 @@ const BinaryTrail = ({
 const Hero = () => {
   const heroRef = useRef(null);
 
+  // === Protección básica contra scrapers ===
+  const decodeBase64 = (b64) => {
+    if (typeof window !== "undefined" && typeof window.atob === "function") {
+      return window.atob(b64);
+    }
+    return b64;
+  };
+
+  // Email codificado en base64: dantebalbuenaatar@gmail.com
+  const rawEmail = decodeBase64("ZGFudGViYWxidWVuYWF0YXJAZ21haWwuY29t");
+  const [emailUser, emailDomain] = rawEmail.split("@");
+
+  // Teléfono codificado en base64: +543816654021
+  const phoneHref = decodeBase64("KzU0MzgxNjY1NDAyMQ==");
+  const phoneVisible = "(381) 665-4021"; // lo que ve el usuario
+
   return (
     <section
-   id="home"
-   ref={heroRef}
-   className="relative z-20 min-h-[90vh] md:min-h-screen text-white"
+      id="home"
+      ref={heroRef}
+      className="relative overflow-hidden min-h-[90vh] md:min-h-screen text-white"
     >
       {/* Fondo */}
       <div
-        className="absolute inset-0 -z-10 bg-cover bg-center"
+        className="absolute inset-0 bg-cover bg-center"
         style={{
           backgroundImage:
             "url('https://web-assets.esetstatic.com/tn/-x700/wls/2022/07/curso-online-ciberseguridad-empresas.jpg')",
@@ -715,23 +731,25 @@ const Hero = () => {
       />
 
       {/* Overlay por delante del fondo */}
-      <div className="absolute inset-0 bg-black/45 z-0 pointer-events-none" />
+      <div className="absolute inset-0 bg-black/45" />
 
       {/* 🔥 Rastro binario (sobre el overlay, debajo del contenido) */}
-      <BinaryTrail
-        targetRef={heroRef}
-        color="rgba(100,167,255,0.9)" // ajusta a tu paleta
-        mixBlendMode="screen"        // prueba "normal" si no querés brillo
-        maxParticles={120}
-        spawnCount={4}
-        fadeMs={1300}
-        sizeRange={[12, 22]}
-        listen="window"
-        // enableOnTouch={true}      // activa en móviles si querés
-      />
+      <div className="pointer-events-none absolute inset-0">
+        <BinaryTrail
+          targetRef={heroRef}
+          color="rgba(100,167,255,0.9)"    // ajusta a tu paleta
+          mixBlendMode="screen"           // prueba "normal" si no querés brillo
+          maxParticles={120}
+          spawnCount={4}
+          fadeMs={1300}
+          sizeRange={[12, 22]}
+          listen="window"
+          // enableOnTouch={true}
+        />
+      </div>
 
       {/* Contenido por encima de todo */}
-      <Container className="relative z-20 pt-24 md:pt-28 pb-16 grid md:grid-cols-2 items-center gap-10">
+      <Container className="relative z-10 pt-24 md:pt-28 pb-16 grid md:grid-cols-2 items-center gap-10">
         <div className="space-y-6">
           <p
             className="text-2xl md:text-3xl lg:text-4xl text-white/90"
@@ -762,33 +780,40 @@ const Hero = () => {
             duration={620}
           />
 
-          <div className="flex items-center gap-6 pt-2 text-lg">
-            <a
-              href="https://github.com/Dante2617012022"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 underline hover:text-white/80"
-            >
-              <IconGitHub className="w-5 h-5" />
-              <span>GitHub</span>
-            </a>
+          <div className="flex flex-wrap items-center gap-3 sm:gap-6 pt-2 text-base sm:text-lg">
+  <a
+    href="https://github.com/Dante2617012022"
+    target="_blank"
+    rel="noreferrer noopener"
+    className="inline-flex items-center gap-2 underline hover:text-white/80 flex-shrink-0"
+  >
+    <IconGitHub className="w-5 h-5" />
+    <span>GitHub</span>
+  </a>
 
-            <a
-              href="mailto:dantebalbuenaatar@gmail.com"
-              className="inline-flex items-center gap-2 underline hover:text-white/80"
-            >
-              <IconMail className="w-5 h-5" />
-              <span>Email</span>
-            </a>
+  <a
+    href={`mailto:${rawEmail}`}
+    className="inline-flex items-center gap-2 underline hover:text-white/80 flex-shrink-0"
+    aria-label={`Enviar correo a ${rawEmail}`}
+  >
+    <IconMail className="w-5 h-5" />
+    <span>
+      {emailUser}
+      <span>@</span>
+      {emailDomain}
+    </span>
+  </a>
 
-            <a
-              href="tel:+543816654021"
-              className="inline-flex items-center gap-2 underline hover:text-white/80"
-            >
-              <IconPhone className="w-5 h-5" />
-              <span>Contacto</span>
-            </a>
-          </div>
+  <a
+    href={`tel:${phoneHref}`}
+    className="inline-flex items-center gap-2 underline hover:text-white/80 flex-shrink-0"
+    aria-label={`Llamar al ${phoneVisible}`}
+  >
+    <IconPhone className="w-5 h-5" />
+    <span>Contacto</span>
+  </a>
+</div>
+
         </div>
 
         <div className="hidden md:block" />
@@ -796,6 +821,8 @@ const Hero = () => {
     </section>
   );
 };
+
+
 
 // === About ===
 /* Helper: Tilt 3D suave sin librerías extra */
@@ -1488,87 +1515,166 @@ const Certificates = () => (
 
 
 // === Projects ===
-const Projects = () => (
-  <section id="projects" className="py-20 bg-white">
-    <Container>
-      <SectionTitle>Proyectos</SectionTitle>
-      <div className="mt-12 grid md:grid-cols-2 gap-6">
-         <ProjectCard
-          title="Chatbot con IA y Automatización de Pedidos"
-          description="Node.js, Baileys, APIs, JavaScript. Integración con GitHub/Codex IA."
-          linkHref="https://github.com/Dante2617012022"
-          linkLabel="Ver en GitHub"
-          
-        />
+const Projects = () => {
+  const shouldReduceMotion = useReducedMotion();
 
+  const baseTransition = { duration: 0.7, ease: [0.22, 1, 0.36, 1] };
 
-         <ProjectCard
-          title="Integración de herramientas de seguridad Open Source"
-          description="Wazuh, Graylog, Snort/Suricata, VirusTotal/YARA, MikroTik. Documentación y prácticas orientadas a PyME."
-          linkHref="https://github.com/Dante2617012022"
-          linkLabel="Ver documentación / repos"
-        />
-      </div>
-    </Container>
-  </section>
-);
+  const leftVariants = {
+    hidden: { opacity: 0, x: shouldReduceMotion ? 0 : -60 },
+    visible: { opacity: 1, x: 0 },
+  };
+
+  const rightVariants = {
+    hidden: { opacity: 0, x: shouldReduceMotion ? 0 : 60 },
+    visible: { opacity: 1, x: 0 },
+  };
+
+  return (
+    <section id="projects" className="py-20 bg-white">
+      <Container>
+        <SectionTitle>Proyectos</SectionTitle>
+
+        <div className="mt-12 grid md:grid-cols-2 gap-6">
+          {/* Card 1 – entra desde la izquierda */}
+          <motion.div
+            variants={leftVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ ...baseTransition, delay: 0.05 }}
+          >
+            <ProjectCard
+              title="Chatbot con IA y Automatización de Pedidos"
+              description="Node.js, Baileys, APIs, JavaScript. Integración con GitHub/Codex IA."
+              linkHref="https://github.com/Dante2617012022"
+              linkLabel="Ver en GitHub"
+            />
+          </motion.div>
+
+          {/* Card 2 – entra desde la derecha */}
+          <motion.div
+            variants={rightVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ ...baseTransition, delay: 0.12 }}
+          >
+            <ProjectCard
+              title="Integración de herramientas de seguridad Open Source"
+              description="Wazuh, Graylog, Snort/Suricata, VirusTotal/YARA, MikroTik. Documentación y prácticas orientadas a PyME."
+              linkHref="https://github.com/Dante2617012022"
+              linkLabel="Ver documentación / repos"
+            />
+          </motion.div>
+        </div>
+      </Container>
+    </section>
+  );
+};
 
 
 // === Contact ===
-const Contact = () => (
-  <section id="contact" className="py-20 bg-white">
-    <Container>
-      <SectionTitle>Contacto</SectionTitle>
-      <div className="mt-12 grid md:grid-cols-3 gap-8">
-        <Card className="text-center">
-          <IconCircle>📍</IconCircle>
-          <h4 className="mt-4 text-xl font-bold">Ubicación</h4>
-          <p className="text-gray-600 mt-2">Tafí Viejo, Tucumán, Argentina</p>
-        </Card>
-        <Card className="text-center">
-          <IconCircle>📞</IconCircle>
-          <h4 className="mt-4 text-xl font-bold">Teléfono</h4>
-          <p className="text-gray-600 mt-2">(381) 665-4021</p>
-        </Card>
-        <Card className="text-center">
-          <IconCircle>✉️</IconCircle>
-          <h4 className="mt-4 text-xl font-bold">Email</h4>
-          <p className="text-gray-600 mt-2">
-            <a href="mailto:dantebalbuenaatar@gmail.com" className="text-blue-600 hover:underline">
-              dantebalbuenaatar@gmail.com
-            </a>
-          </p>
-        </Card>
-      </div>
+const Contact = () => {
+  // Helper para decodificar base64 de forma segura
+  const decodeBase64 = (b64) => {
+    if (typeof window !== "undefined" && typeof window.atob === "function") {
+      return window.atob(b64);
+    }
+    return b64;
+  };
 
-      <div className="mt-8 max-w-md mx-auto">
-        <Card className="text-center">
-          <IconCircle>🌐</IconCircle>
-          <h4 className="mt-4 text-xl font-bold">Perfiles</h4>
-          <div className="mt-2 space-y-1">
-            <a
-              href="https://github.com/Dante2617012022"
-              target="_blank"
-              rel="noreferrer"
-              className="text-blue-600 hover:underline break-all"
-            >
-              github.com/Dante2617012022
-            </a>
-            <br />
-            <a
-              href="https://www.interestingsite.com/"
-              target="_blank"
-              rel="noreferrer"
-              className="text-blue-600 hover:underline break-all"
-            >
-              www.interestingsite.com
-            </a>
-          </div>
-        </Card>
-      </div>
-    </Container>
-  </section>
-);
+  // Email codificado en base64: dantebalbuenaatar@gmail.com
+  const rawEmail = decodeBase64("ZGFudGViYWxidWVuYWF0YXJAZ21haWwuY29t");
+  const [emailUser, emailDomain] = rawEmail.split("@");
+
+  // Teléfono codificado en base64: +543816654021
+  const phoneHref = decodeBase64("KzU0MzgxNjY1NDAyMQ==");
+  const phoneVisible = "(381) 665-4021";
+
+  return (
+    <section id="contact" className="py-20 bg-white">
+      <Container>
+        <SectionTitle>Contacto</SectionTitle>
+
+        <div className="mt-12 grid md:grid-cols-3 gap-8">
+          {/* Ubicación */}
+          <Card as="article" className="text-center" aria-label="Ubicación">
+            <IconCircle>📍</IconCircle>
+            <h4 className="mt-4 text-xl font-bold">Ubicación</h4>
+            <p className="text-gray-600 mt-2">
+              Tafí Viejo, Tucumán, Argentina
+            </p>
+          </Card>
+
+          {/* Teléfono */}
+          <Card as="article" className="text-center" aria-label="Teléfono">
+            <IconCircle>📞</IconCircle>
+            <h4 className="mt-4 text-xl font-bold">Teléfono</h4>
+            <p className="text-gray-600 mt-2">
+              <a
+                href={`tel:${phoneHref}`}
+                className="text-blue-600 hover:underline"
+              >
+                {phoneVisible}
+              </a>
+            </p>
+          </Card>
+
+          {/* Email */}
+          <Card as="article" className="text-center" aria-label="Correo electrónico">
+            <IconCircle>✉️</IconCircle>
+            <h4 className="mt-4 text-xl font-bold">Email</h4>
+            <p className="text-gray-600 mt-2">
+              <a
+                href={`mailto:${rawEmail}`}
+                className="text-blue-600 hover:underline break-all"
+              >
+                {/* separo el @ para molestar a scrapers tontos */}
+                {emailUser}
+                <span>@</span>
+                {emailDomain}
+              </a>
+            </p>
+          </Card>
+        </div>
+
+        {/* Perfiles */}
+        <div className="mt-8 max-w-md mx-auto">
+          <Card
+            as="article"
+            className="text-center"
+            aria-label="Perfiles profesionales"
+          >
+            <IconCircle>🌐</IconCircle>
+            <h4 className="mt-4 text-xl font-bold">Perfiles</h4>
+            <div className="mt-3 space-y-2">
+              <a
+                href="https://github.com/Dante2617012022"
+                target="_blank"
+                rel="noreferrer noopener"
+                className="inline-flex items-center justify-center text-blue-600 hover:underline break-all"
+              >
+                github.com/Dante2617012022
+              </a>
+              {/* Preparado para LinkedIn u otro perfil */}
+              {/* <a
+                href="https://www.linkedin.com/in/tu-perfil"
+                target="_blank"
+                rel="noreferrer noopener"
+                className="inline-flex items-center justify-center text-blue-600 hover:underline break-all"
+              >
+                linkedin.com/in/tu-perfil
+              </a> */}
+            </div>
+          </Card>
+        </div>
+      </Container>
+    </section>
+  );
+};
+
+
 
 
 // === Scroll To Top ===
