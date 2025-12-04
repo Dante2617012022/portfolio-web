@@ -498,11 +498,13 @@ return (
         ))}
       </nav>
       <button
-        className="md:hidden inline-flex items-center justify-center w-10 h-10"
+type="button"
+        className="md:hidden inline-flex items-center justify-center w-10 h-10 p-2 bg-transparent border-0 text-white hover:text-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-blue-900 rounded-lg"
         onClick={() => setOpen((v) => !v)}
         aria-label="Toggle menu"
+                aria-expanded={open}
       >
-        <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6">
+        <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" aria-hidden>
           <path d="M4 6h16M4 12h16M4 18h16"
                 stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
         </svg>
