@@ -5,7 +5,7 @@ const applyHeroBackground = () => {
   const background = hero?.querySelector(":scope > div.absolute.inset-0.bg-cover.bg-center");
   if (!background || background.hasAttribute(HERO_BACKGROUND_MARKER)) return;
 
-  const assetUrl = `${import.meta.env.BASE_URL}hero-soc-bg.svg`;
+  const assetUrl = `${import.meta.env.BASE_URL}hero-soc-network-v3.svg`;
   background.style.backgroundImage = `url("${assetUrl}")`;
   background.style.backgroundPosition = "center";
   background.style.backgroundSize = "cover";

@@ -43,13 +43,6 @@ const applyHeroContent = () => {
   role.textContent = "Analista SOC Jr. | Gestión de Incidentes | Telecomunicaciones";
   rotatingWords.insertAdjacentElement("afterend", role);
 
-  const summary = document.createElement("p");
-  summary.dataset.heroSummary = "true";
-  summary.className = "max-w-2xl text-base sm:text-lg leading-relaxed text-white/90";
-  summary.textContent =
-    "Profesional con casi siete años de experiencia en soporte técnico, telecomunicaciones y gestión de incidentes. Estudiante avanzado de la Tecnicatura Universitaria en Ciberseguridad, con dos exámenes finales pendientes.";
-  role.insertAdjacentElement("afterend", summary);
-
   actions.className = "flex flex-wrap items-center gap-3 pt-2 text-sm sm:text-base";
   actions.replaceChildren(
     createHeroAction({ href: "#projects", label: "Ver proyectos", primary: true }),
