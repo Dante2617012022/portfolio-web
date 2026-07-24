@@ -5,6 +5,7 @@ import { startPortfolioContentOverrides } from './content-overrides.js'
 import { startHeroContent } from './hero-content.js'
 import { startHeroBackground } from './hero-background.js'
 import { startProfileVisuals } from './profile-visuals.js'
+import { startSkillsOverhaul } from './skills-section.js'
 import './index.css'
 
 const redirectPath = sessionStorage.getItem('redirect')
@@ -31,3 +32,4 @@ startPortfolioContentOverrides()
 startHeroContent()
 startHeroBackground()
 startProfileVisuals()
+startSkillsOverhaul()
