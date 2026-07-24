@@ -15,6 +15,7 @@ import { startProjectsOverhaul } from './projects-section.js'
 import { startCertificatesOverhaul } from './certificates-section.js'
 import { startContactInitFix } from './contact-init-fix.js'
 import { startCardMotionFix } from './card-motion-fix.js'
+import { startTenureConsistency } from './tenure-consistency.js'
 import './index.css'
 
 const redirectPath = sessionStorage.getItem('redirect')
@@ -51,3 +52,4 @@ startProjectsOverhaul()
 startCertificatesOverhaul()
 startContactInitFix()
 startCardMotionFix()
+startTenureConsistency()
