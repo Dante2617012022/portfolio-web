@@ -37,11 +37,11 @@ const updateProfile = () => {
   const paragraphs = section.querySelectorAll(".max-w-prose > p");
   setText(
     paragraphs[0],
-    "Profesional con casi siete años de experiencia en telecomunicaciones, soporte técnico y gestión de incidentes, con trabajo bajo SLA, documentación y escalamiento.",
+    "Profesional con casi siete años de experiencia en soporte técnico y gestión de incidentes para telecomunicaciones y servicios críticos. Experiencia en diagnóstico remoto, documentación, priorización por criticidad, cumplimiento de SLA y escalamiento a niveles especializados.",
   );
   setText(
     paragraphs[1],
-    "Estudiante avanzado de la Tecnicatura Universitaria en Ciberseguridad, con dos exámenes finales pendientes, orientado a posiciones de Analista SOC Jr. / Tier 1.",
+    "Finalizando la Tecnicatura Universitaria en Ciberseguridad, con dos exámenes finales pendientes. Orientado a Analista SOC Tier 1, combinando experiencia operativa, conocimientos de redes y Linux Debian, análisis inicial de eventos y respuesta ante incidentes.",
   );
 };
 
