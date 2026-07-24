@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" role="img" aria-labelledby="title desc">
+  <title id="title">Centro de operaciones de seguridad abstracto</title>
+  <desc id="desc">Fondo azul oscuro con paneles de monitoreo, red de nodos y líneas de datos.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#061126"/>
+      <stop offset="0.5" stop-color="#0a1f42"/>
+      <stop offset="1" stop-color="#08152d"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="72%" cy="46%" r="54%">
+      <stop offset="0" stop-color="#1d7cff" stop-opacity="0.28"/>
+      <stop offset="0.48" stop-color="#1263d8" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#061126" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0V48" fill="none" stroke="#7db7ff" stroke-opacity="0.08" stroke-width="1"/>
+    </pattern>
+    <filter id="softGlow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#15345f" stop-opacity="0.92"/>
+      <stop offset="1" stop-color="#0a1b38" stop-opacity="0.9"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1920" height="1080" fill="url(#bg)"/>
+  <rect width="1920" height="1080" fill="url(#glow)"/>
+  <rect width="1920" height="1080" fill="url(#grid)"/>
+
+  <g opacity="0.55" fill="none" stroke="#4d9bff" stroke-width="2">
+    <path d="M780 210L1010 340L1260 260L1510 420L1690 310"/>
+    <path d="M740 720L960 590L1220 740L1440 610L1710 760"/>
+    <path d="M930 180L1120 510L1390 330L1600 560"/>
+  </g>
+
+  <g filter="url(#softGlow)">
+    <g fill="#79b5ff">
+      <circle cx="780" cy="210" r="7"/><circle cx="1010" cy="340" r="8"/>
+      <circle cx="1260" cy="260" r="7"/><circle cx="1510" cy="420" r="9"/>
+      <circle cx="1690" cy="310" r="6"/><circle cx="740" cy="720" r="7"/>
+      <circle cx="960" cy="590" r="9"/><circle cx="1220" cy="740" r="7"/>
+      <circle cx="1440" cy="610" r="8"/><circle cx="1710" cy="760" r="7"/>
+      <circle cx="930" cy="180" r="6"/><circle cx="1120" cy="510" r="10"/>
+      <circle cx="1390" cy="330" r="7"/><circle cx="1600" cy="560" r="8"/>
+    </g>
+  </g>
+
+  <g transform="translate(1040 170)">
+    <rect x="0" y="0" width="630" height="350" rx="24" fill="url(#panel)" stroke="#5ea5ff" stroke-opacity="0.35"/>
+    <rect x="28" y="28" width="574" height="294" rx="16" fill="#07152d" stroke="#3f82d8" stroke-opacity="0.3"/>
+    <g fill="#86bfff" opacity="0.72">
+      <rect x="54" y="56" width="170" height="12" rx="6"/>
+      <rect x="54" y="84" width="110" height="8" rx="4" opacity="0.55"/>
+    </g>
+    <g fill="none" stroke="#42e1a2" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M62 238L120 208L174 224L230 168L292 196L350 132L406 154L464 112L536 146"/>
+    </g>
+    <g fill="#42e1a2">
+      <circle cx="62" cy="238" r="5"/><circle cx="120" cy="208" r="5"/><circle cx="174" cy="224" r="5"/>
+      <circle cx="230" cy="168" r="5"/><circle cx="292" cy="196" r="5"/><circle cx="350" cy="132" r="5"/>
+      <circle cx="406" cy="154" r="5"/><circle cx="464" cy="112" r="5"/><circle cx="536" cy="146" r="5"/>
+    </g>
+    <g fill="#4c91e8" opacity="0.5">
+      <rect x="62" y="272" width="34" height="28" rx="5"/>
+      <rect x="108" y="252" width="34" height="48" rx="5"/>
+      <rect x="154" y="262" width="34" height="38" rx="5"/>
+      <rect x="200" y="226" width="34" height="74" rx="5"/>
+      <rect x="246" y="244" width="34" height="56" rx="5"/>
+      <rect x="292" y="210" width="34" height="90" rx="5"/>
+      <rect x="338" y="230" width="34" height="70" rx="5"/>
+      <rect x="384" y="194" width="34" height="106" rx="5"/>
+      <rect x="430" y="216" width="34" height="84" rx="5"/>
+      <rect x="476" y="180" width="34" height="120" rx="5"/>
+    </g>
+  </g>
+
+  <g transform="translate(1180 610)">
+    <rect x="0" y="0" width="450" height="245" rx="20" fill="url(#panel)" stroke="#5ea5ff" stroke-opacity="0.3"/>
+    <g transform="translate(42 42)">
+      <circle cx="70" cy="70" r="66" fill="none" stroke="#214f87" stroke-width="18"/>
+      <path d="M70 4A66 66 0 0 1 133 90" fill="none" stroke="#42e1a2" stroke-width="18" stroke-linecap="round"/>
+      <circle cx="70" cy="70" r="38" fill="#0b2143"/>
+      <path d="M70 44l20 9v17c0 15-9 27-20 32-11-5-20-17-20-32V53z" fill="#7db7ff" opacity="0.95"/>
+    </g>
+    <g fill="#8fc5ff">
+      <rect x="215" y="54" width="174" height="12" rx="6"/>
+      <rect x="215" y="84" width="132" height="8" rx="4" opacity="0.55"/>
+      <rect x="215" y="124" width="152" height="10" rx="5" opacity="0.78"/>
+      <rect x="215" y="154" width="112" height="10" rx="5" opacity="0.48"/>
+      <rect x="215" y="184" width="162" height="10" rx="5" opacity="0.62"/>
+    </g>
+  </g>
+
+  <g opacity="0.5" fill="#77b4ff" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="24">
+    <text x="70" y="890">01001110 01000101 01010100 01010111 01001111 01010010 01001011</text>
+    <text x="180" y="940">00110010 00110100 00101111 00110111 00100000 01001101 01001111 01001110</text>
+    <text x="90" y="990">01000001 01001100 01000101 01010010 01010100 00100000 01010100 01010010 01001001 01000001 01000111 01000101</text>
+  </g>
+
+  <rect width="1920" height="1080" fill="url(#bg)" opacity="0.08"/>
+</svg>
