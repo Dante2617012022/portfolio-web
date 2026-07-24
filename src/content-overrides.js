@@ -45,6 +45,82 @@ const updateProfile = () => {
   );
 };
 
+const findFloatingLogoWrapper = (image, section) => {
+  let node = image.parentElement;
+
+  while (node && node !== section) {
+    if (window.getComputedStyle(node).position === "absolute") return node;
+    node = node.parentElement;
+  }
+
+  return image.parentElement || image;
+};
+
+const hideUnsupportedSkillLogos = (section) => {
+  const unsupportedTerms = [
+    "wireshark",
+    "apache",
+    "aws.png",
+    "gdpr",
+    "python-original",
+  ];
+
+  section.querySelectorAll("img").forEach((image) => {
+    const descriptor = `${image.alt || ""} ${image.title || ""} ${image.src || ""}`.toLowerCase();
+    if (!unsupportedTerms.some((term) => descriptor.includes(term))) return;
+
+    const wrapper = findFloatingLogoWrapper(image, section);
+    wrapper.hidden = true;
+    wrapper.setAttribute("aria-hidden", "true");
+  });
+};
+
+const addVerifiedSkillsSummary = (section) => {
+  if (section.querySelector("[data-verified-skills-summary]")) return;
+
+  const groups = [
+    {
+      title: "Operación, redes y desarrollo",
+      values:
+        "Linux Debian · Windows · VirtualBox · JavaScript · Node.js · Git/GitHub · SQLite · TCP/IP · DNS · DHCP · VPN · ADSL/VDSL · HFC · FTTH · CATV · 4G/5G",
+    },
+    {
+      title: "Conocimientos aplicados",
+      values:
+        "Nmap · OpenSSL · MITRE ATT&CK · OWASP · ISO 27001 · NIST · APIs REST · MySQL/MariaDB · React · Vite · Tailwind CSS · Python básico",
+    },
+    {
+      title: "Laboratorios autorizados",
+      values:
+        "Burp Suite · Hydra · VirusTotal · YARA · Metasploit inicial · Wazuh · Graylog · Snort · Suricata",
+    },
+  ];
+
+  const summary = document.createElement("div");
+  summary.dataset.verifiedSkillsSummary = "true";
+  summary.className = "mt-8 grid gap-4 md:grid-cols-3 px-2";
+
+  groups.forEach((group) => {
+    const card = document.createElement("div");
+    card.className =
+      "rounded-2xl border border-white/10 bg-gray-800 p-5 text-left shadow-lg";
+
+    const title = document.createElement("h4");
+    title.className = "text-base font-bold text-white";
+    title.textContent = group.title;
+
+    const description = document.createElement("p");
+    description.className = "mt-2 text-sm leading-relaxed text-white/80";
+    description.textContent = group.values;
+
+    card.append(title, description);
+    summary.append(card);
+  });
+
+  const grid = section.querySelector(".mt-12.grid");
+  grid?.insertAdjacentElement("afterend", summary);
+};
+
 const updateSkills = () => {
   const section = document.querySelector("#skills");
   if (!section) return;
@@ -52,17 +128,23 @@ const updateSkills = () => {
   const headings = section.querySelectorAll("h3");
   setText(headings[0], "Uso práctico y operativo");
   setText(headings[1], "Conocimientos aplicados");
-  setText(headings[2], "Laboratorios y formación académica");
+  setText(headings[2], "Seguridad técnica y laboratorios");
 
-  if (!section.querySelector("[data-content-level-note]")) {
-    const note = document.createElement("p");
+  hideUnsupportedSkillLogos(section);
+  addVerifiedSkillsSummary(section);
+
+  let note = section.querySelector("[data-content-level-note]");
+  if (!note) {
+    note = document.createElement("p");
     note.dataset.contentLevelNote = "true";
     note.className = "mt-8 text-center text-sm text-white/80 max-w-4xl mx-auto px-4";
-    note.textContent =
-      "Nivel declarado: Nmap de uso práctico; Metasploit en nivel inicial; Wazuh, Graylog, Snort y Suricata utilizados en actividades académicas autorizadas.";
-    const grid = section.querySelector(".mt-12.grid");
-    grid?.insertAdjacentElement("afterend", note);
+    section.querySelector("[data-verified-skills-summary]")?.insertAdjacentElement("afterend", note);
   }
+
+  setText(
+    note,
+    "Nivel declarado: Nmap de uso práctico en entornos autorizados; Metasploit en nivel inicial; Wazuh, Graylog, Snort y Suricata utilizados en actividades académicas. Se excluyen herramientas sin experiencia real de uso.",
+  );
 };
 
 const updateExperience = () => {
@@ -151,7 +233,7 @@ const updateEducation = () => {
   );
   setText(
     achievements[2],
-    "Laboratorios autorizados con Nmap, Wireshark, Burp Suite y Metasploit inicial",
+    "Laboratorios autorizados con Nmap, Burp Suite, Hydra y Metasploit en nivel inicial",
   );
 };
 
@@ -178,7 +260,7 @@ const updateProjects = () => {
     setText(headings[1], "Seguridad aplicada y laboratorios académicos");
     setText(
       secondCard.querySelector("p"),
-      "Camdis Digital Security Program en desarrollo: activos, accesos, riesgos, backups, continuidad e incidentes. Complementado con laboratorios autorizados de Nmap, Wireshark, Burp Suite y Metasploit inicial.",
+      "Camdis Digital Security Program en desarrollo: activos, accesos, riesgos, backups, continuidad e incidentes. Complementado con laboratorios autorizados de Nmap, Burp Suite, Hydra, YARA y Metasploit inicial.",
     );
     const link = secondCard.querySelector("a");
     if (link) link.href = "https://github.com/Dante2617012022/Actividades-UGR-Ciberseguridad";
