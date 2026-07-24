@@ -10,6 +10,7 @@ import { startSkillsInteractions } from './skills-interactions.js'
 import { startSkillsClickFix } from './skills-click-fix.js'
 import { startExperienceOverhaul } from './experience-section.js'
 import { startEducationOverhaul } from './education-section.js'
+import { startProjectsOverhaul } from './projects-section.js'
 import './index.css'
 
 const redirectPath = sessionStorage.getItem('redirect')
@@ -41,3 +42,4 @@ startSkillsInteractions()
 startSkillsClickFix()
 startExperienceOverhaul()
 startEducationOverhaul()
+startProjectsOverhaul()
