@@ -12,7 +12,7 @@ import { startExperienceOverhaul } from './experience-section.js'
 import { startEducationOverhaul } from './education-section.js'
 import { startProjectsOverhaul } from './projects-section.js'
 import { startCertificatesOverhaul } from './certificates-section.js'
-import { startContactOverhaul } from './contact-section.js'
+import { startContactInitFix } from './contact-init-fix.js'
 import './index.css'
 
 const redirectPath = sessionStorage.getItem('redirect')
@@ -46,4 +46,4 @@ startExperienceOverhaul()
 startEducationOverhaul()
 startProjectsOverhaul()
 startCertificatesOverhaul()
-startContactOverhaul()
+startContactInitFix()
