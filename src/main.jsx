@@ -9,6 +9,7 @@ import { startSkillsOverhaul } from './skills-section.js'
 import { startSkillsInteractions } from './skills-interactions.js'
 import { startSkillsClickFix } from './skills-click-fix.js'
 import { startExperienceOverhaul } from './experience-section.js'
+import { startExperienceResponsiveFix } from './experience-responsive-fix.js'
 import { startEducationOverhaul } from './education-section.js'
 import { startProjectsOverhaul } from './projects-section.js'
 import { startCertificatesOverhaul } from './certificates-section.js'
@@ -44,6 +45,7 @@ startSkillsOverhaul()
 startSkillsInteractions()
 startSkillsClickFix()
 startExperienceOverhaul()
+startExperienceResponsiveFix()
 startEducationOverhaul()
 startProjectsOverhaul()
 startCertificatesOverhaul()
