@@ -43,6 +43,13 @@ const applyProfileVisuals = () => {
   section.style.background =
     "radial-gradient(circle at 12% 18%, rgba(59,130,246,.16), transparent 28%), radial-gradient(circle at 88% 76%, rgba(14,165,233,.12), transparent 30%), linear-gradient(180deg, #f8fbff 0%, #eef5ff 100%)";
 
+  section
+    .querySelectorAll('img[alt="GIF Cyber Joy"], img[alt="GIF Locked In"]')
+    .forEach((gif) => {
+      gif.style.mixBlendMode = "multiply";
+      gif.style.filter = "contrast(1.04) saturate(1.05)";
+    });
+
   const gridBackdrop = document.createElement("div");
   gridBackdrop.dataset.profileGridBackdrop = "true";
   gridBackdrop.className = "pointer-events-none absolute inset-0 opacity-40";
