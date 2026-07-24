@@ -30,6 +30,10 @@ const applyHeroContent = () => {
   if (!heading || !name || !rotatingWords || !role || !actions) return;
 
   name.textContent = "Dante Gabriel Balbuena Atar";
+  name.style.color = "#f8fbff";
+  name.style.textShadow =
+    "0 4px 18px rgba(0,0,0,.45), 0 0 18px rgba(100,167,255,.25)";
+  name.style.fontWeight = "800";
 
   const greeting = document.createElement("div");
   greeting.dataset.heroGreeting = "true";
