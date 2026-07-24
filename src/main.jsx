@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import PortfolioDante from './PortfolioDante.jsx'
 import { startPortfolioContentOverrides } from './content-overrides.js'
+import { startHeroContent } from './hero-content.js'
 import './index.css'
 
 const redirectPath = sessionStorage.getItem('redirect')
@@ -25,3 +26,4 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 )
 
 startPortfolioContentOverrides()
+startHeroContent()
