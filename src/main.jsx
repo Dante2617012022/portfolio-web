@@ -1,7 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import PortfolioDante from './PortfolioDante.jsx'
+import { startPortfolioContentOverrides } from './content-overrides.js'
 import './index.css'
+
 const redirectPath = sessionStorage.getItem('redirect')
 
 if (redirectPath) {
@@ -15,9 +17,11 @@ if (redirectPath) {
 
   window.history.replaceState(null, '', targetUrl)
 }
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <PortfolioDante />
-  </React.StrictMode>
+  </React.StrictMode>,
 )
 
+startPortfolioContentOverrides()
