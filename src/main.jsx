@@ -13,6 +13,7 @@ import { startEducationOverhaul } from './education-section.js'
 import { startProjectsOverhaul } from './projects-section.js'
 import { startCertificatesOverhaul } from './certificates-section.js'
 import { startContactInitFix } from './contact-init-fix.js'
+import { startCardMotionFix } from './card-motion-fix.js'
 import './index.css'
 
 const redirectPath = sessionStorage.getItem('redirect')
@@ -47,3 +48,4 @@ startEducationOverhaul()
 startProjectsOverhaul()
 startCertificatesOverhaul()
 startContactInitFix()
+startCardMotionFix()
