@@ -6,6 +6,7 @@ import { startHeroContent } from './hero-content.js'
 import { startHeroBackground } from './hero-background.js'
 import { startProfileVisuals } from './profile-visuals.js'
 import { startSkillsOverhaul } from './skills-section.js'
+import { startSkillsInteractions } from './skills-interactions.js'
 import './index.css'
 
 const redirectPath = sessionStorage.getItem('redirect')
@@ -33,3 +34,4 @@ startHeroContent()
 startHeroBackground()
 startProfileVisuals()
 startSkillsOverhaul()
+startSkillsInteractions()
