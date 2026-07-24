@@ -1,4 +1,48 @@
 const PROFILE_VISUAL_MARKER = "data-profile-visual-ready";
+const PROFILE_STYLE_MARKER = "data-profile-contrast-styles";
+
+const addProfileStyles = () => {
+  if (document.querySelector(`style[${PROFILE_STYLE_MARKER}]`)) return;
+
+  const style = document.createElement("style");
+  style.setAttribute(PROFILE_STYLE_MARKER, "true");
+  style.textContent = `
+    #about [data-profile-text-block] {
+      color: #f8fafc;
+      background: linear-gradient(145deg, #0f172a 0%, #172554 100%);
+    }
+
+    #about [data-profile-text-block] > p {
+      color: #e2e8f0;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, .28);
+    }
+
+    #about [data-profile-text-block] a {
+      color: #ffffff;
+    }
+
+    #about [data-profile-highlights] {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    @media (max-width: 767px) {
+      #about [data-profile-content-grid] {
+        padding: 1rem;
+        gap: 1.5rem;
+      }
+
+      #about [data-profile-text-block] {
+        padding: 1.25rem;
+      }
+
+      #about [data-profile-highlights] {
+        grid-template-columns: 1fr;
+      }
+    }
+  `;
+
+  document.head.append(style);
+};
 
 const createHighlight = (value, label) => {
   const card = document.createElement("div");
@@ -38,10 +82,18 @@ const applyProfileVisuals = () => {
 
   if (!container || !contentGrid || !textBlock || !image || !button) return;
 
+  addProfileStyles();
+
   section.classList.remove("bg-white");
   section.classList.add("relative", "overflow-hidden");
   section.style.background =
     "radial-gradient(circle at 12% 18%, rgba(59,130,246,.16), transparent 28%), radial-gradient(circle at 88% 76%, rgba(14,165,233,.12), transparent 30%), linear-gradient(180deg, #f8fbff 0%, #eef5ff 100%)";
+
+  const heading = section.querySelector("h2");
+  if (heading) {
+    heading.style.color = "#0f172a";
+    heading.style.textShadow = "0 2px 12px rgba(255,255,255,.75)";
+  }
 
   section
     .querySelectorAll('img[alt="GIF Cyber Joy"], img[alt="GIF Locked In"]')
@@ -58,6 +110,7 @@ const applyProfileVisuals = () => {
   gridBackdrop.style.backgroundSize = "34px 34px";
   section.insertBefore(gridBackdrop, container);
 
+  contentGrid.dataset.profileContentGrid = "true";
   contentGrid.classList.add(
     "relative",
     "z-10",
@@ -73,6 +126,8 @@ const applyProfileVisuals = () => {
     "backdrop-blur-sm",
   );
   contentGrid.style.alignItems = "start";
+  contentGrid.style.background = "rgba(255, 255, 255, .9)";
+  contentGrid.style.border = "1px solid rgba(191, 219, 254, .9)";
 
   const imageWrapper = image.closest(".relative.z-10");
   imageWrapper?.classList.add("group");
@@ -81,31 +136,43 @@ const applyProfileVisuals = () => {
   const imageCaption = document.createElement("div");
   imageCaption.dataset.profileImageCaption = "true";
   imageCaption.className =
-    "absolute bottom-4 left-1/2 z-20 -translate-x-1/2 rounded-full border border-white/20 bg-slate-950/80 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-blue-100 shadow-xl backdrop-blur";
+    "absolute bottom-4 left-1/2 z-20 -translate-x-1/2 rounded-full border border-white/20 px-4 py-2 text-xs font-semibold uppercase tracking-wider shadow-xl backdrop-blur";
+  imageCaption.style.background = "rgba(2, 6, 23, .88)";
+  imageCaption.style.color = "#dbeafe";
   imageCaption.textContent = "Operaciones + Ciberseguridad";
   imageWrapper?.append(imageCaption);
 
+  textBlock.dataset.profileTextBlock = "true";
   textBlock.classList.remove("text-gray-700", "max-w-prose");
   textBlock.classList.add(
     "rounded-3xl",
     "border",
-    "border-slate-700/70",
-    "bg-slate-950",
     "p-6",
     "sm:p-8",
-    "text-slate-100",
     "shadow-2xl",
-    "shadow-slate-950/20",
   );
+  textBlock.style.background =
+    "linear-gradient(145deg, #0f172a 0%, #172554 100%)";
+  textBlock.style.border = "1px solid rgba(96, 165, 250, .42)";
+  textBlock.style.color = "#f8fafc";
+  textBlock.style.boxShadow =
+    "0 24px 55px rgba(15, 23, 42, .24), inset 0 1px 0 rgba(255,255,255,.06)";
 
   textBlock.querySelectorAll(":scope > p").forEach((paragraph) => {
-    paragraph.classList.add("text-slate-200", "text-base", "sm:text-lg");
+    paragraph.classList.add("text-base", "sm:text-lg");
+    paragraph.style.color = "#e2e8f0";
+    paragraph.style.lineHeight = "1.75";
+    paragraph.style.fontWeight = "500";
+    paragraph.style.textShadow = "0 1px 2px rgba(0,0,0,.28)";
   });
 
   const badge = document.createElement("span");
   badge.dataset.profileBadge = "true";
   badge.className =
-    "inline-flex w-fit items-center rounded-full border border-blue-400/30 bg-blue-400/10 px-3 py-1 text-xs font-bold uppercase tracking-widest text-blue-200";
+    "inline-flex w-fit items-center rounded-full border px-3 py-1 text-xs font-bold uppercase tracking-widest";
+  badge.style.borderColor = "rgba(96, 165, 250, .45)";
+  badge.style.background = "rgba(59, 130, 246, .16)";
+  badge.style.color = "#bfdbfe";
   badge.textContent = "Transición profesional hacia SOC";
   textBlock.insertBefore(badge, textBlock.firstChild);
 
@@ -113,7 +180,7 @@ const applyProfileVisuals = () => {
   highlights.dataset.profileHighlights = "true";
   highlights.className = "grid gap-3 sm:grid-cols-3";
   highlights.append(
-    createHighlight("Casi 7 años", "Operaciones"),
+    createHighlight("Más de 5 años y medio", "Operaciones"),
     createHighlight("SLA", "Priorización y escalamiento"),
     createHighlight("Debian + redes", "Base técnica"),
   );
@@ -128,7 +195,6 @@ const applyProfileVisuals = () => {
     "focus:ring-2",
     "focus:ring-blue-300",
     "focus:ring-offset-2",
-    "focus:ring-offset-slate-950",
   );
   button.style.color = "#ffffff";
   button.style.background = "linear-gradient(90deg, #2563eb 0%, #0891b2 100%)";
