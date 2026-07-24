@@ -1,12 +1,71 @@
-# React + Vite
+# Portfolio profesional — Dante Balbuena
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Portfolio orientado a posiciones de **Analista SOC Jr. / Tier 1**, gestión de incidentes, telecomunicaciones y ciberseguridad.
 
-Currently, two official plugins are available:
+## Objetivo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Presentar de forma clara y verificable:
 
-## Expanding the ESLint configuration
+- casi siete años de experiencia en soporte, telecomunicaciones y gestión de incidentes;
+- formación universitaria avanzada en ciberseguridad;
+- proyectos propios de automatización y desarrollo seguro;
+- experiencia aplicada en riesgos, continuidad, activos, accesos y respuesta ante incidentes;
+- herramientas técnicas clasificadas según uso práctico, académico o corporativo.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Secciones
+
+- Perfil profesional
+- Experiencia
+- Proyectos destacados
+- Habilidades técnicas
+- Formación y certificación
+- Contacto
+
+## Proyecto principal enlazado
+
+### Chatbot de pedidos con IA y controles de seguridad
+
+Aplicación modular desarrollada con Node.js, WhatsApp/Baileys y SQLite. Incluye gestión de secretos, sanitización, rate limiting, validación HMAC de webhooks, restricciones de IA, pruebas automatizadas, CI, CodeQL y Dependabot.
+
+Repositorio: `Dante2617012022/chatbot-hamburgueseria-v3`
+
+## Privacidad y criterio de publicación
+
+El portfolio no publica:
+
+- documentación confidencial de Camdis;
+- credenciales, datos personales o configuraciones internas;
+- evidencias académicas que contengan información sensible;
+- payloads, flags o material de laboratorios que deba permanecer privado.
+
+Los proyectos académicos se describen mediante objetivos, metodología, herramientas, hallazgos y mitigaciones, sin exponer material sensible.
+
+## Tecnologías
+
+- React 19
+- Vite
+- Framer Motion
+- Tailwind CSS mediante CDN
+- GitHub Pages
+
+## Desarrollo local
+
+```bash
+npm ci
+npm run dev
+```
+
+## Validación
+
+```bash
+npm run lint
+npm run build
+```
+
+## Despliegue
+
+```bash
+npm run deploy
+```
+
+Sitio publicado: `https://dante2617012022.github.io/portfolio-web/`

@@ -1,1763 +1,673 @@
-import React, { useEffect, useState, useRef, useLayoutEffect } from "react";
-import { motion, useReducedMotion } from "framer-motion"; // eslint-disable-line no-unused-vars
-import FloatingLogos from "./components/FloatingLogos";
+import { useEffect, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 
-// === Tools Logos ===
-import reactLogo from "./assets/logos/react.svg";
-import wazuhLogo from "./assets/logos/wazuh.png";
-import graylogLogo from "./assets/logos/graylog.svg";
-import snortLogo from "./assets/logos/snort.png";
-import suricataLogo from "./assets/logos/suricata.jpg";
-import yaraLogo from "./assets/logos/yara.webp";
-import hydraLogo from "./assets/logos/Hydra.jpeg";
-import virustotalLogo from "./assets/logos/virustotal.svg";
-import flaskLogo from "./assets/logos/flask.png";
-import viteLogo from "./assets/logos/vite.jpeg";
-import tailwindLogo from "./assets/logos/tailwind.jpeg";
-import nmapLogo from "./assets/logos/nmap.jpeg";
-import wiresharkLogo from "./assets/logos/wireshark.svg";
-
-
-import opensslLogo from "./assets/logos/OpenSSL.png";
-import virtualboxLogo from "./assets/logos/VirtualBox.png";
-import mitreLogo from "./assets/logos/mitre-attack.png";
-import owaspLogo from "./assets/logos/OWASP.png";
-import isoLogo from "./assets/logos/ISO 27001.png";
-import nistLogo from "./assets/logos/NIST-Logo.png";
-import gdprLogo from "./assets/logos/GDPR.png";
-import awsLogo from "./assets/logos/AWS.png";
-
-
-// === Icons (SVG inline) ===
-const IconGitHub = ({ className = "w-5 h-5" }) => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
-    <path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.8-.25.8-.56v-2c-3.26.71-3.95-1.56-3.95-1.56-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.7.08-.7 1.18.08 1.8 1.22 1.8 1.22 1.05 1.8 2.76 1.28 3.44.98.11-.77.41-1.28.74-1.57-2.6-.3-5.33-1.3-5.33-5.77 0-1.27.46-2.31 1.22-3.13-.12-.3-.53-1.53.12-3.18 0 0 1-.32 3.29 1.2a11.4 11.4 0 0 1 5.99 0c2.29-1.52 3.28-1.2 3.28-1.2.65 1.65.24 2.88.12 3.18.76.82 1.22 1.86 1.22 3.13 0 4.49-2.74 5.46-5.35 5.75.42.36.79 1.07.79 2.16v3.2c0 .31.21.66.81.55A11.5 11.5 0 0 0 12 .5Z" />
-  </svg>
-);
-
-const IconMail = ({ className = "w-5 h-5" }) => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
-    <path d="M20 4H4a2 2 0 0 0-2 2v.35l10 6.25L22 6.35V6a2 2 0 0 0-2-2Zm2 5.14-9.35 5.83a2 2 0 0 1-2.3 0L1 9.14V18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9.14Z"/>
-  </svg>
-);
-
-const IconPhone = ({ className = "w-5 h-5" }) => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
-    <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24 11.36 11.36 0 0 0 3.56.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A16 16 0 0 1 3 9a1 1 0 0 1 1-1h2.5a1 1 0 0 1 1 1 11.36 11.36 0 0 0 .57 3.56 1 1 0 0 1-.24 1.02l-2.21 2.21Z"/>
-  </svg>
-);
-
-// === Arrays de logos ===
-const createTextLogo = (label) => {
-  const svg = `
-    <svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'>
-      <defs>
-        <linearGradient id='g' x1='0%' x2='100%' y1='0%' y2='100%'>
-          <stop offset='0%' stop-color='%230ea5e9'/>
-          <stop offset='100%' stop-color='%231d4ed8'/>
-        </linearGradient>
-      </defs>
-      <rect x='0' y='0' width='160' height='160' rx='32' fill='url(%23g)'/>
-      <text x='50%' y='52%' fill='white' font-size='26' font-family='Inter, Arial, sans-serif' font-weight='700' text-anchor='middle' dominant-baseline='middle'>${label}</text>
-    </svg>
-  `;
-
-  return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+const PROFILE = {
+  name: "Dante Gabriel Balbuena Atar",
+  role: "Analista SOC Jr. | Gestión de Incidentes | Telecomunicaciones",
+  location: "Tafí Viejo, Tucumán, Argentina",
+  email: "dantebalbuenaatar@gmail.com",
+  phone: "+54 381 665-4021",
+  github: "https://github.com/Dante2617012022",
 };
 
-const techLogosAvanzado = [
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/debian/debian-original.svg", name: "Linux (Debian)", radius: 24 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg", name: "Windows", radius: 24 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", name: "JavaScript", radius: 24 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg", name: "Python", radius: 24 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg", name: "HTML", radius: 24 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg", name: "CSS", radius: 24 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg", name: "MySQL", radius: 24 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mariadb/mariadb-original.svg", name: "MariaDB", radius: 24 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original.svg", name: "Apache", radius: 24 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg", name: "GitHub", radius: 24 },
-   { src: virtualboxLogo, name: "VirtualBox", radius: 24 },
-];
-//intermedio
-const techLogosIntermedio = [
-  { src: opensslLogo, name: "OpenSSL", radius: 24 },
-  { src: mitreLogo, name: "MITRE ATT&CK", radius: 24 },
-  { src: owaspLogo, name: "OWASP", radius: 24 },
-  { src: isoLogo, name: "ISO 27001", radius: 24 },
-  { src: nistLogo, name: "NIST", radius: 24 },
-  { src: gdprLogo, name: "GDPR", radius: 24 },
-  { src: awsLogo, name: "AWS", radius: 24 },
-  { src: viteLogo, name: "Vite", radius: 24 },
-  { src: reactLogo, name: "React", radius: 24 },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg", name: "Node.js", radius: 24 },
-  { src: tailwindLogo, name: "TailwindCSS", radius: 24 },
+const navigation = [
+  { href: "#perfil", label: "Perfil" },
+  { href: "#experiencia", label: "Experiencia" },
+  { href: "#proyectos", label: "Proyectos" },
+  { href: "#habilidades", label: "Habilidades" },
+  { href: "#formacion", label: "Formación" },
+  { href: "#contacto", label: "Contacto" },
 ];
 
-
-//en progreso
-const techLogosBasico = [
-  { src: wazuhLogo, name: "Wazuh", radius: 24 },
-  { src: graylogLogo, name: "Graylog", radius: 24 },
-  { src: snortLogo, name: "Snort", radius: 24 },
-  { src: suricataLogo, name: "Suricata", radius: 24 },
-  { src: yaraLogo, name: "YARA", radius: 24 },
-  { src: hydraLogo, name: "Hydra", radius: 24 },
-  { src: virustotalLogo, name: "VirusTotal", radius: 24 },
-  { src: flaskLogo, name: "Flask", radius: 24 },
-  { src: nmapLogo, name: "Nmap", radius: 24 },
-  { src: wiresharkLogo, name: "Wireshark", radius: 24 },
+const skillGroups = [
+  {
+    title: "Operaciones y SOC",
+    description:
+      "Competencias transferibles desde operaciones técnicas hacia monitoreo y respuesta de seguridad.",
+    items: [
+      "Gestión de incidentes",
+      "Triage inicial",
+      "Documentación y escalamiento",
+      "SLA y criticidad",
+      "Análisis básico de eventos",
+      "Respuesta inicial",
+      "MITRE ATT&CK",
+      "OWASP",
+      "ISO 27001",
+      "NIST",
+    ],
+  },
+  {
+    title: "Sistemas, redes y telecomunicaciones",
+    description:
+      "Base operativa construida en soporte de servicios de conectividad y entornos de usuario.",
+    items: [
+      "Linux Debian",
+      "Windows",
+      "VirtualBox",
+      "TCP/IP",
+      "DNS",
+      "DHCP",
+      "VPN",
+      "ADSL/VDSL",
+      "HFC",
+      "FTTH",
+      "CATV",
+      "4G/5G",
+    ],
+  },
+  {
+    title: "Laboratorios autorizados",
+    description:
+      "Herramientas utilizadas en prácticas académicas, con el nivel indicado de forma transparente.",
+    items: [
+      "Nmap · uso práctico",
+      "Wireshark",
+      "Burp Suite",
+      "Hydra",
+      "OpenSSL",
+      "VirusTotal",
+      "YARA",
+      "Metasploit · nivel inicial",
+      "Wazuh · académico",
+      "Graylog · académico",
+      "Snort · académico",
+      "Suricata · académico",
+    ],
+  },
+  {
+    title: "Desarrollo y automatización",
+    description:
+      "Capacidad para entender aplicaciones, automatizar procesos y conversar con equipos de desarrollo.",
+    items: [
+      "JavaScript",
+      "Node.js",
+      "Python básico",
+      "Git/GitHub",
+      "APIs REST",
+      "SQLite",
+      "MySQL/MariaDB",
+      "Flask",
+      "FastAPI",
+      "HTML/CSS",
+    ],
+  },
+  {
+    title: "Herramientas corporativas",
+    description:
+      "Experiencia diaria en plataformas de atención, gestión de casos y operación empresarial.",
+    items: [
+      "Citrix",
+      "Salesforce",
+      "Oracle Siebel",
+      "Watchdog",
+      "Oracle CC&B",
+      "Avaya",
+    ],
+  },
 ];
 
+const experiences = [
+  {
+    company: "Camdis",
+    role: "Tecnología, Automatización y Ciberseguridad",
+    period: "2025 – Actualidad",
+    summary:
+      "Diseño y coordinación inicial de iniciativas tecnológicas para una PyME gastronómica en crecimiento.",
+    bullets: [
+      "Desarrollo y mejora de automatizaciones con JavaScript y Node.js para procesos operativos.",
+      "Documentación de procesos críticos, riesgos, activos tecnológicos y necesidades de soporte.",
+      "Diseño del Camdis Digital Security Program, un plan director de tecnología y ciberseguridad actualmente en desarrollo.",
+    ],
+  },
+  {
+    company: "CityTech / Teleperformance",
+    role: "Soporte Técnico, Comercial y Gestión de Incidentes",
+    period: "2019 – 2025",
+    summary:
+      "Casi siete años de operación en campañas de telecomunicaciones, servicios digitales y servicios críticos.",
+    bullets: [
+      "Diagnóstico y resolución remota de incidentes en ADSL, VDSL, HFC, FTTH, telefonía fija, televisión y servicios móviles.",
+      "Registro, seguimiento, documentación y escalamiento de casos conforme a criticidad, procedimientos y SLA.",
+      "Trabajo bajo métricas de calidad, productividad, tiempos de atención y satisfacción del cliente.",
+      "Campañas atendidas: Arnet, Telecom, Cablevisión/Fibertel, Personal Hogares, Flow, telefonía móvil y Edenor.",
+    ],
+  },
+];
 
-// === Helpers ===
-const Container = ({ children, className = "" }) => (
-<div className={`w-full max-w-6xl mx-auto px-4 sm:px-6 ${className}`}>
-    {children}
-  </div>
-);
+const projects = [
+  {
+    title: "Chatbot de pedidos con IA y controles de seguridad",
+    status: "Proyecto propio · público",
+    description:
+      "Aplicación modular para automatizar pedidos por WhatsApp, integrando catálogo, pagos y asistencia controlada con IA.",
+    highlights: [
+      "Node.js, WhatsApp/Baileys y SQLite",
+      "Gestión de secretos y validación de entorno",
+      "Sanitización, límites de entrada y rate limiting",
+      "Validación HMAC de webhooks",
+      "Restricciones de IA y pruebas automatizadas",
+      "CI, CodeQL, Dependabot y política de seguridad",
+    ],
+    href: "https://github.com/Dante2617012022/chatbot-hamburgueseria-v3",
+    linkLabel: "Ver repositorio",
+  },
+  {
+    title: "Camdis Digital Security Program",
+    status: "Proyecto aplicado · en desarrollo",
+    description:
+      "Plan director basado en riesgo para ordenar la tecnología y construir capacidades de seguridad sostenibles en una PyME real.",
+    highlights: [
+      "Inventario de activos, cuentas y responsables",
+      "Gestión de accesos, backups y continuidad",
+      "Registro y respuesta ante incidentes",
+      "Políticas, indicadores y roadmap por fases",
+      "Arquitectura objetivo y futura capacidad de monitoreo",
+      "La documentación completa permanece confidencial",
+    ],
+  },
+  {
+    title: "Laboratorios de ciberseguridad",
+    status: "Académico · entornos autorizados",
+    description:
+      "Prácticas universitarias orientadas a comprender vulnerabilidades, evidencias, controles y respuesta defensiva.",
+    highlights: [
+      "Reconocimiento y enumeración con Nmap",
+      "Análisis de tráfico y eventos",
+      "Hacking ético y Metasploit en nivel inicial",
+      "Análisis forense e investigación digital",
+      "Matrices de riesgo, informes y mitigaciones",
+      "Evidencias completas disponibles para entrevista",
+    ],
+  },
+];
 
-const SectionTitle = ({ children, id, colorClass = "text-gray-900" }) => (
-  <div id={id} className="text-center">
-     <h2 className={`text-3xl sm:text-4xl font-extrabold tracking-tight ${colorClass}`}>
-      {children}
-    </h2>
-    <div className="mt-3 flex items-center justify-center gap-2">
-      <span className="h-1 w-16 rounded-full bg-blue-600" />
-      <span className="h-1 w-5 rounded-full bg-blue-400" />
-    </div>
-  </div>
-);
+const education = [
+  {
+    title: "Tecnicatura Universitaria en Ciberseguridad",
+    institution: "Universidad del Gran Rosario",
+    period: "2024 – 2026",
+    details: [
+      "Finalización próxima: dos exámenes finales pendientes.",
+      "Promedio académico igual o superior a 8.",
+      "Plan de estudios de 1.600 horas con reconocimiento oficial y validez nacional.",
+      "Formación en incidentes, vulnerabilidades, hacking ético, criptografía, cloud, análisis forense y ciberdefensa.",
+    ],
+  },
+  {
+    title: "Economía y Gestión de las Organizaciones",
+    institution: "Colegio Gral. Don José de San Martín",
+    period: "Egreso 2014",
+    details: ["Formación secundaria con orientación administrativa y organizacional."],
+  },
+];
 
-const Card = ({ children, className = "", transparent = false }) => {
-   const backgroundClass = transparent ? "bg-white/10 backdrop-blur" : "bg-white";
-  const shadowClass = transparent ? "shadow-lg shadow-white/10" : "shadow-lg";
+function Container({ children, className = "" }) {
+  return <div className={`w-full max-w-6xl mx-auto px-5 sm:px-6 ${className}`}>{children}</div>;
+}
 
+function SectionHeading({ eyebrow, title, description, light = false }) {
   return (
-    <div className={`${backgroundClass} ${shadowClass} rounded-2xl p-6 ${className}`}>
-      {children}
+    <div className="max-w-3xl">
+      <p className={`text-sm font-bold uppercase tracking-widest ${light ? "text-blue-200" : "text-blue-700"}`}>
+        {eyebrow}
+      </p>
+      <h2 className={`mt-3 text-3xl sm:text-4xl font-extrabold tracking-tight ${light ? "text-white" : "text-gray-900"}`}>
+        {title}
+      </h2>
+      {description && (
+        <p className={`mt-4 text-lg leading-relaxed ${light ? "text-gray-300" : "text-gray-600"}`}>
+          {description}
+        </p>
+      )}
     </div>
   );
-};
-const ProjectCard = ({ title, description, linkHref, linkLabel }) => {
-  const cardRef = useRef(null);
-  const [spotlight, setSpotlight] = useState({ x: 0, y: 0, opacity: 0 });
+}
 
-  const updateSpotlight = (event) => {
-    const rect = cardRef.current?.getBoundingClientRect();
-    if (!rect) return;
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-    setSpotlight({ x, y, opacity: 1 });
-  };
-
+function Reveal({ children, className = "", delay = 0 }) {
+  const reduceMotion = useReducedMotion();
   return (
-    <div
-      ref={cardRef}
-      onMouseMove={updateSpotlight}
-      onMouseEnter={updateSpotlight}
-      onMouseLeave={() => setSpotlight((prev) => ({ ...prev, opacity: 0 }))}
-      className="relative group bg-white rounded-2xl shadow-lg p-6 overflow-hidden transition-transform duration-200"
-      style={{ boxShadow: "0 18px 40px rgba(0, 0, 0, 0.08)" }}
+    <motion.div
+      className={className}
+      initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 22 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.55, delay, ease: [0.22, 1, 0.36, 1] }}
     >
-      <div
-        className="pointer-events-none absolute inset-0 transition-opacity duration-200"
-        style={{
-          background: `radial-gradient(160px circle at ${spotlight.x}px ${spotlight.y}px, rgba(59,130,246,0.18), transparent 55%)`,
-          opacity: spotlight.opacity,
-        }}
-        aria-hidden
-      />
-      <div
-        className="absolute inset-0 bg-gradient-to-br from-blue-50/0 via-blue-50/40 to-blue-100/0 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none"
-        aria-hidden
-      />
-      <div className="relative z-10 space-y-3">
-        <h3 className="text-2xl font-extrabold text-gray-900">{title}</h3>
-        <p className="text-gray-700 leading-relaxed">{description}</p>
-        <a
-          href={linkHref}
-          target="_blank"
-          rel="noreferrer"
-          className="group inline-flex items-center gap-2 text-blue-600 font-semibold transition-transform duration-200 hover:translate-x-0.5"
-        >
-          <span className="relative">
-            <span className="block">{linkLabel}</span>
-            <span className="block h-0.5 bg-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-left" aria-hidden />
-          </span>
-          <span className="text-lg transform transition-transform duration-200 group-hover:translate-x-1" aria-hidden>
-            ↗
-          </span>
-        </a>
-      </div>
-    </div>
+      {children}
+    </motion.div>
   );
-};
-const CertificatesBackground = () => {
-  const canvasRef = useRef(null);
-  const prefersReducedMotion = useReducedMotion();
+}
 
-  useEffect(() => {
-    if (prefersReducedMotion) return undefined;
-
-    const canvas = canvasRef.current;
-    if (!canvas) return undefined;
-
-    const ctx = canvas.getContext("2d");
-    const pixels = [];
-    let animationId;
-    let W = 0;
-    let H = 0;
-    const fov = 250;
-
-    const populatePixels = () => {
-      pixels.length = 0;
-      for (let x = -400; x < 400; x += 5) {
-        for (let z = -250; z < 250; z += 5) {
-          pixels.push({ x, y: 100, z });
-        }
-      }
-    };
-
-    const resize = () => {
-      W = canvas.width = window.innerWidth;
-      H = canvas.height = window.innerHeight;
-      populatePixels();
-    };
-
-    const render = (ts = 0) => {
-      if (!ctx) return;
-      const imageData = ctx.getImageData(0, 0, W, H);
-      const { data, width } = imageData;
-      const len = pixels.length;
-
-      for (let i = 0; i < len; i += 1) {
-        const pixel = pixels[i];
-        const scale = fov / (fov + pixel.z);
-        const x2d = pixel.x * scale + W / 2;
-        const y2d = pixel.y * scale + H / 2;
-
-        if (x2d >= 0 && x2d <= W && y2d >= 0 && y2d <= H) {
-          const c = (Math.round(y2d) * width + Math.round(x2d)) * 4;
-          data[c] = 0;
-          data[c + 1] = 255;
-          data[c + 2] = 80;
-          data[c + 3] = 255;
-        }
-
-        pixel.z -= 0.4;
-        pixel.y = H / 14 + Math.sin((i / len) * 15 + ts / 450) * 10;
-        if (pixel.z < -fov) pixel.z += 2 * fov;
-      }
-
-      ctx.putImageData(imageData, 0, 0);
-    };
-
-    const drawFrame = (ts) => {
-      ctx.fillStyle = "#111827";
-      ctx.fillRect(0, 0, W, H);
-      render(ts);
-      animationId = requestAnimationFrame(drawFrame);
-    };
-
-    resize();
-    animationId = requestAnimationFrame(drawFrame);
-    window.addEventListener("resize", resize);
-
-    return () => {
-      cancelAnimationFrame(animationId);
-      window.removeEventListener("resize", resize);
-    };
-  }, [prefersReducedMotion]);
-
-  if (prefersReducedMotion) return null;
-
-  return (
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 h-full w-full opacity-80"
-      aria-hidden
-    />
-  );
-};
-const IconCircle = ({ children }) => (
-  <div className="w-16 h-16 rounded-full bg-blue-600/10 text-blue-600 grid place-items-center text-3xl mx-auto" aria-hidden>
-    {children}
-  </div>
-);
-
-const Progress = ({ label, value }) => (
-  <div className="space-y-1">
-    <div className="flex items-baseline justify-between text-sm font-medium text-gray-100">
-      <span>{label}</span>
-      <span>{value}%</span>
-    </div>
-    <div className="h-3 rounded-full bg-white/10 overflow-hidden">
-      <div
-        className="h-full rounded-full bg-white/80"
-        style={{ width: `${value}%` }}
-      />
-    </div>
-  </div>
-);
-
-// === 3D Rotating Words (stable + fixed width + colors) ===
-const FlippyWords = ({
-  phrases,
-  interval = 2600,
-  className = "",
-  style = {},
-  axis = "x",
-  duration = 620
-}) => {
-  const [i, setI] = useState(0);
-  const [flip, setFlip] = useState(false);
-  const [maxW, setMaxW] = useState(null);
-  const next = (i + 1) % phrases.length;
-  const t = duration;
-
-  const measureRef = useRef(null);
-  const timeoutRef = useRef(null);
-  const intervalRef = useRef(null);
-
-  // 🎨 Colores por índice (sumá más si hay más frases)
-  const colors = ["#64a7ff", "#f97316", "#10b981"];
-
-  // Mide ancho máximo
-  useLayoutEffect(() => {
-    if (!measureRef.current) return;
-    let widest = 0;
-    const nodes = measureRef.current.querySelectorAll("[data-measure-item]");
-    nodes.forEach((n) => (widest = Math.max(widest, n.offsetWidth)));
-    setMaxW(widest);
-  }, [phrases]);
-
-  // Re-medición en resize
-  useEffect(() => {
-    const onR = () => {
-      if (!measureRef.current) return;
-      let widest = 0;
-      const nodes = measureRef.current.querySelectorAll("[data-measure-item]");
-      nodes.forEach((n) => (widest = Math.max(widest, n.offsetWidth)));
-      setMaxW(widest);
-    };
-    window.addEventListener("resize", onR);
-    return () => window.removeEventListener("resize", onR);
-  }, []);
-
-  // Animación
-  useEffect(() => {
-    const prefersReduced =
-      typeof window !== "undefined" &&
-      window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
-
-    const tick = () => {
-      if (prefersReduced) {
-        setI((v) => (v + 1) % phrases.length);
-        return;
-      }
-      setFlip(true);
-      timeoutRef.current = setTimeout(() => {
-        setI((v) => (v + 1) % phrases.length);
-        setFlip(false);
-      }, t);
-    };
-
-    intervalRef.current = setInterval(tick, interval);
-
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    };
-  }, [interval, phrases.length, t]);
-
-  const rotateA =
-    flip ? (axis === "x" ? "rotateX(-180deg)" : "rotateY(-180deg)") : "rotate(0)";
-  const faceBRot = axis === "x" ? "rotateX(180deg)" : "rotateY(180deg)";
-
+function Tag({ children, dark = false }) {
   return (
     <span
-      aria-live="polite"
-      className={`inline-block align-middle ${className}`}
-      style={{
-        ...style,
-        perspective: "1000px",
-        contain: "layout paint style",
-        isolation: "isolate",
-        width: maxW ? `${maxW}px` : undefined,
-        whiteSpace: "nowrap",
-      }}
+      className={`inline-flex items-center rounded-full px-3 py-1 text-sm font-semibold border ${
+        dark
+          ? "border-white border-opacity-20 bg-white bg-opacity-10 text-gray-100"
+          : "border-blue-100 bg-blue-50 text-blue-800"
+      }`}
     >
-      {/* wrapper que rota */}
-      <span
-        className="relative block will-change-transform overflow-hidden"
-        style={{
-          transformStyle: "preserve-3d",
-          transition: `transform ${t}ms cubic-bezier(0.22,1,0.36,1)`,
-          transform: rotateA,
-          translate: "0 0",
-          transformOrigin: axis === "x" ? "50% 60%" : "50% 50%",
-          paddingTop: "0.15em",
-          paddingBottom: "0.15em",
-          backfaceVisibility: "hidden",
-          WebkitBackfaceVisibility: "hidden",
-        }}
-      >
-        {/* cara A */}
-        <span
-          className="absolute inset-0"
-          style={{
-            backfaceVisibility: "hidden",
-            WebkitBackfaceVisibility: "hidden",
-            transform: "translateZ(0.01px)",
-            color: colors[i] || "inherit",
-            transition: "color 0.6s ease-in-out",
-          }}
-        >
-          {phrases[i]}
-        </span>
-
-        {/* cara B */}
-        <span
-          className="absolute inset-0"
-          style={{
-            transform: `${faceBRot} translateZ(0.01px)`,
-            backfaceVisibility: "hidden",
-            WebkitBackfaceVisibility: "hidden",
-            color: colors[next] || "inherit",
-            transition: "color 0.6s ease-in-out",
-          }}
-        >
-          {phrases[next]}
-        </span>
-
-        {/* clon invisible para fijar altura */}
-        <span
-          className="invisible block"
-          style={{ paddingTop: "0.15em", paddingBottom: "0.15em" }}
-        >
-          {phrases[i]}
-        </span>
-      </span>
-
-      {/* medidor oculto (misma tipografía) */}
-      <span
-        ref={measureRef}
-        aria-hidden="true"
-        className={`absolute -z-50 opacity-0 pointer-events-none ${className}`}
-        style={{ whiteSpace: "nowrap", position: "fixed", top: -9999, left: -9999 }}
-      >
-        {phrases.map((p, k) => (
-          <span key={k} data-measure-item className="inline-block">
-            {p}
-          </span>
-        ))}
-      </span>
+      {children}
     </span>
   );
-};
+}
 
-
-// === Navbar ===
-const Navbar = () => {
+function Navbar() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setOpen(false);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+    const close = () => setOpen(false);
+    window.addEventListener("scroll", close, { passive: true });
+    return () => window.removeEventListener("scroll", close);
   }, []);
 
+  return (
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-gray-800 bg-gray-900 text-white shadow-lg">
+      <Container className="flex h-16 items-center justify-between">
+        <a href="#inicio" className="font-extrabold tracking-wider text-white" aria-label="Ir al inicio">
+          DANTE BALBUENA
+        </a>
 
-
-  const links = [
-  { href: "#home", label: "Home" },
-  { href: "#about", label: "Perfil" },
-  { href: "#skills", label: "Skills" },
-  { href: "#experience", label: "Experiencia" },
-  { href: "#education", label: "Educación" },
-  { href: "#projects", label: "Proyectos" },
-  { href: "#certs", label: "Certificados" },
-  { href: "#contact", label: "Contacto" }
-];
-
-return (
-  <header className="fixed top-0 inset-x-0 z-50 
-                     bg-blue-900 bg-opacity-60  /* azul translúcido */
-                     text-white 
-                     border-b border-white border-opacity-10">
-    <Container className="flex items-center justify-between h-16">
-      <a href="#home" className="text-2xl font-extrabold tracking-wider">
-        DANTE
-      </a>
-      <nav className="hidden md:flex items-center gap-8">
-        {links.map((l) => (
-          <a key={l.href} href={l.href}
-             className="text-sm font-semibold text-white hover:text-blue-200 transition-colors">
-            {l.label}
-          </a>
-        ))}
-      </nav>
-      <button
-type="button"
-        className="md:hidden inline-flex items-center justify-center w-10 h-10 p-2 bg-transparent border-0 text-white hover:text-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-blue-900 rounded-lg"
-        onClick={() => setOpen((v) => !v)}
-        aria-label="Toggle menu"
-                aria-expanded={open}
-      >
-        <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" aria-hidden>
-          <path d="M4 6h16M4 12h16M4 18h16"
-                stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-        </svg>
-      </button>
-    </Container>
-
-    {open && (
-      <div className="md:hidden border-t border-white border-opacity-20 bg-blue-900 bg-opacity-40">
-        <Container className="py-4 grid gap-4">
-          {links.map((l) => (
-            <a key={l.href} href={l.href}
-               className="text-sm font-semibold text-white hover:text-blue-200 transition-colors">
-              {l.label}
+        <nav className="hidden md:flex items-center gap-6" aria-label="Navegación principal">
+          {navigation.map((item) => (
+            <a key={item.href} href={item.href} className="text-sm font-semibold text-gray-200 hover:text-white">
+              {item.label}
             </a>
           ))}
-        </Container>
-      </div>
-    )}
-  </header>
-);
-};
+        </nav>
 
+        <button
+          type="button"
+          className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-white"
+          onClick={() => setOpen((current) => !current)}
+          aria-expanded={open}
+          aria-controls="mobile-navigation"
+          aria-label="Abrir o cerrar navegación"
+        >
+          <span aria-hidden className="text-xl">☰</span>
+        </button>
+      </Container>
 
-// === Cursor Binary Trail (canvas) ===
-const BinaryTrail = ({
-  targetRef,
-  color = "rgba(100,167,255,0.9)",
-  maxParticles = 160,
-  spawnCount = 6,
-  fadeMs = 1200,
-  sizeRange = [12, 20],
-  enableOnTouch = false,
-  mixBlendMode = "screen",
-  listen = "window", // "window" | "element"
-}) => {
-  const canvasRef = useRef(null);
-  const ctxRef = useRef(null);
-  const particlesRef = useRef([]);
-  const rafRef = useRef(null);
-
-  useEffect(() => {
-    const prefersReduced =
-      typeof window !== "undefined" &&
-      window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
-
-    const finePointer =
-      typeof window !== "undefined" &&
-      window.matchMedia?.("(pointer: fine)")?.matches;
-
-    if (prefersReduced) return;
-    if (!enableOnTouch && !finePointer) return;
-
-    const el = targetRef?.current;
-    const cvs = canvasRef.current;
-    if (!el || !cvs) return;
-
-    const ctx = cvs.getContext("2d");
-    ctxRef.current = ctx;
-
-    let running = true;
-
-    // Ajusta tamaño del canvas al elemento
-    const resize = () => {
-      const r = el.getBoundingClientRect();
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      cvs.style.width = r.width + "px";
-      cvs.style.height = r.height + "px";
-      cvs.width = Math.max(1, Math.floor(r.width * dpr));
-      cvs.height = Math.max(1, Math.floor(r.height * dpr));
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.clearRect(0, 0, r.width, r.height);
-    };
-
-    resize();
-    const ro = new ResizeObserver(resize);
-    ro.observe(el);
-    window.addEventListener("scroll", resize, { passive: true });
-
-    const spawn = (mx, my, vx, vy) => {
-      const arr = particlesRef.current;
-      for (let i = 0; i < spawnCount; i++) {
-        if (arr.length >= maxParticles) arr.shift();
-        const speedJitter = 0.5 + Math.random() * 0.8;
-        const angle = (Math.random() - 0.5) * Math.PI / 2;
-        const cos = Math.cos(angle), sin = Math.sin(angle);
-        const svx = (vx * cos - vy * sin) * speedJitter;
-        const svy = (vx * sin + vy * cos) * speedJitter;
-
-        arr.push({
-          x: mx,
-          y: my,
-          vx: svx * 0.06,
-          vy: svy * 0.06 - (Math.random() * 0.4 + 0.1),
-          born: performance.now(),
-          ttl: fadeMs,
-          rot: (Math.random() - 0.5) * 0.6,
-          size: Math.floor(sizeRange[0] + Math.random() * (sizeRange[1] - sizeRange[0])),
-          char: Math.random() < 0.5 ? "0" : "1",
-        });
-      }
-    };
-
-    let last = { x: 0, y: 0, t: 0 };
-
-    const handleMove = (clientX, clientY) => {
-      const r = el.getBoundingClientRect(); // siempre fresco (considera scroll)
-      // Solo dibujar si el cursor está sobre el Hero
-      if (
-        clientX < r.left || clientX > r.right ||
-        clientY < r.top  || clientY > r.bottom
-      ) return;
-
-      const now = performance.now();
-      const mx = clientX - r.left;
-      const my = clientY - r.top;
-      const dt = Math.max(16, now - (last.t || now));
-      const vx = (mx - (last.x || mx)) / dt;
-      const vy = (my - (last.y || my)) / dt;
-      spawn(mx, my, vx, vy);
-      last = { x: mx, y: my, t: now };
-    };
-
-    const onMoveWindow = (e) => handleMove(e.clientX, e.clientY);
-    const onMoveEl = (e) => handleMove(e.clientX, e.clientY);
-    const onLeave = () => { last = { x: 0, y: 0, t: 0 }; };
-
-    if (listen === "window") {
-      window.addEventListener("mousemove", onMoveWindow);
-      window.addEventListener("mouseleave", onLeave);
-    } else {
-      el.addEventListener("mousemove", onMoveEl);
-      el.addEventListener("mouseleave", onLeave);
-    }
-
-    const loop = () => {
-      if (!running) return;
-      const r = el.getBoundingClientRect();
-      const ctx = ctxRef.current;
-      ctx.clearRect(0, 0, r.width, r.height);
-
-      const now = performance.now();
-      const arr = particlesRef.current;
-
-      for (let i = arr.length - 1; i >= 0; i--) {
-        const p = arr[i];
-        const life = now - p.born;
-        if (life > p.ttl) { arr.splice(i, 1); continue; }
-
-        p.x += p.vx * 16;
-        p.y += p.vy * 16;
-        p.vx *= 0.98;
-        p.vy *= 0.98;
-
-        const alpha = 1 - life / p.ttl;
-        ctx.save();
-        ctx.globalAlpha = Math.max(0, Math.min(1, alpha));
-        ctx.translate(p.x, p.y);
-        ctx.rotate(p.rot);
-        ctx.fillStyle = color;
-        ctx.font = `${p.size}px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Courier New", monospace`;
-        ctx.fillText(p.char, 0, 0);
-        ctx.restore();
-      }
-
-      rafRef.current = requestAnimationFrame(loop);
-    };
-    rafRef.current = requestAnimationFrame(loop);
-
-    return () => {
-      running = false;
-      cancelAnimationFrame(rafRef.current);
-      ro.disconnect();
-      window.removeEventListener("scroll", resize);
-      if (listen === "window") {
-        window.removeEventListener("mousemove", onMoveWindow);
-        window.removeEventListener("mouseleave", onLeave);
-      } else {
-        el.removeEventListener("mousemove", onMoveEl);
-        el.removeEventListener("mouseleave", onLeave);
-      }
-      particlesRef.current = [];
-    };
-  }, [targetRef, color, maxParticles, spawnCount, fadeMs, sizeRange, enableOnTouch, listen]);
-
-  return (
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 z-10 pointer-events-none"
-      style={{ mixBlendMode }}
-      aria-hidden
-    />
+      {open && (
+        <nav id="mobile-navigation" className="border-t border-gray-800 bg-gray-900 md:hidden" aria-label="Navegación móvil">
+          <Container className="grid gap-1 py-3">
+            {navigation.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                className="rounded-lg px-3 py-3 text-sm font-semibold text-gray-200 hover:bg-gray-800 hover:text-white"
+              >
+                {item.label}
+              </a>
+            ))}
+          </Container>
+        </nav>
+      )}
+    </header>
   );
-};
+}
 
-// === Hero ===
-const Hero = () => {
-  const heroRef = useRef(null);
-
-  // === Protección básica contra scrapers ===
-  const decodeBase64 = (b64) => {
-    if (typeof window !== "undefined" && typeof window.atob === "function") {
-      return window.atob(b64);
-    }
-    return b64;
-  };
-
-  // Email codificado en base64: dantebalbuenaatar@gmail.com
-  const rawEmail = decodeBase64("ZGFudGViYWxidWVuYWF0YXJAZ21haWwuY29t");
-  const [emailUser, emailDomain] = rawEmail.split("@");
-
-  // Teléfono codificado en base64: +543816654021
-  const phoneHref = decodeBase64("KzU0MzgxNjY1NDAyMQ==");
-  const phoneVisible = "(381) 665-4021"; // lo que ve el usuario
-
+function Hero() {
   return (
-    <section
-      id="home"
-      ref={heroRef}
-      className="relative overflow-hidden min-h-[90vh] md:min-h-screen text-white"
-    >
-      {/* Fondo */}
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage:
-            "url('https://web-assets.esetstatic.com/tn/-x700/wls/2022/07/curso-online-ciberseguridad-empresas.jpg')",
-        }}
-      />
-
-      {/* Overlay por delante del fondo */}
-      <div className="absolute inset-0 bg-black/45" />
-
-      {/* 🔥 Rastro binario (sobre el overlay, debajo del contenido) */}
-      <div className="pointer-events-none absolute inset-0">
-        <BinaryTrail
-          targetRef={heroRef}
-          color="rgba(100,167,255,0.9)"    // ajusta a tu paleta
-          mixBlendMode="screen"           // prueba "normal" si no querés brillo
-          maxParticles={120}
-          spawnCount={4}
-          fadeMs={1300}
-          sizeRange={[12, 22]}
-          listen="window"
-          // enableOnTouch={true}
-        />
+    <section id="inicio" className="relative overflow-hidden bg-gray-900 pt-16 text-white">
+      <div className="absolute inset-0" aria-hidden>
+        <div className="absolute -left-32 top-20 h-96 w-96 rounded-full bg-blue-700 opacity-20 blur-3xl" />
+        <div className="absolute -right-32 bottom-10 h-96 w-96 rounded-full bg-indigo-700 opacity-20 blur-3xl" />
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 opacity-80" />
       </div>
 
-      {/* Contenido por encima de todo */}
-      <Container className="relative z-10 pt-24 md:pt-28 pb-16 grid md:grid-cols-2 items-center gap-10">
-        <div className="space-y-6">
-          <p
-            className="text-2xl md:text-3xl lg:text-4xl text-white/90"
-            style={{ color: "#64a7ff", textShadow: "0 3px 16px rgba(0,0,0,.25)" }}
-          >
-            Hola, soy
+      <Container className="relative py-20 sm:py-24 lg:py-32">
+        <Reveal className="max-w-4xl">
+          <Tag dark>Orientado a oportunidades SOC Tier 1</Tag>
+          <p className="mt-7 text-lg font-semibold text-blue-200">Hola, soy</p>
+          <h1 className="mt-2 text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight">
+            {PROFILE.name}
+          </h1>
+          <p className="mt-5 text-xl sm:text-2xl font-bold text-blue-100">{PROFILE.role}</p>
+          <p className="mt-6 max-w-3xl text-lg leading-relaxed text-gray-300">
+            Profesional de soporte y gestión de incidentes con casi siete años de experiencia en telecomunicaciones y
+            servicios críticos. Estudiante avanzado de Ciberseguridad, con dos finales pendientes, y experiencia en
+            automatización, documentación técnica y proyectos de seguridad aplicados.
           </p>
 
-          <h1 className="leading-tight">
-            <span
-              className="block font-extrabold tracking-tight"
-              style={{
-                color: "#0b1b55",
-                textShadow: "0 6px 28px rgba(0,0,0,.45)",
-                fontSize: "clamp(30px, 10vw, 60px)",
-              }}
+          <div className="mt-8 flex flex-wrap gap-3">
+            <a href="#proyectos" className="rounded-lg bg-blue-600 px-5 py-3 font-bold text-white shadow-lg hover:bg-blue-500">
+              Ver proyectos
+            </a>
+            <a
+              href={PROFILE.github}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="rounded-lg border border-gray-500 px-5 py-3 font-bold text-white hover:border-white hover:bg-white hover:bg-opacity-10"
             >
-              Dante Balbuena
-            </span>
-          </h1>
+              GitHub ↗
+            </a>
+            <a
+              href={`mailto:${PROFILE.email}`}
+              className="rounded-lg border border-gray-500 px-5 py-3 font-bold text-white hover:border-white hover:bg-white hover:bg-opacity-10"
+            >
+              Contactar
+            </a>
+          </div>
+        </Reveal>
 
-          <FlippyWords
-            className="block text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4"
-            style={{ textShadow: "0 3px 16px rgba(0,0,0,.25)" }}
-            phrases={["Ciberseguridad", "Desarrollo web", "Automatización digital"]}
-            interval={2600}
-            axis="x"
-            duration={620}
-          />
-
-          <div className="flex flex-wrap items-center gap-3 sm:gap-6 pt-2 text-base sm:text-lg">
-  <a
-    href="https://github.com/Dante2617012022"
-    target="_blank"
-    rel="noreferrer noopener"
-    className="inline-flex items-center gap-2 underline hover:text-white/80 flex-shrink-0"
-  >
-    <IconGitHub className="w-5 h-5" />
-    <span>GitHub</span>
-  </a>
-
-  <a
-    href={`mailto:${rawEmail}`}
-    className="inline-flex items-center gap-2 underline hover:text-white/80 flex-shrink-0"
-    aria-label={`Enviar correo a ${rawEmail}`}
-  >
-    <IconMail className="w-5 h-5" />
-    <span>
-      {emailUser}
-      <span>@</span>
-      {emailDomain}
-    </span>
-  </a>
-
-  <a
-    href={`tel:${phoneHref}`}
-    className="inline-flex items-center gap-2 underline hover:text-white/80 flex-shrink-0"
-    aria-label={`Llamar al ${phoneVisible}`}
-  >
-    <IconPhone className="w-5 h-5" />
-    <span>Contacto</span>
-  </a>
-</div>
-
+        <div className="mt-14 grid gap-4 sm:grid-cols-3">
+          {[
+            ["Casi 7 años", "Operaciones y telecomunicaciones"],
+            ["2 finales", "Para completar la Tecnicatura"],
+            ["1.600 horas", "Plan universitario con validez nacional"],
+          ].map(([value, label], index) => (
+            <Reveal key={value} delay={index * 0.08} className="rounded-2xl border border-white border-opacity-10 bg-white bg-opacity-10 p-5 backdrop-blur">
+              <p className="text-2xl font-extrabold text-white">{value}</p>
+              <p className="mt-1 text-sm text-gray-300">{label}</p>
+            </Reveal>
+          ))}
         </div>
-
-        <div className="hidden md:block" />
       </Container>
     </section>
   );
-};
+}
 
-
-
-// === About ===
-/* Helper: Tilt 3D suave sin librerías extra */
-const Tilt = ({ className = "", children, max = 6 }) => {
-  const ref = useRef(null);
-  const reduce = typeof window !== "undefined" &&
-    window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
-
-  const onMove = (e) => {
-    if (reduce) return;
-    const el = ref.current; if (!el) return;
-    const r = el.getBoundingClientRect();
-    const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
-    const rx = (y - 0.5) * -max, ry = (x - 0.5) * max;
-    el.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-2px)`;
-  };
-  const reset = () => { if (ref.current) ref.current.style.transform = ""; };
-
+function ProfileSection() {
   return (
-    <div
-      ref={ref}
-      onMouseMove={onMove}
-      onMouseLeave={reset}
-      className={`transition-transform duration-200 will-change-transform ${className}`}
-    >
-      {children}
-    </div>
-  );
-};
-
-const About = () => {
-  const reduce = useReducedMotion();
-
-  const list = {
-    hidden: { opacity: 0 },
-    show: { opacity: 1, transition: { staggerChildren: 0.08 } }
-  };
-  const item = {
-    hidden: reduce ? { opacity: 0 } : { opacity: 0, y: 12 },
-    show: reduce ? { opacity: 1 } : { opacity: 1, y: 0 }
-  };
-
-  return (
-    <section id="about" className="py-20 bg-white">
-      {/* 👇 el Container es relative para posicionar el GIF */}
-      <Container className="relative">
-        {/* GIF a la derecha, DEBAJO del contenido */}
-        <motion.img
-          alt="GIF Cyber Joy"
-          src="https://media1.tenor.com/m/zn8iyusePtgAAAAC/joy.gif"
-          loading="lazy"
-          aria-hidden="true"
-          className="
-            hidden md:block                      /* evita móviles */
-            pointer-events-none select-none
-            absolute z-0                         /* debajo del texto */
-            top-0 md:-top-4 lg:-top-16
-            right-0 md:right-8 lg:right-12 xl:right-16
-            translate-x-1/3 md:translate-x-1/2
-            w-40 md:w-48 lg:w-56 xl:w-64
-            object-contain
-            opacity-95                           /* sutil para que el texto contraste */
-          "
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, margin: "-10% 0px" }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+    <section id="perfil" className="bg-white py-20 sm:py-24">
+      <Container>
+        <SectionHeading
+          eyebrow="Perfil profesional"
+          title="Una transición natural desde operaciones hacia seguridad"
+          description="Mi diferencial no es una lista extensa de herramientas: es la combinación de experiencia operativa real, telecomunicaciones, gestión de incidentes, formación universitaria y proyectos técnicos aplicados."
         />
-        {/* GIF arriba a la izquierda */}
-<motion.img
-  alt="GIF Locked In"
-  src="https://media1.tenor.com/m/9Ez46wr-voMAAAAd/lock.gif"
-  loading="lazy"
-  aria-hidden="true"
-  className="
-    hidden md:block
-    pointer-events-none select-none
-    absolute z-0
-    top-0 md:-top-2 lg:-top-10       /* un poquito hacia abajo */
-    left-10 sm:left-16 md:left-24 lg:left-52   /* margen izquierdo */
-    -translate-x-1/4              /* lo movemos un poco hacia fuera */
-    w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-32 lg:h-32          /* más chico que el de la derecha */
-    object-contain
-    opacity-90
-  "
-  initial={{ opacity: 0, scale: 0.9 }}
-  whileInView={{ opacity: 1, scale: 1 }}
-  viewport={{ once: true, margin: "-10% 0px" }}
-  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-/>
 
-
-        {/* Título */}
-        <div className="text-center relative z-10">
-          <motion.h2
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-10% 0px" }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900"
-          >
-            Perfil profesional
-          </motion.h2>
-
-          <div className="mt-3 flex items-center justify-center gap-2">
-            <motion.span
-              initial={{ width: 0, opacity: 0 }}
-              whileInView={{ width: 64, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="h-1 rounded-full bg-blue-600"
-              style={{ width: 64 }}
-            />
-            <motion.span
-              initial={{ width: 0, opacity: 0 }}
-              whileInView={{ width: 20, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.18 }}
-              className="h-1 rounded-full bg-blue-400"
-              style={{ width: 20 }}
-            />
-          </div>
-        </div>
-
-        {/* Contenido */}
-        <div className="mt-12 grid md:grid-cols-2 items-center gap-12 lg:gap-16">
-          {/* Imagen con glow + tilt */}
-          <div className="relative z-10">
-            <div
-              className="absolute -inset-4 rounded-3xl bg-gradient-to-tr from-blue-500/20 to-indigo-500/10 blur-2xl"
-              aria-hidden
-            />
-            <Tilt className="rounded-2xl">
-              <motion.img
-                alt="Dante - ciberseguridad"
-                src="https://www.redseguridad.com/wp-content/uploads/sites/2/2021/12/soc-centro-de-operaciones-de-seguridad.jpg"
-                className="w-full max-w-md mx-auto rounded-2xl shadow-2xl object-cover"
-                initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.98 }}
-                whileInView={reduce ? { opacity: 1 } : { opacity: 1, scale: 1 }}
-                viewport={{ once: true, margin: "-10% 0px" }}
-                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              />
-            </Tilt>
-          </div>
-
-          {/* Texto ENCIMA del GIF */}
-          <motion.div
-            variants={list}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: "-10% 0px" }}
-            className="relative z-10 space-y-6 text-gray-700 leading-relaxed max-w-prose"
-          >
-            <motion.p variants={item}>
-              Estudiante de Ciberseguridad con experiencia práctica en soporte técnico,
-              monitoreo de sistemas y gestión de incidentes.
-            </motion.p>
-            <motion.p variants={item}>
-              Formación en seguridad operativa, cumplimiento normativo y herramientas
-              ofensivas/defensivas.
-            </motion.p>
-            <motion.div variants={item} className="pt-2">
-              <a
-                href="#projects"
-                className="inline-flex items-center gap-2 rounded-xl px-4 py-2 bg-blue-600 text-white font-semibold shadow-lg hover:shadow-xl transition-shadow"
-              >
-                Ver proyectos
-                <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none">
-                  <path
-                    d="M5 12h14M13 5l7 7-7 7"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </a>
-            </motion.div>
-          </motion.div>
+        <div className="mt-12 grid gap-6 md:grid-cols-3">
+          {[
+            {
+              title: "Experiencia operativa",
+              text: "Diagnóstico remoto, atención bajo presión, documentación, seguimiento, escalamiento y cumplimiento de SLA.",
+            },
+            {
+              title: "Formación en ciberseguridad",
+              text: "Incidentes, riesgos, vulnerabilidades, hacking ético, criptografía, cloud, análisis forense y ciberdefensa.",
+            },
+            {
+              title: "Mentalidad orientada al negocio",
+              text: "Seguridad proporcional al riesgo, continuidad operativa, documentación y mejoras que puedan mantenerse en el tiempo.",
+            },
+          ].map((item, index) => (
+            <Reveal key={item.title} delay={index * 0.08} className="rounded-2xl border border-gray-200 bg-gray-50 p-6 shadow-sm">
+              <h3 className="text-xl font-extrabold text-gray-900">{item.title}</h3>
+              <p className="mt-3 leading-relaxed text-gray-600">{item.text}</p>
+            </Reveal>
+          ))}
         </div>
       </Container>
     </section>
   );
-};
+}
 
-
-
-// === Skills ===
-const Skills = () => (
-  <section id="skills" className="py-20 bg-gray-900 text-white">
-    <Container>
-      <div className="text-center">
-        <h2 className="text-4xl font-extrabold">Habilidades Técnicas</h2>
-        <div className="mt-3 flex items-center gap-2 justify-center">
-          <span className="h-1 w-16 rounded-full bg-blue-500" />
-          <span className="h-1 w-5 rounded-full bg-blue-300" />
-        </div>
-      </div>
-
-      <div className="mt-12 grid md:grid-cols-3 gap-6">
-        {/* Avanzado */}
-        <Card className="bg-gray-800 text-white border border-white/10 shadow-xl overflow-hidden">
-          <h3 className="text-xl font-bold px-6 pt-6">Uso frecuente</h3>
-          <div className="mt-4 h-72 px-2 pb-2">
-            <FloatingLogos
-              logos={techLogosAvanzado}
-              className="w-full h-full rounded-2xl"
-              restitution={0.92}
-              maxSpeed={1.0}
-              density={1.0}
-            />
-          </div>
-        </Card>
-
-        {/* Intermedio */}
-        <Card className="bg-gray-800 text-white border border-white/10 shadow-xl overflow-hidden">
-          <h3 className="text-xl font-bold px-6 pt-6">   Uso regular</h3>
-          <div className="mt-4 h-72 px-2 pb-2">
-            <FloatingLogos
-              logos={techLogosIntermedio}
-              className="w-full h-full rounded-2xl"
-              restitution={0.9}
-              maxSpeed={0.9}
-              density={1.0}
-            />
-          </div>
-        </Card>
-
-        {/* Básico */}
-        <Card className="bg-gray-800 text-white border border-white/10 shadow-xl overflow-hidden">
-          <h3 className="text-xl font-bold px-6 pt-6">En progreso</h3>
-          <div className="mt-4 h-72 px-2 pb-2">
-            <FloatingLogos
-  logos={techLogosBasico}
-  className="w-full h-full rounded-2xl"
-  restitution={0.88}
-  maxSpeed={0.8}
-  density={1.0}
-/>
-
-          </div>
-        </Card>
-      </div>
-    </Container>
-  </section>
-);
-
-
-
-/* === Experience (tilt 3D + reveal on scroll) === */
-const Experience = () => {
-  // ---- Card con tilt 3D dinámico ----
-  const TiltCard = ({ children, className = "" }) => {
-    const ref = React.useRef(null);
-    const rafRef = React.useRef(null);
-    const target = React.useRef({ rx: 0, ry: 0, tz: 0 });
-    const state  = React.useRef({ rx: 0, ry: 0, tz: 0 });
-
-    const MAX = 8;      // grados máx
-    const Z   = -6;     // pequeño lift
-    const EASING = 0.12;
-
-    React.useEffect(() => {
-      const el = ref.current;
-      if (!el) return;
-
-      const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
-      const fine   = window.matchMedia?.("(pointer: fine)")?.matches;
-      if (reduce || !fine) return;
-
-      let hovering = false;
-
-      const animate = () => {
-        state.current.rx += (target.current.rx - state.current.rx) * EASING;
-        state.current.ry += (target.current.ry - state.current.ry) * EASING;
-        state.current.tz += (target.current.tz - state.current.tz) * EASING;
-
-        el.style.transform = `
-          perspective(1000px)
-          rotateX(${state.current.rx}deg)
-          rotateY(${state.current.ry}deg)
-          translateZ(${state.current.tz}px)
-        `;
-
-        const glare = el.querySelector(".tilt-glare");
-        if (glare) {
-          const gx = (state.current.ry / MAX) * 50 + 50;
-          const gy = (state.current.rx / MAX) * -50 + 50;
-          glare.style.background = `radial-gradient(600px at ${gx}% ${gy}%, rgba(255,255,255,0.18), transparent 60%)`;
-        }
-
-        if (hovering) rafRef.current = requestAnimationFrame(animate);
-      };
-
-      const onMove = (e) => {
-        const r = el.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width;
-        const y = (e.clientY - r.top)  / r.height;
-        target.current.rx = (0.5 - y) * (MAX * 2);
-        target.current.ry = (x - 0.5) * (MAX * 2);
-        target.current.tz = Z;
-      };
-
-      const onEnter = () => { hovering = true; rafRef.current = requestAnimationFrame(animate); };
-      const onLeave = () => {
-        hovering = false;
-        cancelAnimationFrame(rafRef.current);
-        target.current = { rx: 0, ry: 0, tz: 0 };
-        rafRef.current = requestAnimationFrame(function settle() {
-          const near =
-            Math.abs(state.current.rx) < 0.05 &&
-            Math.abs(state.current.ry) < 0.05 &&
-            Math.abs(state.current.tz) < 0.1;
-          if (!near) {
-            state.current.rx += (0 - state.current.rx) * EASING;
-            state.current.ry += (0 - state.current.ry) * EASING;
-            state.current.tz += (0 - state.current.tz) * EASING;
-            el.style.transform = `
-              perspective(1000px)
-              rotateX(${state.current.rx}deg)
-              rotateY(${state.current.ry}deg)
-              translateZ(${state.current.tz}px)
-            `;
-            rafRef.current = requestAnimationFrame(settle);
-          } else {
-            el.style.transform = "";
-          }
-        });
-      };
-
-      el.addEventListener("mouseenter", onEnter);
-      el.addEventListener("mousemove", onMove);
-      el.addEventListener("mouseleave", onLeave);
-      return () => {
-        cancelAnimationFrame(rafRef.current);
-        el.removeEventListener("mouseenter", onEnter);
-        el.removeEventListener("mousemove", onMove);
-        el.removeEventListener("mouseleave", onLeave);
-      };
-    }, []);
-
-    return (
-      <div
-        ref={ref}
-        className={`relative rounded-2xl border border-slate-200 bg-white/90 backdrop-blur p-6 md:p-8 shadow-lg transition-[box-shadow,border-color] duration-300 will-change-transform ${className}`}
-      >
-        <div className="tilt-glare pointer-events-none absolute inset-0 rounded-2xl" />
-        {children}
-      </div>
-    );
-  };
-
-  // ---- Reveal on scroll (como About) + oscilación de títulos ----
-  React.useEffect(() => {
-    const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
-    if (reduce) {
-      document.querySelectorAll(".reveal").forEach((n) => n.classList.add("is-in"));
-      return;
-    }
-
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) e.target.classList.add("is-in");
-        });
-      },
-      { rootMargin: "0px 0px -10% 0px", threshold: 0.1 }
-    );
-    document.querySelectorAll(".reveal").forEach((n) => io.observe(n));
-    return () => io.disconnect();
-  }, []);
-
+function ExperienceSection() {
   return (
-    <section
-      id="experience"
-      aria-labelledby="exp-title"
-      className="py-24 bg-white experience-section"
-    >
-      {/* estilos locales: reveal + título oscilante */}
-      <style>{`
-        .reveal{opacity:0; transform:translateY(24px)}
-        .reveal.is-in{opacity:1; transform:none; transition:opacity .6s cubic-bezier(.22,1,.36,1), transform .6s cubic-bezier(.22,1,.36,1)}
-        @media (prefers-reduced-motion: no-preference){
-          @keyframes oscillateTitle{0%{transform:rotate(0)}25%{transform:rotate(.8deg)}50%{transform:rotate(0)}75%{transform:rotate(-.8deg)}100%{transform:rotate(0)}}
-          .animate-oscillate{animation:oscillateTitle 2.2s ease-in-out infinite; transform-origin:0% 60%}
-        }
-                .experience-section{color:#0f172a;}
-        .experience-section p,
-        .experience-section li{color:#334155;}
-        .experience-section .exp-meta{color:#475569;}
-        .experience-section h3{color:#0f172a;}
-      `}</style>
-
+    <section id="experiencia" className="bg-gray-50 py-20 sm:py-24">
       <Container>
-        {/* Título */}
-        <div className="text-center mb-10 reveal" style={{ transitionDelay: "60ms" }}>
-          <h2 id="exp-title" className="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900">
-            Experiencia
-          </h2>
-          <div className="mt-3 flex items-center justify-center gap-2">
-            <span className="h-1 w-16 rounded-full bg-blue-600" />
-            <span className="h-1 w-5 rounded-full bg-blue-400" />
-          </div>
-        </div>
+        <SectionHeading
+          eyebrow="Trayectoria"
+          title="Experiencia profesional"
+          description="Experiencia real en operación, atención de incidentes y soporte de servicios que requieren continuidad, trazabilidad y comunicación clara."
+        />
 
-        {/* Grid */}
-        <div className="grid gap-6 md:grid-cols-2">
-          {/* Camdis */}
-          <div className="reveal" style={{ transitionDelay: "120ms" }}>
-            <TiltCard className="hover:shadow-2xl hover:border-blue-400/60">
-              <header className="mb-3">
-                <h3 className="text-2xl font-extrabold leading-tight text-slate-900 animate-oscillate">
-                  Automatización Digital – Camdis
-                </h3>
-                <p className="text-sm text-slate-500 exp-meta">
-                  Rol: Automatización · Período: 2025 – Actualidad
-                </p>
-              </header>
-
-              <p className="text-slate-700">
-                Desarrollo de herramientas de automatización con JavaScript y Node.js. Soporte técnico y
-                optimización de procesos internos.
-              </p>
-
-              <ul className="mt-4 space-y-2 text-slate-700">
-                <li className="flex gap-3 reveal" style={{ transitionDelay: "200ms" }}>
-                  <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-blue-500/80" />
-                  <span>Scripts y utilidades en Node.js para automatizar tareas operativas.</span>
-                </li>
-                <li className="flex gap-3 reveal" style={{ transitionDelay: "240ms" }}>
-                  <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-blue-500/80" />
-                  <span>Mejora de flujos internos y soporte técnico a equipos.</span>
-                </li>
-              </ul>
-
-             <p className="mt-5 text-sm text-slate-600 reveal exp-meta" style={{ transitionDelay: "280ms" }}>
-                <strong className="font-semibold text-slate-800">Stack:</strong> JavaScript, Node.js
-              </p>
-            </TiltCard>
-          </div>
-
-          {/* CityTech / Teleperformance */}
-          <div className="reveal" style={{ transitionDelay: "180ms" }}>
-            <TiltCard className="hover:shadow-2xl hover:border-blue-400/60">
-              <header className="mb-3">
-                <h3 className="text-2xl font-extrabold leading-tight text-slate-900 animate-oscillate">
-                  Agente telefónico – Soporte técnico y Gestión de Incidentes – CityTech S.A. / Teleperformance
-                </h3>
-                <p className="text-sm text-slate-500 exp-meta">
-                  Rol: Soporte técnico / Gestión de incidentes · Período: 2019 – 2025
-                </p>
-              </header>
-
-              <p className="text-slate-700">
-                Atención y resolución de incidentes técnicos en entornos críticos. Escalamiento según criticidad
-                y documentación de soluciones.
-              </p>
-
-              <ul className="mt-4 space-y-2 text-slate-700">
-                <li className="flex gap-3 reveal" style={{ transitionDelay: "260ms" }}>
-                  <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-blue-500/80" />
-                  <span>Soporte en tecnologías XDSL, HFC, FTTH, CATV, 5G.</span>
-                </li>
-                <li className="flex gap-3 reveal" style={{ transitionDelay: "300ms" }}>
-                  <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-blue-500/80" />
-                  <span>
-                    Uso de herramientas de monitoreo y CRMs corporativos: Citrix, Salesforce, Oracle (Siebel,
-                    Watchdog, CC&amp;B), Avaya, Microsoft Office y otras internas.
-                  </span>
-                </li>
-                <li className="flex gap-3 reveal" style={{ transitionDelay: "340ms" }}>
-                  <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-blue-500/80" />
-                  <span>Capacitación periódica en ciberseguridad mediante e-learning.</span>
-                </li>
-              </ul>
-
-             <p className="mt-5 text-sm text-slate-600 reveal exp-meta" style={{ transitionDelay: "380ms" }}>
-                <strong className="font-semibold text-slate-800">Herramientas y plataformas:</strong> Citrix · Salesforce (CRM corporativo / monitoreo) · Oracle Siebel / Watchdog / CC&B · Avaya · Microsoft Office · Herramientas internas de monitoreo y gestión
-              </p>
-            </TiltCard>
-          </div>
-        </div>
-      </Container>
-    </section>
-  );
-};
-
-
-
-const Education = () => {
-  const educationMilestones = [
-    {
-      title: "Título Secundario",
-      date: "2014",
-      institution: "Colegio Gral. Don José de San Martín",
-      duration: "Economía y Gestión de las Organizaciones",
-      achievements: [
-        "Orientación en administración y gestión",
-        "Proyectos finales con foco en procesos y finanzas",
-        "Trabajo en equipo y organización de eventos",
-      ],
-      icon: "🎓",
-      accent: "from-amber-500/10 via-amber-400/10 to-amber-300/20",
-    },
-    {
-      title: "Tecnicatura en Ciberseguridad",
-      date: "2024 – en curso",
-      institution: "Universidad del Gran Rosario (UGR)",
-      duration: "Dos años y medio (avance 73%)",
-      achievements: [
-        "1º y 2º año completos con promedio ≥ 8",
-        "Redes, seguridad defensiva, gestión de incidentes",
-        "Prácticas con laboratorios y simulaciones",
-      ],
-      icon: "🛡️",
-      accent: "from-blue-500/10 via-blue-400/10 to-blue-300/20",
-    },
-  ];
-
-  React.useEffect(() => {
-    const prefersReduce = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
-    const nodes = document.querySelectorAll(".edu-reveal");
-
-    if (prefersReduce) {
-      nodes.forEach((n) => n.classList.add("edu-in"));
-      return undefined;
-    }
-
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("edu-in");
-            io.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.2, rootMargin: "0px 0px -8% 0px" }
-    );
-
-    nodes.forEach((n) => io.observe(n));
-    return () => io.disconnect();
-  }, []);
-
-  return (
-    <section id="education" className="py-20 bg-gray-900 education-section">
-      <style>{`
-      
-      .timeline-grid{
-          position:relative;
-          --line-left:1.4rem;
-          --node-size:2.5rem;
-        }
-        .timeline-grid::before{
-          content:"";
-          position:absolute;
-          inset:0;
-          width:3px;
-          background:linear-gradient(180deg,#cbd5e1 0%,#94a3b8 50%,#cbd5e1 100%);
-          left:var(--line-left);
-          transform:translateX(-50%);
-          border-radius:999px;
-        }
-        .timeline-item{position:relative;padding-left:3.75rem;}
-        .timeline-node{position:absolute;left:var(--line-left);top:1rem;transform:translateX(-50%);}
-        .timeline-card{transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease;}
-        .timeline-card:hover{transform:translateY(-2px) scale(1.01);box-shadow:0 20px 40px rgba(15,23,42,.12);}
-        .timeline-card:focus-visible{outline:3px solid #2563eb; outline-offset:6px;}
-        .edu-reveal{opacity:0; transform:translateY(20px);}
-        .edu-reveal.edu-in{opacity:1; transform:none; transition:opacity .6s cubic-bezier(.22,1,.36,1), transform .6s cubic-bezier(.22,1,.36,1);}
-        .edu-tooltip{pointer-events:none; opacity:0; transform:translateY(4px) scale(.98); transition:opacity .25s ease, transform .25s ease;}
-        .timeline-card:hover .edu-tooltip, .timeline-card:focus-within .edu-tooltip{opacity:1; transform:translateY(0) scale(1);}
-        .education-section{color:#e2e8f0;}
-        .education-section .timeline-card{color:#0f172a;}
-        .education-section .timeline-card p,
-        .education-section .timeline-card li{color:#334155;}
-        .education-section .timeline-card h3{color:#0f172a;}
-        .education-section .edu-badge{color:#1d4ed8;}
-        @media (min-width:768px){
-          .timeline-grid{padding-inline:1rem; --line-left:50%;}
-          .timeline-grid::before{left:var(--line-left);}
-          .timeline-item{width:50%; padding-left:3.5rem;}
-          .timeline-item:nth-child(odd){text-align:right; padding-right:3.5rem; padding-left:0; margin-left:0;}
-                    .timeline-item:nth-child(odd) .timeline-card{ text-align:left; }
-          .timeline-item:nth-child(odd) .timeline-node{left:var(--line-left); right:auto;}
-          .timeline-item:nth-child(even){margin-left:50%;}
-                    .timeline-item:nth-child(even) .timeline-node{left:var(--line-left);}
-          .timeline-item:nth-child(odd) .timeline-card{margin-left:auto;}
-        }
-      `}</style>
-      <Container>
-        <SectionTitle colorClass="text-white">Educación</SectionTitle>
-<div className="relative mt-14 timeline-grid text-slate-800">
-          <div className="sr-only" aria-live="polite">
-            Línea de tiempo de educación con dos hitos principales.
-          </div>
-
-          {educationMilestones.map((milestone, idx) => (
-            <article
-              key={milestone.title}
-              className="timeline-item edu-reveal mb-10"
-              style={{ transitionDelay: `${idx * 80 + 60}ms` }}
-            >
-              <div className="timeline-node" aria-hidden>
-                <span className="grid h-10 w-10 place-items-center rounded-full bg-white shadow ring-2 ring-blue-200">
-                  
-                </span>
-              </div>
-
-              <div
-                tabIndex={0}
-                aria-describedby={`edu-tip-${idx}`}
-                className="timeline-card group relative overflow-hidden rounded-2xl border border-slate-200 bg-white backdrop-blur p-6 md:p-7"
-                
-              >
-                <div className="flex flex-col gap-3">
-                  <div className="flex items-center justify-between gap-3">
-                    <div className="inline-flex items-center gap-2">
-                      <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/80 text-lg shadow-inner">
-                        {milestone.icon}
-                      </span>
-                      <h3 className="text-xl font-bold text-slate-900 leading-tight">{milestone.title}</h3>
-                    </div>
-                    <span className="text-sm font-semibold uppercase tracking-wide text-blue-700 bg-white/80 px-3 py-1 rounded-full shadow-sm edu-badge">
-                      {milestone.date}
-                    </span>
-                  </div>
-
-                  <div className="text-sm text-slate-700">
-                  <p className="font-semibold text-slate-900">{milestone.institution}</p>
-                  <p className="mt-1 text-slate-700">{milestone.duration}</p>
+        <div className="mt-12 grid gap-6 lg:grid-cols-2">
+          {experiences.map((experience, index) => (
+            <Reveal key={experience.company} delay={index * 0.08} className="h-full rounded-2xl border border-gray-200 bg-white p-6 sm:p-8 shadow-sm">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                <div>
+                  <p className="text-sm font-bold uppercase tracking-wider text-blue-700">{experience.company}</p>
+                  <h3 className="mt-2 text-2xl font-extrabold text-gray-900">{experience.role}</h3>
                 </div>
+                <Tag>{experience.period}</Tag>
+              </div>
+              <p className="mt-5 leading-relaxed text-gray-600">{experience.summary}</p>
+              <ul className="mt-6 space-y-3">
+                {experience.bullets.map((bullet) => (
+                  <li key={bullet} className="flex gap-3 leading-relaxed text-gray-700">
+                    <span className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-blue-600" aria-hidden />
+                    <span>{bullet}</span>
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+          ))}
+        </div>
+      </Container>
+    </section>
+  );
+}
 
-                  <ul className="mt-3 space-y-2 text-slate-700 list-none">
-                  {milestone.achievements.map((item) => (
-                    <li key={item} className="text-slate-700">
-                      {item}
+function ProjectCard({ project, index }) {
+  return (
+    <Reveal delay={index * 0.08} className="h-full">
+      <article className="flex h-full flex-col rounded-2xl border border-gray-200 bg-white p-6 sm:p-7 shadow-sm transition-shadow hover:shadow-xl">
+        <Tag>{project.status}</Tag>
+        <h3 className="mt-5 text-2xl font-extrabold text-gray-900">{project.title}</h3>
+        <p className="mt-4 leading-relaxed text-gray-600">{project.description}</p>
+        <ul className="mt-6 space-y-2">
+          {project.highlights.map((item) => (
+            <li key={item} className="flex gap-3 text-sm leading-relaxed text-gray-700">
+              <span className="text-blue-600" aria-hidden>✓</span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+        {project.href ? (
+          <a
+            href={project.href}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="mt-7 inline-flex items-center font-bold text-blue-700 hover:text-blue-900"
+          >
+            {project.linkLabel} ↗
+          </a>
+        ) : (
+          <p className="mt-7 text-sm font-semibold text-gray-500">Material sensible o académico conservado de forma privada.</p>
+        )}
+      </article>
+    </Reveal>
+  );
+}
+
+function ProjectsSection() {
+  return (
+    <section id="proyectos" className="bg-white py-20 sm:py-24">
+      <Container>
+        <SectionHeading
+          eyebrow="Evidencia técnica"
+          title="Proyectos destacados"
+          description="Una selección breve para mostrar capacidad de desarrollo, análisis de riesgos, documentación y seguridad aplicada sin publicar información confidencial."
+        />
+        <div className="mt-12 grid gap-6 lg:grid-cols-3">
+          {projects.map((project, index) => (
+            <ProjectCard key={project.title} project={project} index={index} />
+          ))}
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+function SkillsSection() {
+  return (
+    <section id="habilidades" className="bg-gray-900 py-20 text-white sm:py-24">
+      <Container>
+        <SectionHeading
+          eyebrow="Capacidades"
+          title="Habilidades técnicas por contexto de uso"
+          description="Las herramientas se presentan según experiencia práctica, académica o corporativa para mantener un perfil honesto y defendible en entrevista."
+          light
+        />
+
+        <div className="mt-12 grid gap-6 md:grid-cols-2">
+          {skillGroups.map((group, index) => (
+            <Reveal key={group.title} delay={index * 0.05} className={index === skillGroups.length - 1 ? "md:col-span-2" : ""}>
+              <article className="h-full rounded-2xl border border-gray-700 bg-gray-800 p-6">
+                <h3 className="text-xl font-extrabold text-white">{group.title}</h3>
+                <p className="mt-3 leading-relaxed text-gray-300">{group.description}</p>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {group.items.map((item) => (
+                    <Tag key={item} dark>{item}</Tag>
+                  ))}
+                </div>
+              </article>
+            </Reveal>
+          ))}
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+function EducationSection() {
+  return (
+    <section id="formacion" className="bg-gray-50 py-20 sm:py-24">
+      <Container>
+        <SectionHeading
+          eyebrow="Formación"
+          title="Educación y certificación"
+          description="La formación universitaria complementa la experiencia operativa y los proyectos técnicos."
+        />
+
+        <div className="mt-12 grid gap-6 lg:grid-cols-3">
+          <div className="space-y-6 lg:col-span-2">
+            {education.map((item, index) => (
+              <Reveal key={item.title} delay={index * 0.08} className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-8 shadow-sm">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                  <div>
+                    <h3 className="text-2xl font-extrabold text-gray-900">{item.title}</h3>
+                    <p className="mt-2 font-semibold text-blue-700">{item.institution}</p>
+                  </div>
+                  <Tag>{item.period}</Tag>
+                </div>
+                <ul className="mt-6 space-y-3">
+                  {item.details.map((detail) => (
+                    <li key={detail} className="flex gap-3 leading-relaxed text-gray-700">
+                      <span className="text-blue-600" aria-hidden>✓</span>
+                      <span>{detail}</span>
                     </li>
                   ))}
                 </ul>
+              </Reveal>
+            ))}
+          </div>
 
-                  <div
-                    id={`edu-tip-${idx}`}
-                    role="tooltip"
-                    className="edu-tooltip absolute left-1/2 top-full z-10 mt-3 w-full min-w-[240px] max-w-[320px] -translate-x-1/2 rounded-2xl bg-white p-4 text-sm text-slate-700 shadow-2xl ring-1 ring-slate-200 md:left-auto md:right-0 md:translate-x-4"
-                  >
-                    <p className="font-semibold text-slate-900">Más detalles</p>
-                    <p className="mt-1">{milestone.institution}</p>
-                    <p className="mt-1 text-xs text-slate-500">Duración: {milestone.duration}</p>
-                    <div className="mt-2 flex flex-wrap gap-2">
-                      <span className="inline-flex items-center gap-1 rounded-full bg-blue-50 px-3 py-1 text-[11px] font-semibold text-blue-700 ring-1 ring-blue-100">
-                        <span aria-hidden>✨</span>Enfoque práctico
-                      </span>
-                      <span className="inline-flex items-center gap-1 rounded-full bg-slate-50 px-3 py-1 text-[11px] font-semibold text-slate-700 ring-1 ring-slate-200">
-                        <span aria-hidden>🧭</span>Trayectoria
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </article>
-          ))}
+          <Reveal delay={0.12} className="rounded-2xl border border-blue-100 bg-blue-50 p-6 sm:p-8 shadow-sm">
+            <p className="text-sm font-bold uppercase tracking-wider text-blue-700">Certificación</p>
+            <h3 className="mt-3 text-2xl font-extrabold text-gray-900">Newbie Security Auditor</h3>
+            <p className="mt-2 font-semibold text-gray-700">Diosdelared.com · 2025</p>
+            <p className="mt-5 leading-relaxed text-gray-600">
+              Fundamentos de auditoría, pentesting básico y hardening.
+            </p>
+            <a
+              href="https://cert.ddlr.org/cert.php?id=55"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="mt-6 inline-flex font-bold text-blue-700 hover:text-blue-900"
+            >
+              Verificar certificado ↗
+            </a>
+          </Reveal>
         </div>
       </Container>
     </section>
   );
-};
-const Certificates = () => (
-  <section
-    id="certs"
-    className="relative overflow-hidden py-20 bg-gray-900 text-white"
-    aria-labelledby="certificates-title"
-  >
-    <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-900/95 to-gray-900" aria-hidden />
-    <CertificatesBackground />
-    <Container className="relative z-10">
-      <SectionTitle id="certificates-title" colorClass="text-white">
-        Certificados
-      </SectionTitle>
-      <div className="mt-12 flex justify-center">
-       <Card
-          transparent
-          className="text-white border border-white/30 shadow-xl max-w-md w-full text-center"
-        >
-          <h3 className="text-xl font-bold text-white">Newbie Security Auditor – Diosdelared.com</h3>
-          <p className="text-white/80">2025</p>
-          <p className="mt-2 text-white/80">
-            Fundamentos de auditoría, pentesting básico y hardening.
-          </p>
-          <a
-            href="https://cert.ddlr.org/cert.php?id=55"
-            target="_blank"
-            rel="noreferrer"
-             className="mt-3 inline-block font-semibold text-blue-200 hover:text-white transition-colors"
-          >
-            Verificación: cert.ddlr.org/cert.php?id=55
-          </a>
-        </Card>
-      </div>
-    </Container>
-  </section>
-);
+}
 
-
-
-
-// === Projects ===
-const Projects = () => {
-  const shouldReduceMotion = useReducedMotion();
-
-  const baseTransition = { duration: 0.7, ease: [0.22, 1, 0.36, 1] };
-
-  const leftVariants = {
-    hidden: { opacity: 0, x: shouldReduceMotion ? 0 : -60 },
-    visible: { opacity: 1, x: 0 },
-  };
-
-  const rightVariants = {
-    hidden: { opacity: 0, x: shouldReduceMotion ? 0 : 60 },
-    visible: { opacity: 1, x: 0 },
-  };
+function ContactSection() {
+  const contacts = [
+    { label: "Correo", value: PROFILE.email, href: `mailto:${PROFILE.email}` },
+    { label: "Teléfono", value: PROFILE.phone, href: "tel:+543816654021" },
+    { label: "GitHub", value: "github.com/Dante2617012022", href: PROFILE.github, external: true },
+  ];
 
   return (
-    <section id="projects" className="py-20 bg-white">
+    <section id="contacto" className="bg-white py-20 sm:py-24">
       <Container>
-        <SectionTitle>Proyectos</SectionTitle>
-
-        <div className="mt-12 grid md:grid-cols-2 gap-6">
-          {/* Card 1 – entra desde la izquierda */}
-          <motion.div
-            variants={leftVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ ...baseTransition, delay: 0.05 }}
-          >
-            <ProjectCard
-              title="Chatbot con IA y Automatización de Pedidos"
-              description="Node.js, Baileys, APIs, JavaScript. Integración con GitHub/Codex IA."
-              linkHref="https://github.com/Dante2617012022"
-              linkLabel="Ver en GitHub"
-            />
-          </motion.div>
-
-          {/* Card 2 – entra desde la derecha */}
-          <motion.div
-            variants={rightVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ ...baseTransition, delay: 0.12 }}
-          >
-            <ProjectCard
-              title="Integración de herramientas de seguridad Open Source"
-              description="Wazuh, Graylog, Snort/Suricata, VirusTotal/YARA, MikroTik. Documentación y prácticas orientadas a PyME."
-              linkHref="https://github.com/Dante2617012022"
-              linkLabel="Ver documentación / repos"
-            />
-          </motion.div>
-        </div>
-      </Container>
-    </section>
-  );
-};
-
-
-// === Contact ===
-const Contact = () => {
-  // Helper para decodificar base64 de forma segura
-  const decodeBase64 = (b64) => {
-    if (typeof window !== "undefined" && typeof window.atob === "function") {
-      return window.atob(b64);
-    }
-    return b64;
-  };
-
-  // Email codificado en base64: dantebalbuenaatar@gmail.com
-  const rawEmail = decodeBase64("ZGFudGViYWxidWVuYWF0YXJAZ21haWwuY29t");
-  const [emailUser, emailDomain] = rawEmail.split("@");
-
-  // Teléfono codificado en base64: +543816654021
-  const phoneHref = decodeBase64("KzU0MzgxNjY1NDAyMQ==");
-  const phoneVisible = "(381) 665-4021";
-
-  return (
-    <section id="contact" className="py-20 bg-white">
-      <Container>
-        <SectionTitle>Contacto</SectionTitle>
-
-        <div className="mt-12 grid md:grid-cols-3 gap-8">
-          {/* Ubicación */}
-          <Card as="article" className="text-center" aria-label="Ubicación">
-            <IconCircle>📍</IconCircle>
-            <h4 className="mt-4 text-xl font-bold">Ubicación</h4>
-            <p className="text-gray-600 mt-2">
-              Tafí Viejo, Tucumán, Argentina
-            </p>
-          </Card>
-
-          {/* Teléfono */}
-          <Card as="article" className="text-center" aria-label="Teléfono">
-            <IconCircle>📞</IconCircle>
-            <h4 className="mt-4 text-xl font-bold">Teléfono</h4>
-            <p className="text-gray-600 mt-2">
-              <a
-                href={`tel:${phoneHref}`}
-                className="text-blue-600 hover:underline"
-              >
-                {phoneVisible}
-              </a>
-            </p>
-          </Card>
-
-          {/* Email */}
-          <Card as="article" className="text-center" aria-label="Correo electrónico">
-            <IconCircle>✉️</IconCircle>
-            <h4 className="mt-4 text-xl font-bold">Email</h4>
-            <p className="text-gray-600 mt-2">
-              <a
-                href={`mailto:${rawEmail}`}
-                className="text-blue-600 hover:underline break-all"
-              >
-                {/* separo el @ para molestar a scrapers tontos */}
-                {emailUser}
-                <span>@</span>
-                {emailDomain}
-              </a>
-            </p>
-          </Card>
-        </div>
-
-        {/* Perfiles */}
-        <div className="mt-8 max-w-md mx-auto">
-          <Card
-            as="article"
-            className="text-center"
-            aria-label="Perfiles profesionales"
-          >
-            <IconCircle>🌐</IconCircle>
-            <h4 className="mt-4 text-xl font-bold">Perfiles</h4>
-            <div className="mt-3 space-y-2">
-              <a
-                href="https://github.com/Dante2617012022"
-                target="_blank"
-                rel="noreferrer noopener"
-                className="inline-flex items-center justify-center text-blue-600 hover:underline break-all"
-              >
-                github.com/Dante2617012022
-              </a>
-              {/* Preparado para LinkedIn u otro perfil */}
-              {/* <a
-                href="https://www.linkedin.com/in/tu-perfil"
-                target="_blank"
-                rel="noreferrer noopener"
-                className="inline-flex items-center justify-center text-blue-600 hover:underline break-all"
-              >
-                linkedin.com/in/tu-perfil
-              </a> */}
+        <div className="rounded-3xl bg-gradient-to-br from-blue-900 to-gray-900 px-6 py-10 text-white shadow-2xl sm:px-10 sm:py-12">
+          <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
+            <div>
+              <p className="text-sm font-bold uppercase tracking-widest text-blue-200">Contacto</p>
+              <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold">Preparado para dar el siguiente paso hacia un SOC</h2>
+              <p className="mt-5 max-w-xl text-lg leading-relaxed text-gray-300">
+                Busco oportunidades donde pueda aportar experiencia operativa, capacidad de documentación y criterio de
+                escalamiento mientras profundizo mi práctica en monitoreo y respuesta de seguridad.
+              </p>
+              <p className="mt-5 font-semibold text-blue-100">{PROFILE.location}</p>
             </div>
-          </Card>
+
+            <div className="grid gap-3">
+              {contacts.map((contact) => (
+                <a
+                  key={contact.label}
+                  href={contact.href}
+                  target={contact.external ? "_blank" : undefined}
+                  rel={contact.external ? "noreferrer noopener" : undefined}
+                  className="rounded-xl border border-white border-opacity-20 bg-white bg-opacity-10 px-5 py-4 hover:bg-opacity-20"
+                >
+                  <span className="block text-xs font-bold uppercase tracking-wider text-blue-200">{contact.label}</span>
+                  <span className="mt-1 block break-all font-semibold text-white">
+                    {contact.value}{contact.external ? " ↗" : ""}
+                  </span>
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
       </Container>
     </section>
   );
-};
+}
 
-
-
-
-// === Scroll To Top ===
-const ScrollTop = () => {
+function ScrollToTop() {
   const [visible, setVisible] = useState(false);
+
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 600);
-    window.addEventListener("scroll", onScroll);
+    const onScroll = () => setVisible(window.scrollY > 700);
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
   return (
     <button
+      type="button"
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      className={`fixed bottom-6 right-6 rounded-xl shadow-lg p-3 bg-blue-600 text-white transition-opacity ${
-        visible ? "opacity-100" : "opacity-0 pointer-events-none"
+      className={`fixed bottom-5 right-5 z-40 h-11 w-11 rounded-full bg-blue-600 font-bold text-white shadow-xl transition-opacity hover:bg-blue-500 ${
+        visible ? "opacity-100" : "pointer-events-none opacity-0"
       }`}
-      aria-label="Scroll to top"
+      aria-label="Volver al inicio"
     >
       ↑
     </button>
   );
-};
+}
 
 export default function PortfolioDante() {
-  useEffect(() => {
-    const anchorHandler = (e) => {
-      const a = e.target.closest('a[href^="#"]');
-      if (!a) return;
-      const id = a.getAttribute('href');
-      if (!id || id === '#') return;
-      const el = document.querySelector(id);
-      if (el) {
-        e.preventDefault();
-        const y = el.getBoundingClientRect().top + window.scrollY - 70;
-        window.scrollTo({ top: y, behavior: 'smooth' });
-      }
-    };
-    document.addEventListener('click', anchorHandler);
-    return () => document.removeEventListener('click', anchorHandler);
-  }, []);
-
   return (
     <>
+      <a href="#contenido" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-white focus:px-4 focus:py-3 focus:font-bold focus:text-blue-800">
+        Saltar al contenido
+      </a>
       <Navbar />
-      <main className="pt-16">
-  <Hero />
-  <About />
-  <Skills />
-  <Experience />
-  <Education />
-  <Projects />
-  <Certificates />
-  <Contact />
-</main>
-
-      <footer className="py-8 text-center text-sm text-gray-500 bg-gray-50">
-        © {new Date().getFullYear()} Dante Balbuena — All rights reserved.
+      <main id="contenido">
+        <Hero />
+        <ProfileSection />
+        <ExperienceSection />
+        <ProjectsSection />
+        <SkillsSection />
+        <EducationSection />
+        <ContactSection />
+      </main>
+      <footer className="border-t border-gray-200 bg-gray-50 py-8 text-center text-sm text-gray-600">
+        © {new Date().getFullYear()} Dante Gabriel Balbuena Atar · Portfolio profesional de ciberseguridad.
       </footer>
-      <ScrollTop />
+      <ScrollToTop />
     </>
   );
 }
-
-
-
-
-
