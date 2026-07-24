@@ -11,6 +11,7 @@ import { startSkillsClickFix } from './skills-click-fix.js'
 import { startExperienceOverhaul } from './experience-section.js'
 import { startEducationOverhaul } from './education-section.js'
 import { startProjectsOverhaul } from './projects-section.js'
+import { startCertificatesOverhaul } from './certificates-section.js'
 import './index.css'
 
 const redirectPath = sessionStorage.getItem('redirect')
@@ -43,3 +44,4 @@ startSkillsClickFix()
 startExperienceOverhaul()
 startEducationOverhaul()
 startProjectsOverhaul()
+startCertificatesOverhaul()
