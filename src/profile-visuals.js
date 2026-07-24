@@ -65,24 +65,10 @@ const applyProfileVisuals = () => {
     "shadow-blue-900/10",
     "backdrop-blur-sm",
   );
+  contentGrid.style.alignItems = "start";
 
   const imageWrapper = image.closest(".relative.z-10");
-  imageWrapper?.classList.add("group", "self-start");
-  if (imageWrapper) imageWrapper.dataset.profileImageWrapper = "true";
-
-  if (!document.querySelector("style[data-profile-position-style]")) {
-    const positionStyle = document.createElement("style");
-    positionStyle.dataset.profilePositionStyle = "true";
-    positionStyle.textContent = `
-      @media (min-width: 768px) {
-        #about [data-profile-image-wrapper="true"] {
-          transform: translateY(-2.5rem);
-        }
-      }
-    `;
-    document.head.append(positionStyle);
-  }
-
+  imageWrapper?.classList.add("group");
   image.classList.add("border", "border-white/70", "ring-1", "ring-blue-200/70");
 
   const imageCaption = document.createElement("div");
