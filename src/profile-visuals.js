@@ -3,14 +3,23 @@ const PROFILE_VISUAL_MARKER = "data-profile-visual-ready";
 const createHighlight = (value, label) => {
   const card = document.createElement("div");
   card.className =
-    "rounded-2xl border border-white/10 bg-white/5 px-4 py-4 text-center shadow-lg backdrop-blur-sm";
+    "rounded-2xl px-4 py-4 text-center shadow-lg backdrop-blur-sm";
+  card.style.background =
+    "linear-gradient(145deg, rgba(30,64,175,.96), rgba(15,23,42,.98))";
+  card.style.border = "1px solid rgba(125,211,252,.55)";
+  card.style.boxShadow =
+    "0 12px 30px rgba(2,132,199,.18), inset 0 1px 0 rgba(255,255,255,.08)";
 
   const valueNode = document.createElement("strong");
-  valueNode.className = "block text-lg font-extrabold text-white";
+  valueNode.className = "block text-xl font-extrabold";
+  valueNode.style.color = "#ffffff";
+  valueNode.style.textShadow = "0 2px 10px rgba(0,0,0,.45)";
   valueNode.textContent = value;
 
   const labelNode = document.createElement("span");
-  labelNode.className = "mt-1 block text-xs font-medium uppercase tracking-wide text-blue-200";
+  labelNode.className = "mt-1 block text-sm font-semibold tracking-wide";
+  labelNode.style.color = "#bae6fd";
+  labelNode.style.textShadow = "0 1px 6px rgba(0,0,0,.5)";
   labelNode.textContent = label;
 
   card.append(valueNode, labelNode);
@@ -58,7 +67,22 @@ const applyProfileVisuals = () => {
   );
 
   const imageWrapper = image.closest(".relative.z-10");
-  imageWrapper?.classList.add("group");
+  imageWrapper?.classList.add("group", "self-start");
+  if (imageWrapper) imageWrapper.dataset.profileImageWrapper = "true";
+
+  if (!document.querySelector("style[data-profile-position-style]")) {
+    const positionStyle = document.createElement("style");
+    positionStyle.dataset.profilePositionStyle = "true";
+    positionStyle.textContent = `
+      @media (min-width: 768px) {
+        #about [data-profile-image-wrapper="true"] {
+          transform: translateY(-2.5rem);
+        }
+      }
+    `;
+    document.head.append(positionStyle);
+  }
+
   image.classList.add("border", "border-white/70", "ring-1", "ring-blue-200/70");
 
   const imageCaption = document.createElement("div");
@@ -106,17 +130,18 @@ const applyProfileVisuals = () => {
 
   button.classList.remove("bg-blue-600");
   button.classList.add(
-    "bg-gradient-to-r",
-    "from-blue-500",
-    "to-cyan-500",
-    "hover:from-blue-400",
-    "hover:to-cyan-400",
+    "font-extrabold",
     "focus:outline-none",
     "focus:ring-2",
     "focus:ring-blue-300",
     "focus:ring-offset-2",
     "focus:ring-offset-slate-950",
   );
+  button.style.color = "#ffffff";
+  button.style.background = "linear-gradient(90deg, #2563eb 0%, #0891b2 100%)";
+  button.style.border = "1px solid rgba(165,243,252,.65)";
+  button.style.boxShadow = "0 12px 30px rgba(8,145,178,.35)";
+  button.style.textShadow = "0 1px 5px rgba(0,0,0,.45)";
 
   section.setAttribute(PROFILE_VISUAL_MARKER, "true");
 };
