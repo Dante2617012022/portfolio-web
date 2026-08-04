@@ -24,9 +24,9 @@ Mi formación y proyectos actuales combinan:
 
 Plataforma privada de pedidos y operación gastronómica con seguridad integrada.
 
-**Controles demostrados:** Keycloak, clientes OIDC separados, Google solo para clientes, TOTP para personal, sesiones BFF, cookies `HttpOnly`, CSRF, RBAC, idempotencia, PostgreSQL, Docker, Caddy, secret scanning, Trivy, SBOM, backups y restauración.
+**Controles demostrados:** separación de identidades y sesiones, OIDC con PKCE, MFA para personal, autorización backend por roles, seguridad de sesiones, validación de reglas de negocio, pruebas automatizadas, análisis estático, detección de secretos, escaneo, SBOM, backups y restauración.
 
-El código permanece privado para proteger información operativa. La evidencia pública se presenta mediante un [caso de estudio sanitizado](https://github.com/Dante2617012022/portfolio-web/blob/main/docs/case-studies/camdis-commerce-security.md).
+El código, la configuración y la topología operativa permanecen privados. La evidencia pública se presenta mediante un [caso de estudio sanitizado](https://github.com/Dante2617012022/portfolio-web/blob/main/docs/case-studies/camdis-commerce-security.md).
 
 ### Chatbot de pedidos con IA y controles de seguridad
 
@@ -74,9 +74,12 @@ Casos académicos sobre aplicaciones vulnerables, CTF y sistemas Linux autorizad
 
 `CodeQL` · `Gitleaks` · `Trivy` · `npm audit` · `pip-audit` · `SBOM` · `CI/CD` · `Backups y rollback`
 
+Las tecnologías se presentan como competencias generales. No describen la topología, versiones, endpoints ni configuración de un entorno productivo.
+
 ## Evidencias
 
 - [Índice técnico del portfolio](https://github.com/Dante2617012022/portfolio-web/blob/main/docs/PORTFOLIO_EVIDENCE_INDEX.md)
+- [Política de divulgación pública](https://github.com/Dante2617012022/portfolio-web/blob/main/docs/PUBLIC_DISCLOSURE_POLICY.md)
 - [Actividades académicas UGR](https://github.com/Dante2617012022/Actividades-UGR-Ciberseguridad)
 - [Caso Camdis Commerce](https://github.com/Dante2617012022/portfolio-web/blob/main/docs/case-studies/camdis-commerce-security.md)
 - [Chatbot seguro](https://github.com/Dante2617012022/chatbot-hamburgueseria-v3)
