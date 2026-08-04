@@ -1,55 +1,144 @@
-# Portfolio profesional — Dante Gabriel Balbuena Atar
+# Portfolio profesional - Dante Gabriel Balbuena Atar
 
-Portfolio web orientado a posiciones de **Analista SOC Jr.**, gestión de incidentes y seguridad vinculada con telecomunicaciones.
+Portfolio web orientado a posiciones junior de **ciberseguridad, SOC, AppSec, DevSecOps y pentesting en entornos autorizados**.
 
-El sitio presenta experiencia operativa, formación en ciberseguridad, proyectos aplicados y canales de contacto con una narrativa profesional coherente y verificable.
+El sitio conecta experiencia operativa en soporte técnico y gestión de incidentes con formación académica y proyectos aplicados de seguridad.
 
 ## Enlaces
 
 - **Sitio publicado:** https://dante2617012022.github.io/portfolio-web/
+- **Índice de evidencias:** [docs/PORTFOLIO_EVIDENCE_INDEX.md](docs/PORTFOLIO_EVIDENCE_INDEX.md)
 - **GitHub:** https://github.com/Dante2617012022
 - **LinkedIn:** https://www.linkedin.com/in/dante-gabriel-balbuena-179963235/
 
-## Objetivo profesional
+## Posicionamiento profesional
 
-Conectar más de cinco años y medio de experiencia en soporte técnico y gestión de incidentes con una transición hacia operaciones defensivas de ciberseguridad.
+**Técnico en Ciberseguridad | Seguridad ofensiva y defensiva junior | AppSec y DevSecOps**
 
-El portfolio destaca competencias transferibles a un SOC:
+El portfolio diferencia claramente:
+
+- experiencia profesional en soporte, telecomunicaciones, SLA y gestión de incidentes;
+- proyectos aplicados de desarrollo y seguridad;
+- pentesting y hacking ético realizados en laboratorios académicos autorizados;
+- conocimientos en evolución que todavía no constituyen experiencia profesional especializada.
+
+## Proyectos principales
+
+### Camdis Commerce Platform
+
+Plataforma privada de pedidos y operación gastronómica con seguridad integrada:
+
+- Keycloak, OIDC y PKCE;
+- clientes y sesiones separados para público y personal;
+- Google limitado a clientes;
+- contraseña y TOTP para personal;
+- RBAC y autorización en la API;
+- sesiones BFF con cookies `HttpOnly`;
+- CSRF, idempotencia y reglas de negocio en backend;
+- PostgreSQL, Docker y Caddy;
+- CI con pruebas, secret scanning, Trivy, auditoría y SBOM;
+- backups, restauración y rollback.
+
+El código permanece privado por confidencialidad. Se publica un [caso de estudio sanitizado](docs/case-studies/camdis-commerce-security.md).
+
+### Chatbot de pedidos con IA y controles de seguridad
+
+Repositorio público que demuestra:
+
+- arquitectura modular en Node.js;
+- parser determinístico y fallback de IA controlado;
+- JSON Schema, umbral de confianza y validación contra catálogo;
+- bloqueo de acciones sensibles delegadas a IA;
+- sanitización, rate limiting y gestión de secretos;
+- HMAC para webhooks;
+- pruebas automatizadas, CI y CodeQL.
+
+[Ver repositorio](https://github.com/Dante2617012022/chatbot-hamburgueseria-v3)
+
+### Hacking Ético y Tratamiento de Vulnerabilidades
+
+Prácticas académicas sobre CTF, aplicaciones vulnerables y sistemas Linux:
+
+- reconocimiento y enumeración;
+- OWASP Top 10;
+- SQLi, XSS, CSRF, IDOR, LFI y command injection;
+- carga insegura y encadenamiento de hallazgos;
+- escalada de privilegios;
+- post-explotación, movimiento lateral y pivoting;
+- reportes técnicos, impacto y remediación.
+
+[Ver resumen profesional](docs/case-studies/offensive-security-labs.md)
+
+## Objetivos laborales compatibles
+
+- Analista SOC Nivel 1.
+- Analista de ciberseguridad junior.
+- Pentester o analista de vulnerabilidades junior.
+- AppSec junior.
+- DevSecOps junior.
+- IAM junior.
+- Soporte e infraestructura con enfoque en seguridad.
+
+No se afirma experiencia profesional como Red Team Operator. Las técnicas asociadas a red teaming fueron practicadas en laboratorios controlados.
+
+## Competencias transferibles desde experiencia profesional
 
 - Registro, clasificación y seguimiento de incidentes.
 - Priorización por impacto y criticidad.
 - Trabajo bajo SLA y métricas operativas.
-- Documentación y escalamiento técnico.
-- Telecomunicaciones, redes y Linux Debian.
-- Formación académica en SIEM, MITRE ATT&CK y respuesta inicial.
+- Diagnóstico, documentación y escalamiento técnico.
+- Redes, telecomunicaciones y Linux Debian.
+- Comunicación con usuarios y equipos técnicos.
 
-## Secciones
+## Tecnologías del portfolio web
 
-- **Inicio:** posicionamiento profesional y accesos rápidos.
-- **Perfil:** transición desde operaciones de telecomunicaciones hacia ciberseguridad.
-- **Habilidades:** separación entre uso práctico, conocimientos aplicados y laboratorios académicos.
-- **Experiencia:** CityTech/Teleperformance y automatización con seguridad aplicada en Camdis.
-- **Educación:** Tecnicatura Universitaria en Ciberseguridad en etapa final.
-- **Proyectos:** chatbot con controles de seguridad y actividades académicas autorizadas.
-- **Certificaciones:** formación complementaria relevante.
-- **Contacto:** canales directos sin formularios ni recolección adicional de datos.
+- React 19.
+- Vite 7.
+- JavaScript.
+- Framer Motion.
+- Tailwind CSS.
+- ESLint.
+- GitHub Actions.
+- GitHub Pages.
 
-## Tecnologías
+## Ejecución local
 
-### Aplicación
+```bash
 
-- React 19
-- Vite 7
-- JavaScript
-- Framer Motion
-- Tailwind CSS
+git clone git@github.com:Dante2617012022/portfolio-web.git
+cd portfolio-web
+npm ci
+npm run dev
+```
 
-### Calidad y publicación
+Validación:
 
-- ESLint
-- GitHub Actions
-- GitHub Pages
-- Flujo de cambios mediante ramas y pull requests
+```bash
+npm run lint
+npm run build
+npm audit --audit-level=high
+```
+
+## Seguridad y privacidad
+
+El portfolio es un sitio estático:
+
+- no implementa autenticación;
+- no almacena información de visitantes;
+- no incorpora base de datos ni backend propio;
+- no solicita credenciales;
+- utiliza enlaces directos de contacto;
+- abre enlaces externos con aislamiento de contexto.
+
+Los casos de estudio sanitizados no publican tokens, cookies, secretos, datos personales, información operativa de Camdis ni payloads ofensivos reutilizables.
+
+## Accesibilidad
+
+- diseño responsive;
+- foco visible para teclado;
+- compatibilidad con `prefers-reduced-motion`;
+- contenido legible sin depender de animaciones;
+- enlaces descriptivos y navegación directa.
 
 ## Arquitectura actual
 
@@ -57,114 +146,30 @@ El portfolio destaca competencias transferibles a un SOC:
 flowchart TD
     U[Usuario] --> P[GitHub Pages]
     P --> R[Aplicación React]
-    R --> B[Componente base del portfolio]
-    R --> S[Módulos por sección]
-    S --> C[Normalización de contenido]
-    S --> I[Interacciones y movimiento]
+    R --> B[Componente base]
+    R --> M[Módulos por sección]
+    M --> C[Contenido profesional]
+    M --> I[Interacciones y accesibilidad]
     C --> V[Vista final]
     I --> V
 ```
 
-La aplicación combina un componente React principal con módulos de mejora progresiva para contenido, interacciones, accesibilidad y comportamiento responsive.
+## Deuda técnica declarada
 
-```text
-src/
-├── PortfolioDante.jsx          interfaz base
-├── main.jsx                    inicialización de la aplicación
-├── content-overrides.js        normalización de contenido heredado
-├── hero-content.js             contenido principal
-├── hero-background.js          fondo interactivo
-├── profile-visuals.js          recursos visuales del perfil
-├── skills-section.js           presentación de habilidades
-├── experience-section.js       experiencia profesional
-├── education-section.js        educación
-├── projects-section.js         proyectos
-├── certificates-section.js     certificaciones
-├── contact-section.js          contacto
-└── card-motion-fix.js          movimiento 3D progresivo
-```
-
-## Ejecución local
-
-### Requisitos
-
-- Node.js compatible con las dependencias del proyecto.
-- npm.
-
-### Instalación
-
-```bash
-git clone https://github.com/Dante2617012022/portfolio-web.git
-cd portfolio-web
-npm install
-```
-
-### Desarrollo
-
-```bash
-npm run dev
-```
-
-### Validación
-
-```bash
-npm run lint
-npm run build
-```
-
-### Vista previa de producción
-
-```bash
-npm run preview
-```
-
-## Despliegue
-
-La compilación utiliza la ruta base `/portfolio-web/` y se publica como sitio estático en GitHub Pages.
-
-Los cambios de contenido y comportamiento se trabajan mediante ramas independientes. Antes de fusionarse, las pull requests validan lint y compilación.
-
-## Accesibilidad y experiencia de uso
-
-- Diseño responsive para escritorio y dispositivos móviles.
-- Estados de foco visibles para navegación con teclado.
-- Compatibilidad con `prefers-reduced-motion`.
-- Enlaces externos abiertos con aislamiento de contexto.
-- Contenido legible sin depender exclusivamente de animaciones.
-- Contacto directo mediante email, teléfono y GitHub.
-
-## Seguridad y privacidad
-
-El portfolio es un sitio estático y no implementa autenticación, base de datos ni formularios propios.
-
-- No almacena información de visitantes.
-- No solicita credenciales ni datos sensibles.
-- No incorpora un backend propio.
-- Los canales de contacto utilizan enlaces directos.
-- Los proyectos se describen diferenciando experiencia profesional, desarrollo aplicado y formación académica.
-
-## Estado técnico y mejoras planificadas
-
-El resultado visual está estabilizado, pero existen oportunidades de refactorización:
-
-- Convertir las mejoras progresivas del DOM en componentes React declarativos.
-- Centralizar todo el contenido profesional en una única fuente de datos.
-- Sustituir dependencias cargadas por CDN por dependencias administradas en el proyecto.
-- Incorporar pruebas de componentes y recorridos críticos.
-- Automatizar controles de accesibilidad, rendimiento y seguridad de dependencias.
+- consolidar mejoras progresivas del DOM en componentes React declarativos;
+- centralizar el contenido en una fuente de datos única;
+- incorporar pruebas de componentes y E2E;
+- automatizar accesibilidad y rendimiento;
+- reducir módulos correctivos heredados;
+- establecer releases y changelog estables.
 
 El detalle se mantiene en [`docs/TECHNICAL_ROADMAP.md`](docs/TECHNICAL_ROADMAP.md).
 
-## Proyecto relacionado
+## Alcance ético
 
-El principal proyecto aplicado del portfolio es:
-
-**Chatbot de pedidos con IA y controles de seguridad**  
-https://github.com/Dante2617012022/chatbot-hamburgueseria-v3
-
-Demuestra automatización operativa, arquitectura modular, validación de entradas, rate limiting, gestión de secretos, verificación HMAC de webhooks y uso restringido de inteligencia artificial.
+Todas las actividades ofensivas mencionadas fueron realizadas en laboratorios propios o autorizados. No se realizaron pruebas sobre sistemas de terceros fuera del alcance académico.
 
 ## Autor
 
 **Dante Gabriel Balbuena Atar**  
-Orientado a Analista SOC Jr., gestión de incidentes, telecomunicaciones y seguridad aplicada.
+Técnico en formación avanzada en Ciberseguridad, con experiencia en soporte técnico, telecomunicaciones, gestión de incidentes y documentación operativa.

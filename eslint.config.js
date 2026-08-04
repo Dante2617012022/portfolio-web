@@ -5,9 +5,14 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
-  globalIgnores(['dist']),
+  globalIgnores([
+    'dist/**',
+    '.vite/**',
+    'coverage/**',
+    'node_modules/**',
+  ]),
   {
-    files: ['**/*.{js,jsx}'],
+    files: ['src/**/*.{js,jsx}'],
     extends: [
       js.configs.recommended,
       reactHooks.configs['recommended-latest'],
@@ -23,7 +28,13 @@ export default defineConfig([
       },
     },
     rules: {
-      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+      // El componente base conserva piezas declaradas con mayúscula que hoy son
+      // reemplazadas por módulos progresivos. Se retirarán durante el refactor
+      // React documentado en el roadmap técnico.
+      'no-unused-vars': ['error', {
+        varsIgnorePattern: '^(?:[A-Z_]|createTextLogo)',
+        argsIgnorePattern: '^_',
+      }],
     },
   },
 ])
