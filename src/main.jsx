@@ -12,6 +12,7 @@ import { startExperienceOverhaul } from './experience-section.js'
 import { startExperienceResponsiveFix } from './experience-responsive-fix.js'
 import { startEducationOverhaul } from './education-section.js'
 import { startProjectsOverhaul } from './projects-section.js'
+import { startSecurityProjectPositioning } from './projects-security-positioning.js'
 import { startCertificatesOverhaul } from './certificates-section.js'
 import { startContactInitFix } from './contact-init-fix.js'
 import { startCardMotionFix } from './card-motion-fix.js'
@@ -49,6 +50,7 @@ startExperienceOverhaul()
 startExperienceResponsiveFix()
 startEducationOverhaul()
 startProjectsOverhaul()
+startSecurityProjectPositioning()
 startCertificatesOverhaul()
 startContactInitFix()
 startCardMotionFix()
