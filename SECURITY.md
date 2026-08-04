@@ -23,7 +23,8 @@ No incluyas tokens, cookies, credenciales, datos personales ni información de t
 - exposición accidental de datos de contacto o documentos;
 - XSS introducido por contenido dinámico;
 - errores de configuración de GitHub Pages o Actions;
-- publicación de evidencia sin sanitizar.
+- publicación de evidencia sin sanitizar;
+- divulgación excesiva de arquitectura, inventario o controles pendientes de sistemas reales.
 
 ## Controles
 
@@ -33,7 +34,21 @@ No incluyas tokens, cookies, credenciales, datos personales ni información de t
 - auditoría de dependencias;
 - Dependabot para npm y GitHub Actions;
 - casos de estudio sanitizados;
-- separación explícita entre experiencia profesional y laboratorios académicos.
+- política de divulgación pública para contenido técnico;
+- separación explícita entre experiencia profesional, proyectos aplicados y laboratorios académicos.
+
+## Divulgación de proyectos reales
+
+El portfolio publica capacidades, patrones y evidencia sanitizada. No debe publicar:
+
+- secretos, credenciales, certificados ni datos personales;
+- IP, dominios internos, hosts, puertos, redes o topología productiva;
+- rutas administrativas, endpoints internos o configuración;
+- nombres de clientes IAM, cookies, audiencias, roles o cuentas;
+- versiones operativas asociadas a un sistema real;
+- hallazgos abiertos o controles ausentes con detalle explotable.
+
+Los nombres de tecnologías pueden figurar como competencias generales, pero no deben convertirse en un mapa de infraestructura. El criterio completo está documentado en [`docs/PUBLIC_DISCLOSURE_POLICY.md`](docs/PUBLIC_DISCLOSURE_POLICY.md).
 
 ## Divulgación de material ofensivo
 
