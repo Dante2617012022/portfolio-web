@@ -8,6 +8,7 @@ El sitio conecta experiencia operativa en soporte técnico y gestión de inciden
 
 - **Sitio publicado:** https://dante2617012022.github.io/portfolio-web/
 - **Índice de evidencias:** [docs/PORTFOLIO_EVIDENCE_INDEX.md](docs/PORTFOLIO_EVIDENCE_INDEX.md)
+- **Política de divulgación pública:** [docs/PUBLIC_DISCLOSURE_POLICY.md](docs/PUBLIC_DISCLOSURE_POLICY.md)
 - **GitHub:** https://github.com/Dante2617012022
 - **LinkedIn:** https://www.linkedin.com/in/dante-gabriel-balbuena-179963235/
 
@@ -28,18 +29,13 @@ El portfolio diferencia claramente:
 
 Plataforma privada de pedidos y operación gastronómica con seguridad integrada:
 
-- Keycloak, OIDC y PKCE;
-- clientes y sesiones separados para público y personal;
-- Google limitado a clientes;
-- contraseña y TOTP para personal;
-- RBAC y autorización en la API;
-- sesiones BFF con cookies `HttpOnly`;
-- CSRF, idempotencia y reglas de negocio en backend;
-- PostgreSQL, Docker y Caddy;
-- CI con pruebas, secret scanning, Trivy, auditoría y SBOM;
-- backups, restauración y rollback.
+- separación de identidades, sesiones y permisos entre clientes y personal;
+- OIDC, PKCE, MFA y autorización por roles;
+- seguridad de sesiones, validación de entradas y reglas de negocio en backend;
+- pruebas automatizadas, análisis estático, detección de secretos, escaneo y SBOM;
+- backups, restauración, actualización y rollback.
 
-El código permanece privado por confidencialidad. Se publica un [caso de estudio sanitizado](docs/case-studies/camdis-commerce-security.md).
+El código, la topología operativa y la configuración permanecen privados. La evidencia pública se presenta mediante un [caso de estudio sanitizado](docs/case-studies/camdis-commerce-security.md) que demuestra capacidades sin publicar inventarios, endpoints ni detalles productivos.
 
 ### Chatbot de pedidos con IA y controles de seguridad
 
@@ -104,7 +100,6 @@ No se afirma experiencia profesional como Red Team Operator. Las técnicas asoci
 ## Ejecución local
 
 ```bash
-
 git clone git@github.com:Dante2617012022/portfolio-web.git
 cd portfolio-web
 npm ci
@@ -130,7 +125,7 @@ El portfolio es un sitio estático:
 - utiliza enlaces directos de contacto;
 - abre enlaces externos con aislamiento de contexto.
 
-Los casos de estudio sanitizados no publican tokens, cookies, secretos, datos personales, información operativa de Camdis ni payloads ofensivos reutilizables.
+Los casos de estudio publican capacidades, decisiones y evidencia sanitizada. No publican secretos, datos personales, inventarios productivos, IP, dominios internos, puertos, rutas administrativas, nombres de clientes IAM, configuración, versiones operativas ni una lista detallada de controles pendientes.
 
 ## Accesibilidad
 
