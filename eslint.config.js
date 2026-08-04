@@ -28,10 +28,11 @@ export default defineConfig([
       },
     },
     rules: {
-      // `createTextLogo` pertenece al componente heredado y se retirará durante
-      // la refactorización declarativa registrada en el roadmap técnico.
+      // El componente base conserva piezas declaradas con mayúscula que hoy son
+      // reemplazadas por módulos progresivos. Se retirarán durante el refactor
+      // React documentado en el roadmap técnico.
       'no-unused-vars': ['error', {
-        varsIgnorePattern: '^(?:[A-Z_]|createTextLogo)$',
+        varsIgnorePattern: '^(?:[A-Z_]|createTextLogo)',
         argsIgnorePattern: '^_',
       }],
     },
