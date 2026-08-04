@@ -1,74 +1,76 @@
 # Dante Gabriel Balbuena Atar
 
-**Técnico en Ciberseguridad | Seguridad ofensiva y defensiva junior | AppSec y DevSecOps**
+**Ciberseguridad | SOC Jr. | AppSec y DevSecOps Jr.**
 
 Tucumán, Argentina · [Portfolio](https://dante2617012022.github.io/portfolio-web/) · [LinkedIn](https://www.linkedin.com/in/dante-gabriel-balbuena-179963235/)
 
 ## Perfil
 
-Experiencia previa en soporte técnico, telecomunicaciones y gestión operativa de incidentes, con foco en diagnóstico, documentación, priorización, SLA y escalamiento.
+Estudiante avanzado de la Tecnicatura Universitaria en Ciberseguridad, con dos exámenes finales pendientes, y experiencia previa en soporte técnico, telecomunicaciones y gestión operativa de incidentes.
 
-Mi formación y proyectos actuales combinan:
+Mi perfil combina diagnóstico, documentación, priorización, SLA y escalamiento con proyectos aplicados de seguridad de aplicaciones, IAM y automatización DevSecOps.
+
+Áreas de interés profesional:
 
 - operaciones defensivas y análisis inicial de incidentes;
-- pentesting web y Linux en laboratorios autorizados;
 - seguridad de aplicaciones y APIs;
 - IAM, OIDC, PKCE, MFA y RBAC;
-- automatización segura e IA controlada;
-- Docker, Linux Debian y prácticas DevSecOps;
-- threat modeling, backups, recuperación y documentación técnica.
+- CI/CD y automatización de controles;
+- Linux Debian, contenedores y seguridad de infraestructura;
+- threat modeling, continuidad y documentación técnica;
+- pentesting únicamente en laboratorios autorizados.
 
 ## Proyectos destacados
 
 ### Camdis Commerce Platform
 
-Plataforma privada de pedidos y operación gastronómica con seguridad integrada.
+Plataforma privada de pedidos y operación gastronómica desarrollada como proyecto aplicado para una PyME.
 
-**Controles demostrados:** separación de identidades y sesiones, OIDC con PKCE, MFA para personal, autorización backend por roles, seguridad de sesiones, validación de reglas de negocio, pruebas automatizadas, análisis estático, detección de secretos, escaneo, SBOM, backups y restauración.
+**Controles demostrados:** separación de identidades y sesiones, OIDC con PKCE, MFA, autorización backend por roles, seguridad de sesiones, validación de reglas de negocio, pruebas automatizadas, análisis estático, detección de secretos, escaneo, SBOM, backups y restauración.
 
 El código, la configuración y la topología operativa permanecen privados. La evidencia pública se presenta mediante un [caso de estudio sanitizado](https://github.com/Dante2617012022/portfolio-web/blob/main/docs/case-studies/camdis-commerce-security.md).
 
 ### Chatbot de pedidos con IA y controles de seguridad
 
-Sistema modular en Node.js para automatizar pedidos por WhatsApp sin delegar decisiones sensibles directamente a la IA.
+Sistema modular en Node.js para automatizar pedidos mediante mensajería sin delegar decisiones sensibles directamente a la IA.
 
-- parser determinístico y fallback restringido;
-- JSON Schema y umbral de confianza;
-- catálogo validado del lado de la aplicación;
+- procesamiento determinístico y fallback restringido;
+- validación estructurada y umbral de confianza;
+- catálogo validado por la aplicación;
 - acciones sensibles bloqueadas;
 - rate limiting y sanitización;
-- HMAC para webhooks;
-- 485 pruebas automatizadas;
-- CI, CodeQL y auditoría de dependencias.
+- autenticación criptográfica de webhooks;
+- pruebas automatizadas;
+- CI, CodeQL, Gitleaks, Trivy, auditoría y SBOM.
 
 [Ver repositorio](https://github.com/Dante2617012022/chatbot-hamburgueseria-v3)
 
 ### Hacking Ético y Tratamiento de Vulnerabilidades
 
-Casos académicos sobre aplicaciones vulnerables, CTF y sistemas Linux autorizados:
+Casos académicos realizados en aplicaciones vulnerables, CTF y sistemas Linux autorizados:
 
 - reconocimiento y enumeración;
-- SQLi, XSS, CSRF, IDOR, LFI y command injection;
-- carga insegura y encadenamiento de vulnerabilidades;
-- escalada de privilegios;
-- post-explotación, movimiento lateral y pivoting;
-- informes con impacto y remediación.
+- análisis de vulnerabilidades web;
+- explotación y post-explotación controlada;
+- escalada de privilegios en laboratorio;
+- informes con impacto y remediación;
+- documentación explícita de alcance ético.
 
-[Ver casos sanitizados](https://github.com/Dante2617012022/Actividades-UGR-Ciberseguridad/tree/main/hacking-etico)
+[Ver actividades académicas](https://github.com/Dante2617012022/Actividades-UGR-Ciberseguridad)
 
 ## Competencias
 
 ### Seguridad
 
-`SOC fundamentals` · `AppSec` · `Pentesting web` · `OWASP` · `IAM` · `MFA` · `RBAC` · `Threat modeling` · `MITRE ATT&CK`
+`SOC fundamentals` · `AppSec` · `OWASP` · `IAM` · `MFA` · `RBAC` · `Threat modeling` · `MITRE ATT&CK`
 
 ### Sistemas e infraestructura
 
-`Linux Debian` · `Docker` · `PostgreSQL` · `Keycloak` · `Caddy` · `Redes` · `Telecomunicaciones`
+`Linux Debian` · `Docker` · `PostgreSQL` · `Keycloak` · `Reverse proxy` · `Redes` · `Telecomunicaciones`
 
 ### Desarrollo y automatización
 
-`JavaScript` · `Node.js` · `Fastify` · `Python` · `Flask` · `FastAPI` · `React` · `GitHub Actions`
+`JavaScript` · `Node.js` · `Fastify` · `Python básico` · `Flask` · `FastAPI` · `React` · `GitHub Actions`
 
 ### DevSecOps
 
@@ -78,14 +80,15 @@ Las tecnologías se presentan como competencias generales. No describen la topol
 
 ## Evidencias
 
-- [Índice técnico del portfolio](https://github.com/Dante2617012022/portfolio-web/blob/main/docs/PORTFOLIO_EVIDENCE_INDEX.md)
+- [Portfolio profesional](https://dante2617012022.github.io/portfolio-web/)
+- [Índice técnico](https://github.com/Dante2617012022/portfolio-web/blob/main/docs/PORTFOLIO_EVIDENCE_INDEX.md)
 - [Política de divulgación pública](https://github.com/Dante2617012022/portfolio-web/blob/main/docs/PUBLIC_DISCLOSURE_POLICY.md)
-- [Actividades académicas UGR](https://github.com/Dante2617012022/Actividades-UGR-Ciberseguridad)
 - [Caso Camdis Commerce](https://github.com/Dante2617012022/portfolio-web/blob/main/docs/case-studies/camdis-commerce-security.md)
 - [Chatbot seguro](https://github.com/Dante2617012022/chatbot-hamburgueseria-v3)
+- [Actividades académicas UGR](https://github.com/Dante2617012022/Actividades-UGR-Ciberseguridad)
 
 ## Objetivo profesional
 
-Busco oportunidades junior en SOC, análisis de ciberseguridad, pentesting, AppSec, DevSecOps, IAM o infraestructura con enfoque en seguridad.
+Busco oportunidades junior en SOC, AppSec, DevSecOps, IAM, soporte de seguridad o infraestructura con enfoque en seguridad.
 
-Las prácticas ofensivas publicadas fueron realizadas únicamente en CTF y laboratorios autorizados. No afirmo experiencia profesional previa como Red Team Operator.
+No afirmo experiencia profesional previa dentro de un SOC, como especialista DevSecOps ni como Red Team Operator. Las capacidades publicadas están respaldadas por experiencia transferible, proyectos propios y laboratorios autorizados.
