@@ -295,7 +295,7 @@ const contactMarkup = `
       <div class="contact-main-content">
         <p class="contact-kicker">Contacto profesional</p>
         <h3 class="contact-name" id="contact-name">Dante Gabriel Balbuena Atar</h3>
-        <p class="contact-role">Técnico en Ciberseguridad · SOC Jr. · AppSec y DevSecOps Jr.</p>
+        <p class="contact-role">Ciberseguridad · SOC Jr. · AppSec y DevSecOps Jr.</p>
         <p class="contact-summary">Busco aportar experiencia operativa, capacidad de diagnóstico y formación universitaria en ciberseguridad a equipos donde pueda analizar incidentes, fortalecer aplicaciones y automatizar controles de seguridad dentro del ciclo de desarrollo.</p>
 
         <div class="contact-actions" aria-label="Canales de contacto">

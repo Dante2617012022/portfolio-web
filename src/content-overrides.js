@@ -26,7 +26,7 @@ const updateHero = () => {
 
   setText(
     hero.querySelector(".space-y-6 > p"),
-    "Técnico en Ciberseguridad | SOC Jr. | AppSec y DevSecOps Jr.",
+    "Ciberseguridad | SOC Jr. | AppSec y DevSecOps Jr.",
   );
 };
 
