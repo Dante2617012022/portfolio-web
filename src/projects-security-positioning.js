@@ -5,6 +5,18 @@ const setText = (root, selector, value) => {
   if (node) node.textContent = value
 }
 
+const setStatusText = (card, value) => {
+  const status = card.querySelector('.project-status')
+  if (!status) return
+
+  const statusIcon = status.querySelector('svg')
+  const nodes = statusIcon
+    ? [statusIcon, document.createTextNode(value)]
+    : [document.createTextNode(value)]
+
+  status.replaceChildren(...nodes)
+}
+
 const setChips = (card, values) => {
   const list = card.querySelector('.project-chip-list')
   if (!list) return
@@ -29,6 +41,7 @@ const updateAnchor = (anchor, href, label) => {
   anchor.href = href
   anchor.target = '_blank'
   anchor.rel = 'noreferrer noopener'
+  anchor.setAttribute('aria-label', label)
 
   const labelNode = anchor.querySelector('span')
   if (labelNode) labelNode.textContent = label
@@ -62,7 +75,7 @@ const applySecurityProjectPositioning = () => {
 
   const [camdis, chatbot, offensiveLabs] = cards
 
-  setText(camdis, '.project-status', 'Proyecto principal · AppSec / IAM / DevSecOps')
+  setStatusText(camdis, 'Proyecto principal · AppSec / IAM / DevSecOps')
   setText(camdis, '.text-xs', 'Piloto técnico · Entorno controlado')
   setText(camdis, '.project-heading', 'Camdis Commerce Platform')
   setText(
@@ -90,6 +103,10 @@ const applySecurityProjectPositioning = () => {
     'Ver índice de evidencias',
   )
 
+  const architecture = camdis.querySelector('.project-architecture')
+  if (architecture) {
+    architecture.setAttribute('aria-label', 'Arquitectura resumida de Camdis Commerce Platform')
+  }
   setText(camdis, '.architecture-label', 'Arquitectura segura resumida')
   const architectureSteps = [...camdis.querySelectorAll('.architecture-step span:last-child')]
   const architectureLabels = [
@@ -104,7 +121,7 @@ const applySecurityProjectPositioning = () => {
     if (architectureLabels[index]) step.textContent = architectureLabels[index]
   })
 
-  setText(chatbot, '.project-status', 'Automatización segura e IA controlada')
+  setStatusText(chatbot, 'Automatización segura e IA controlada')
   setText(chatbot, '.project-heading', 'Chatbot de pedidos con IA y controles de seguridad')
   setText(
     chatbot,
@@ -112,15 +129,17 @@ const applySecurityProjectPositioning = () => {
     'Sistema modular de pedidos por WhatsApp con parser determinístico, fallback de IA restringido, validación contra catálogo, rate limiting, gestión de secretos, HMAC para webhooks y pruebas automatizadas.',
   )
   setChips(chatbot, ['Node.js', 'SQLite', 'IA controlada', 'JSON Schema', 'Rate limiting', 'HMAC', 'CodeQL'])
-  const privateNote = chatbot.querySelector('.project-private-note')
-  if (privateNote) privateNote.textContent = 'Repositorio público con README técnico, modelo de amenazas, política de seguridad y CI.'
+  const privateNoteText = chatbot.querySelector('.project-private-note span')
+  if (privateNoteText) {
+    privateNoteText.textContent = 'Repositorio público con README técnico, modelo de amenazas, política de seguridad y CI.'
+  }
   ensureAction(
     chatbot,
     'https://github.com/Dante2617012022/chatbot-hamburgueseria-v3',
     'Ver código y documentación',
   )
 
-  setText(offensiveLabs, '.project-status', 'Pentesting en laboratorios autorizados')
+  setStatusText(offensiveLabs, 'Pentesting en laboratorios autorizados')
   setText(offensiveLabs, '.project-heading', 'Hacking Ético y Tratamiento de Vulnerabilidades')
   setText(
     offensiveLabs,
