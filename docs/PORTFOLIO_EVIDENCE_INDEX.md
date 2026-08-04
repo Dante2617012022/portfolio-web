@@ -1,20 +1,20 @@
 # Índice de evidencias técnicas
 
-Este documento ayuda a reclutadores y evaluadores a revisar el portfolio por competencia, sin depender únicamente de afirmaciones personales.
+Este documento ayuda a reclutadores y evaluadores a revisar el portfolio por competencia, sin depender únicamente de afirmaciones personales y sin exponer detalles operativos de sistemas reales.
 
 ## Seguridad aplicada y AppSec
 
 ### Camdis Commerce Platform
 
 - [Caso de estudio sanitizado](case-studies/camdis-commerce-security.md)
-- IAM con clientes OIDC separados.
-- PKCE, MFA TOTP y RBAC.
-- Sesiones BFF y cookies `HttpOnly`.
-- CSRF, idempotencia y reglas de negocio en API.
-- CI con secret scanning, escaneo de imágenes y SBOM.
-- Backups, restauración y rollback.
+- separación de identidades y sesiones entre clientes y personal;
+- OIDC, PKCE, MFA y autorización por roles;
+- seguridad de sesiones y autorización backend;
+- validación de entradas, idempotencia y reglas de negocio;
+- CI con pruebas, análisis estático, detección de secretos, escaneo y SBOM;
+- backups, restauración y rollback.
 
-**Estado:** repositorio privado; evidencia pública sanitizada.
+**Estado:** repositorio privado; evidencia pública sanitizada. La topología, configuración, endpoints, versiones y documentación operativa no se publican.
 
 ## Pentesting y seguridad ofensiva
 
@@ -65,14 +65,21 @@ La experiencia se presenta como soporte técnico y gestión operativa, sin afirm
 - Cloud Security e infraestructuras críticas.
 - Hacking ético y tratamiento de vulnerabilidades.
 
+## Política de evidencia pública
+
+La publicación se rige por la [política de divulgación pública](PUBLIC_DISCLOSURE_POLICY.md). Las tecnologías pueden mencionarse como competencias generales, pero no se vinculan con una topología productiva, versiones exactas, endpoints ni configuración real.
+
 ## Evidencias que no se publican
 
 Por seguridad y confidencialidad quedan fuera del portfolio público:
 
-- secretos, tokens y cookies;
-- credenciales y datos personales;
-- configuraciones internas de Camdis;
-- pedidos, precios operativos y usuarios reales;
-- payloads ofensivos reutilizables;
-- flags de desafíos activos;
+- secretos, tokens, cookies, certificados y credenciales;
+- datos personales, pedidos, precios operativos, usuarios y logs reales;
+- IP, dominios internos, hosts, puertos, redes y topología;
+- proveedor, región, tamaño o identificadores del hosting;
+- rutas administrativas, endpoints internos y estructura completa de APIs;
+- nombres de clientes IAM, audiencias, cookies, roles y cuentas;
+- versiones operativas y archivos de configuración;
+- controles pendientes, hallazgos abiertos o riesgos residuales con detalle explotable;
+- payloads ofensivos reutilizables y flags de desafíos activos;
 - documentos académicos con enlaces privados o metadatos no sanitizados.
