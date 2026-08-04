@@ -139,7 +139,7 @@ const applyProfileVisuals = () => {
     "absolute bottom-4 left-1/2 z-20 -translate-x-1/2 rounded-full border border-white/20 px-4 py-2 text-xs font-semibold uppercase tracking-wider shadow-xl backdrop-blur";
   imageCaption.style.background = "rgba(2, 6, 23, .88)";
   imageCaption.style.color = "#dbeafe";
-  imageCaption.textContent = "Operaciones + Ciberseguridad";
+  imageCaption.textContent = "Operaciones + Seguridad aplicada";
   imageWrapper?.append(imageCaption);
 
   textBlock.dataset.profileTextBlock = "true";
@@ -173,7 +173,7 @@ const applyProfileVisuals = () => {
   badge.style.borderColor = "rgba(96, 165, 250, .45)";
   badge.style.background = "rgba(59, 130, 246, .16)";
   badge.style.color = "#bfdbfe";
-  badge.textContent = "Transición profesional hacia SOC";
+  badge.textContent = "SOC · AppSec · DevSecOps junior";
   textBlock.insertBefore(badge, textBlock.firstChild);
 
   const highlights = document.createElement("div");
@@ -182,7 +182,7 @@ const applyProfileVisuals = () => {
   highlights.append(
     createHighlight("Más de 5 años y medio", "Operaciones"),
     createHighlight("SLA", "Priorización y escalamiento"),
-    createHighlight("Debian + redes", "Base técnica"),
+    createHighlight("Debian + CI/CD", "Base técnica y automatización"),
   );
 
   const buttonWrapper = button.closest("div");

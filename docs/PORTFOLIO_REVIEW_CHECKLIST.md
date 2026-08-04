@@ -102,9 +102,12 @@ En DevTools:
 ## 7. Contenido profesional
 
 - [ ] nombre y experiencia coinciden con CV y LinkedIn;
+- [ ] el hero presenta SOC, AppSec y DevSecOps como orientaciones junior, no solamente SOC;
+- [ ] DevSecOps está respaldado por evidencia de CI, análisis estático, detección de secretos, escaneo, SBOM y prácticas de cadena de suministro;
+- [ ] no se afirma experiencia profesional consolidada en DevSecOps ni dentro de un SOC;
 - [ ] Camdis se describe como piloto técnico, no como producto definitivo;
 - [ ] pentesting se limita a laboratorios autorizados;
-- [ ] experiencia SOC se presenta como objetivo y capacidad transferible;
+- [ ] la experiencia en soporte e incidentes se presenta como capacidad transferible hacia SOC;
 - [ ] las limitaciones se agrupan sin publicar una lista accionable de defensas ausentes;
 - [ ] no existen afirmaciones como “100 % seguro”.
 

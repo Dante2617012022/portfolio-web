@@ -26,7 +26,7 @@ const updateHero = () => {
 
   setText(
     hero.querySelector(".space-y-6 > p"),
-    "Analista SOC Jr. | Gestión de Incidentes | Telecomunicaciones",
+    "Técnico en Ciberseguridad | SOC Jr. | AppSec y DevSecOps Jr.",
   );
 };
 
@@ -37,11 +37,11 @@ const updateProfile = () => {
   const paragraphs = section.querySelectorAll(".max-w-prose > p");
   setText(
     paragraphs[0],
-    "Profesional con casi siete años de experiencia en soporte técnico y gestión de incidentes para telecomunicaciones y servicios críticos. Experiencia en diagnóstico remoto, documentación, priorización por criticidad, cumplimiento de SLA y escalamiento a niveles especializados.",
+    "Profesional con más de cinco años y medio de experiencia en soporte técnico y gestión de incidentes para telecomunicaciones y servicios críticos. Experiencia en diagnóstico remoto, documentación, priorización por criticidad, cumplimiento de SLA y escalamiento a niveles especializados.",
   );
   setText(
     paragraphs[1],
-    "Finalizando la Tecnicatura Universitaria en Ciberseguridad, con dos exámenes finales pendientes. Orientado a Analista SOC Tier 1, combinando experiencia operativa, conocimientos de redes y Linux Debian, análisis inicial de eventos y respuesta ante incidentes.",
+    "Finalizando la Tecnicatura Universitaria en Ciberseguridad, con dos exámenes finales pendientes. Orientado a oportunidades junior en SOC, AppSec y DevSecOps, combinando experiencia operativa, redes y Linux Debian con desarrollo seguro, automatización de controles, CI/CD y respuesta inicial ante incidentes.",
   );
 };
 
@@ -80,19 +80,19 @@ const addVerifiedSkillsSummary = (section) => {
 
   const groups = [
     {
-      title: "Operación, redes y desarrollo",
+      title: "Operación, desarrollo y automatización",
       values:
-        "Linux Debian · Windows · VirtualBox · JavaScript · Node.js · Git/GitHub · SQLite · TCP/IP · DNS · DHCP · VPN · ADSL/VDSL · HFC · FTTH · CATV · 4G/5G",
+        "Linux Debian · Windows · VirtualBox · JavaScript · Node.js · Git/GitHub · Docker · GitHub Actions · SQLite · TCP/IP · DNS · DHCP · VPN · ADSL/VDSL · HFC · FTTH · CATV · 4G/5G",
     },
     {
-      title: "Conocimientos aplicados",
+      title: "AppSec y DevSecOps aplicados",
       values:
-        "Nmap · OpenSSL · MITRE ATT&CK · OWASP · ISO 27001 · NIST · APIs REST · MySQL/MariaDB · React · Vite · Tailwind CSS · Python básico",
+        "OWASP · APIs REST · IAM · OIDC · MFA · RBAC · CI/CD · CodeQL · Gitleaks · Trivy · SBOM · auditoría de dependencias · backups y rollback",
     },
     {
-      title: "Laboratorios autorizados",
+      title: "Seguridad técnica y laboratorios",
       values:
-        "Burp Suite · Hydra · VirusTotal · YARA · Metasploit inicial · Wazuh · Graylog · Snort · Suricata",
+        "Nmap · OpenSSL · MITRE ATT&CK · ISO 27001 · NIST · Burp Suite · Hydra · VirusTotal · YARA · Metasploit inicial · Wazuh · Graylog · Snort · Suricata",
     },
   ];
 
@@ -127,7 +127,7 @@ const updateSkills = () => {
 
   const headings = section.querySelectorAll("h3");
   setText(headings[0], "Uso práctico y operativo");
-  setText(headings[1], "Conocimientos aplicados");
+  setText(headings[1], "Desarrollo seguro y DevSecOps");
   setText(headings[2], "Seguridad técnica y laboratorios");
 
   hideUnsupportedSkillLogos(section);
@@ -143,7 +143,7 @@ const updateSkills = () => {
 
   setText(
     note,
-    "Nivel declarado: Nmap de uso práctico en entornos autorizados; Metasploit en nivel inicial; Wazuh, Graylog, Snort y Suricata utilizados en actividades académicas. Se excluyen herramientas sin experiencia real de uso.",
+    "Nivel declarado: prácticas DevSecOps aplicadas en proyectos propios mediante CI, análisis estático, detección de secretos, escaneo y SBOM; Nmap de uso práctico en entornos autorizados; Metasploit en nivel inicial; Wazuh, Graylog, Snort y Suricata utilizados en actividades académicas. No se afirma experiencia profesional consolidada en DevSecOps ni en operaciones SOC.",
   );
 };
 
@@ -157,24 +157,24 @@ const updateExperience = () => {
 
   if (camdisCard) {
     const header = camdisCard.querySelector("header");
-    setText(headings[0], "Automatización y seguridad aplicada – Camdis");
+    setText(headings[0], "Desarrollo seguro y automatización aplicada – Camdis");
     setText(
       header?.querySelector("p"),
       "Proyecto propio · Período: 2025 – Actualidad",
     );
     setText(
       header?.nextElementSibling,
-      "Desarrollo de automatización operativa y planificación de seguridad para una PyME gastronómica.",
+      "Desarrollo de soluciones operativas para una PyME gastronómica, incorporando controles de AppSec, IAM, DevSecOps y continuidad desde el diseño.",
     );
     replaceList(camdisCard.querySelector("ul"), [
-      "Chatbot de pedidos con Node.js, SQLite, WhatsApp, pagos y controles de seguridad.",
-      "Camdis Digital Security Program: activos, accesos, riesgos, backups, continuidad e incidentes; actualmente en desarrollo.",
+      "Plataforma privada de pedidos con separación de identidades, autorización backend, seguridad de sesiones, pruebas automatizadas y controles de cadena de suministro.",
+      "Chatbot de pedidos con Node.js y controles de validación, rate limiting, gestión de secretos, pruebas y CI.",
     ]);
 
     const meta = camdisCard.querySelector("p.mt-5");
     if (meta) {
       meta.innerHTML =
-        '<strong class="font-semibold text-slate-800">Tecnologías y enfoque:</strong> JavaScript · Node.js · SQLite · Git/GitHub · gestión de riesgos y continuidad';
+        '<strong class="font-semibold text-slate-800">Tecnologías y enfoque:</strong> JavaScript · Node.js · Docker · GitHub Actions · AppSec · IAM · DevSecOps · gestión de riesgos y continuidad';
     }
   }
 
@@ -190,7 +190,7 @@ const updateExperience = () => {
     );
     setText(
       header?.nextElementSibling,
-      "Casi siete años de diagnóstico remoto, registro, seguimiento y escalamiento de incidentes, con trabajo bajo métricas y SLA.",
+      "Más de cinco años y medio de diagnóstico remoto, registro, seguimiento y escalamiento de incidentes, con trabajo bajo métricas y SLA.",
     );
     replaceList(cityTechCard.querySelector("ul"), [
       "Soporte sobre ADSL/VDSL, HFC, FTTH, CATV y servicios móviles 4G/5G.",
@@ -229,7 +229,7 @@ const updateEducation = () => {
   setText(achievements[0], "Carrera oficial de 1.600 horas y validez nacional");
   setText(
     achievements[1],
-    "Gestión de incidentes, vulnerabilidades, redes, análisis forense y ciberdefensa",
+    "Gestión de incidentes, vulnerabilidades, redes, desarrollo seguro, análisis forense y ciberdefensa",
   );
   setText(
     achievements[2],
