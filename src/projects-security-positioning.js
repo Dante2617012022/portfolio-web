@@ -76,19 +76,19 @@ const applySecurityProjectPositioning = () => {
   const [camdis, chatbot, offensiveLabs] = cards
 
   setStatusText(camdis, 'Proyecto principal · AppSec / IAM / DevSecOps')
-  setText(camdis, '.text-xs', 'Piloto técnico · Entorno controlado')
+  setText(camdis, '.text-xs', 'Piloto técnico · Evidencia pública sanitizada')
   setText(camdis, '.project-heading', 'Camdis Commerce Platform')
   setText(
     camdis,
     '.project-description',
-    'Plataforma de pedidos y operación gastronómica con seguridad integrada: identidad separada para clientes y personal, MFA, autorización por roles, sesiones BFF, reglas de negocio en API, CI de seguridad, backups y recuperación.',
+    'Plataforma privada de pedidos y operación gastronómica con seguridad integrada: separación de identidades, MFA, autorización backend, reglas de negocio, prácticas DevSecOps y continuidad. La vista pública demuestra capacidades sin representar la topología operativa.',
   )
-  setChips(camdis, ['Fastify', 'PostgreSQL', 'Keycloak', 'OIDC + PKCE', 'MFA TOTP', 'Docker', 'SBOM'])
+  setChips(camdis, ['AppSec', 'IAM', 'OIDC + PKCE', 'MFA', 'RBAC', 'DevSecOps', 'Continuidad'])
   setControlTexts(camdis, [
-    'Clientes OIDC, callbacks, audiencias, cookies y sesiones separados por contexto.',
-    'Google limitado a clientes y rechazo backend de identidad federada administrativa.',
-    'Autorización por rol, CSRF, idempotencia y precios calculados en el servidor.',
-    'CI con pruebas, secret scanning, Trivy, auditoría de dependencias y SBOM.',
+    'Separación de identidades y sesiones entre clientes y personal.',
+    'MFA y autorización backend para funciones internas sensibles.',
+    'Validación de entradas, reglas de negocio, CSRF e idempotencia.',
+    'Pruebas, análisis de código, detección de secretos, escaneo y SBOM.',
   ])
 
   const camdisActions = [...camdis.querySelectorAll('.project-actions a')]
@@ -105,17 +105,20 @@ const applySecurityProjectPositioning = () => {
 
   const architecture = camdis.querySelector('.project-architecture')
   if (architecture) {
-    architecture.setAttribute('aria-label', 'Arquitectura resumida de Camdis Commerce Platform')
+    architecture.setAttribute(
+      'aria-label',
+      'Arquitectura conceptual sanitizada de Camdis Commerce Platform; no representa topología, rutas ni componentes productivos',
+    )
   }
-  setText(camdis, '.architecture-label', 'Arquitectura segura resumida')
+  setText(camdis, '.architecture-label', 'Arquitectura conceptual sanitizada')
   const architectureSteps = [...camdis.querySelectorAll('.architecture-step span:last-child')]
   const architectureLabels = [
-    'Tienda pública y dashboard interno',
-    'Caddy como reverse proxy y capa de entrada',
-    'API Fastify con reglas y autorización',
-    'Keycloak con OIDC, PKCE y MFA',
-    'PostgreSQL para datos, sesiones y auditoría',
-    'CI, escaneo, SBOM, backups y rollback',
+    'Canales de clientes y operación interna',
+    'Capa de entrada y segmentación de servicios',
+    'Servicios de aplicación con autorización backend',
+    'Gestión de identidad y acceso',
+    'Persistencia protegida y trazabilidad',
+    'DevSecOps, continuidad y recuperación',
   ]
   architectureSteps.forEach((step, index) => {
     if (architectureLabels[index]) step.textContent = architectureLabels[index]

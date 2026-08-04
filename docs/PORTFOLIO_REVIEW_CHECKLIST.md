@@ -2,13 +2,13 @@
 
 ## Objetivo
 
-Validar que el reposicionamiento profesional y los nuevos casos de estudio se presenten correctamente antes de fusionar el PR.
+Validar que el posicionamiento profesional y los casos de estudio se presenten correctamente antes de fusionar cambios públicos.
 
 ## Preparación local
 
 ```bash
 git fetch origin --prune
-git switch portfolio/security-positioning-20260804
+git switch <rama-del-pr>
 npm ci
 npm run lint
 npm run build
@@ -28,7 +28,8 @@ La sección Proyectos debe mostrar, en este orden:
 Comprobar:
 
 - [ ] Camdis conserva la tarjeta destacada.
-- [ ] La arquitectura resumida menciona Caddy, Fastify, Keycloak, PostgreSQL y CI.
+- [ ] La arquitectura de Camdis es conceptual y no representa topología operativa.
+- [ ] Los controles se expresan por capacidad: IAM, AppSec, DevSecOps y continuidad.
 - [ ] El chatbot aparece como repositorio público.
 - [ ] Los laboratorios se presentan como académicos y autorizados.
 - [ ] No se afirma experiencia profesional como Red Team Operator.
@@ -39,6 +40,7 @@ Abrir y comprobar:
 
 - [ ] caso sanitizado de Camdis;
 - [ ] índice de evidencias;
+- [ ] política de divulgación pública;
 - [ ] repositorio del chatbot;
 - [ ] casos de Hacking Ético;
 - [ ] portfolio, GitHub y LinkedIn desde README cuando corresponda.
@@ -78,7 +80,7 @@ Sin utilizar mouse:
 - [ ] activar enlaces con `Enter`;
 - [ ] comprobar orden lógico de foco;
 - [ ] verificar que los enlaces tengan nombres comprensibles;
-- [ ] confirmar que la arquitectura de Camdis tenga etiqueta accesible.
+- [ ] confirmar que la arquitectura conceptual tenga etiqueta accesible.
 
 Activar reducción de movimiento en el sistema o DevTools:
 
@@ -103,8 +105,22 @@ En DevTools:
 - [ ] Camdis se describe como piloto técnico, no como producto definitivo;
 - [ ] pentesting se limita a laboratorios autorizados;
 - [ ] experiencia SOC se presenta como objetivo y capacidad transferible;
-- [ ] limitaciones y deuda técnica permanecen visibles;
+- [ ] las limitaciones se agrupan sin publicar una lista accionable de defensas ausentes;
 - [ ] no existen afirmaciones como “100 % seguro”.
+
+## 8. Revisión de divulgación y OSINT
+
+Aplicar [`PUBLIC_DISCLOSURE_POLICY.md`](PUBLIC_DISCLOSURE_POLICY.md) y comprobar:
+
+- [ ] no aparecen IP, dominios internos, hosts, puertos, redes ni topología productiva;
+- [ ] no aparecen rutas administrativas ni endpoints internos;
+- [ ] no aparecen versiones operativas asociadas al sistema real;
+- [ ] no aparecen nombres de clientes IAM, cookies, audiencias, roles o cuentas;
+- [ ] no aparecen proveedores, regiones o identificadores de hosting innecesarios;
+- [ ] no aparecen secretos, certificados, configuración, logs ni datos comerciales;
+- [ ] las tecnologías se presentan como competencias, no como un mapa de infraestructura;
+- [ ] capturas, documentos, enlaces y metadatos están sanitizados;
+- [ ] hallazgos abiertos y controles pendientes detallados permanecen privados.
 
 ## Criterio de cierre
 
@@ -113,6 +129,6 @@ El PR puede fusionarse cuando:
 - CI, CodeQL, lint, build y auditoría están en verde;
 - el artefacto compilado coincide con la revisión local;
 - no existen errores visuales o de consola;
-- los cuatro enlaces principales funcionan;
-- no se expone información sensible;
+- los enlaces principales funcionan;
+- no se expone información sensible ni inteligencia operativa innecesaria;
 - la narrativa profesional es verificable y coherente.

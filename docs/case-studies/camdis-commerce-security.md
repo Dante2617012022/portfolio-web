@@ -2,9 +2,9 @@
 
 ## Resumen
 
-Camdis Commerce Platform es una plataforma de pedidos y operación gastronómica desarrollada como proyecto aplicado para una PyME. El caso combina comercio electrónico, gestión de identidad, autorización por roles, seguridad de APIs, contenedores, continuidad y prácticas DevSecOps.
+Camdis Commerce Platform es una plataforma privada de pedidos y operación gastronómica desarrollada como proyecto aplicado para una PyME. El caso combina comercio electrónico, gestión de identidad, autorización, seguridad de APIs, continuidad y prácticas DevSecOps.
 
-El repositorio principal permanece privado para proteger información operativa, marca, configuración e implementación específica. Este documento presenta únicamente arquitectura y evidencia sanitizada.
+El repositorio principal, la configuración y la arquitectura operativa permanecen privados. Este documento presenta decisiones, controles y evidencia sanitizada para demostrar competencias sin publicar un inventario utilizable contra el sistema.
 
 > Estado documentado: piloto técnico en entorno controlado. No procesa pagos reales y no debe interpretarse como una plataforma productiva final.
 
@@ -13,166 +13,151 @@ El repositorio principal permanece privado para proteger información operativa,
 La solución debía atender dos contextos con riesgos diferentes:
 
 - clientes que consultan el catálogo, crean pedidos y revisan únicamente su actividad;
-- personal interno de recepción, cocina, gestión y administración con acceso a funciones operativas sensibles.
+- personal interno con acceso a funciones operativas sensibles.
 
-Compartir autenticación, sesiones y permisos entre ambos contextos habría aumentado el riesgo de confusión de identidad, escalamiento indebido y exposición del panel interno.
+Compartir identidad, sesiones y permisos entre ambos contextos habría aumentado el riesgo de confusión de identidad, escalamiento indebido y exposición de funciones internas.
 
-## Arquitectura de alto nivel
+## Arquitectura conceptual sanitizada
 
 ```mermaid
 flowchart TD
-    U[Cliente o personal] --> C[Caddy / entrada web]
-    C --> W[Tienda y dashboard]
-    C --> A[API Fastify]
-    C --> K[Keycloak]
-    A --> P[(PostgreSQL)]
-    K --> P
-
-    G[Google Identity] -->|solo clientes| K
+    U[Clientes y personal autorizado] --> E[Capa de entrada]
+    E --> C[Canales de cliente y operación]
+    E --> A[Servicios de aplicación]
+    A --> I[Gestión de identidad y acceso]
+    A --> D[Persistencia y auditoría]
 
     subgraph Controles
-      IAM[OIDC + PKCE]
-      MFA[MFA TOTP interno]
-      RBAC[Autorización por rol]
-      SESS[Sesiones BFF separadas]
-      CI[CI, escaneo y SBOM]
-      BCP[Backup y restauración]
+      IAM[Identidad separada + MFA]
+      AUTH[Autorización backend]
+      APPSEC[Validación y seguridad de sesiones]
+      CICD[Pruebas y controles DevSecOps]
+      BCP[Backup, recuperación y cambios reversibles]
     end
 ```
+
+El diagrama es deliberadamente conceptual. No representa dominios, IP, redes, puertos, proveedores, rutas, nombres internos, versiones ni la topología del entorno productivo.
 
 ## Controles implementados
 
 ### Identidad y acceso
 
-- Keycloak como proveedor central de identidad.
-- Clientes OIDC distintos para clientes y personal interno.
+- Contextos de autenticación separados para clientes y personal.
 - Authorization Code con PKCE.
-- Login local o Google para clientes.
-- Contraseña y TOTP para personal.
-- Google deshabilitado para el contexto administrativo.
-- Validación backend que rechaza sesiones administrativas originadas en un proveedor federado.
-- Callbacks, audiencias, cookies y sesiones diferentes por contexto.
-- Roles internos para recepción, cocina, gestión y administración.
+- MFA obligatorio para funciones internas sensibles.
+- Inicio de sesión federado limitado al contexto permitido.
+- Validación backend del contexto de identidad antes de crear una sesión interna.
+- Autorización por roles aplicada en la API.
 
 ### Sesiones y frontend
 
-- Cookies `HttpOnly` para evitar la lectura directa desde JavaScript.
-- `SameSite` y CSRF para operaciones mutables.
-- Sesiones almacenadas del lado servidor.
-- Tokens y estado sensible cifrados en el backend.
-- Sin persistencia de tokens OIDC en `localStorage`.
-- Cookies `Secure` obligatorias en producción con HTTPS.
+- Cookies `HttpOnly` para evitar lectura directa desde JavaScript.
+- `SameSite`, protección CSRF y cookies `Secure` en entornos HTTPS.
+- Sesiones y estado sensible almacenados del lado servidor.
+- Sin persistencia de tokens de identidad en `localStorage`.
+- Separación entre sesión pública y sesión administrativa.
 
 ### API y reglas de negocio
 
 - Validación de esquemas y rechazo de propiedades inesperadas.
-- CORS restringido, encabezados de seguridad y limitación de solicitudes.
-- Autorización aplicada en la API, no solamente en la interfaz.
-- Precios calculados desde datos del servidor.
-- Idempotencia para reducir pedidos duplicados.
-- Transacciones y trazabilidad de cambios.
-- Restricciones de estados para impedir que cocina avance pedidos sin condiciones previas.
-- Redacción de cookies, tokens y credenciales en logs.
+- Autorización aplicada en backend, no solamente mediante controles visuales.
+- Precios y estados calculados o validados desde datos confiables del servidor.
+- Idempotencia y transacciones para reducir operaciones duplicadas o inconsistentes.
+- Trazabilidad de cambios y redacción de información sensible en logs.
+- Encabezados de seguridad, CORS restringido y limitación de solicitudes.
 
 ### Pagos
 
-La plataforma conserva pagos simulados como modo seguro de desarrollo. El piloto de Mercado Pago se mantiene separado hasta completar pruebas en sandbox y staging HTTPS.
+El proyecto conserva un modo simulado como opción segura de desarrollo. La integración con el proveedor de pagos permanece separada hasta completar pruebas dinámicas en un entorno autorizado.
 
 Controles diseñados:
 
-- preferencia creada desde el backend;
-- importe y moneda validados contra el pedido;
-- webhook firmado mediante HMAC;
-- consulta posterior al proveedor antes de acreditar;
-- validación de referencia externa y metadatos;
+- creación de operaciones desde backend;
+- validación de importe, moneda y referencias contra el pedido;
+- autenticación de notificaciones y confirmación posterior con el proveedor;
 - procesamiento idempotente;
-- separación estricta de sandbox y producción;
-- compuerta independiente para impedir pagos reales accidentales.
+- separación estricta entre prueba y operación real;
+- habilitación productiva bloqueada por defecto.
 
 ### DevSecOps y cadena de suministro
 
-- instalación reproducible mediante `npm ci` y lockfile;
+- instalación reproducible mediante lockfile;
 - pruebas automatizadas;
-- auditoría de dependencias;
-- Gitleaks sobre el historial;
-- Trivy para configuración, secretos e imágenes;
-- acciones de GitHub fijadas por commit;
+- análisis estático de código;
+- detección de secretos;
+- auditoría y escaneo de dependencias, configuración e imágenes;
+- acciones de CI fijadas por commit;
 - generación de SBOM CycloneDX;
 - checksums de artefactos;
-- construcción y escaneo de imágenes;
-- validaciones de scripts, configuración y redacción de diagnósticos.
+- validaciones sobre scripts, paquetes y diagnósticos.
 
 ### Continuidad
 
-- backup de PostgreSQL y configuración de identidad;
-- checksums SHA-256;
+- backups de datos y configuración crítica;
+- checksums para verificar integridad;
 - restauración en entorno aislado;
-- empaquetado de release;
+- empaquetado de releases;
 - procedimientos de actualización y rollback en evolución.
-
-## Separación de identidad
-
-| Contexto | Inicio de sesión | MFA | Google | Sesión |
-|---|---|---:|---:|---|
-| Cliente | Contraseña o Google | No obligatorio | Permitido | Cookie `HttpOnly` de cliente |
-| Personal | Contraseña local | TOTP obligatorio | Rechazado | Cookie `HttpOnly` administrativa |
-
-La ausencia visual del botón Google en el acceso interno no se considera un control suficiente. La API valida el origen de identidad y rechaza el contexto federado para la sesión administrativa.
 
 ## Modelo de amenazas resumido
 
-| Riesgo | Control aplicado | Riesgo residual |
+| Riesgo | Control aplicado | Tratamiento residual |
 |---|---|---|
-| Cliente accede a funciones internas | Clientes OIDC, cookies, audiencias y RBAC separados | Requiere pruebas negativas continuas |
-| Robo de token desde JavaScript | BFF y cookies `HttpOnly` | Un XSS aún podría operar con la sesión activa |
-| Manipulación de precios | Cálculo servidor y validación del catálogo | Requiere pruebas sobre cambios concurrentes |
-| Pedido duplicado | Idempotencia y transacciones | Debe probarse bajo concurrencia real |
-| Webhook falso | HMAC y verificación posterior | Falta validación dinámica completa en staging |
-| Secreto versionado | Variables de entorno, Gitleaks y revisión | Requiere rotación y gestor de secretos productivo |
-| Pérdida de datos | Backups, checksums y restauración aislada | Falta copia externa cifrada y política definitiva |
-| Dependencia vulnerable | Audit, Trivy y SBOM | Requiere proceso de actualización y aceptación de riesgo |
+| Un cliente intenta acceder a funciones internas | Separación de contexto, sesión y autorización backend | Pruebas negativas continuas |
+| Robo o abuso de sesión | Cookies protegidas, CSRF y estado del lado servidor | Defensa en profundidad y monitoreo |
+| Manipulación de precios o estados | Validación y reglas de negocio en backend | Pruebas de concurrencia y regresión |
+| Operaciones duplicadas | Idempotencia y transacciones | Validación bajo carga controlada |
+| Notificación de pago falsa | Autenticación y verificación posterior | Pruebas dinámicas autorizadas |
+| Secreto incorporado al código | Variables externas, detección automática y revisión | Rotación y gobierno continuo |
+| Pérdida o corrupción de datos | Backup, integridad y restauración aislada | Pruebas periódicas de recuperación |
+| Dependencia vulnerable | Auditoría, escaneo y SBOM | Actualización y aceptación formal de riesgo |
 
 ## Evidencia disponible
 
-- 25 pruebas automatizadas aprobadas para el bloque de identidad y autorización.
-- Pruebas de separación entre clientes OIDC.
-- Rechazo de identidad federada en administración.
-- Login de clientes mediante contraseña y Google.
-- Login interno mediante contraseña y TOTP.
-- Servicios API, Keycloak y PostgreSQL con health checks.
-- Cookies de sesión verificadas como `HttpOnly` en laboratorio.
-- CI con auditoría, secret scanning, escaneo de imágenes y SBOM.
-- Documentación de arquitectura, amenazas, rollback y evidencias.
+- Pruebas automatizadas de identidad, sesiones y autorización.
+- Pruebas negativas de separación entre clientes y personal.
+- Validación de MFA en el contexto interno.
+- Servicios con health checks en laboratorio.
+- Cookies de sesión verificadas como `HttpOnly` en entorno controlado.
+- CI con pruebas, análisis estático, detección de secretos, escaneo y SBOM.
+- Documentación privada de arquitectura, amenazas, recuperación y cambios reversibles.
 
-Las capturas públicas deben ocultar valores de cookies, tokens, correos, usuarios, Client IDs, rutas privadas y datos operativos.
+Las capturas y documentos públicos deben ocultar valores de cookies, tokens, correos, usuarios, identificadores, URLs, rutas privadas y datos operativos.
 
 ## Decisiones de diseño
 
 ### Seguridad en backend
 
-Los controles de acceso no dependen de esconder botones o rutas. La API valida sesión, contexto, audiencia y rol.
+Los controles de acceso no dependen de esconder botones o rutas. El backend valida sesión, contexto y permisos antes de ejecutar acciones.
 
-### Redirección OIDC estándar
+### Identidad basada en estándares
 
-Se utiliza redirección completa en lugar de ventanas emergentes para reducir JavaScript especial, mantener el intercambio fuera del frontend y simplificar soporte.
+Se utilizan flujos estándar de identidad y redirección para mantener el intercambio sensible fuera del frontend y reducir lógica especial en el navegador.
 
 ### Pagos bloqueados por defecto
 
-El modo real requiere una combinación explícita de entorno productivo y habilitación independiente. El retorno del navegador no acredita por sí solo un pedido.
+El retorno del navegador no acredita por sí solo un pedido. La habilitación real requiere condiciones explícitas y validaciones independientes.
 
 ### Cambios reversibles
 
 Las funcionalidades sensibles se desarrollan en ramas, con pull requests, CI y respaldo previo a integraciones grandes.
 
-## Limitaciones actuales
+## Estado y limitaciones
 
-- El entorno validado utiliza laboratorio local; producción requiere dominio, HTTPS, Cloudflare y firewall.
-- Mercado Pago todavía necesita pruebas dinámicas completas en sandbox.
-- Faltan monitoreo, alertas y centralización de logs.
-- Los backups requieren copia externa cifrada y política de retención.
-- Falta prueba de carga, concurrencia y DAST sobre staging.
-- La administración de catálogo, delivery y otras funciones comerciales continúa en desarrollo.
-- No se realizó todavía un pentest independiente previo a producción.
+La plataforma continúa en piloto técnico. La preparación productiva se mantiene en evaluación en cuatro áreas generales: validación dinámica, observabilidad, continuidad externa y revisión independiente. El detalle operativo y los controles pendientes permanecen en documentación privada para evitar publicar una lista accionable de defensas ausentes.
+
+## Límite de divulgación pública
+
+Este caso no publica:
+
+- topología productiva, redes, IP, puertos o proveedor de hosting;
+- dominios internos, rutas administrativas o endpoints completos;
+- versiones operativas ni asociaciones exactas entre herramientas y servicios;
+- nombres de clientes IAM, cookies, audiencias, roles o cuentas;
+- configuración, secretos, certificados, logs o datos comerciales;
+- hallazgos abiertos o controles pendientes con detalle explotable.
+
+Las tecnologías concretas pueden aparecer en el perfil como competencias generales, pero no se presentan aquí como un mapa del sistema real.
 
 ## Competencias demostradas
 
@@ -180,11 +165,11 @@ Las funcionalidades sensibles se desarrollan en ramas, con pull requests, CI y r
 - IAM, OIDC, PKCE, MFA y RBAC.
 - Seguridad de sesiones y APIs.
 - Threat modeling y defensa en profundidad.
-- Docker, Caddy, PostgreSQL y Keycloak.
-- DevSecOps, secret scanning, SBOM y seguridad de supply chain.
+- Contenedores, backend web, persistencia relacional y reverse proxy.
+- DevSecOps, análisis estático, detección de secretos, SBOM y seguridad de supply chain.
 - Backups, restauración y rollback.
 - Documentación técnica y comunicación de riesgo residual.
 
 ## Resultado
 
-El proyecto demuestra cómo integrar controles de seguridad desde la arquitectura y el ciclo de desarrollo, en lugar de agregarlos solamente al final. Su valor para el portfolio reside en poder explicar qué riesgo se identificó, qué control se implementó, dónde se aplica, cómo se verificó y qué limitación permanece.
+El proyecto demuestra cómo integrar controles de seguridad desde la arquitectura y el ciclo de desarrollo. Su valor para el portfolio reside en poder explicar qué riesgo se identificó, qué control se implementó, cómo se verificó y qué evidencia puede compartirse sin comprometer la confidencialidad del sistema.
