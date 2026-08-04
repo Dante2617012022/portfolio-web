@@ -44,7 +44,7 @@ const applyHeroContent = () => {
   heading.insertAdjacentElement("beforebegin", greeting);
 
   role.className = "max-w-3xl text-xl sm:text-2xl font-semibold leading-snug text-white";
-  role.textContent = "Técnico en Ciberseguridad | SOC Jr. | AppSec y DevSecOps Jr.";
+  role.textContent = "Ciberseguridad | SOC Jr. | AppSec y DevSecOps Jr.";
   rotatingWords.insertAdjacentElement("afterend", role);
 
   actions.className = "flex flex-wrap items-center gap-3 pt-2 text-sm sm:text-base";
