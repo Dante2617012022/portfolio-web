@@ -1,6 +1,6 @@
 # Portfolio profesional - Dante Gabriel Balbuena Atar
 
-Portfolio web orientado a posiciones junior de **ciberseguridad, SOC, AppSec, DevSecOps y pentesting en entornos autorizados**.
+Portfolio web orientado a posiciones junior de **ciberseguridad, SOC, Security Operations, AppSec y Security Engineering**.
 
 El sitio conecta experiencia operativa en soporte técnico y gestión de incidentes con formación académica y proyectos aplicados de seguridad.
 
@@ -14,7 +14,7 @@ El sitio conecta experiencia operativa en soporte técnico y gestión de inciden
 
 ## Posicionamiento profesional
 
-**Técnico en Ciberseguridad | Seguridad ofensiva y defensiva junior | AppSec y DevSecOps**
+**Ciberseguridad | SOC / Security Operations | AppSec / Security Engineering junior**
 
 El portfolio diferencia claramente:
 
@@ -24,6 +24,20 @@ El portfolio diferencia claramente:
 - conocimientos en evolución que todavía no constituyen experiencia profesional especializada.
 
 ## Proyectos principales
+
+### Camdis Operations Platform — Security Engineering
+
+Proyecto privado de producción e inventario utilizado como caso aplicado de ingeniería de seguridad:
+
+- identidad y autorización server-side con enfoque de mínimo privilegio;
+- mutaciones transaccionales e idempotentes resistentes a retries y concurrencia;
+- evidencia histórica preservada mediante correcciones auditables y append-only;
+- proveniencia e integridad de migraciones con comportamiento fail-closed;
+- autenticación criptográfica de callbacks externos;
+- threat modeling, UAT y change control documentados;
+- paginación determinística y vistas operativas acotadas sin eliminar historial.
+
+El repositorio fuente y la documentación operativa permanecen privados. La evidencia pública se presenta mediante un [caso de estudio sanitizado](docs/case-studies/camdis-operations-security.md).
 
 ### Camdis Commerce Platform
 
@@ -69,8 +83,9 @@ Prácticas académicas sobre CTF, aplicaciones vulnerables y sistemas Linux:
 
 - Analista SOC Nivel 1.
 - Analista de ciberseguridad junior.
+- Security Operations junior.
+- AppSec / Security Engineering junior.
 - Pentester o analista de vulnerabilidades junior.
-- AppSec junior.
 - DevSecOps junior.
 - IAM junior.
 - Soporte e infraestructura con enfoque en seguridad.
