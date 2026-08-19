@@ -2,7 +2,22 @@
 
 Este documento ayuda a reclutadores y evaluadores a revisar el portfolio por competencia, sin depender únicamente de afirmaciones personales y sin exponer detalles operativos de sistemas reales.
 
-## Seguridad aplicada y AppSec
+## Security Engineering, AppSec e integridad operacional
+
+### Camdis Operations Platform
+
+- [Caso de estudio sanitizado](case-studies/camdis-operations-security.md)
+- identidad y autorización server-side con enfoque de mínimo privilegio;
+- políticas de privilegio verificadas semánticamente;
+- mutaciones transaccionales e idempotentes;
+- protección ante retries, duplicación y condiciones de carrera;
+- evidencia histórica preservada mediante correcciones auditables;
+- proveniencia e integridad de migraciones con checksums y comportamiento fail-closed;
+- autenticación criptográfica de callbacks externos;
+- threat modeling, change control y validación UAT;
+- paginación determinística y vistas operativas acotadas sin eliminar historial.
+
+**Estado:** repositorio privado; release candidate validada en UAT. La evidencia pública está sanitizada y no publica topología, configuración, contratos internos, identificadores ni detalles operativos.
 
 ### Camdis Commerce Platform
 
