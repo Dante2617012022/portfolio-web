@@ -73,52 +73,52 @@ const applySecurityProjectPositioning = () => {
   const cards = [...section.querySelectorAll('[data-project-card]')]
   if (cards.length < 3) return
 
-  const [camdis, chatbot, offensiveLabs] = cards
+  const [operations, chatbot, offensiveLabs] = cards
 
-  setStatusText(camdis, 'Proyecto principal · AppSec / IAM / DevSecOps')
-  setText(camdis, '.text-xs', 'Piloto técnico · Evidencia pública sanitizada')
-  setText(camdis, '.project-heading', 'Camdis Commerce Platform')
+  setStatusText(operations, 'Proyecto principal · Security Engineering / AppSec')
+  setText(operations, '.text-xs', 'Release candidate UAT · Evidencia pública sanitizada')
+  setText(operations, '.project-heading', 'Camdis Operations Platform')
   setText(
-    camdis,
+    operations,
     '.project-description',
-    'Plataforma privada de pedidos y operación gastronómica con seguridad integrada: separación de identidades, MFA, autorización backend, reglas de negocio, prácticas DevSecOps y continuidad. La vista pública demuestra capacidades sin representar la topología operativa.',
+    'Sistema operativo privado para producción e inventario diseñado con controles de identidad, autorización backend, idempotencia, evidencia append-only, migraciones auditables, webhooks autenticados y validación fail-closed. La vista pública muestra decisiones y evidencia sanitizada sin revelar la implementación operativa.',
   )
-  setChips(camdis, ['AppSec', 'IAM', 'OIDC + PKCE', 'MFA', 'RBAC', 'DevSecOps', 'Continuidad'])
-  setControlTexts(camdis, [
-    'Separación de identidades y sesiones entre clientes y personal.',
-    'MFA y autorización backend para funciones internas sensibles.',
-    'Validación de entradas, reglas de negocio, CSRF e idempotencia.',
-    'Pruebas, análisis de código, detección de secretos, escaneo y SBOM.',
+  setChips(operations, ['Security Engineering', 'AppSec', 'OIDC', 'RBAC', 'Idempotencia', 'Auditabilidad', 'Threat Modeling'])
+  setControlTexts(operations, [
+    'Autorización server-side y mínimo privilegio con políticas de dominio verificadas.',
+    'Mutaciones transaccionales e idempotentes resistentes a retries y concurrencia.',
+    'Evidencia histórica preservada mediante correcciones auditables y append-only.',
+    'Change control con proveniencia de migraciones, checksums y comportamiento fail-closed.',
   ])
 
-  const camdisActions = [...camdis.querySelectorAll('.project-actions a')]
+  const operationsActions = [...operations.querySelectorAll('.project-actions a')]
   updateAnchor(
-    camdisActions[0],
-    'https://github.com/Dante2617012022/portfolio-web/blob/main/docs/case-studies/camdis-commerce-security.md',
+    operationsActions[0],
+    'https://github.com/Dante2617012022/portfolio-web/blob/main/docs/case-studies/camdis-operations-security.md',
     'Ver caso de estudio sanitizado',
   )
   updateAnchor(
-    camdisActions[1],
+    operationsActions[1],
     'https://github.com/Dante2617012022/portfolio-web/blob/main/docs/PORTFOLIO_EVIDENCE_INDEX.md',
     'Ver índice de evidencias',
   )
 
-  const architecture = camdis.querySelector('.project-architecture')
+  const architecture = operations.querySelector('.project-architecture')
   if (architecture) {
     architecture.setAttribute(
       'aria-label',
-      'Arquitectura conceptual sanitizada de Camdis Commerce Platform; no representa topología, rutas ni componentes productivos',
+      'Arquitectura conceptual sanitizada de Camdis Operations Platform; no representa topología, rutas ni componentes productivos',
     )
   }
-  setText(camdis, '.architecture-label', 'Arquitectura conceptual sanitizada')
-  const architectureSteps = [...camdis.querySelectorAll('.architecture-step span:last-child')]
+  setText(operations, '.architecture-label', 'Arquitectura conceptual sanitizada')
+  const architectureSteps = [...operations.querySelectorAll('.architecture-step span:last-child')]
   const architectureLabels = [
-    'Canales de clientes y operación interna',
-    'Capa de entrada y segmentación de servicios',
-    'Servicios de aplicación con autorización backend',
-    'Gestión de identidad y acceso',
-    'Persistencia protegida y trazabilidad',
-    'DevSecOps, continuidad y recuperación',
+    'Usuario autenticado y cliente web',
+    'Proveedor de identidad y trust boundary',
+    'API con autorización y validación server-side',
+    'Servicios transaccionales e idempotencia',
+    'Persistencia y evidencia auditable',
+    'Change control, continuidad y validación UAT',
   ]
   architectureSteps.forEach((step, index) => {
     if (architectureLabels[index]) step.textContent = architectureLabels[index]
