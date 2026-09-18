@@ -14,7 +14,7 @@ El sitio conecta experiencia operativa en soporte técnico y gestión de inciden
 
 ## Posicionamiento profesional
 
-**Técnico en Ciberseguridad | Seguridad ofensiva y defensiva junior | AppSec y DevSecOps**
+**Técnico Universitario en Ciberseguridad | Seguridad ofensiva y defensiva junior | AppSec y DevSecOps**
 
 El portfolio diferencia claramente:
 
@@ -167,4 +167,4 @@ Todas las actividades ofensivas mencionadas fueron realizadas en laboratorios pr
 ## Autor
 
 **Dante Gabriel Balbuena Atar**  
-Técnico en formación avanzada en Ciberseguridad, con experiencia en soporte técnico, telecomunicaciones, gestión de incidentes y documentación operativa.
+Técnico Universitario en Ciberseguridad, con experiencia en soporte técnico, telecomunicaciones, gestión de incidentes y documentación operativa.

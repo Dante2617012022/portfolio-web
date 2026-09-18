@@ -26,7 +26,7 @@ const updateHero = () => {
 
   setText(
     hero.querySelector(".space-y-6 > p"),
-    "Ciberseguridad | SOC Jr. | AppSec y DevSecOps Jr.",
+    "Técnico Universitario en Ciberseguridad | SOC Jr. | AppSec y DevSecOps Jr.",
   );
 };
 
@@ -41,7 +41,7 @@ const updateProfile = () => {
   );
   setText(
     paragraphs[1],
-    "Finalizando la Tecnicatura Universitaria en Ciberseguridad, con dos exámenes finales pendientes. Orientado a oportunidades junior en SOC, AppSec y DevSecOps, combinando experiencia operativa, redes y Linux Debian con desarrollo seguro, automatización de controles, CI/CD y respuesta inicial ante incidentes.",
+    "Técnico Universitario en Ciberseguridad por la Universidad del Gran Rosario. Orientado a oportunidades junior en SOC, AppSec y DevSecOps, combinando experiencia operativa, redes y Linux Debian con desarrollo seguro, automatización de controles, CI/CD y respuesta inicial ante incidentes.",
   );
 };
 
@@ -222,7 +222,7 @@ const updateEducation = () => {
   setText(institutionParagraphs?.[0], "Universidad del Gran Rosario (UGR)");
   setText(
     institutionParagraphs?.[1],
-    "Finalización próxima · dos exámenes finales pendientes",
+    "Carrera finalizada en 2026 · título de Técnico Universitario en Ciberseguridad",
   );
 
   const achievements = university.querySelectorAll("ul li");

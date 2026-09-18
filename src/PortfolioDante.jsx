@@ -981,7 +981,7 @@ const About = () => {
             className="relative z-10 space-y-6 text-gray-700 leading-relaxed max-w-prose"
           >
             <motion.p variants={item}>
-              Estudiante de Ciberseguridad con experiencia práctica en soporte técnico,
+              Técnico Universitario en Ciberseguridad con experiencia práctica en soporte técnico,
               monitoreo de sistemas y gestión de incidentes.
             </motion.p>
             <motion.p variants={item}>
@@ -1332,12 +1332,12 @@ const Education = () => {
       accent: "from-amber-500/10 via-amber-400/10 to-amber-300/20",
     },
     {
-      title: "Tecnicatura en Ciberseguridad",
-      date: "2024 – en curso",
+      title: "Tecnicatura Universitaria en Ciberseguridad",
+      date: "2024 – 2026",
       institution: "Universidad del Gran Rosario (UGR)",
-      duration: "Dos años y medio (avance 73%)",
+      duration: "Carrera finalizada",
       achievements: [
-        "1º y 2º año completos con promedio ≥ 8",
+        "Carrera completada con promedio académico ≥ 8",
         "Redes, seguridad defensiva, gestión de incidentes",
         "Prácticas con laboratorios y simulaciones",
       ],
