@@ -1,12 +1,12 @@
 # Dante Gabriel Balbuena Atar
 
-**Ciberseguridad | SOC Jr. | AppSec y DevSecOps Jr.**
+**Técnico Universitario en Ciberseguridad | SOC Jr. | AppSec y DevSecOps Jr.**
 
 Tucumán, Argentina · [Portfolio](https://dante2617012022.github.io/portfolio-web/) · [LinkedIn](https://www.linkedin.com/in/dante-gabriel-balbuena-179963235/)
 
 ## Perfil
 
-Estudiante avanzado de la Tecnicatura Universitaria en Ciberseguridad, con dos exámenes finales pendientes, y experiencia previa en soporte técnico, telecomunicaciones y gestión operativa de incidentes.
+Técnico Universitario en Ciberseguridad por la Universidad del Gran Rosario, con experiencia previa en soporte técnico, telecomunicaciones y gestión operativa de incidentes.
 
 Mi perfil combina diagnóstico, documentación, priorización, SLA y escalamiento con proyectos aplicados de seguridad de aplicaciones, IAM y automatización DevSecOps.
 

@@ -295,8 +295,8 @@ const contactMarkup = `
       <div class="contact-main-content">
         <p class="contact-kicker">Contacto profesional</p>
         <h3 class="contact-name" id="contact-name">Dante Gabriel Balbuena Atar</h3>
-        <p class="contact-role">Ciberseguridad · SOC Jr. · AppSec y DevSecOps Jr.</p>
-        <p class="contact-summary">Busco aportar experiencia operativa, capacidad de diagnóstico y formación universitaria en ciberseguridad a equipos donde pueda analizar incidentes, fortalecer aplicaciones y automatizar controles de seguridad dentro del ciclo de desarrollo.</p>
+        <p class="contact-role">Técnico Universitario en Ciberseguridad · SOC Jr. · AppSec y DevSecOps Jr.</p>
+        <p class="contact-summary">Busco aportar experiencia operativa, capacidad de diagnóstico y formación universitaria finalizada en ciberseguridad a equipos donde pueda analizar incidentes, fortalecer aplicaciones y automatizar controles de seguridad dentro del ciclo de desarrollo.</p>
 
         <div class="contact-actions" aria-label="Canales de contacto">
           <a class="contact-action contact-action-primary" href="mailto:${getEmail()}?subject=Oportunidad%20laboral%20en%20ciberseguridad"><span aria-hidden="true">✉</span>Enviar email</a>

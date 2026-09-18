@@ -474,7 +474,7 @@ const createPrimaryEducation = () => {
 
   const status = document.createElement("span");
   status.className = "education-overhaul__status";
-  status.textContent = "Finalización próxima";
+  status.textContent = "Carrera finalizada";
 
   const date = document.createElement("span");
   date.className = "education-overhaul__date";
@@ -493,12 +493,12 @@ const createPrimaryEducation = () => {
   const summary = document.createElement("p");
   summary.className = "education-overhaul__summary";
   summary.textContent =
-    "Formación universitaria orientada al análisis, prevención y respuesta ante incidentes. Actualmente restan dos exámenes finales para completar la carrera.";
+    "Carrera universitaria finalizada en 2026, con formación orientada al análisis, prevención y respuesta ante incidentes de ciberseguridad.";
 
   const metrics = document.createElement("div");
   metrics.className = "education-overhaul__metrics";
   metrics.append(
-    createMetric("2", "Exámenes finales pendientes"),
+    createMetric("2026", "Año de graduación"),
     createMetric("1.600 h", "Carga horaria total"),
     createMetric("≥ 8", "Promedio académico"),
     createMetric("1226/2022", "Resolución ministerial"),
