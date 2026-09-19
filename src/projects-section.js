@@ -329,89 +329,66 @@ const styles = `
   }
 `;
 
+
+const evidenceRoot = 'https://github.com/Dante2617012022/portfolio-web/blob/main/docs';
+const projects = [
+  {
+    name: 'Camdis Operations Platform', status: 'Proyecto principal · Beta interna controlada',
+    description: 'Producción e inventario con seguridad integrada: autorización en el servidor, movimientos trazables y correcciones que conservan la evidencia original. Un proyecto propio conectado con necesidades reales de una PyME.',
+    tags: ['IAM', 'RBAC', 'Integridad', 'Idempotencia', 'Auditoría'],
+    controls: ['Identidad y permisos comprobados en el servidor.', 'Reintentos y concurrencia tratados con transacciones y unicidad.', 'Correcciones explícitas sin borrar el historial confirmado.', 'Pruebas, CI y UAT documentadas para cambios controlados.'],
+    link: evidenceRoot + '/case-studies/camdis-operations-security.md', label: 'Ver caso de seguridad e integridad',
+  },
+  {
+    name: 'Camdis Commerce Platform', status: 'Piloto técnico · Repositorio privado',
+    description: 'Comercio electrónico con separación entre clientes y personal, protección de sesiones y reglas de negocio en backend. El caso público explica decisiones de seguridad y límites del piloto.',
+    tags: ['AppSec', 'OIDC + PKCE', 'MFA', 'Sesiones', 'DevSecOps'],
+    link: evidenceRoot + '/case-studies/camdis-commerce-security.md', label: 'Ver caso de identidad y aplicaciones',
+  },
+  {
+    name: 'Chatbot de pedidos con IA controlada', status: 'Código público · Entorno controlado',
+    description: 'Automatización en Node.js con procesamiento determinístico y fallback de IA restringido. Validación contra catálogo, límites de solicitudes y autenticación de notificaciones externas.',
+    tags: ['Node.js', 'IA controlada', 'Validación', 'HMAC', 'Pruebas'],
+    link: 'https://github.com/Dante2617012022/chatbot-hamburgueseria-v3', label: 'Ver código, pruebas y documentación',
+  },
+  {
+    name: 'Hacking ético y vulnerabilidades', status: 'Práctica académica · Entornos autorizados',
+    description: 'Laboratorios de seguridad web y Linux con reconocimiento, validación de vulnerabilidades, escalada de privilegios e informes de impacto y remediación.',
+    tags: ['Nmap', 'OWASP', 'Linux', 'Pentesting', 'Reportes'],
+    link: 'https://github.com/Dante2617012022/Actividades-UGR-Ciberseguridad/tree/main/hacking-etico', label: 'Ver laboratorios documentados',
+  },
+  {
+    name: 'Camdis Digital Security Program', status: 'Plan Director · Propuesta en desarrollo',
+    description: 'Diagnóstico, registro de riesgos y hoja de ruta de tecnología y ciberseguridad. Incluye propuestas de políticas, continuidad y seguimiento de controles, diferenciando planificación e implementación.',
+    tags: ['GRC', 'Riesgos', 'Activos', 'Continuidad', 'Gobierno'],
+    link: evidenceRoot + '/case-studies/camdis-governance.md', label: 'Ver enfoque de gobierno y riesgos',
+  },
+];
+
+const projectCard = (project, featured = false) => `
+  <article data-project-card class="project-overhaul-card ${featured ? 'project-featured mt-12' : 'project-secondary p-6 md:p-8'} projects-reveal">
+    <span class="project-status ${featured ? 'project-status--featured' : 'project-status--lab'}">${project.status}</span>
+    <h3 class="project-heading">${project.name}</h3>
+    <p class="project-description">${project.description}</p>
+    <div class="project-chip-list">${project.tags.map(tag => `<span class="project-chip">${tag}</span>`).join('')}</div>
+    ${project.controls ? `<div class="project-control-grid">${project.controls.map(control => `<div class="project-control">${ICONS.check}<span>${control}</span></div>`).join('')}</div>` : ''}
+    <div class="project-actions">
+      <a class="project-link ${featured ? 'project-link--primary' : ''}" href="${project.link}" target="_blank" rel="noreferrer noopener"><span>${project.label}</span>${ICONS.external}</a>
+    </div>
+  </article>
+`;
+
 const markup = `
   <div data-projects-shell class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
     <div class="projects-reveal text-center">
-      <span class="projects-kicker">${ICONS.shield} Evidencia técnica</span>
-      <h2 class="projects-title">Proyectos</h2>
-      <p class="projects-intro">Proyectos que conectan automatización, desarrollo seguro, gestión de riesgos y prácticas académicas autorizadas.</p>
-      <div class="mt-4 flex items-center justify-center gap-2" aria-hidden="true">
-        <span class="h-1 w-16 rounded-full bg-blue-600"></span>
-        <span class="h-1 w-5 rounded-full bg-cyan-500"></span>
-      </div>
+      <span class="projects-kicker">${ICONS.shield} Seguridad aplicada</span>
+      <h2 class="projects-title">Proyectos y evidencias</h2>
+      <p class="projects-intro">Problemas reales, decisiones técnicas y controles verificables. Cada caso distingue su estado y el alcance de la evidencia disponible.</p>
     </div>
-
-    <article data-project-card class="project-overhaul-card project-featured projects-reveal mt-12" style="transition-delay:80ms">
-      <div class="project-featured-grid">
-        <div class="relative z-10">
-          <div class="flex flex-wrap items-center justify-between gap-3">
-            <span class="project-status project-status--featured">${ICONS.shield} Proyecto principal</span>
-            <span class="text-xs font-bold text-cyan-100">En evolución · Preproducción</span>
-          </div>
-          <div class="project-icon mt-5">${ICONS.code}</div>
-          <h3 class="project-heading">Chatbot de pedidos con IA y controles de seguridad</h3>
-          <p class="project-description">Sistema modular para automatizar pedidos por WhatsApp sin delegar decisiones sensibles directamente a la IA. Integra persistencia, pagos, validaciones y controles de abuso.</p>
-          <div class="project-chip-list" aria-label="Tecnologías del proyecto">
-            <span class="project-chip">Node.js</span><span class="project-chip">Baileys</span><span class="project-chip">SQLite</span><span class="project-chip">Mercado Pago</span><span class="project-chip">HMAC SHA-256</span><span class="project-chip">Pruebas automatizadas</span>
-          </div>
-          <div class="project-control-grid" aria-label="Controles implementados">
-            <div class="project-control">${ICONS.check}<span>Validación de entorno y gestión de secretos con variables protegidas.</span></div>
-            <div class="project-control">${ICONS.check}<span>Webhooks firmados con HMAC y comparación segura de firmas.</span></div>
-            <div class="project-control">${ICONS.check}<span>Sanitización, límite de longitud y rate limiting persistente.</span></div>
-            <div class="project-control">${ICONS.check}<span>IA con esquema estricto, umbral de confianza y acciones sensibles bloqueadas.</span></div>
-          </div>
-          <div class="project-actions">
-            <a class="project-link project-link--primary" href="https://github.com/Dante2617012022/chatbot-hamburgueseria-v3" target="_blank" rel="noreferrer noopener">${ICONS.github}<span>Ver código y documentación</span>${ICONS.external}</a>
-            <a class="project-link project-link--secondary" href="https://github.com/Dante2617012022/chatbot-hamburgueseria-v3#modelo-de-amenazas-resumido" target="_blank" rel="noreferrer noopener">${ICONS.shield}<span>Ver modelo de amenazas</span></a>
-          </div>
-        </div>
-
-        <div class="project-architecture relative z-10 mt-6 lg:mt-0" aria-label="Arquitectura resumida del chatbot">
-          <p class="architecture-label">Flujo seguro resumido</p>
-          <div class="architecture-flow">
-            <div class="architecture-step"><span>01</span><span>Mensaje del cliente por WhatsApp</span></div>
-            <div class="architecture-step"><span>02</span><span>Sanitización y control de frecuencia</span></div>
-            <div class="architecture-step"><span>03</span><span>Parser determinístico</span></div>
-            <div class="architecture-step"><span>04</span><span>Fallback de IA controlado</span></div>
-            <div class="architecture-step"><span>05</span><span>Validación contra catálogo y reglas</span></div>
-            <div class="architecture-step"><span>06</span><span>Persistencia, pagos y trazabilidad</span></div>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <div class="projects-secondary-grid mt-6">
-      <article data-project-card class="project-overhaul-card project-secondary projects-reveal p-6 md:p-8" style="transition-delay:150ms">
-        <div class="flex flex-wrap items-center justify-between gap-3">
-          <span class="project-status project-status--development">Proyecto aplicado en desarrollo</span>
-          <div class="project-icon">${ICONS.shield}</div>
-        </div>
-        <h3 class="project-heading">Camdis Digital Security Program</h3>
-        <p class="project-description">Plan director de tecnología, infraestructura y ciberseguridad para una PyME gastronómica, construido con foco en gobierno, continuidad y reducción progresiva del riesgo.</p>
-        <div class="project-chip-list">
-          <span class="project-chip">Activos</span><span class="project-chip">IAM</span><span class="project-chip">Riesgos</span><span class="project-chip">Backups</span><span class="project-chip">BCP</span><span class="project-chip">Incidentes</span>
-        </div>
-        <div class="project-private-note">${ICONS.lock}<span>La documentación completa es interna y no se publica por confidencialidad.</span></div>
-      </article>
-
-      <article data-project-card class="project-overhaul-card project-secondary projects-reveal p-6 md:p-8" style="transition-delay:220ms">
-        <div class="flex flex-wrap items-center justify-between gap-3">
-          <span class="project-status project-status--lab">Laboratorios autorizados</span>
-          <div class="project-icon">${ICONS.book}</div>
-        </div>
-        <h3 class="project-heading">Actividades UGR — Ciberseguridad</h3>
-        <p class="project-description">Repositorio académico con documentación y prácticas autorizadas de seguridad, análisis técnico y gestión, presentadas como formación y no como experiencia profesional.</p>
-        <div class="project-chip-list">
-          <span class="project-chip">Nmap</span><span class="project-chip">Burp Suite</span><span class="project-chip">YARA</span><span class="project-chip">VirusTotal</span><span class="project-chip">Metasploit inicial</span><span class="project-chip">Riesgos</span>
-        </div>
-        <div class="project-actions">
-          <a class="project-link" href="https://github.com/Dante2617012022/Actividades-UGR-Ciberseguridad" target="_blank" rel="noreferrer noopener">${ICONS.github}<span>Ver actividades académicas</span>${ICONS.external}</a>
-        </div>
-      </article>
-    </div>
-
-    <div class="projects-reveal text-center" style="transition-delay:260ms">
-      <a class="projects-footer-link" href="https://github.com/Dante2617012022" target="_blank" rel="noreferrer noopener">${ICONS.github}<span>Ver perfil completo en GitHub</span>${ICONS.external}</a>
+    ${projectCard(projects[0], true)}
+    <div class="projects-secondary-grid mt-6" style="display:grid;gap:1.25rem">${projects.slice(1).map(project => projectCard(project)).join('')}</div>
+    <div class="projects-reveal text-center">
+      <a class="projects-footer-link" href="${evidenceRoot}/PORTFOLIO_EVIDENCE_INDEX.md" target="_blank" rel="noreferrer noopener">Recorrer el índice de evidencias ${ICONS.external}</a>
     </div>
   </div>
 `;

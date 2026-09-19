@@ -1,3 +1,4 @@
+import { PROFILE } from './profile-content.js'
 const EMAIL_USER = 'dantebalbuenaatar'
 const EMAIL_DOMAIN = 'gmail.com'
 const PHONE_HREF = '+543816654021'
@@ -286,7 +287,7 @@ const contactMarkup = `
   <div class="contact-heading contact-reveal">
     <h2>Hablemos sobre oportunidades en ciberseguridad</h2>
     <div class="contact-title-line" aria-hidden="true"><span></span><span></span></div>
-    <p class="contact-heading-copy">Estoy interesado en oportunidades junior en SOC, AppSec y DevSecOps, además de soporte de seguridad y gestión de incidentes.</p>
+    <p class="contact-heading-copy">Busco oportunidades junior en SOC e IAM. También considero AppSec, GRC y soporte de seguridad según el alcance del puesto.</p>
   </div>
 
   <div class="contact-layout">
@@ -295,13 +296,14 @@ const contactMarkup = `
       <div class="contact-main-content">
         <p class="contact-kicker">Contacto profesional</p>
         <h3 class="contact-name" id="contact-name">Dante Gabriel Balbuena Atar</h3>
-        <p class="contact-role">Técnico Universitario en Ciberseguridad · SOC Jr. · AppSec y DevSecOps Jr.</p>
+        <p class="contact-role">${PROFILE.role}</p>
         <p class="contact-summary">Busco aportar experiencia operativa, capacidad de diagnóstico y formación universitaria finalizada en ciberseguridad a equipos donde pueda analizar incidentes, fortalecer aplicaciones y automatizar controles de seguridad dentro del ciclo de desarrollo.</p>
 
         <div class="contact-actions" aria-label="Canales de contacto">
           <a class="contact-action contact-action-primary" href="mailto:${getEmail()}?subject=Oportunidad%20laboral%20en%20ciberseguridad"><span aria-hidden="true">✉</span>Enviar email</a>
           <a class="contact-action contact-action-secondary" href="tel:${PHONE_HREF}"><span aria-hidden="true">☎</span>Llamar</a>
           <a class="contact-action contact-action-neutral" href="${GITHUB_URL}" target="_blank" rel="noreferrer noopener"><span aria-hidden="true">↗</span>Ver GitHub</a>
+          <a class="contact-action contact-action-neutral" href="${PROFILE.linkedin}" target="_blank" rel="noreferrer noopener">LinkedIn</a>
         </div>
 
         <div class="contact-copy-row">
@@ -318,12 +320,12 @@ const contactMarkup = `
         <h3 id="contact-details-title">Información profesional</h3>
         <ul class="contact-side-list">
           <li><span class="contact-side-icon" aria-hidden="true">⌖</span><span><strong>Ubicación</strong><br>Tafí Viejo, Tucumán, Argentina</span></li>
-          <li><span class="contact-side-icon" aria-hidden="true">SEC</span><span><strong>Objetivo</strong><br>Roles junior en SOC, AppSec, DevSecOps o infraestructura con enfoque en seguridad</span></li>
+          <li><span class="contact-side-icon" aria-hidden="true">SEC</span><span><strong>Objetivo</strong><br>SOC e IAM junior · Seguridad de aplicaciones y GRC</span></li>
           <li><span class="contact-side-icon" aria-hidden="true">@</span><span><strong>Canal recomendado</strong><br>Contacto y seguimiento por email</span></li>
         </ul>
         <div class="contact-badges" aria-label="Estado profesional">
           <span class="contact-badge">● Abierto a oportunidades junior</span>
-          <span class="contact-badge">SOC · AppSec · DevSecOps</span>
+          <span class="contact-badge">SOC · IAM · Seguridad aplicada</span>
         </div>
       </div>
     </aside>

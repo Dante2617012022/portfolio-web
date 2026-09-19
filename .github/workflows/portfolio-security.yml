@@ -35,8 +35,36 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - name: Prepare downloadable CVs
+        run: |
+          python -m pip install -r scripts/requirements-cv.txt
+          python scripts/build-cvs.py
+
       - name: Build
         run: npm run build
+
+      - name: Install browser verification tools
+        run: |
+          python -m pip install -r scripts/requirements-browser.txt
+          python -m playwright install --with-deps chromium
+
+      - name: Verify recruiter journey
+        run: |
+          npm run preview -- --host 127.0.0.1 --port 4173 > /tmp/portfolio-preview.log 2>&1 &
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:4173/portfolio-web/ > /dev/null; then break; fi
+            sleep 1
+          done
+          python scripts/check-recruiter-journey.py
+
+      - name: Upload browser evidence
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: portfolio-browser-evidence
+          path: test-results
+          if-no-files-found: ignore
+          retention-days: 7
 
       - name: Audit production dependencies
         run: npm audit --omit=dev --audit-level=high

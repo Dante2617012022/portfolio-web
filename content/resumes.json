@@ -1,0 +1,181 @@
+{
+  "SOC_Junior": {
+    "role": "Analista SOC Junior | Operaciones de seguridad",
+    "profile": "Técnico Universitario en Ciberseguridad, graduado en septiembre de 2026, con más de cinco años en soporte de telecomunicaciones. Experiencia en diagnóstico, documentación, seguimiento de procedimientos y escalamiento. Busco una primera posición en SOC nivel 1, con formación en incidentes y práctica documentada en vulnerabilidades.",
+    "sections": [
+      [
+        "EXPERIENCIA LABORAL",
+        [
+          [
+            "Soporte técnico telefónico | CityTech S.A. / Teleperformance | 2019 - 2025",
+            "Diagnóstico remoto de fallas de internet, telefonía y televisión. Registro y seguimiento de casos, aplicación de procedimientos y escalamiento a niveles especializados.",
+            "Soporte sobre xDSL, HFC y FTTH y comunicación de contingencias a usuarios. Uso de herramientas corporativas como Citrix, Salesforce y Oracle/Siebel."
+          ],
+          [
+            "Automatización digital | Camdis | 2025 - Actualidad",
+            "Desarrollo de herramientas con JavaScript y Node.js, automatización de procesos internos y soporte técnico."
+          ]
+        ]
+      ],
+      [
+        "PROYECTOS Y PRÁCTICA",
+        [
+          [
+            "Camdis Operations Platform | Proyecto propio | Beta interna controlada",
+            "Autorización por responsabilidades y validación de reglas de negocio en el servidor. Trazabilidad de operaciones y correcciones que preservan el historial.",
+            "Controles de integridad, idempotencia y concurrencia para prevenir duplicados e inconsistencias de stock. Pruebas de API y base de datos; documentación de decisiones."
+          ],
+          [
+            "Laboratorios UGR | Práctica académica autorizada | 2026",
+            "Reconocimiento y enumeración con Nmap, análisis de vulnerabilidades web y Linux, revisión de registros y documentación de evidencias.",
+            "El Blog de M2 y DDLR Pwneable: inyección SQL, path traversal, explotación controlada y escalada de privilegios mediante revisión de permisos. Informes de impacto y remediación."
+          ]
+        ]
+      ],
+      [
+        "CONOCIMIENTOS",
+        [
+          [
+            "Base técnica",
+            "Linux Debian, Windows, TCP/IP, DNS, Git, Docker, SQL y GitHub Actions. Formación académica en tratamiento de incidentes, accesos y continuidad."
+          ]
+        ]
+      ]
+    ]
+  },
+  "AppSec_IAM_DevSecOps_Junior": {
+    "role": "Ciberseguridad Junior | AppSec, IAM y DevSecOps",
+    "profile": "Técnico Universitario en Ciberseguridad, graduado en septiembre de 2026, con práctica en desarrollo seguro, gestión de identidades y automatización de controles. Desarrollo proyectos propios con autorización, trazabilidad y pruebas de integridad. Aporto más de cinco años de experiencia en soporte técnico.",
+    "sections": [
+      [
+        "PROYECTOS APLICADOS",
+        [
+          [
+            "Camdis Operations Platform | Proyecto propio | Beta interna controlada",
+            "Autorización por responsabilidades y validación de reglas de negocio en el servidor. Trazabilidad de operaciones y correcciones que preservan el historial.",
+            "Controles de integridad, idempotencia y concurrencia para prevenir duplicados e inconsistencias de stock. Pruebas de API y base de datos; documentación de decisiones."
+          ],
+          [
+            "Camdis Commerce Platform | Proyecto propio | Piloto técnico",
+            "Autenticación, autorización y protección de sesiones; validación de entradas y reglas de negocio. Automatización de pruebas y revisiones de seguridad.",
+            "Desarrollo de procedimientos de respaldo y recuperación. El piloto no se presenta como plataforma productiva terminada."
+          ]
+        ]
+      ],
+      [
+        "CONOCIMIENTOS APLICADOS",
+        [
+          [
+            "Seguridad e identidad",
+            "OIDC, PKCE, MFA, RBAC, protección CSRF y validación server-side. Práctica con Keycloak."
+          ],
+          [
+            "DevSecOps y tecnologías",
+            "GitHub Actions, CodeQL, Gitleaks, Trivy, auditoría de dependencias y SBOM. Linux Debian, JavaScript, Node.js, PostgreSQL, Docker y Git."
+          ]
+        ]
+      ],
+      [
+        "EXPERIENCIA LABORAL",
+        [
+          [
+            "Automatización digital | Camdis | 2025 - Actualidad",
+            "Desarrollo de herramientas con JavaScript y Node.js, automatización de procesos internos y soporte técnico."
+          ],
+          [
+            "Soporte técnico telefónico | CityTech S.A. / Teleperformance | 2019 - 2025",
+            "Diagnóstico remoto de fallas de internet, telefonía y televisión. Registro y seguimiento de casos, aplicación de procedimientos y escalamiento a niveles especializados."
+          ]
+        ]
+      ]
+    ]
+  },
+  "GRC_Junior": {
+    "role": "Analista GRC Junior | Gobierno, riesgos y cumplimiento",
+    "profile": "Técnico Universitario en Ciberseguridad, graduado en septiembre de 2026, con formación en riesgos, auditoría, SGSI y continuidad. Autor de un Plan Director de Tecnología y Ciberseguridad para Camdis. Aporto documentación de controles vinculados a necesidades operativas y más de cinco años en soporte de telecomunicaciones.",
+    "sections": [
+      [
+        "PROYECTOS DE GOBIERNO Y SEGURIDAD",
+        [
+          [
+            "Camdis Digital Security Program | Plan Director | 2026",
+            "Elaboración de diagnóstico, inventario de activos, registro de riesgos y hoja de ruta priorizada para una PyME.",
+            "Propuestas de políticas de autenticación, respaldos y recuperación; procedimientos de incidentes, continuidad e indicadores. Documento en desarrollo con implementación gradual prevista."
+          ],
+          [
+            "Camdis Operations Platform | Proyecto propio | Beta interna controlada",
+            "Autorización por responsabilidades y validación de reglas de negocio en el servidor. Trazabilidad de operaciones y correcciones que preservan el historial."
+          ]
+        ]
+      ],
+      [
+        "COMPETENCIAS",
+        [
+          [
+            "Formación y base técnica",
+            "Evaluación de riesgos, auditoría, SGSI, accesos, aspectos legales y normativos y continuidad. Inventarios, políticas, procedimientos y planes de acción. Linux Debian, Git y Docker."
+          ]
+        ]
+      ],
+      [
+        "EXPERIENCIA LABORAL",
+        [
+          [
+            "Automatización digital | Camdis | 2025 - Actualidad",
+            "Desarrollo de herramientas con JavaScript y Node.js, automatización de procesos internos y soporte técnico."
+          ],
+          [
+            "Soporte técnico telefónico | CityTech S.A. / Teleperformance | 2019 - 2025",
+            "Diagnóstico remoto de fallas de internet, telefonía y televisión. Registro y seguimiento de casos, aplicación de procedimientos y escalamiento a niveles especializados."
+          ]
+        ]
+      ]
+    ]
+  },
+  "Hacking_Etico_Junior": {
+    "role": "Pentester Junior | Hacking ético y vulnerabilidades",
+    "profile": "Técnico Universitario en Ciberseguridad, graduado en septiembre de 2026, con laboratorios documentados de reconocimiento, explotación web y escalada de privilegios en entornos autorizados. Desarrollo proyectos propios de software seguro. Busco una primera posición en pentesting o evaluación de vulnerabilidades.",
+    "sections": [
+      [
+        "LABORATORIOS Y EVIDENCIA",
+        [
+          [
+            "Laboratorios UGR | Práctica académica autorizada | 2026",
+            "Reconocimiento y enumeración con Nmap, análisis de vulnerabilidades web y Linux, revisión de registros y documentación de evidencias.",
+            "El Blog de M2 y DDLR Pwneable: inyección SQL, path traversal, explotación controlada y escalada de privilegios mediante revisión de permisos. Informes de impacto y remediación."
+          ],
+          [
+            "Herramientas utilizadas",
+            "Nmap, Metasploit, Netcat, Linux Debian, Docker y VirtualBox. Documentación de alcance, metodología, hallazgos y conclusiones."
+          ]
+        ]
+      ],
+      [
+        "PROYECTOS DE DESARROLLO SEGURO",
+        [
+          [
+            "Camdis Operations Platform | Proyecto propio | Beta interna controlada",
+            "Autorización por responsabilidades y validación de reglas de negocio en el servidor. Trazabilidad de operaciones y correcciones que preservan el historial."
+          ],
+          [
+            "Camdis Commerce Platform | Proyecto propio | Piloto técnico",
+            "Autenticación, autorización y protección de sesiones; validación de entradas y reglas de negocio. Automatización de pruebas y revisiones de seguridad."
+          ]
+        ]
+      ],
+      [
+        "EXPERIENCIA LABORAL",
+        [
+          [
+            "Automatización digital | Camdis | 2025 - Actualidad",
+            "Desarrollo de herramientas con JavaScript y Node.js, automatización de procesos internos y soporte técnico."
+          ],
+          [
+            "Soporte técnico telefónico | CityTech S.A. / Teleperformance | 2019 - 2025",
+            "Diagnóstico remoto de fallas de internet, telefonía y televisión. Registro y seguimiento de casos, aplicación de procedimientos y escalamiento a niveles especializados."
+          ]
+        ]
+      ]
+    ]
+  }
+}

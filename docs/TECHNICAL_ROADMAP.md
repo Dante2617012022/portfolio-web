@@ -15,7 +15,8 @@ Este documento registra mejoras técnicas priorizadas para mantener el portfolio
 - [x] Unificar la antigüedad profesional verificable.
 - [x] Diferenciar experiencia profesional de formación académica.
 - [x] Eliminar herramientas no respaldadas del contenido visible.
-- [x] Mantener CV, LinkedIn y portfolio con fechas y cargos consistentes.
+- [x] Alinear CV, GitHub y portfolio con graduación en septiembre de 2026.
+- [ ] Confirmar actualización del perfil externo de LinkedIn.
 - [x] Diferenciar pentesting académico de experiencia profesional de Red Team.
 - [x] Publicar casos sanitizados de Camdis y laboratorios ofensivos.
 - [x] Crear un índice de evidencias técnicas.
@@ -54,7 +55,7 @@ Convertir cada sección en componentes React declarativos y retirar progresivame
 - [ ] Migrar Tailwind desde CDN a una dependencia administrada por npm.
 - [x] Habilitar actualización automática de dependencias con Dependabot.
 - [x] Agregar auditoría de dependencias en CI.
-- [ ] Incorporar análisis estático de código.
+- [x] Incorporar análisis estático de código con CodeQL.
 - [ ] Revisar política de seguridad de contenido para el sitio estático.
 - [ ] Documentar revisión periódica de enlaces externos.
 - [ ] Confirmar mediante secret scanning que no existan credenciales o tokens versionados.
@@ -73,7 +74,7 @@ Convertir cada sección en componentes React declarativos y retirar progresivame
 
 ### Pruebas de interfaz
 
-- [ ] Agregar recorridos Playwright para escritorio y móvil.
+- [x] Agregar recorridos Playwright de CV, proyectos y contacto para escritorio y móvil.
 - [ ] Verificar navegación por teclado.
 - [ ] Verificar ausencia de desbordamiento horizontal.
 - [ ] Validar enlaces externos y anclas internas.
@@ -98,7 +99,7 @@ Convertir cada sección en componentes React declarativos y retirar progresivame
 - [ ] Incorporar capturas sanitizadas de IAM, pruebas y CI.
 - [ ] Publicar una versión etiquetada estable.
 - [ ] Añadir badges de CI y despliegue cuando los workflows estén validados.
-- [ ] Crear README de perfil en `Dante2617012022/Dante2617012022`.
+- [x] Crear README de perfil en `Dante2617012022/Dante2617012022`.
 
 ## P5 - Gobierno del portfolio
 

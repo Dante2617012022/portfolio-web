@@ -2,7 +2,31 @@
 
 Este documento ayuda a reclutadores y evaluadores a revisar el portfolio por competencia, sin depender únicamente de afirmaciones personales y sin exponer detalles operativos de sistemas reales.
 
+## Recorrido para evaluación técnica
+
+| Interés | Evidencia | Alcance |
+|---|---|---|
+| IAM e integridad | [Camdis Operations](case-studies/camdis-operations-security.md) | Beta interna; validaciones documentadas |
+| AppSec y sesiones | [Camdis Commerce](case-studies/camdis-commerce-security.md) | Piloto técnico |
+| Automatización y código | [Chatbot](https://github.com/Dante2617012022/chatbot-hamburgueseria-v3) | Entorno controlado |
+| GRC | [Plan Director](case-studies/camdis-governance.md) | Propuesta en desarrollo |
+| Pentesting | [Laboratorios](case-studies/offensive-security-labs.md) | Práctica académica autorizada |
+| SOC | Soporte y formación en incidentes, detallados debajo | Experiencia transferible; sin empleo previo en SOC |
+
+[CV por orientación](https://dante2617012022.github.io/portfolio-web/#cv)
+
 ## Seguridad aplicada y AppSec
+
+### Camdis Operations Platform
+
+- [Caso de seguridad e integridad](case-studies/camdis-operations-security.md).
+- Autenticación y autorización server-side.
+- Idempotencia y transacciones ante reintentos.
+- Correcciones auditables sin borrar evidencia confirmada.
+- Cambios de esquema verificables, CI y UAT documentadas.
+
+**Estado:** beta interna controlada con desarrollo posterior en revisión. Evidencia documentada, no auditoría independiente.
+
 
 ### Camdis Commerce Platform
 

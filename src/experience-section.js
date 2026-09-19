@@ -1,3 +1,4 @@
+import { PROFILE } from './profile-content.js';
 const EXPERIENCE_MARKER = "data-experience-overhaul-ready";
 
 const EXPERIENCES = [
@@ -8,7 +9,7 @@ const EXPERIENCES = [
     title: "Soporte técnico y gestión de incidentes",
     company: "CityTech S.A. / Teleperformance",
     summary:
-      "Casi siete años de experiencia atendiendo, diagnosticando y gestionando incidentes técnicos para servicios de telecomunicaciones y energía, con foco en SLA, documentación, criticidad y escalamiento.",
+      PROFILE.summary,
     highlights: [
       "Diagnóstico remoto de incidentes en ADSL/VDSL, HFC, FTTH, CATV, telefonía móvil y servicios digitales.",
       "Registro, clasificación, seguimiento y documentación de casos en entornos de alta demanda.",
@@ -35,9 +36,9 @@ const EXPERIENCES = [
     summary:
       "Diseño y desarrollo de soluciones para digitalizar operaciones, automatizar la atención y mejorar progresivamente la seguridad tecnológica de una PyME gastronómica.",
     highlights: [
-      "Desarrollo de un chatbot modular para WhatsApp con Node.js, SQLite e integración con Mercado Pago.",
-      "Aplicación de validación de entorno, protección HMAC de webhooks, sanitización y límites de solicitudes.",
-      "Restricción de acciones sensibles y validación de respuestas generadas mediante inteligencia artificial.",
+      "Desarrollo de Camdis Operations para producción e inventario, con autorización y trazabilidad del lado del servidor.",
+      "Controles de integridad, idempotencia y correcciones que preservan el historial operativo.",
+      "Pilotos de comercio electrónico y chatbot, con pruebas automatizadas y validación de entradas.",
       "Diseño y documentación del Camdis Digital Security Program, actualmente en desarrollo.",
     ],
     tags: [
@@ -622,7 +623,7 @@ const applyExperienceOverhaul = () => {
 
   const summary = createElement("div", "experience-overhaul__summary");
   [
-    ["Casi 7 años", "Operaciones y soporte técnico"],
+    [PROFILE.tenure, "Operaciones y soporte técnico"],
     ["Incidentes + SLA", "Priorización y escalamiento"],
     ["Telecom + automatización", "Base diferencial para SOC"],
   ].forEach(([strongText, spanText]) => {

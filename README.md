@@ -14,7 +14,9 @@ El sitio conecta experiencia operativa en soporte técnico y gestión de inciden
 
 ## Posicionamiento profesional
 
-**Técnico Universitario en Ciberseguridad | Seguridad ofensiva y defensiva junior | AppSec y DevSecOps**
+**Técnico Universitario en Ciberseguridad | SOC e IAM junior | Seguridad aplicada**
+
+Graduado en septiembre de 2026. [CV por orientación](https://dante2617012022.github.io/portfolio-web/#cv).
 
 El portfolio diferencia claramente:
 
@@ -24,6 +26,12 @@ El portfolio diferencia claramente:
 - conocimientos en evolución que todavía no constituyen experiencia profesional especializada.
 
 ## Proyectos principales
+
+### Camdis Operations Platform
+
+Proyecto principal de producción e inventario con autorización backend, idempotencia, integridad transaccional y correcciones que preservan el historial. Beta interna controlada; cambios posteriores sujetos a CI y UAT.
+
+[Ver caso de seguridad e integridad](docs/case-studies/camdis-operations-security.md).
 
 ### Camdis Commerce Platform
 
@@ -65,6 +73,12 @@ Prácticas académicas sobre CTF, aplicaciones vulnerables y sistemas Linux:
 
 [Ver resumen profesional](docs/case-studies/offensive-security-labs.md)
 
+### Camdis Digital Security Program
+
+Plan Director con diagnóstico, riesgos, políticas propuestas y continuidad. Planificación en desarrollo, no implementación completa ni certificación.
+
+[Ver caso de gobierno y riesgos](docs/case-studies/camdis-governance.md).
+
 ## Objetivos laborales compatibles
 
 - Analista SOC Nivel 1.
@@ -103,6 +117,8 @@ No se afirma experiencia profesional como Red Team Operator. Las técnicas asoci
 git clone git@github.com:Dante2617012022/portfolio-web.git
 cd portfolio-web
 npm ci
+python -m pip install -r scripts/requirements-cv.txt
+python scripts/build-cvs.py
 npm run dev
 ```
 
@@ -111,7 +127,7 @@ Validación:
 ```bash
 npm run lint
 npm run build
-npm audit --audit-level=high
+npm audit --omit=dev --audit-level=high
 ```
 
 ## Seguridad y privacidad
@@ -119,10 +135,11 @@ npm audit --audit-level=high
 El portfolio es un sitio estático:
 
 - no implementa autenticación;
-- no almacena información de visitantes;
+- no incorpora almacenamiento propio de información de visitantes;
 - no incorpora base de datos ni backend propio;
 - no solicita credenciales;
 - utiliza enlaces directos de contacto;
+- GitHub Pages y los proveedores de recursos externos pueden procesar datos técnicos de conexión;
 - abre enlaces externos con aislamiento de contexto.
 
 Los casos de estudio publican capacidades, decisiones y evidencia sanitizada. No publican secretos, datos personales, inventarios productivos, IP, dominios internos, puertos, rutas administrativas, nombres de clientes IAM, configuración, versiones operativas ni una lista detallada de controles pendientes.
@@ -168,3 +185,9 @@ Todas las actividades ofensivas mencionadas fueron realizadas en laboratorios pr
 
 **Dante Gabriel Balbuena Atar**  
 Técnico Universitario en Ciberseguridad, con experiencia en soporte técnico, telecomunicaciones, gestión de incidentes y documentación operativa.
+
+## CV y verificación de publicación
+
+Los CV públicos se generan desde `content/resumes.json` mediante `scripts/build-cvs.py`. Los workflows de validación y despliegue incluyen su generación. Para vista local, ejecutá la preparación de PDF antes de iniciar Vite.
+
+El PR verifica descargas PDF, enlaces, ausencia de errores JavaScript y desbordamientos en Chromium a 1440, 390 y 320 px. Las capturas se conservan como artefacto temporal de Actions para UAT.

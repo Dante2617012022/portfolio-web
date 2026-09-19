@@ -1,3 +1,4 @@
+import { PROFILE } from './profile-content.js';
 const HERO_CONTENT_MARKER = "data-hero-content-ready";
 
 const createHeroAction = ({ href, label, primary = false, external = false }) => {
@@ -44,12 +45,13 @@ const applyHeroContent = () => {
   heading.insertAdjacentElement("beforebegin", greeting);
 
   role.className = "max-w-3xl text-xl sm:text-2xl font-semibold leading-snug text-white";
-  role.textContent = "Técnico Universitario en Ciberseguridad | SOC Jr. | AppSec y DevSecOps Jr.";
+  role.textContent = PROFILE.role;
   rotatingWords.insertAdjacentElement("afterend", role);
 
   actions.className = "flex flex-wrap items-center gap-3 pt-2 text-sm sm:text-base";
   actions.replaceChildren(
-    createHeroAction({ href: "#projects", label: "Ver proyectos", primary: true }),
+    createHeroAction({ href: "#cv", label: "Descargar CV", primary: true }),
+    createHeroAction({ href: "#projects", label: "Ver proyectos" }),
     createHeroAction({
       href: "https://github.com/Dante2617012022",
       label: "GitHub",
