@@ -49,8 +49,8 @@ Abrir y comprobar:
 
 Los enlaces externos deben abrir una pestaña nueva sin conservar acceso al contexto de la página original.
 
-- [ ] las cuatro descargas de CV abren PDFs legibles y actualizados;
-- [ ] el botón de Inicio y el enlace `#cv` permiten llegar a los currículums.
+- [ ] no hay enlaces de descarga ni PDF de CV en el sitio publicado;
+- [ ] el botón de Inicio y el enlace `#cv` permiten solicitar el CV mediante contacto profesional.
 
 ## 3. Escritorio
 

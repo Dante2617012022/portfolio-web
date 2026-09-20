@@ -15,14 +15,11 @@ with sync_playwright() as p:
         page.goto("http://127.0.0.1:4173/portfolio-web/", wait_until="networkidle")
         expect(page.get_by_role("heading", name="Camdis Operations Platform", exact=True)).to_be_visible()
         expect(page.locator("#about")).to_contain_text("Graduado en septiembre de 2026")
-        page.locator("#home").get_by_role("link", name="Descargar CV", exact=True).click()
-        expect(page.get_by_role("heading", name="Currículum para cada oportunidad")).to_be_in_viewport()
-        for name in ("SOC Junior", "AppSec · IAM · DevSecOps", "GRC Junior", "Hacking Ético Junior"):
-            link = page.locator("#cv").get_by_role("link", name=f"Descargar CV {name} (PDF)", exact=True)
-            expect(link).to_be_visible()
-            response = page.request.get("http://127.0.0.1:4173" + link.get_attribute("href"))
-            assert response.status == 200
-            assert response.body().startswith(b"%PDF-")
+        page.locator("#home").get_by_role("link", name="Solicitar CV", exact=True).click()
+        expect(page.get_by_role("heading", name="Conversemos sobre tu oportunidad")).to_be_in_viewport()
+        expect(page.locator("#cv").get_by_role("link", name="Solicitar CV por LinkedIn")).to_have_attribute("href", "https://www.linkedin.com/in/dante-gabriel-balbuena-179963235/")
+        assert page.locator('a[download], a[href*="/cv/"], a[href$=".pdf"]').count() == 0
+        assert not list(Path("dist").rglob("CV_*.pdf")), "Public CV found in build"
         expect(page.locator("#contact").get_by_role("link", name="LinkedIn", exact=True)).to_have_attribute("href", "https://www.linkedin.com/in/dante-gabriel-balbuena-179963235/")
         invalid = page.evaluate("""() => [...document.querySelectorAll('a')].filter(a => {
             const h = a.getAttribute('href') || '';
@@ -34,7 +31,7 @@ with sync_playwright() as p:
         page.locator("#projects").screenshot(path=str(OUT / f"projects-{width}.png"))
         page.locator("#cv").screenshot(path=str(OUT / f"cv-{width}.png"))
         page.screenshot(path=str(OUT / f"portfolio-{width}.png"), full_page=True)
-        results.append({"width": width, "cv_downloads": "PASS", "links": "PASS", "overflow": False, "page_errors": errors})
+        results.append({"width": width, "cv_privacy": "PASS", "links": "PASS", "overflow": False, "page_errors": errors})
         page.close()
     browser.close()
     (OUT / "summary.json").write_text(json.dumps(results, indent=2))

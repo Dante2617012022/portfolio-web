@@ -13,7 +13,7 @@ Este documento ayuda a reclutadores y evaluadores a revisar el portfolio por com
 | Pentesting | [Laboratorios](case-studies/offensive-security-labs.md) | Práctica académica autorizada |
 | SOC | Soporte y formación en incidentes, detallados debajo | Experiencia transferible; sin empleo previo en SOC |
 
-[CV por orientación](https://dante2617012022.github.io/portfolio-web/#cv)
+[Solicitar CV](https://dante2617012022.github.io/portfolio-web/#cv)
 
 ## Seguridad aplicada y AppSec
 
@@ -107,3 +107,4 @@ Por seguridad y confidencialidad quedan fuera del portfolio público:
 - controles pendientes, hallazgos abiertos o riesgos residuales con detalle explotable;
 - payloads ofensivos reutilizables y flags de desafíos activos;
 - documentos académicos con enlaces privados o metadatos no sanitizados.
+

@@ -35,10 +35,8 @@ jobs:
       - name: Lint
         run: npm run lint
 
-      - name: Prepare downloadable CVs
-        run: |
-          python -m pip install -r scripts/requirements-cv.txt
-          python scripts/build-cvs.py
+      - name: Remove public CV files
+        run: rm -rf public/cv dist/cv
 
       - name: Build
         run: npm run build
