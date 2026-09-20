@@ -1,4 +1,4 @@
-// Shared professional facts; aligned with the downloadable CVs.
+// Shared professional facts; used across the public portfolio.
 export const PROFILE = {
   role: 'Técnico Universitario en Ciberseguridad | SOC e IAM junior',
   tenure: 'Más de 5 años',

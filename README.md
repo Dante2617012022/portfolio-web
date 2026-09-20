@@ -16,7 +16,7 @@ El sitio conecta experiencia operativa en soporte técnico y gestión de inciden
 
 **Técnico Universitario en Ciberseguridad | SOC e IAM junior | Seguridad aplicada**
 
-Graduado en septiembre de 2026. [CV por orientación](https://dante2617012022.github.io/portfolio-web/#cv).
+Graduado en septiembre de 2026. [Solicitar CV](https://dante2617012022.github.io/portfolio-web/#cv).
 
 El portfolio diferencia claramente:
 
@@ -117,8 +117,6 @@ No se afirma experiencia profesional como Red Team Operator. Las técnicas asoci
 git clone git@github.com:Dante2617012022/portfolio-web.git
 cd portfolio-web
 npm ci
-python -m pip install -r scripts/requirements-cv.txt
-python scripts/build-cvs.py
 npm run dev
 ```
 
@@ -188,6 +186,6 @@ Técnico Universitario en Ciberseguridad, con experiencia en soporte técnico, t
 
 ## CV y verificación de publicación
 
-Los CV públicos se generan desde `content/resumes.json` mediante `scripts/build-cvs.py`. Los workflows de validación y despliegue incluyen su generación. Para vista local, ejecutá la preparación de PDF antes de iniciar Vite.
+El CV se comparte directamente con reclutadores por contacto profesional. La web y este repositorio no distribuyen versiones descargables ni generan PDFs de CV.
 
-El PR verifica descargas PDF, enlaces, ausencia de errores JavaScript y desbordamientos en Chromium a 1440, 390 y 320 px. Las capturas se conservan como artefacto temporal de Actions para UAT.
+El PR verifica el acceso a contacto, ausencia de descargas de CV, enlaces, errores JavaScript y desbordamientos en Chromium a 1440, 390 y 320 px.
