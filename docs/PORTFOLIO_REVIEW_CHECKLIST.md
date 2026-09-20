@@ -21,9 +21,11 @@ Abrir la URL local indicada por Vite.
 
 La sección Proyectos debe mostrar, en este orden:
 
-1. **Camdis Commerce Platform** como proyecto principal.
-2. **Chatbot de pedidos con IA y controles de seguridad**.
-3. **Hacking Ético y Tratamiento de Vulnerabilidades**.
+1. **Camdis Operations Platform** como proyecto principal.
+2. **Camdis Commerce Platform**.
+3. **Chatbot de pedidos con IA controlada**.
+4. **Hacking ético y vulnerabilidades**.
+5. **Camdis Digital Security Program**.
 
 Comprobar:
 
@@ -46,6 +48,9 @@ Abrir y comprobar:
 - [ ] portfolio, GitHub y LinkedIn desde README cuando corresponda.
 
 Los enlaces externos deben abrir una pestaña nueva sin conservar acceso al contexto de la página original.
+
+- [ ] las cuatro descargas de CV abren PDFs legibles y actualizados;
+- [ ] el botón de Inicio y el enlace `#cv` permiten llegar a los currículums.
 
 ## 3. Escritorio
 
@@ -102,10 +107,10 @@ En DevTools:
 ## 7. Contenido profesional
 
 - [ ] nombre y experiencia coinciden con CV y LinkedIn;
-- [ ] el hero presenta SOC, AppSec y DevSecOps como orientaciones junior, no solamente SOC;
+- [ ] el hero prioriza SOC e IAM junior y los proyectos muestran AppSec y GRC;
 - [ ] DevSecOps está respaldado por evidencia de CI, análisis estático, detección de secretos, escaneo, SBOM y prácticas de cadena de suministro;
 - [ ] no se afirma experiencia profesional consolidada en DevSecOps ni dentro de un SOC;
-- [ ] Camdis se describe como piloto técnico, no como producto definitivo;
+- [ ] Operations es beta interna; Commerce es piloto; el Plan Director es propuesta;
 - [ ] pentesting se limita a laboratorios autorizados;
 - [ ] la experiencia en soporte e incidentes se presenta como capacidad transferible hacia SOC;
 - [ ] las limitaciones se agrupan sin publicar una lista accionable de defensas ausentes;

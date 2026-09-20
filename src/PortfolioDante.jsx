@@ -1,3 +1,4 @@
+import ResumeSection from './ResumeSection.jsx';
 import React, { useEffect, useState, useRef, useLayoutEffect } from "react";
 import { motion, useReducedMotion } from "framer-motion"; // eslint-disable-line no-unused-vars
 import FloatingLogos from "./components/FloatingLogos";
@@ -1678,7 +1679,7 @@ const Contact = () => {
               </a>
               {/* Preparado para LinkedIn u otro perfil */}
               {/* <a
-                href="https://www.linkedin.com/in/tu-perfil"
+                href="https://www.linkedin.com/in/dante-gabriel-balbuena-179963235/"
                 target="_blank"
                 rel="noreferrer noopener"
                 className="inline-flex items-center justify-center text-blue-600 hover:underline break-all"
@@ -1746,6 +1747,7 @@ export default function PortfolioDante() {
   <Education />
   <Projects />
   <Certificates />
+  <ResumeSection />
   <Contact />
 </main>
 

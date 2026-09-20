@@ -23,3 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 update.sh
+
+# Generated CVs and browser evidence
+public/cv/*.pdf
+test-results/

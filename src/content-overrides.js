@@ -1,3 +1,4 @@
+import { PROFILE } from './profile-content.js';
 const setText = (element, value) => {
   if (!element) return;
   if (element.textContent.trim() !== value) element.textContent = value;
@@ -26,7 +27,7 @@ const updateHero = () => {
 
   setText(
     hero.querySelector(".space-y-6 > p"),
-    "Técnico Universitario en Ciberseguridad | SOC Jr. | AppSec y DevSecOps Jr.",
+    PROFILE.role,
   );
 };
 
@@ -37,11 +38,11 @@ const updateProfile = () => {
   const paragraphs = section.querySelectorAll(".max-w-prose > p");
   setText(
     paragraphs[0],
-    "Profesional con más de cinco años y medio de experiencia en soporte técnico y gestión de incidentes para telecomunicaciones y servicios críticos. Experiencia en diagnóstico remoto, documentación, priorización por criticidad, cumplimiento de SLA y escalamiento a niveles especializados.",
+    PROFILE.summary,
   );
   setText(
     paragraphs[1],
-    "Técnico Universitario en Ciberseguridad por la Universidad del Gran Rosario. Orientado a oportunidades junior en SOC, AppSec y DevSecOps, combinando experiencia operativa, redes y Linux Debian con desarrollo seguro, automatización de controles, CI/CD y respuesta inicial ante incidentes.",
+    PROFILE.focus,
   );
 };
 
@@ -123,7 +124,7 @@ const addVerifiedSkillsSummary = (section) => {
 
 const updateSkills = () => {
   const section = document.querySelector("#skills");
-  if (!section) return;
+  if (!section || section.hasAttribute("data-experience-overhaul-ready") || section.hasAttribute("data-projects-overhaul")) return;
 
   const headings = section.querySelectorAll("h3");
   setText(headings[0], "Uso práctico y operativo");
@@ -149,7 +150,7 @@ const updateSkills = () => {
 
 const updateExperience = () => {
   const section = document.querySelector("#experience");
-  if (!section) return;
+  if (!section || section.hasAttribute("data-experience-overhaul-ready") || section.hasAttribute("data-projects-overhaul")) return;
 
   const headings = section.querySelectorAll("h3");
   const camdisCard = headings[0]?.closest('div[class*="rounded-2xl"]');
@@ -239,7 +240,7 @@ const updateEducation = () => {
 
 const updateProjects = () => {
   const section = document.querySelector("#projects");
-  if (!section) return;
+  if (!section || section.hasAttribute("data-experience-overhaul-ready") || section.hasAttribute("data-projects-overhaul")) return;
 
   const headings = section.querySelectorAll("h3");
   const firstCard = headings[0]?.closest('div[class*="group bg-white"]');
@@ -286,7 +287,7 @@ const updateNavigationAndFooter = () => {
 
   const footer = document.querySelector("footer");
   if (footer) {
-    footer.textContent = `© ${new Date().getFullYear()} Dante Balbuena — Todos los derechos reservados.`;
+    setText(footer, `© ${new Date().getFullYear()} Dante Balbuena — Todos los derechos reservados.`);
   }
 };
 

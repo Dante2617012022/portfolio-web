@@ -1,3 +1,4 @@
+import { PROFILE } from './profile-content.js';
 const PROFILE_VISUAL_MARKER = "data-profile-visual-ready";
 const PROFILE_STYLE_MARKER = "data-profile-contrast-styles";
 
@@ -173,14 +174,14 @@ const applyProfileVisuals = () => {
   badge.style.borderColor = "rgba(96, 165, 250, .45)";
   badge.style.background = "rgba(59, 130, 246, .16)";
   badge.style.color = "#bfdbfe";
-  badge.textContent = "SOC · AppSec · DevSecOps junior";
+  badge.textContent = "SOC e IAM junior · Seguridad aplicada";
   textBlock.insertBefore(badge, textBlock.firstChild);
 
   const highlights = document.createElement("div");
   highlights.dataset.profileHighlights = "true";
   highlights.className = "grid gap-3 sm:grid-cols-3";
   highlights.append(
-    createHighlight("Más de 5 años y medio", "Operaciones"),
+    createHighlight(PROFILE.tenure, "Operaciones"),
     createHighlight("SLA", "Priorización y escalamiento"),
     createHighlight("Debian + CI/CD", "Base técnica y automatización"),
   );
