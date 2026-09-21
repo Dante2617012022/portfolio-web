@@ -69,6 +69,83 @@ const styles = `
     font-size: 1rem;
     line-height: 1.75;
   }
+  #projects .review-path {
+    margin-top: 2rem;
+    border: 1px solid rgba(37,99,235,.18);
+    border-radius: 1.4rem;
+    padding: 1rem;
+    background: rgba(255,255,255,.9);
+    box-shadow: 0 18px 45px rgba(15,23,42,.08);
+    text-align: left;
+  }
+  #projects .review-path-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: .4rem 1rem;
+    padding: .15rem .2rem .8rem;
+  }
+  #projects .review-path-title {
+    color: #0f172a;
+    font-size: 1rem;
+    font-weight: 900;
+    letter-spacing: -.01em;
+  }
+  #projects .review-path-note {
+    color: #64748b;
+    font-size: .78rem;
+    font-weight: 700;
+  }
+  #projects .review-path-grid {
+    display: grid;
+    gap: .7rem;
+  }
+  #projects .review-path-link {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: .75rem;
+    min-width: 0;
+    border: 1px solid rgba(148,163,184,.28);
+    border-radius: 1rem;
+    padding: .85rem;
+    background: #fff;
+    color: #0f172a;
+    text-decoration: none;
+    transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+  }
+  #projects .review-path-link:hover {
+    transform: translateY(-2px);
+    border-color: rgba(37,99,235,.34);
+    box-shadow: 0 10px 26px rgba(37,99,235,.1);
+  }
+  #projects .review-path-step {
+    display: grid;
+    width: 2rem;
+    height: 2rem;
+    place-items: center;
+    border-radius: .7rem;
+    background: #eff6ff;
+    color: #1d4ed8;
+    font-size: .72rem;
+    font-weight: 900;
+  }
+  #projects .review-path-copy { min-width: 0; }
+  #projects .review-path-copy strong {
+    display: block;
+    color: #0f172a;
+    font-size: .86rem;
+    font-weight: 900;
+  }
+  #projects .review-path-copy span {
+    display: block;
+    margin-top: .18rem;
+    color: #64748b;
+    font-size: .75rem;
+    line-height: 1.4;
+  }
+  #projects .review-path-link svg { color: #2563eb; }
   #projects .project-overhaul-card {
     position: relative;
     overflow: hidden;
@@ -322,6 +399,7 @@ const styles = `
     #projects .project-featured-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(290px, .75fr); gap: 1.5rem; align-items: stretch; }
     #projects .project-control-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     #projects .projects-secondary-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; }
+    #projects .review-path-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   }
   @media (prefers-reduced-motion: reduce) {
     #projects .projects-reveal { opacity: 1; transform: none; }
@@ -367,6 +445,45 @@ const projects = [
   },
 ];
 
+const technicalReview = [
+  {
+    step: '01',
+    title: 'ERP — controles verificables',
+    description: 'Riesgo, decisión, evidencia y límites para autorización, idempotencia y trazabilidad.',
+    link: projects[0].link,
+  },
+  {
+    step: '02',
+    title: 'ERP — código y pruebas',
+    description: 'Muestra pública adaptada con pruebas reproducibles y alcance explícito.',
+    link: projects[0].codeLink,
+  },
+  {
+    step: '03',
+    title: 'IAM / AppSec — caso público',
+    description: 'Separación de identidades, sesiones protegidas y autorización en backend.',
+    link: projects[1].link,
+  },
+];
+
+const reviewPath = `
+  <aside data-review-path class="review-path projects-reveal" aria-labelledby="technical-review-title">
+    <div class="review-path-header">
+      <h3 id="technical-review-title" class="review-path-title">Recorrido técnico recomendado</h3>
+      <span class="review-path-note">~5 min · empezar por evidencia reproducible</span>
+    </div>
+    <div class="review-path-grid">
+      ${technicalReview.map(item => `
+        <a data-review-link class="review-path-link" href="${item.link}" target="_blank" rel="noreferrer noopener">
+          <span class="review-path-step">${item.step}</span>
+          <span class="review-path-copy"><strong>${item.title}</strong><span>${item.description}</span></span>
+          ${ICONS.external}
+        </a>
+      `).join('')}
+    </div>
+  </aside>
+`;
+
 const projectCard = (project, featured = false) => `
   <article data-project-card class="project-overhaul-card ${featured ? 'project-featured mt-12' : 'project-secondary p-6 md:p-8'} projects-reveal">
     <span class="project-status ${featured ? 'project-status--featured' : 'project-status--lab'}">${project.status}</span>
@@ -388,6 +505,7 @@ const markup = `
       <h2 class="projects-title">Proyectos y evidencias</h2>
       <p class="projects-intro">Problemas reales, decisiones técnicas y controles verificables. Cada caso distingue su estado y el alcance de la evidencia disponible.</p>
     </div>
+    ${reviewPath}
     ${projectCard(projects[0], true)}
     <div class="projects-secondary-grid mt-6" style="display:grid;gap:1.25rem">${projects.slice(1, 3).map(project => projectCard(project)).join('')}</div>
     <div class="projects-reveal mt-12"><h3 class="project-heading">Proyectos complementarios</h3><p class="projects-intro" style="margin-left:0">Automatización y propuestas de gobierno y continuidad.</p></div>
