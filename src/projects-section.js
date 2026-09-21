@@ -354,10 +354,10 @@ const projects = [
     link: 'https://github.com/Dante2617012022/Actividades-UGR-Ciberseguridad', label: 'Ver trabajos de la facultad',
   },
   {
-    name: 'Chatbot de pedidos con IA controlada', status: 'Código público · Entorno controlado',
-    description: 'Automatización en Node.js con procesamiento determinístico y fallback de IA restringido. Validación contra catálogo, límites de solicitudes y autenticación de notificaciones externas.',
+    name: 'Chatbot de pedidos con IA controlada', status: 'Proyecto privado · Evidencia sanitizada',
+    description: 'Automatización en Node.js con procesamiento determinístico y fallback de IA restringido. Validación contra catálogo, límites de solicitudes y autenticación de notificaciones externas. El código operativo permanece privado.',
     tags: ['Node.js', 'IA controlada', 'Validación', 'HMAC', 'Pruebas'],
-    link: 'https://github.com/Dante2617012022/chatbot-hamburgueseria-v3', label: 'Ver código, pruebas y documentación',
+    link: 'https://github.com/Dante2617012022/portfolio-web/blob/main/docs/PORTFOLIO_EVIDENCE_INDEX.md#automatizaci%C3%B3n-segura-e-ia', label: 'Ver evidencia sanitizada',
   },
   {
     name: 'Camdis Digital Security Program', status: 'Plan Director · Propuesta en desarrollo',

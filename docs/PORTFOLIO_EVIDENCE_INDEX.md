@@ -8,7 +8,7 @@ Este documento ayuda a reclutadores y evaluadores a revisar el portfolio por com
 |---|---|---|
 | IAM e integridad | [Camdis Operations](case-studies/camdis-operations-security.md) | Beta interna; validaciones documentadas |
 | AppSec y sesiones | [Camdis Commerce](case-studies/camdis-commerce-security.md) | Piloto técnico |
-| Automatización y código | [Chatbot](https://github.com/Dante2617012022/chatbot-hamburgueseria-v3) | Entorno controlado |
+| Automatización e IA | [Chatbot](#automatización-segura-e-ia) | Proyecto privado; evidencia sanitizada |
 | GRC | [Plan Director](case-studies/camdis-governance.md) | Propuesta en desarrollo |
 | Pentesting | [Laboratorios](case-studies/offensive-security-labs.md) | Práctica académica autorizada |
 | SOC | Soporte y formación en incidentes, detallados debajo | Experiencia transferible; sin empleo previo en SOC |
@@ -58,7 +58,8 @@ Este documento ayuda a reclutadores y evaluadores a revisar el portfolio por com
 
 ### Chatbot de pedidos
 
-- [Repositorio público](https://github.com/Dante2617012022/chatbot-hamburgueseria-v3)
+**Estado:** proyecto privado. Se publica únicamente evidencia sanitizada de arquitectura, controles y prácticas de validación; no se expone el repositorio operativo.
+
 - Parser determinístico con fallback de IA controlado.
 - JSON Schema, umbral de confianza y allowlist de intenciones.
 - Acciones sensibles bloqueadas para la IA.
