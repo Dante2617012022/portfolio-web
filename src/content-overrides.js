@@ -253,8 +253,8 @@ const updateProjects = () => {
       "Node.js, WhatsApp/Baileys, SQLite y Mercado Pago. Incluye validación de entorno, HMAC para webhooks, rate limiting, sanitización, restricciones de IA, pruebas automatizadas, CI y CodeQL.",
     );
     const link = firstCard.querySelector("a");
-    if (link) link.href = "https://github.com/Dante2617012022/chatbot-hamburgueseria-v3";
-    setLinkLabel(link, "Ver proyecto principal");
+    if (link) link.href = "https://github.com/Dante2617012022/portfolio-web/blob/main/docs/PORTFOLIO_EVIDENCE_INDEX.md#automatizaci%C3%B3n-segura-e-ia";
+    setLinkLabel(link, "Ver evidencia sanitizada");
   }
 
   if (secondCard) {
