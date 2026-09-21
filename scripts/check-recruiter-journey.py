@@ -14,6 +14,12 @@ with sync_playwright() as p:
         page.on("pageerror", lambda error: errors.append(str(error)))
         page.goto("http://127.0.0.1:4173/portfolio-web/", wait_until="networkidle")
         expect(page.get_by_role("heading", name="ERP Camdis — producción e inventario", exact=True)).to_be_visible()
+        expect(page.get_by_role("heading", name="Recorrido técnico recomendado", exact=True)).to_be_visible()
+        review_links = page.locator("#projects [data-review-link]")
+        assert review_links.count() == 3, "Technical review path must expose exactly three focused public evidence links"
+        expect(review_links.nth(0)).to_have_attribute("href", "https://github.com/Dante2617012022/camdis-erp-case-study")
+        expect(review_links.nth(1)).to_have_attribute("href", "https://github.com/Dante2617012022/camdis-erp-case-study#código-para-evaluar")
+        expect(review_links.nth(2)).to_have_attribute("href", "https://github.com/Dante2617012022/camdis-ecommerce-case-study")
         expect(page.locator("#about")).to_contain_text("Graduado en septiembre de 2026")
         page.locator("#home").get_by_role("link", name="Solicitar CV", exact=True).click()
         expect(page.get_by_role("heading", name="Conversemos sobre tu oportunidad")).to_be_in_viewport()
