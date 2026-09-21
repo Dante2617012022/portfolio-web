@@ -337,13 +337,15 @@ const projects = [
     description: 'Producción e inventario con seguridad integrada: autorización en el servidor, movimientos trazables y correcciones que conservan la evidencia original. Un proyecto propio conectado con necesidades reales de una PyME.',
     tags: ['IAM', 'RBAC', 'Integridad', 'Idempotencia', 'Auditoría'],
     controls: ['Identidad y permisos comprobados en el servidor.', 'Reintentos y concurrencia tratados con transacciones y unicidad.', 'Correcciones explícitas sin borrar el historial confirmado.', 'Pruebas, CI y UAT documentadas para cambios controlados.'],
-    link: evidenceRoot + '/case-studies/camdis-operations-security.md', label: 'Ver caso de seguridad e integridad',
+    link: 'https://github.com/Dante2617012022/camdis-erp-case-study', label: 'Ver caso de seguridad e integridad',
+    codeLink: 'https://github.com/Dante2617012022/camdis-erp-case-study#código-para-evaluar',
   },
   {
     name: 'Camdis Commerce Platform', status: 'Piloto técnico · Repositorio privado',
     description: 'Comercio electrónico con separación entre clientes y personal, protección de sesiones y reglas de negocio en backend. El caso público explica decisiones de seguridad y límites del piloto.',
     tags: ['AppSec', 'OIDC + PKCE', 'MFA', 'Sesiones', 'DevSecOps'],
-    link: evidenceRoot + '/case-studies/camdis-commerce-security.md', label: 'Ver caso de identidad y aplicaciones',
+    link: 'https://github.com/Dante2617012022/camdis-ecommerce-case-study', label: 'Ver caso de identidad y aplicaciones',
+    codeLink: 'https://github.com/Dante2617012022/camdis-ecommerce-case-study/tree/main/sample',
   },
   {
     name: 'Chatbot de pedidos con IA controlada', status: 'Código público · Entorno controlado',
@@ -374,6 +376,7 @@ const projectCard = (project, featured = false) => `
     ${project.controls ? `<div class="project-control-grid">${project.controls.map(control => `<div class="project-control">${ICONS.check}<span>${control}</span></div>`).join('')}</div>` : ''}
     <div class="project-actions">
       <a class="project-link ${featured ? 'project-link--primary' : ''}" href="${project.link}" target="_blank" rel="noreferrer noopener"><span>${project.label}</span>${ICONS.external}</a>
+      ${project.codeLink ? `<a class="project-link ${featured ? 'project-link--secondary' : ''}" href="${project.codeLink}" target="_blank" rel="noreferrer noopener"><span>Ver código y ejecutar pruebas</span>${ICONS.code}</a>` : ''}
     </div>
   </article>
 `;
