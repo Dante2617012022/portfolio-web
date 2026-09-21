@@ -47,7 +47,7 @@ El código, la topología operativa y la configuración permanecen privados. La 
 
 ### Chatbot de pedidos con IA y controles de seguridad
 
-Repositorio público que demuestra:
+Proyecto privado. La evidencia pública sanitizada demuestra:
 
 - arquitectura modular en Node.js;
 - parser determinístico y fallback de IA controlado;
@@ -57,7 +57,7 @@ Repositorio público que demuestra:
 - HMAC para webhooks;
 - pruebas automatizadas, CI y CodeQL.
 
-[Ver repositorio](https://github.com/Dante2617012022/chatbot-hamburgueseria-v3)
+[Ver evidencia sanitizada](docs/PORTFOLIO_EVIDENCE_INDEX.md#automatización-segura-e-ia)
 
 ### Hacking Ético y Tratamiento de Vulnerabilidades
 
