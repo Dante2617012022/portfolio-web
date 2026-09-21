@@ -22,6 +22,12 @@ with sync_playwright() as p:
         assert page.locator('a[href*="chatbot-hamburgueseria-v3"]').count() == 0, "Private chatbot repository exposed"
         expect(page.locator("#projects")).to_contain_text("Proyecto privado · Evidencia sanitizada")
         assert not list(Path("dist").rglob("CV_*.pdf")), "Public CV found in build"
+        built_text = "\n".join(
+            path.read_text(encoding="utf-8", errors="ignore")
+            for path in Path("dist").rglob("*")
+            if path.is_file() and path.suffix in {".html", ".js", ".css", ".json", ".txt", ".map"}
+        )
+        assert "chatbot-hamburgueseria-v3" not in built_text, "Private chatbot repository reference found in compiled portfolio"
         expect(page.locator("#contact").get_by_role("link", name="LinkedIn", exact=True)).to_have_attribute("href", "https://www.linkedin.com/in/dante-gabriel-balbuena-179963235/")
         invalid = page.evaluate("""() => [...document.querySelectorAll('a')].filter(a => {
             const h = a.getAttribute('href') || '';
