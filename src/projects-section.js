@@ -333,7 +333,7 @@ const styles = `
 const evidenceRoot = 'https://github.com/Dante2617012022/portfolio-web/blob/main/docs';
 const projects = [
   {
-    name: 'Camdis Operations Platform', status: 'Proyecto principal · Beta interna controlada',
+    name: 'ERP Camdis — producción e inventario', status: 'Proyecto principal · Beta interna controlada',
     description: 'Producción e inventario con seguridad integrada: autorización en el servidor, movimientos trazables y correcciones que conservan la evidencia original. Un proyecto propio conectado con necesidades reales de una PyME.',
     tags: ['IAM', 'RBAC', 'Integridad', 'Idempotencia', 'Auditoría'],
     controls: ['Identidad y permisos comprobados en el servidor.', 'Reintentos y concurrencia tratados con transacciones y unicidad.', 'Correcciones explícitas sin borrar el historial confirmado.', 'Pruebas, CI y UAT documentadas para cambios controlados.'],
@@ -341,23 +341,23 @@ const projects = [
     codeLink: 'https://github.com/Dante2617012022/camdis-erp-case-study#código-para-evaluar',
   },
   {
-    name: 'Camdis Commerce Platform', status: 'Piloto técnico · Repositorio privado',
+    name: 'E-commerce Camdis — identidad y acceso', status: 'Piloto técnico · Repositorio privado',
     description: 'Comercio electrónico con separación entre clientes y personal, protección de sesiones y reglas de negocio en backend. El caso público explica decisiones de seguridad y límites del piloto.',
     tags: ['AppSec', 'OIDC + PKCE', 'MFA', 'Sesiones', 'DevSecOps'],
     link: 'https://github.com/Dante2617012022/camdis-ecommerce-case-study', label: 'Ver caso de identidad y aplicaciones',
     codeLink: 'https://github.com/Dante2617012022/camdis-ecommerce-case-study/tree/main/sample',
   },
   {
+    name: 'Trabajos académicos — Ciberseguridad UGR', status: 'Práctica académica · Entornos autorizados',
+    description: 'Prácticas académicas autorizadas de seguridad web y Linux, desarrollo seguro, criptografía y gestión de riesgos. Trabajos seleccionados de la Tecnicatura Universitaria en Ciberseguridad.',
+    tags: ['Seguridad web', 'Linux', 'Desarrollo seguro', 'Criptografía', 'Riesgos'],
+    link: 'https://github.com/Dante2617012022/Actividades-UGR-Ciberseguridad', label: 'Ver trabajos de la facultad',
+  },
+  {
     name: 'Chatbot de pedidos con IA controlada', status: 'Código público · Entorno controlado',
     description: 'Automatización en Node.js con procesamiento determinístico y fallback de IA restringido. Validación contra catálogo, límites de solicitudes y autenticación de notificaciones externas.',
     tags: ['Node.js', 'IA controlada', 'Validación', 'HMAC', 'Pruebas'],
     link: 'https://github.com/Dante2617012022/chatbot-hamburgueseria-v3', label: 'Ver código, pruebas y documentación',
-  },
-  {
-    name: 'Hacking ético y vulnerabilidades', status: 'Práctica académica · Entornos autorizados',
-    description: 'Laboratorios de seguridad web y Linux con reconocimiento, validación de vulnerabilidades, escalada de privilegios e informes de impacto y remediación.',
-    tags: ['Nmap', 'OWASP', 'Linux', 'Pentesting', 'Reportes'],
-    link: 'https://github.com/Dante2617012022/Actividades-UGR-Ciberseguridad/tree/main/hacking-etico', label: 'Ver laboratorios documentados',
   },
   {
     name: 'Camdis Digital Security Program', status: 'Plan Director · Propuesta en desarrollo',
@@ -389,7 +389,9 @@ const markup = `
       <p class="projects-intro">Problemas reales, decisiones técnicas y controles verificables. Cada caso distingue su estado y el alcance de la evidencia disponible.</p>
     </div>
     ${projectCard(projects[0], true)}
-    <div class="projects-secondary-grid mt-6" style="display:grid;gap:1.25rem">${projects.slice(1).map(project => projectCard(project)).join('')}</div>
+    <div class="projects-secondary-grid mt-6" style="display:grid;gap:1.25rem">${projects.slice(1, 3).map(project => projectCard(project)).join('')}</div>
+    <div class="projects-reveal mt-12"><h3 class="project-heading">Proyectos complementarios</h3><p class="projects-intro" style="margin-left:0">Automatización y propuestas de gobierno y continuidad.</p></div>
+    <div class="projects-secondary-grid mt-6" style="display:grid;gap:1.25rem">${projects.slice(3).map(project => projectCard(project)).join('')}</div>
     <div class="projects-reveal text-center">
       <a class="projects-footer-link" href="${evidenceRoot}/PORTFOLIO_EVIDENCE_INDEX.md" target="_blank" rel="noreferrer noopener">Recorrer el índice de evidencias ${ICONS.external}</a>
     </div>

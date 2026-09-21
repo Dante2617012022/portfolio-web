@@ -478,7 +478,7 @@ const createPrimaryEducation = () => {
 
   const date = document.createElement("span");
   date.className = "education-overhaul__date";
-  date.textContent = "2024 – 2026";
+  date.textContent = "2024 – septiembre de 2026";
 
   topline.append(status, date);
 
@@ -493,7 +493,7 @@ const createPrimaryEducation = () => {
   const summary = document.createElement("p");
   summary.className = "education-overhaul__summary";
   summary.textContent =
-    "Carrera universitaria finalizada en 2026, con formación orientada al análisis, prevención y respuesta ante incidentes de ciberseguridad.";
+    "Carrera universitaria finalizada en septiembre de 2026, con formación orientada al análisis, prevención y respuesta ante incidentes de ciberseguridad.";
 
   const metrics = document.createElement("div");
   metrics.className = "education-overhaul__metrics";

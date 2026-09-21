@@ -38,17 +38,17 @@ const EXPERIENCES = [
     highlights: [
       "Desarrollo de Camdis Operations para producción e inventario, con autorización y trazabilidad del lado del servidor.",
       "Controles de integridad, idempotencia y correcciones que preservan el historial operativo.",
-      "Pilotos de comercio electrónico y chatbot, con pruebas automatizadas y validación de entradas.",
-      "Diseño y documentación del Camdis Digital Security Program, actualmente en desarrollo.",
+      "E-commerce en piloto técnico: separación entre clientes y personal, autorización por roles y protección de sesiones.",
+      "Muestras públicas de código con pruebas ejecutables y documentación de su alcance. Plan Director de tecnología y ciberseguridad en desarrollo.",
     ],
     tags: [
       "Node.js",
       "Automatización",
       "Security by Design",
-      "SQLite",
+      "PostgreSQL",
       "Proyecto en desarrollo",
     ],
-    tools: "JavaScript · Node.js · SQLite · APIs · GitHub",
+    tools: "JavaScript · Node.js · PostgreSQL · APIs · GitHub Actions",
     featured: false,
   },
 ];
