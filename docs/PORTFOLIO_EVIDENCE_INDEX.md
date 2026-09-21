@@ -19,7 +19,8 @@ Este documento ayuda a reclutadores y evaluadores a revisar el portfolio por com
 
 ### Camdis Operations Platform
 
-- [Caso de seguridad e integridad](case-studies/camdis-operations-security.md).
+- [Caso de seguridad e integridad](case-studies/camdis-operations-security.md): lectura breve y tres controles con evidencia y límites.
+- [Guion de demostración](case-studies/camdis-operations-walkthrough.md): datos ficticios y criterios observables; ejecución pendiente.
 - Autenticación y autorización server-side.
 - Idempotencia y transacciones ante reintentos.
 - Correcciones auditables sin borrar evidencia confirmada.

@@ -31,7 +31,7 @@ El portfolio diferencia claramente:
 
 Proyecto principal de producción e inventario con autorización backend, idempotencia, integridad transaccional y correcciones que preservan el historial. Beta interna controlada; cambios posteriores sujetos a CI y UAT.
 
-[Ver caso de seguridad e integridad](docs/case-studies/camdis-operations-security.md).
+[Ver caso de seguridad e integridad](docs/case-studies/camdis-operations-security.md): resumen de dos minutos, tres controles con evidencia y arquitectura conceptual. [Guion de demostración con datos ficticios](docs/case-studies/camdis-operations-walkthrough.md) (pendiente de ejecutar).
 
 ### Camdis Commerce Platform
 
