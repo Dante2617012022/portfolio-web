@@ -19,6 +19,8 @@ with sync_playwright() as p:
         expect(page.get_by_role("heading", name="Conversemos sobre tu oportunidad")).to_be_in_viewport()
         expect(page.locator("#cv").get_by_role("link", name="Solicitar CV por LinkedIn")).to_have_attribute("href", "https://www.linkedin.com/in/dante-gabriel-balbuena-179963235/")
         assert page.locator('a[download], a[href*="/cv/"], a[href$=".pdf"]').count() == 0
+        assert page.locator('a[href*="chatbot-hamburgueseria-v3"]').count() == 0, "Private chatbot repository exposed"
+        expect(page.locator("#projects")).to_contain_text("Proyecto privado · Evidencia sanitizada")
         assert not list(Path("dist").rglob("CV_*.pdf")), "Public CV found in build"
         expect(page.locator("#contact").get_by_role("link", name="LinkedIn", exact=True)).to_have_attribute("href", "https://www.linkedin.com/in/dante-gabriel-balbuena-179963235/")
         invalid = page.evaluate("""() => [...document.querySelectorAll('a')].filter(a => {
