@@ -2,65 +2,64 @@ const SKILLS_MARKER = "data-skills-overhaul-ready";
 
 const SKILL_GROUPS = [
   {
-    title: "Operaciones, sistemas y redes",
-    description: "Experiencia operativa, soporte técnico y telecomunicaciones.",
+    title: "IAM, AppSec y autorización",
+    description: "Controles implementados y validados en proyectos propios de Camdis.",
     accent: ["#2563eb", "#0891b2"],
     skills: [
-      ["DEB", "Linux Debian"],
-      ["WIN", "Windows"],
-      ["VM", "VirtualBox"],
-      ["TCP", "TCP/IP"],
-      ["DNS", "DNS"],
-      ["DHCP", "DHCP"],
-      ["VPN", "VPN"],
-      ["XDSL", "ADSL / VDSL"],
-      ["HFC", "Redes HFC"],
-      ["FTTH", "Redes FTTH"],
-      ["CATV", "CATV"],
-      ["4G/5G", "Redes móviles 4G / 5G"],
-      ["INC", "Gestión de incidentes"],
-      ["SLA", "SLA, documentación y escalamiento"],
+      ["KC", "Keycloak"],
+      ["OIDC", "OpenID Connect (OIDC)"],
+      ["OAUTH", "OAuth 2.0"],
+      ["PKCE", "Authorization Code + PKCE S256"],
+      ["JWT", "JWT"],
+      ["JWKS", "JWKS"],
+      ["RBAC", "RBAC y mínimo privilegio"],
+      ["MFA", "MFA"],
+      ["CSRF", "Protección CSRF"],
+      ["AUTHZ", "Autorización server-side"],
+      ["HMAC", "HMAC-SHA256 para webhooks"],
+      ["OWASP", "OWASP y desarrollo seguro"],
     ],
   },
   {
-    title: "Seguridad y laboratorios autorizados",
-    description: "Uso práctico inicial y formación académica, sin atribuir experiencia profesional en un SOC.",
-    accent: ["#0f766e", "#2563eb"],
-    skills: [
-      ["NMAP", "Nmap — uso práctico"],
-      ["SSL", "OpenSSL"],
-      ["VT", "VirusTotal"],
-      ["YARA", "YARA"],
-      ["MSF", "Metasploit — nivel inicial"],
-      ["MITRE", "MITRE ATT&CK"],
-      ["OWASP", "OWASP"],
-      ["ISO", "ISO 27001"],
-      ["NIST", "NIST"],
-      ["WAZ", "Wazuh — formación académica"],
-      ["GRAY", "Graylog — formación académica"],
-      ["SNORT", "Snort — formación académica"],
-      ["SURI", "Suricata — formación académica"],
-    ],
-  },
-  {
-    title: "Desarrollo y automatización",
-    description: "Proyectos propios, integraciones, APIs y automatización de procesos.",
+    title: "DevSecOps, backend y datos",
+    description: "Tecnologías usadas en desarrollo, automatización, CI y controles de cadena de suministro.",
     accent: ["#4f46e5", "#0284c7"],
     skills: [
+      ["DEB", "Linux Debian"],
       ["JS", "JavaScript"],
       ["NODE", "Node.js"],
+      ["FAST", "Fastify"],
+      ["PG", "PostgreSQL"],
+      ["DOCKER", "Docker"],
       ["GIT", "Git y GitHub"],
-      ["API", "APIs REST"],
-      ["SQLITE", "SQLite"],
-      ["SQL", "MySQL / MariaDB"],
-      ["PY", "Python básico"],
-      ["FLASK", "Flask"],
-      ["FAST", "FastAPI"],
-      ["WEB", "HTML y CSS"],
-      ["BOT", "Automatización con Baileys"],
+      ["GHA", "GitHub Actions"],
+      ["CQL", "CodeQL"],
+      ["GL", "Gitleaks"],
+      ["TRIVY", "Trivy"],
+      ["SBOM", "SBOM / CycloneDX"],
     ],
   },
-];
+  {
+    title: "Operaciones, redes y laboratorios",
+    description: "Experiencia profesional en soporte y telecomunicaciones, más práctica técnica en entornos autorizados.",
+    accent: ["#0f766e", "#2563eb"],
+    skills: [
+      ["WIN", "Windows"],
+      ["TCP", "TCP/IP"],
+      ["DNS", "DNS"],
+      ["TELCO", "xDSL, HFC, FTTH, CATV y 4G/5G"],
+      ["INC", "Gestión de incidentes"],
+      ["SLA", "SLA, documentación y escalamiento"],
+      ["NMAP", "Nmap"],
+      ["BURP", "Burp Suite"],
+      ["MSF", "Metasploit — nivel inicial"],
+      ["NC", "Netcat"],
+      ["SSL", "OpenSSL"],
+      ["MITRE", "MITRE ATT&CK"],
+      ["GRC", "ISO 27001 y NIST — formación aplicada"],
+    ],
+  },
+]
 
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 
@@ -511,7 +510,7 @@ const applySkillsOverhaul = () => {
   const intro = document.createElement("p");
   intro.className = "skills-overhaul__intro";
   intro.textContent =
-    "Competencias organizadas según experiencia operativa, práctica en laboratorios autorizados y proyectos propios.";
+    "Tecnologías y prácticas que puedo respaldar con experiencia profesional, proyectos propios o laboratorios autorizados. Cada bloque indica el contexto real de uso.";
 
   heading.append(title, underline, intro);
 
