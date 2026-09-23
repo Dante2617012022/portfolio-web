@@ -14,6 +14,13 @@ with sync_playwright() as p:
         page.on("pageerror", lambda error: errors.append(str(error)))
         page.goto("http://127.0.0.1:4173/portfolio-web/", wait_until="networkidle")
         expect(page.get_by_role("heading", name="ERP Camdis — producción e inventario", exact=True)).to_be_visible()
+        skills = page.locator("#skills [data-skills-overhaul]")
+        expect(skills).to_be_visible()
+        expect(skills.get_by_role("heading", name="IAM, AppSec y autorización", exact=True)).to_be_visible()
+        expect(skills.get_by_role("heading", name="DevSecOps, backend y datos", exact=True)).to_be_visible()
+        expect(skills.get_by_role("heading", name="Operaciones, redes y laboratorios", exact=True)).to_be_visible()
+        for skill_name in ("Keycloak", "OpenID Connect (OIDC)", "PostgreSQL", "GitHub Actions", "Nmap"):
+            expect(skills.get_by_role("button", name=skill_name, exact=True)).to_be_visible()
         expect(page.locator("#about")).to_contain_text("Graduado en septiembre de 2026")
         page.locator("#home").get_by_role("link", name="Solicitar CV", exact=True).click()
         expect(page.get_by_role("heading", name="Conversemos sobre tu oportunidad")).to_be_in_viewport()
