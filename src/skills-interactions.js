@@ -29,7 +29,7 @@ const svgIcon = (body, color = "#0f3b75") => {
 };
 
 const ICONS = {
-  "Keycloak": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/keycloak/keycloak-original.svg",
+  "Keycloak": svgIcon('<circle cx="34" cy="48" r="15"/><path d="M49 48h34M72 48v11M61 48v8"/><path d="M28 39V28a9 9 0 0 1 18 0v5"/>'),
   "OpenID Connect (OIDC)": svgIcon('<circle cx="48" cy="31" r="14"/><path d="M22 78c3-20 13-30 26-30s23 10 26 30"/><path d="M70 24h14M77 17v14"/>'),
   "OAuth 2.0": svgIcon('<circle cx="32" cy="48" r="15"/><path d="M47 48h35M70 48v12M59 48v9"/>'),
   "Authorization Code + PKCE S256": svgIcon('<path d="M48 10 78 21v22c0 20-12 34-30 43-18-9-30-23-30-43V21z"/><path d="m33 48 10 10 21-25"/>'),
