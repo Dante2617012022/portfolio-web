@@ -13,6 +13,8 @@ with sync_playwright() as p:
         errors = []
         page.on("pageerror", lambda error: errors.append(str(error)))
         page.goto("http://127.0.0.1:4173/portfolio-web/", wait_until="networkidle")
+        expect(page.locator("#home")).to_contain_text("Técnico Universitario en Ciberseguridad | SOC · IAM · AppSec")
+        expect(page.locator("#home [aria-live=\"polite\"]")).to_contain_text("Ciberseguridad")
         expect(page.get_by_role("heading", name="ERP Camdis — producción e inventario", exact=True)).to_be_visible()
         skills = page.locator("#skills [data-skills-overhaul]")
         expect(skills).to_be_visible()

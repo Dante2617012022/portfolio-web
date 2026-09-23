@@ -352,10 +352,7 @@ const FlippyWords = ({
       window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
 
     const tick = () => {
-      if (prefersReduced) {
-        setI((v) => (v + 1) % phrases.length);
-        return;
-      }
+      if (prefersReduced) return;
       setFlip(true);
       timeoutRef.current = setTimeout(() => {
         setI((v) => (v + 1) % phrases.length);
