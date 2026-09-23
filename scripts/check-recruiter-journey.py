@@ -21,6 +21,10 @@ with sync_playwright() as p:
         expect(skills.get_by_role("heading", name="Operaciones, redes y laboratorios", exact=True)).to_be_visible()
         for skill_name in ("Keycloak", "OpenID Connect (OIDC)", "PostgreSQL", "GitHub Actions", "Nmap"):
             expect(skills.get_by_role("button", name=skill_name, exact=True)).to_be_visible()
+        bubbles = skills.locator(".skill-bubble")
+        logos = skills.locator(".skill-bubble__logo")
+        assert bubbles.count() == logos.count(), "Every skill bubble must expose a visual logo or pictogram"
+        assert logos.evaluate_all("els => els.every(img => img.complete && img.naturalWidth > 0)"), "One or more skill logos failed to load"
         expect(page.locator("#about")).to_contain_text("Graduado en septiembre de 2026")
         page.locator("#home").get_by_role("link", name="Solicitar CV", exact=True).click()
         expect(page.get_by_role("heading", name="Conversemos sobre tu oportunidad")).to_be_in_viewport()
