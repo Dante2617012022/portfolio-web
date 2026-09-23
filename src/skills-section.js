@@ -1,4 +1,39 @@
+import nmapLogo from "./assets/logos/nmap.jpeg";
+import burpLogo from "./assets/logos/burpsuite.svg";
+import opensslLogo from "./assets/logos/OpenSSL.png";
+import mitreLogo from "./assets/logos/mitre-attack.png";
+import owaspLogo from "./assets/logos/OWASP.png";
+import isoLogo from "./assets/logos/ISO 27001.png";
+import nistLogo from "./assets/logos/NIST-Logo.png";
+
 const SKILLS_MARKER = "data-skills-overhaul-ready";
+
+const DEVICON = "https://cdn.jsdelivr.net/gh/devicons/devicon/icons";
+
+const pictogram = (kind) => {
+  const bodies = {
+    identity: '<circle cx="32" cy="22" r="10"/><path d="M14 51c2-11 10-17 18-17s16 6 18 17"/>',
+    key: '<circle cx="22" cy="31" r="10"/><path d="M31 31h21m-7 0v7m-8-7v5"/>',
+    token: '<rect x="10" y="17" width="44" height="30" rx="7"/><path d="M20 27h24M20 37h15"/>',
+    shield: '<path d="M32 8 50 15v14c0 12-7 21-18 27C21 50 14 41 14 29V15z"/><path d="m23 31 6 6 12-13"/>',
+    users: '<circle cx="25" cy="24" r="8"/><circle cx="43" cy="27" r="6"/><path d="M10 50c2-10 8-15 15-15s14 5 16 15M38 39c7 0 12 4 14 11"/>',
+    phone: '<rect x="20" y="8" width="24" height="48" rx="5"/><path d="M28 15h8M29 49h6"/><path d="m26 34 5 5 9-11"/>',
+    code: '<path d="m23 20-12 12 12 12M41 20l12 12-12 12M36 14 28 50"/>',
+    scan: '<path d="M12 24V12h12M40 12h12v12M52 40v12H40M24 52H12V40"/><circle cx="32" cy="32" r="8"/><path d="m38 38 8 8"/>',
+    secret: '<path d="M14 20h36v28H14z"/><path d="M22 20v-5h20v5M22 30h20M22 38h12"/><circle cx="43" cy="39" r="4"/>',
+    document: '<path d="M18 8h20l10 10v38H18z"/><path d="M38 8v12h10M25 30h16M25 39h16M25 48h11"/>',
+    network: '<circle cx="32" cy="32" r="7"/><circle cx="13" cy="15" r="6"/><circle cx="51" cy="15" r="6"/><circle cx="13" cy="49" r="6"/><circle cx="51" cy="49" r="6"/><path d="m18 19 9 8m19-8-9 8m-19 18 9-8m19 8-9-8"/>',
+    globe: '<circle cx="32" cy="32" r="23"/><path d="M9 32h46M32 9c8 7 12 15 12 23S40 48 32 55M32 9c-8 7-12 15-12 23s4 16 12 23"/>',
+    radio: '<path d="M32 52V29M23 52h18M27 29h10"/><circle cx="32" cy="20" r="4"/><path d="M20 12c-5 5-5 11 0 16M44 12c5 5 5 11 0 16M14 6C5 14 5 25 14 34M50 6c9 8 9 19 0 28"/>',
+    alert: '<path d="M32 9 57 53H7z"/><path d="M32 24v14M32 46h.01"/>',
+    clock: '<circle cx="32" cy="32" r="23"/><path d="M32 18v15l10 6"/>',
+    terminal: '<rect x="8" y="12" width="48" height="40" rx="5"/><path d="m17 25 8 7-8 7M29 40h15"/>',
+    target: '<circle cx="32" cy="32" r="22"/><circle cx="32" cy="32" r="13"/><circle cx="32" cy="32" r="4"/><path d="M32 4v8M32 52v8M4 32h8M52 32h8"/>',
+  };
+  const body = bodies[kind] || bodies.shield;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="#0f172a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">${body}</svg>`;
+  return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+};
 
 const SKILL_GROUPS = [
   {
@@ -6,18 +41,18 @@ const SKILL_GROUPS = [
     description: "Controles implementados y validados en proyectos propios de Camdis.",
     accent: ["#2563eb", "#0891b2"],
     skills: [
-      ["KC", "Keycloak"],
-      ["OIDC", "OpenID Connect (OIDC)"],
-      ["OAUTH", "OAuth 2.0"],
-      ["PKCE", "Authorization Code + PKCE S256"],
-      ["JWT", "JWT"],
-      ["JWKS", "JWKS"],
-      ["RBAC", "RBAC y mínimo privilegio"],
-      ["MFA", "MFA"],
-      ["CSRF", "Protección CSRF"],
-      ["AUTHZ", "Autorización server-side"],
-      ["HMAC", "HMAC-SHA256 para webhooks"],
-      ["OWASP", "OWASP y desarrollo seguro"],
+      ["KC", "Keycloak", `${DEVICON}/keycloak/keycloak-original.svg`],
+      ["OIDC", "OpenID Connect (OIDC)", pictogram("identity")],
+      ["OAUTH", "OAuth 2.0", pictogram("key")],
+      ["PKCE", "Authorization Code + PKCE S256", pictogram("shield")],
+      ["JWT", "JWT", pictogram("token")],
+      ["JWKS", "JWKS", pictogram("key")],
+      ["RBAC", "RBAC y mínimo privilegio", pictogram("users")],
+      ["MFA", "MFA", pictogram("phone")],
+      ["CSRF", "Protección CSRF", pictogram("shield")],
+      ["AUTHZ", "Autorización server-side", pictogram("shield")],
+      ["HMAC", "HMAC-SHA256 para webhooks", pictogram("secret")],
+      ["OWASP", "OWASP y desarrollo seguro", owaspLogo],
     ],
   },
   {
@@ -25,18 +60,18 @@ const SKILL_GROUPS = [
     description: "Tecnologías usadas en desarrollo, automatización, CI y controles de cadena de suministro.",
     accent: ["#4f46e5", "#0284c7"],
     skills: [
-      ["DEB", "Linux Debian"],
-      ["JS", "JavaScript"],
-      ["NODE", "Node.js"],
-      ["FAST", "Fastify"],
-      ["PG", "PostgreSQL"],
-      ["DOCKER", "Docker"],
-      ["GIT", "Git y GitHub"],
-      ["GHA", "GitHub Actions"],
-      ["CQL", "CodeQL"],
-      ["GL", "Gitleaks"],
-      ["TRIVY", "Trivy"],
-      ["SBOM", "SBOM / CycloneDX"],
+      ["DEB", "Linux Debian", `${DEVICON}/debian/debian-original.svg`],
+      ["JS", "JavaScript", `${DEVICON}/javascript/javascript-original.svg`],
+      ["NODE", "Node.js", `${DEVICON}/nodejs/nodejs-original.svg`],
+      ["FAST", "Fastify", `${DEVICON}/fastify/fastify-original.svg`],
+      ["PG", "PostgreSQL", `${DEVICON}/postgresql/postgresql-original.svg`],
+      ["DOCKER", "Docker", `${DEVICON}/docker/docker-original.svg`],
+      ["GIT", "Git y GitHub", `${DEVICON}/github/github-original.svg`],
+      ["GHA", "GitHub Actions", `${DEVICON}/githubactions/githubactions-original.svg`],
+      ["CQL", "CodeQL", pictogram("code")],
+      ["GL", "Gitleaks", pictogram("secret")],
+      ["TRIVY", "Trivy", pictogram("scan")],
+      ["SBOM", "SBOM / CycloneDX", pictogram("document")],
     ],
   },
   {
@@ -44,22 +79,23 @@ const SKILL_GROUPS = [
     description: "Experiencia profesional en soporte y telecomunicaciones, más práctica técnica en entornos autorizados.",
     accent: ["#0f766e", "#2563eb"],
     skills: [
-      ["WIN", "Windows"],
-      ["TCP", "TCP/IP"],
-      ["DNS", "DNS"],
-      ["TELCO", "xDSL, HFC, FTTH, CATV y 4G/5G"],
-      ["INC", "Gestión de incidentes"],
-      ["SLA", "SLA, documentación y escalamiento"],
-      ["NMAP", "Nmap"],
-      ["BURP", "Burp Suite"],
-      ["MSF", "Metasploit — nivel inicial"],
-      ["NC", "Netcat"],
-      ["SSL", "OpenSSL"],
-      ["MITRE", "MITRE ATT&CK"],
-      ["GRC", "ISO 27001 y NIST — formación aplicada"],
+      ["WIN", "Windows", `${DEVICON}/windows8/windows8-original.svg`],
+      ["TCP", "TCP/IP", pictogram("network")],
+      ["DNS", "DNS", pictogram("globe")],
+      ["TELCO", "xDSL, HFC, FTTH, CATV y 4G/5G", pictogram("radio")],
+      ["INC", "Gestión de incidentes", pictogram("alert")],
+      ["SLA", "SLA, documentación y escalamiento", pictogram("clock")],
+      ["NMAP", "Nmap", nmapLogo],
+      ["BURP", "Burp Suite", burpLogo],
+      ["MSF", "Metasploit — nivel inicial", pictogram("target")],
+      ["NC", "Netcat", pictogram("terminal")],
+      ["SSL", "OpenSSL", opensslLogo],
+      ["MITRE", "MITRE ATT&CK", mitreLogo],
+      ["ISO", "ISO 27001 — formación aplicada", isoLogo],
+      ["NIST", "NIST — formación aplicada", nistLogo],
     ],
   },
-]
+];
 
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 
@@ -153,19 +189,33 @@ const addStyles = () => {
       width: 100%;
       height: 100%;
       place-items: center;
-      border: 1px solid rgba(186, 230, 253, .55);
+      overflow: hidden;
+      border: 1px solid rgba(186, 230, 253, .68);
       border-radius: inherit;
-      color: #fff;
-      font-size: .72rem;
-      font-weight: 900;
-      letter-spacing: .025em;
-      text-align: center;
-      text-shadow: 0 1px 5px rgba(0, 0, 0, .65);
+      background:
+        radial-gradient(circle at 32% 24%, rgba(255, 255, 255, .98), rgba(241, 245, 249, .94) 58%, rgba(203, 213, 225, .92));
       box-shadow:
         0 11px 24px rgba(2, 132, 199, .22),
-        inset 0 1px 0 rgba(255, 255, 255, .22);
+        inset 0 1px 0 rgba(255, 255, 255, .88);
       transition: transform .16s ease, filter .16s ease, box-shadow .16s ease;
       user-select: none;
+    }
+
+    .skill-bubble__logo {
+      width: 68%;
+      height: 68%;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 3px rgba(15, 23, 42, .16));
+      pointer-events: none;
+    }
+
+    .skill-bubble__fallback {
+      color: #0f172a;
+      font-size: .68rem;
+      font-weight: 900;
+      letter-spacing: .02em;
+      text-align: center;
+      pointer-events: none;
     }
 
     .skill-bubble:hover .skill-bubble__inner,
@@ -269,20 +319,38 @@ const createBubbleArena = (group, tooltip) => {
   arena.className = "skills-overhaul__arena";
   arena.setAttribute("aria-label", `Burbujas de ${group.title}`);
 
-  const bubbles = group.skills.map(([shortName, fullName], index) => {
+  const bubbles = group.skills.map(([shortName, fullName, iconSrc], index) => {
     const diameter = shortName.length >= 6 ? 68 : shortName.length >= 4 ? 62 : 58;
     const bubble = document.createElement("button");
     bubble.type = "button";
     bubble.className = "skill-bubble";
     bubble.style.width = `${diameter}px`;
     bubble.style.height = `${diameter}px`;
+    bubble.style.setProperty("--skill-accent", group.accent[0]);
     bubble.setAttribute("aria-label", fullName);
     bubble.title = fullName;
 
     const inner = document.createElement("span");
     inner.className = "skill-bubble__inner";
-    inner.style.background = `linear-gradient(145deg, ${group.accent[0]}, ${group.accent[1]})`;
-    inner.textContent = shortName;
+
+    const image = document.createElement("img");
+    image.className = "skill-bubble__logo";
+    image.src = iconSrc;
+    image.alt = "";
+    image.decoding = "async";
+    image.referrerPolicy = "no-referrer";
+
+    const fallback = document.createElement("span");
+    fallback.className = "skill-bubble__fallback";
+    fallback.textContent = shortName;
+    fallback.hidden = true;
+
+    image.addEventListener("error", () => {
+      image.hidden = true;
+      fallback.hidden = false;
+    });
+
+    inner.append(image, fallback);
     bubble.append(inner);
 
     const showTooltip = (event) => {
