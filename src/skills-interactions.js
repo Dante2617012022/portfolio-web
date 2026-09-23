@@ -67,6 +67,7 @@ const ICONS = {
   Netcat: svgIcon('<rect x="14" y="19" width="68" height="58" rx="7"/><path d="m26 36 12 11-12 11M45 60h22"/>'),
   OpenSSL: opensslLogo,
   "MITRE ATT&CK": mitreLogo,
+  "ISO 27001 y NIST — formación aplicada": isoLogo,
   "ISO 27001 — formación aplicada": isoLogo,
   "NIST — formación aplicada": nistLogo,
 
