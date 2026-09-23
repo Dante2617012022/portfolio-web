@@ -183,7 +183,6 @@ const addLogo = (bubble) => {
   const icon = ICONS[label];
   if (!inner || !icon) return;
 
-  const fallbackText = inner.textContent.trim();
   inner.textContent = "";
 
   const shell = document.createElement("span");
@@ -195,10 +194,10 @@ const addLogo = (bubble) => {
   image.alt = "";
   image.decoding = "async";
   image.draggable = false;
+  image.referrerPolicy = "no-referrer";
 
   image.addEventListener("error", () => {
-    shell.textContent = fallbackText;
-    shell.classList.add("skill-bubble__logo-fallback");
+    image.src = svgIcon('<rect x="18" y="18" width="60" height="60" rx="12"/><path d="M31 38h34M31 50h24M31 62h16"/>');
   }, { once: true });
 
   shell.append(image);
