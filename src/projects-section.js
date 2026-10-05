@@ -419,6 +419,13 @@ const projects = [
     codeLink: 'https://github.com/Dante2617012022/camdis-erp-case-study#código-para-evaluar',
   },
   {
+    name: 'Mini-SOC Lab — detección y respuesta', status: 'Blue Team Lab · v1 validada',
+    description: 'Laboratorio defensivo propio con un flujo reproducible de telemetría, detección, triage, respuesta temporal y rollback. La evidencia distingue explícitamente laboratorio de experiencia SOC productiva.',
+    tags: ['Wazuh', 'Suricata', 'nftables', 'YARA', 'Blue Team'],
+    link: evidenceRoot + '/case-studies/mini-soc-lab.md', label: 'Ver caso Mini-SOC',
+    codeLink: 'https://github.com/Dante2617012022/mini-soc-lab',
+  },
+  {
     name: 'E-commerce Camdis — identidad y acceso', status: 'Piloto técnico · Repositorio privado',
     description: 'Comercio electrónico con separación entre clientes y personal, protección de sesiones y reglas de negocio en backend. El caso público explica decisiones de seguridad y límites del piloto.',
     tags: ['AppSec', 'OIDC + PKCE', 'MFA', 'Sesiones', 'DevSecOps'],
@@ -460,8 +467,8 @@ const technicalReview = [
   },
   {
     step: '03',
-    title: 'IAM / AppSec — caso público',
-    description: 'Separación de identidades, sesiones protegidas y autorización en backend.',
+    title: 'Mini-SOC — Blue Team',
+    description: 'Telemetría, detección, triage, respuesta acotada y rollback con evidencia reproducible.',
     link: projects[1].link,
   },
 ];
@@ -507,9 +514,9 @@ const markup = `
     </div>
     ${reviewPath}
     ${projectCard(projects[0], true)}
-    <div class="projects-secondary-grid mt-6" style="display:grid;gap:1.25rem">${projects.slice(1, 3).map(project => projectCard(project)).join('')}</div>
+    <div class="projects-secondary-grid mt-6" style="display:grid;gap:1.25rem">${projects.slice(1, 4).map(project => projectCard(project)).join('')}</div>
     <div class="projects-reveal mt-12"><h3 class="project-heading">Proyectos complementarios</h3><p class="projects-intro" style="margin-left:0">Automatización y propuestas de gobierno y continuidad.</p></div>
-    <div class="projects-secondary-grid mt-6" style="display:grid;gap:1.25rem">${projects.slice(3).map(project => projectCard(project)).join('')}</div>
+    <div class="projects-secondary-grid mt-6" style="display:grid;gap:1.25rem">${projects.slice(4).map(project => projectCard(project)).join('')}</div>
     <div class="projects-reveal text-center">
       <a class="projects-footer-link" href="${evidenceRoot}/PORTFOLIO_EVIDENCE_INDEX.md" target="_blank" rel="noreferrer noopener">Recorrer el índice de evidencias ${ICONS.external}</a>
     </div>
