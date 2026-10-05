@@ -422,8 +422,8 @@ const projects = [
     name: 'Mini-SOC Lab — detección y respuesta', status: 'Blue Team Lab · v1 validada',
     description: 'Laboratorio defensivo propio con un flujo reproducible de telemetría, detección, triage, respuesta temporal y rollback. La evidencia distingue explícitamente laboratorio de experiencia SOC productiva.',
     tags: ['Wazuh', 'Suricata', 'nftables', 'YARA', 'Blue Team'],
-    link: 'https://github.com/Dante2617012022/portfolio-web/blob/portfolio/mini-soc-case-study/docs/case-studies/mini-soc-lab.md', label: 'Ver caso Mini-SOC',
-    codeLink: 'https://github.com/Dante2617012022/mini-soc-lab',
+    link: 'https://github.com/Dante2617012022/mini-soc-lab', label: 'Ver Mini-SOC',
+    codeLink: 'https://github.com/Dante2617012022/mini-soc-lab/blob/main/docs/ARCHITECTURE.md',
   },
   {
     name: 'E-commerce Camdis — identidad y acceso', status: 'Piloto técnico · Repositorio privado',
