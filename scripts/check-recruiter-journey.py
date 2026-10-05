@@ -16,6 +16,12 @@ with sync_playwright() as p:
         expect(page.locator("#home")).to_contain_text("Técnico Universitario en Ciberseguridad | SOC · IAM · AppSec")
         expect(page.locator("#home [aria-live=\"polite\"]")).to_contain_text("Ciberseguridad")
         expect(page.get_by_role("heading", name="ERP Camdis — producción e inventario", exact=True)).to_be_visible()
+        expect(page.get_by_role("heading", name="Recorrido técnico recomendado", exact=True)).to_be_visible()
+        review_links = page.locator("#projects [data-review-link]")
+        assert review_links.count() == 3, "Technical review path must expose exactly three focused public evidence links"
+        expect(review_links.nth(0)).to_have_attribute("href", "https://github.com/Dante2617012022/camdis-erp-case-study")
+        expect(review_links.nth(1)).to_have_attribute("href", "https://github.com/Dante2617012022/camdis-erp-case-study#código-para-evaluar")
+        expect(review_links.nth(2)).to_have_attribute("href", "https://github.com/Dante2617012022/camdis-ecommerce-case-study")
         skills = page.locator("#skills [data-skills-overhaul]")
         expect(skills).to_be_visible()
         expect(skills.get_by_role("heading", name="IAM, AppSec y autorización", exact=True)).to_be_visible()
