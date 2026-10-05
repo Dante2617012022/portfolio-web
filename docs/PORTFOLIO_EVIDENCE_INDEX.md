@@ -11,7 +11,7 @@ Este documento ayuda a reclutadores y evaluadores a revisar el portfolio por com
 | Automatización e IA | [Chatbot](#automatización-segura-e-ia) | Proyecto privado; evidencia sanitizada |
 | GRC | [Plan Director](case-studies/camdis-governance.md) | Propuesta en desarrollo |
 | Pentesting | [Laboratorios](case-studies/offensive-security-labs.md) | Práctica académica autorizada |
-| SOC | Soporte y formación en incidentes, detallados debajo | Experiencia transferible; sin empleo previo en SOC |
+| SOC / Blue Team | [Mini-SOC Lab](case-studies/mini-soc-lab.md) | Laboratorio propio v1 validado; no equivale a empleo SOC |
 
 [Solicitar CV](https://dante2617012022.github.io/portfolio-web/#cv)
 
@@ -67,7 +67,16 @@ Este documento ayuda a reclutadores y evaluadores a revisar el portfolio por com
 - HMAC para webhooks de pago.
 - CI, pruebas automatizadas y CodeQL.
 
-## SOC, soporte e incidentes
+## SOC, Blue Team y soporte
+
+### Mini-SOC Lab
+
+- [Caso de estudio](case-studies/mini-soc-lab.md): arquitectura, decisiones, detection-to-response y límites.
+- [Repositorio público](https://github.com/Dante2617012022/mini-soc-lab): scripts, documentación, CI y evidencia reproducible.
+- Wazuh, Suricata, YARA y nftables en un laboratorio defensivo propio y controlado.
+- Detección, triage, enriquecimiento hash-only, respuesta temporal y rollback.
+
+**Estado:** v1 implementada y validada. Es evidencia práctica de laboratorio; no se presenta como experiencia profesional operando un SOC.
 
 ### Experiencia profesional transferible
 

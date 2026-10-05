@@ -21,7 +21,12 @@ with sync_playwright() as p:
         assert review_links.count() == 3, "Technical review path must expose exactly three focused public evidence links"
         expect(review_links.nth(0)).to_have_attribute("href", "https://github.com/Dante2617012022/camdis-erp-case-study")
         expect(review_links.nth(1)).to_have_attribute("href", "https://github.com/Dante2617012022/camdis-erp-case-study#código-para-evaluar")
-        expect(review_links.nth(2)).to_have_attribute("href", "https://github.com/Dante2617012022/camdis-ecommerce-case-study")
+        expect(review_links.nth(2)).to_have_attribute("href", "https://github.com/Dante2617012022/mini-soc-lab")
+        expect(page.get_by_role("heading", name="Mini-SOC Lab — detección y respuesta", exact=True)).to_be_visible()
+        mini_soc_card = page.get_by_role("heading", name="Mini-SOC Lab — detección y respuesta", exact=True).locator("xpath=ancestor::article")
+        expect(mini_soc_card).to_contain_text("Blue Team Lab · v1 validada")
+        expect(mini_soc_card.get_by_role("link", name="Ver Mini-SOC", exact=True)).to_have_attribute("href", "https://github.com/Dante2617012022/mini-soc-lab")
+        expect(mini_soc_card.get_by_role("link", name="Ver código y ejecutar pruebas", exact=True)).to_have_attribute("href", "https://github.com/Dante2617012022/mini-soc-lab/blob/main/docs/ARCHITECTURE.md")
         skills = page.locator("#skills [data-skills-overhaul]")
         expect(skills).to_be_visible()
         expect(skills.get_by_role("heading", name="IAM, AppSec y autorización", exact=True)).to_be_visible()
