@@ -411,19 +411,21 @@ const styles = `
 const evidenceRoot = 'https://github.com/Dante2617012022/portfolio-web/blob/main/docs';
 const projects = [
   {
-    name: 'ERP Camdis — producción e inventario', status: 'Proyecto principal · Beta interna controlada',
+    name: 'Mini-SOC Lab — detección y respuesta', status: 'Proyecto principal · Blue Team Lab v1 validada',
+    description: 'Laboratorio defensivo propio con un flujo reproducible de telemetría, detección, triage, respuesta temporal y rollback. La evidencia distingue explícitamente laboratorio de experiencia SOC productiva.',
+    tags: ['Wazuh', 'Suricata', 'nftables', 'YARA', 'Blue Team'],
+    controls: ['Telemetría centralizada con Wazuh y detección de red con Suricata.', 'Segmento de pruebas aislado y firewalling con nftables.', 'Active Response acotado con bloqueo temporal y rollback automático.', 'Detecciones, UAT y evidencia sanitizada versionadas en GitHub.'],
+    link: 'https://github.com/Dante2617012022/mini-soc-lab', label: 'Ver Mini-SOC',
+    codeLink: 'https://github.com/Dante2617012022/mini-soc-lab/blob/main/docs/ARCHITECTURE.md',
+    codeLabel: 'Ver arquitectura y detecciones',
+  },
+  {
+    name: 'ERP Camdis — producción e inventario', status: 'Caso aplicado · Beta interna controlada',
     description: 'Producción e inventario con seguridad integrada: autorización en el servidor, movimientos trazables y correcciones que conservan la evidencia original. Un proyecto propio conectado con necesidades reales de una PyME.',
     tags: ['IAM', 'RBAC', 'Integridad', 'Idempotencia', 'Auditoría'],
     controls: ['Identidad y permisos comprobados en el servidor.', 'Reintentos y concurrencia tratados con transacciones y unicidad.', 'Correcciones explícitas sin borrar el historial confirmado.', 'Pruebas, CI y UAT documentadas para cambios controlados.'],
     link: 'https://github.com/Dante2617012022/camdis-erp-case-study', label: 'Ver caso de seguridad e integridad',
     codeLink: 'https://github.com/Dante2617012022/camdis-erp-case-study#código-para-evaluar',
-  },
-  {
-    name: 'Mini-SOC Lab — detección y respuesta', status: 'Blue Team Lab · v1 validada',
-    description: 'Laboratorio defensivo propio con un flujo reproducible de telemetría, detección, triage, respuesta temporal y rollback. La evidencia distingue explícitamente laboratorio de experiencia SOC productiva.',
-    tags: ['Wazuh', 'Suricata', 'nftables', 'YARA', 'Blue Team'],
-    link: 'https://github.com/Dante2617012022/mini-soc-lab', label: 'Ver Mini-SOC',
-    codeLink: 'https://github.com/Dante2617012022/mini-soc-lab/blob/main/docs/ARCHITECTURE.md',
   },
   {
     name: 'E-commerce Camdis — identidad y acceso', status: 'Piloto técnico · Repositorio privado',
@@ -455,20 +457,20 @@ const projects = [
 const technicalReview = [
   {
     step: '01',
-    title: 'ERP — controles verificables',
-    description: 'Riesgo, decisión, evidencia y límites para autorización, idempotencia y trazabilidad.',
+    title: 'Mini-SOC — Blue Team',
+    description: 'Telemetría, detección, triage, respuesta acotada y rollback con evidencia reproducible.',
     link: projects[0].link,
   },
   {
     step: '02',
-    title: 'ERP — código y pruebas',
-    description: 'Muestra pública adaptada con pruebas reproducibles y alcance explícito.',
+    title: 'Mini-SOC — arquitectura',
+    description: 'Topología, zonas de confianza y flujo de telemetría del laboratorio.',
     link: projects[0].codeLink,
   },
   {
     step: '03',
-    title: 'Mini-SOC — Blue Team',
-    description: 'Telemetría, detección, triage, respuesta acotada y rollback con evidencia reproducible.',
+    title: 'ERP — controles verificables',
+    description: 'Riesgo, decisión, evidencia y límites para autorización, idempotencia y trazabilidad.',
     link: projects[1].link,
   },
 ];
@@ -500,7 +502,7 @@ const projectCard = (project, featured = false) => `
     ${project.controls ? `<div class="project-control-grid">${project.controls.map(control => `<div class="project-control">${ICONS.check}<span>${control}</span></div>`).join('')}</div>` : ''}
     <div class="project-actions">
       <a class="project-link ${featured ? 'project-link--primary' : ''}" href="${project.link}" target="_blank" rel="noreferrer noopener"><span>${project.label}</span>${ICONS.external}</a>
-      ${project.codeLink ? `<a class="project-link ${featured ? 'project-link--secondary' : ''}" href="${project.codeLink}" target="_blank" rel="noreferrer noopener"><span>Ver código y ejecutar pruebas</span>${ICONS.code}</a>` : ''}
+      ${project.codeLink ? `<a class="project-link ${featured ? 'project-link--secondary' : ''}" href="${project.codeLink}" target="_blank" rel="noreferrer noopener"><span>${project.codeLabel || 'Ver código y ejecutar pruebas'}</span>${ICONS.code}</a>` : ''}
     </div>
   </article>
 `;
