@@ -28,6 +28,10 @@ with sync_playwright() as p:
         expect(mini_soc_card).to_contain_text("Proyecto principal · Blue Team Lab v1 validada")
         expect(mini_soc_card.get_by_role("link", name="Ver Mini-SOC", exact=True)).to_have_attribute("href", "https://github.com/Dante2617012022/mini-soc-lab")
         expect(mini_soc_card.get_by_role("link", name="Ver arquitectura y detecciones", exact=True)).to_have_attribute("href", "https://github.com/Dante2617012022/mini-soc-lab/blob/main/docs/ARCHITECTURE.md")
+        erp_card = page.get_by_role("heading", name="ERP Camdis — producción e inventario", exact=True).locator("xpath=ancestor::article")
+        erp_control = erp_card.get_by_text("Identidad y permisos comprobados en el servidor.", exact=True)
+        expect(erp_control).to_be_visible()
+        assert erp_control.evaluate("el => getComputedStyle(el.closest('.project-control')).color") == "rgb(51, 65, 85)", "Secondary project controls must remain readable on the light card"
         skills = page.locator("#skills [data-skills-overhaul]")
         expect(skills).to_be_visible()
         expect(skills.get_by_role("heading", name="IAM, AppSec y autorización", exact=True)).to_be_visible()

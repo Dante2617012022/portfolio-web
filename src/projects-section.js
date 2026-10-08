@@ -280,11 +280,14 @@ const styles = `
     display: flex;
     align-items: flex-start;
     gap: .7rem;
-    color: rgba(241,245,249,.9);
     font-size: .9rem;
     line-height: 1.5;
   }
-  #projects .project-control svg { flex: 0 0 auto; margin-top: .12rem; color: #67e8f9; }
+  #projects .project-featured .project-control { color: rgba(241,245,249,.9); }
+  #projects .project-secondary .project-control { color: #334155; }
+  #projects .project-control svg { flex: 0 0 auto; margin-top: .12rem; }
+  #projects .project-featured .project-control svg { color: #67e8f9; }
+  #projects .project-secondary .project-control svg { color: #2563eb; }
   #projects .project-actions {
     display: flex;
     flex-wrap: wrap;
