@@ -47,11 +47,20 @@ const applyHeroContent = () => {
   role.className = "max-w-3xl text-xl sm:text-2xl font-semibold leading-snug text-white";
   role.textContent = PROFILE.role;
   rotatingWords.insertAdjacentElement("afterend", role);
+  const mobility = document.createElement("div");
+  mobility.dataset.heroMobility = "true";
+  mobility.style.cssText = "max-width:42rem;padding:1rem;border:1px solid rgba(125,211,252,.45);border-radius:1rem;background:rgba(15,23,42,.8);color:#f8fafc;line-height:1.6;font-size:1rem";
+  const availability = document.createElement("strong");
+  availability.textContent = PROFILE.mobility;
+  const location = document.createElement("div");
+  location.textContent = `${PROFILE.location}. Trabajo presencial o híbrido.`;
+  mobility.append(availability, location);
+  role.insertAdjacentElement("afterend", mobility);
 
   actions.className = "flex flex-wrap items-center gap-3 pt-2 text-sm sm:text-base";
   actions.replaceChildren(
-    createHeroAction({ href: "#cv", label: "Solicitar CV", primary: true }),
-    createHeroAction({ href: "#projects", label: "Ver proyectos" }),
+    createHeroAction({ href: "#projects", label: "Ver casos SOC", primary: true }),
+    createHeroAction({ href: "#cv", label: "Solicitar CV" }),
     createHeroAction({
       href: "https://github.com/Dante2617012022",
       label: "GitHub",

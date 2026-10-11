@@ -174,7 +174,7 @@ const applyProfileVisuals = () => {
   badge.style.borderColor = "rgba(96, 165, 250, .45)";
   badge.style.background = "rgba(59, 130, 246, .16)";
   badge.style.color = "#bfdbfe";
-  badge.textContent = "SOC e IAM junior · Seguridad aplicada";
+  badge.textContent = "SOC Nivel 1 / Junior · Monitoreo y análisis";
   textBlock.insertBefore(badge, textBlock.firstChild);
 
   const highlights = document.createElement("div");
@@ -183,7 +183,7 @@ const applyProfileVisuals = () => {
   highlights.append(
     createHighlight(PROFILE.tenure, "Operaciones"),
     createHighlight("SLA", "Priorización y escalamiento"),
-    createHighlight("Debian + CI/CD", "Base técnica y automatización"),
+    createHighlight("Wazuh + Suricata", "Práctica en laboratorio"),
   );
 
   const buttonWrapper = button.closest("div");

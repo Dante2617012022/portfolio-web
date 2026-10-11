@@ -641,7 +641,7 @@ const applyEducationOverhaul = () => {
   const intro = document.createElement("p");
   intro.className = "education-overhaul__intro";
   intro.textContent =
-    "Formación universitaria oficial en etapa final, con contenidos directamente aplicables al análisis y la respuesta ante incidentes.";
+    "Técnico Universitario en Ciberseguridad, graduado en septiembre de 2026. Formación aplicada al análisis y la respuesta ante incidentes.";
 
   heading.append(title, underline, intro);
 

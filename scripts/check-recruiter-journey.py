@@ -13,15 +13,15 @@ with sync_playwright() as p:
         errors = []
         page.on("pageerror", lambda error: errors.append(str(error)))
         page.goto("http://127.0.0.1:4173/portfolio-web/", wait_until="networkidle")
-        expect(page.locator("#home")).to_contain_text("Técnico Universitario en Ciberseguridad | SOC · IAM · AppSec")
-        expect(page.locator("#home [aria-live=\"polite\"]")).to_contain_text("Ciberseguridad")
+        expect(page.locator("#home")).to_contain_text("Técnico Universitario en Ciberseguridad | SOC Nivel 1 / Junior")
+        expect(page.locator("#home [aria-live=\"polite\"]")).to_contain_text("Monitoreo y análisis de alertas")
         expect(page.get_by_role("heading", name="Mini-SOC Lab — detección y respuesta", exact=True)).to_be_visible()
         expect(page.get_by_role("heading", name="ERP Camdis — producción e inventario", exact=True)).to_be_visible()
         expect(page.get_by_role("heading", name="Recorrido técnico recomendado", exact=True)).to_be_visible()
         review_links = page.locator("#projects [data-review-link]")
         assert review_links.count() == 3, "Technical review path must expose exactly three focused public evidence links"
-        expect(review_links.nth(0)).to_have_attribute("href", "https://github.com/Dante2617012022/mini-soc-lab")
-        expect(review_links.nth(1)).to_have_attribute("href", "https://github.com/Dante2617012022/mini-soc-lab/blob/main/docs/ARCHITECTURE.md")
+        expect(review_links.nth(0)).to_have_attribute("href", "https://github.com/Dante2617012022/mini-soc-lab/blob/main/docs/detections/SOC-DET-002-fim-realtime-modification.md")
+        expect(review_links.nth(1)).to_have_attribute("href", "https://github.com/Dante2617012022/mini-soc-lab/blob/main/docs/detections/SOC-DET-004-controlled-udp-rate-anomaly.md")
         expect(review_links.nth(2)).to_have_attribute("href", "https://github.com/Dante2617012022/camdis-erp-case-study")
         mini_soc_card = page.get_by_role("heading", name="Mini-SOC Lab — detección y respuesta", exact=True).locator("xpath=ancestor::article")
         assert "project-featured" in (mini_soc_card.get_attribute("class") or ""), "Mini-SOC must be the featured project"
@@ -34,24 +34,23 @@ with sync_playwright() as p:
         assert erp_control.evaluate("el => getComputedStyle(el.closest('.project-control')).color") == "rgb(51, 65, 85)", "Secondary project controls must remain readable on the light card"
         skills = page.locator("#skills [data-skills-overhaul]")
         expect(skills).to_be_visible()
-        expect(skills.get_by_role("heading", name="IAM, AppSec y autorización", exact=True)).to_be_visible()
-        expect(skills.get_by_role("heading", name="DevSecOps, backend y datos", exact=True)).to_be_visible()
-        expect(skills.get_by_role("heading", name="Operaciones, redes y laboratorios", exact=True)).to_be_visible()
-        for skill_name in ("Keycloak", "OpenID Connect (OIDC)", "PostgreSQL", "GitHub Actions", "Nmap"):
-            expect(skills.get_by_role("button", name=skill_name, exact=True)).to_be_visible()
-        bubbles = skills.locator(".skill-bubble")
-        bubble_count = bubbles.count()
-        page.wait_for_function(
-            """expected => {
-                const logos = [...document.querySelectorAll('#skills [data-skills-overhaul] .skill-bubble__logo')];
-                return logos.length === expected && logos.every(img => img.complete && img.naturalWidth > 0);
-            }""",
-            arg=bubble_count,
-        )
+        for group in ("Monitoreo y análisis de alertas", "Operaciones, redes y sistemas", "Seguridad aplicada en proyectos"):
+            expect(skills.get_by_role("heading", name=group, exact=True)).to_be_visible()
+        for skill_name in ("Wazuh (SIEM)", "Suricata / EVE JSON", "VirtualBox", "Git/GitHub y GitHub Actions"):
+            expect(skills.get_by_text(skill_name, exact=True)).to_be_visible()
+        assert skills.locator(".skill-bubble").count() == 0
+        expect(page.locator("#home [data-hero-mobility]")).to_contain_text("Disponibilidad para viajar y relocalizarme en CABA")
+        expect(page.locator("#education")).not_to_contain_text("en etapa final")
+        if width < 768:
+            page.get_by_role("button", name="Abrir menú", exact=True).click()
+            menu_link = page.locator("header").get_by_role("link", name="Proyectos", exact=True).filter(visible=True)
+            menu_link.click()
+            expect(page.locator("#projects h2")).to_be_in_viewport()
         expect(page.locator("#about")).to_contain_text("Graduado en septiembre de 2026")
         page.locator("#home").get_by_role("link", name="Solicitar CV", exact=True).click()
-        expect(page.get_by_role("heading", name="Conversemos sobre tu oportunidad")).to_be_in_viewport()
-        expect(page.locator("#cv").get_by_role("link", name="Solicitar CV por LinkedIn")).to_have_attribute("href", "https://www.linkedin.com/in/dante-gabriel-balbuena-179963235/")
+        expect(page.get_by_role("heading", name="CV y disponibilidad")).to_be_in_viewport()
+        expect(page.locator("#cv").get_by_role("link", name="Contactar por LinkedIn")).to_have_attribute("href", "https://www.linkedin.com/in/dante-gabriel-balbuena-179963235/")
+        expect(page.locator("#cv").get_by_role("link", name="Solicitar CV por email")).to_have_attribute("href", "mailto:dantebalbuenaatar@gmail.com?subject=Solicitud%20de%20CV%20SOC%20Junior")
         assert page.locator('a[download], a[href*="/cv/"], a[href$=".pdf"]').count() == 0
         assert page.locator('a[href*="chatbot-hamburgueseria-v3"]').count() == 0, "Private chatbot repository exposed"
         expect(page.locator("#projects")).to_contain_text("Proyecto privado · Evidencia sanitizada")
@@ -68,8 +67,14 @@ with sync_playwright() as p:
             return h.includes('tu-perfil') || (h.startsWith('#') && h.length > 1 && !document.getElementById(h.slice(1)));
         }).map(a => a.getAttribute('href'))""")
         assert not invalid, invalid
-        assert page.evaluate("document.documentElement.scrollWidth <= innerWidth"), f"Horizontal overflow at {width}"
+        overflow = page.evaluate("""() => [...document.querySelectorAll('main *,header *')].filter(el => {
+            const r=el.getBoundingClientRect(); return r.width && (r.right > innerWidth + 1 || r.left < -1);
+        }).slice(0,12).map(el => ({tag:el.tagName,cls:el.className,text:el.textContent.slice(0,80),right:el.getBoundingClientRect().right}))""")
+        page.screenshot(path=str(OUT / f"layout-{width}.png"), full_page=True)
+        assert page.evaluate("document.documentElement.scrollWidth <= innerWidth"), f"Horizontal overflow at {width}: {overflow}"
         assert not errors, errors
+        page.locator("#home").screenshot(path=str(OUT / f"home-{width}.png"))
+        page.locator("#skills").screenshot(path=str(OUT / f"skills-{width}.png"))
         page.locator("#projects").screenshot(path=str(OUT / f"projects-{width}.png"))
         page.locator("#cv").screenshot(path=str(OUT / f"cv-{width}.png"))
         page.screenshot(path=str(OUT / f"portfolio-{width}.png"), full_page=True)

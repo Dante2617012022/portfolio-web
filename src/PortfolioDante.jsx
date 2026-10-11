@@ -470,10 +470,10 @@ const Navbar = () => {
   const links = [
   { href: "#home", label: "Home" },
   { href: "#about", label: "Perfil" },
-  { href: "#skills", label: "Skills" },
-  { href: "#experience", label: "Experiencia" },
-  { href: "#education", label: "Educación" },
   { href: "#projects", label: "Proyectos" },
+  { href: "#experience", label: "Experiencia" },
+  { href: "#skills", label: "Habilidades" },
+  { href: "#education", label: "Educación" },
   { href: "#certs", label: "Certificados" },
   { href: "#contact", label: "Contacto" }
 ];
@@ -499,7 +499,7 @@ return (
 type="button"
         className="md:hidden inline-flex items-center justify-center w-10 h-10 p-2 bg-transparent border-0 text-white hover:text-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-blue-900 rounded-lg"
         onClick={() => setOpen((v) => !v)}
-        aria-label="Toggle menu"
+        aria-label="Abrir menú"
                 aria-expanded={open}
       >
         <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" aria-hidden>
@@ -773,14 +773,9 @@ const Hero = () => {
             </span>
           </h1>
 
-          <FlippyWords
-            className="block text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4"
-            style={{ textShadow: "0 3px 16px rgba(0,0,0,.25)" }}
-            phrases={["Ciberseguridad", "Desarrollo web", "Automatización digital"]}
-            interval={2600}
-            axis="x"
-            duration={620}
-          />
+          <div aria-live="polite" className="text-3xl sm:text-4xl font-extrabold" style={{ color: '#6ee7b7' }}>
+            Monitoreo y análisis de alertas
+          </div>
 
           <div className="flex flex-wrap items-center gap-3 sm:gap-6 pt-2 text-base sm:text-lg">
   <a
@@ -1739,10 +1734,10 @@ export default function PortfolioDante() {
       <main className="pt-16">
   <Hero />
   <About />
-  <Skills />
-  <Experience />
-  <Education />
   <Projects />
+  <Experience />
+  <Skills />
+  <Education />
   <Certificates />
   <ResumeSection />
   <Contact />

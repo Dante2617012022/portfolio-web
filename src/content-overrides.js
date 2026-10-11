@@ -124,6 +124,7 @@ const addVerifiedSkillsSummary = (section) => {
 
 const updateSkills = () => {
   const section = document.querySelector("#skills");
+  if (section?.dataset.skillsOverhaulReady) return;
   if (!section || section.hasAttribute("data-experience-overhaul-ready") || section.hasAttribute("data-projects-overhaul")) return;
 
   const headings = section.querySelectorAll("h3");

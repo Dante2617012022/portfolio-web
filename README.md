@@ -1,6 +1,6 @@
 # Portfolio profesional - Dante Gabriel Balbuena Atar
 
-Portfolio web orientado a posiciones junior de **ciberseguridad, SOC, AppSec, DevSecOps y pentesting en entornos autorizados**.
+Portfolio web orientado a posiciones junior de **SOC Nivel 1 / Junior, monitoreo y operaciones de seguridad**.
 
 El sitio conecta experiencia operativa en soporte técnico y gestión de incidentes con formación académica y proyectos aplicados de seguridad.
 
@@ -14,7 +14,9 @@ El sitio conecta experiencia operativa en soporte técnico y gestión de inciden
 
 ## Posicionamiento profesional
 
-**Técnico Universitario en Ciberseguridad | SOC e IAM junior | Seguridad aplicada**
+**Técnico Universitario en Ciberseguridad | SOC Nivel 1 / Junior**
+
+Disponibilidad para viajar y relocalizarme en CABA. Residencia actual: Tafí Viejo, Tucumán.
 
 Graduado en septiembre de 2026. [Solicitar CV](https://dante2617012022.github.io/portfolio-web/#cv).
 
@@ -26,6 +28,15 @@ El portfolio diferencia claramente:
 - conocimientos en evolución que todavía no constituyen experiencia profesional especializada.
 
 ## Proyectos principales
+
+### Mini SOC Lab
+
+Proyecto principal para evaluar monitoreo y análisis de alertas con Wazuh y Suricata. Cuatro detecciones documentadas, triage, pruebas positivas/negativas y respuesta temporal con alcance acotado.
+
+[Repositorio](https://github.com/Dante2617012022/mini-soc-lab) · [FIM y recuperación de telemetría](https://github.com/Dante2617012022/mini-soc-lab/blob/main/docs/detections/SOC-DET-002-fim-realtime-modification.md) · [Anomalía UDP controlada](https://github.com/Dante2617012022/mini-soc-lab/blob/main/docs/detections/SOC-DET-004-controlled-udp-rate-anomaly.md)
+
+Los siguientes proyectos complementan ese foco con seguridad aplicada.
+
 
 ### Camdis Operations Platform
 
@@ -79,17 +90,9 @@ Plan Director con diagnóstico, riesgos, políticas propuestas y continuidad. Pl
 
 [Ver caso de gobierno y riesgos](docs/case-studies/camdis-governance.md).
 
-## Objetivos laborales compatibles
+## Objetivo laboral
 
-- Analista SOC Nivel 1.
-- Analista de ciberseguridad junior.
-- Pentester o analista de vulnerabilidades junior.
-- AppSec junior.
-- DevSecOps junior.
-- IAM junior.
-- Soporte e infraestructura con enfoque en seguridad.
-
-No se afirma experiencia profesional como Red Team Operator. Las técnicas asociadas a red teaming fueron practicadas en laboratorios controlados.
+Primera oportunidad en SOC L1 / Junior, monitoreo u operaciones de seguridad. También se consideran funciones de soporte de seguridad compatibles con la experiencia previa. IAM, AppSec y desarrollo seguro son evidencias complementarias; no se presenta experiencia profesional especializada en todas esas áreas.
 
 ## Competencias transferibles desde experiencia profesional
 
@@ -181,11 +184,11 @@ Todas las actividades ofensivas mencionadas fueron realizadas en laboratorios pr
 
 ## Autor
 
-**Dante Gabriel Balbuena Atar**  
+**Dante Gabriel Balbuena Atar**
 Técnico Universitario en Ciberseguridad, con experiencia en soporte técnico, telecomunicaciones, gestión de incidentes y documentación operativa.
 
 ## CV y verificación de publicación
 
-El CV se comparte directamente con reclutadores por contacto profesional. La web y este repositorio no distribuyen versiones descargables ni generan PDFs de CV.
+El CV se solicita por email o LinkedIn y se comparte directamente por contacto profesional. La web y este repositorio no distribuyen versiones descargables ni generan PDFs de CV.
 
 El PR verifica el acceso a contacto, ausencia de descargas de CV, enlaces, errores JavaScript y desbordamientos en Chromium a 1440, 390 y 320 px.

@@ -460,15 +460,15 @@ const projects = [
 const technicalReview = [
   {
     step: '01',
-    title: 'Mini-SOC — Blue Team',
-    description: 'Telemetría, detección, triage, respuesta acotada y rollback con evidencia reproducible.',
-    link: projects[0].link,
+    title: 'Caso SOC — integridad y telemetría',
+    description: 'Alerta FIM, diagnóstico de conectividad y decisión analítica documentada.',
+    link: 'https://github.com/Dante2617012022/mini-soc-lab/blob/main/docs/detections/SOC-DET-002-fim-realtime-modification.md',
   },
   {
     step: '02',
-    title: 'Mini-SOC — arquitectura',
-    description: 'Topología, zonas de confianza y flujo de telemetría del laboratorio.',
-    link: projects[0].codeLink,
+    title: 'Caso SOC — anomalía de red',
+    description: 'Prueba UDP positiva y negativa, contexto y separación de la contención.',
+    link: 'https://github.com/Dante2617012022/mini-soc-lab/blob/main/docs/detections/SOC-DET-004-controlled-udp-rate-anomaly.md',
   },
   {
     step: '03',
