@@ -6,12 +6,12 @@ Este documento ayuda a reclutadores y evaluadores a revisar el portfolio por com
 
 | Interés | Evidencia | Alcance |
 |---|---|---|
+| SOC / Blue Team | [Mini-SOC Lab](case-studies/mini-soc-lab.md) | Laboratorio propio v1 validado; no equivale a empleo SOC |
 | IAM e integridad | [Camdis Operations](case-studies/camdis-operations-security.md) | Beta interna; validaciones documentadas |
 | AppSec y sesiones | [Camdis Commerce](case-studies/camdis-commerce-security.md) | Piloto técnico |
 | Automatización e IA | [Chatbot](#automatización-segura-e-ia) | Proyecto privado; evidencia sanitizada |
 | GRC | [Plan Director](case-studies/camdis-governance.md) | Propuesta en desarrollo |
 | Pentesting | [Laboratorios](case-studies/offensive-security-labs.md) | Práctica académica autorizada |
-| SOC / Blue Team | [Mini-SOC Lab](case-studies/mini-soc-lab.md) | Laboratorio propio v1 validado; no equivale a empleo SOC |
 
 [Solicitar CV](https://dante2617012022.github.io/portfolio-web/#cv)
 

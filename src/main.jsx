@@ -1,3 +1,4 @@
+import 'tailwindcss/dist/tailwind.min.css';
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import PortfolioDante from './PortfolioDante.jsx'
@@ -6,8 +7,6 @@ import { startHeroContent } from './hero-content.js'
 import { startHeroBackground } from './hero-background.js'
 import { startProfileVisuals } from './profile-visuals.js'
 import { startSkillsOverhaul } from './skills-section.js'
-import { startSkillsInteractions } from './skills-interactions.js'
-import { startSkillsClickFix } from './skills-click-fix.js'
 import { startExperienceOverhaul } from './experience-section.js'
 import { startExperienceResponsiveFix } from './experience-responsive-fix.js'
 import { startEducationOverhaul } from './education-section.js'
@@ -42,8 +41,6 @@ startHeroContent()
 startHeroBackground()
 startProfileVisuals()
 startSkillsOverhaul()
-startSkillsInteractions()
-startSkillsClickFix()
 startExperienceOverhaul()
 startExperienceResponsiveFix()
 startEducationOverhaul()
