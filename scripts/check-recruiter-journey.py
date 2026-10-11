@@ -38,7 +38,8 @@ with sync_playwright() as p:
             expect(skills.get_by_role("heading", name=group, exact=True)).to_be_visible()
         for skill_name in ("Wazuh (SIEM)", "Suricata / EVE JSON", "VirtualBox", "Git/GitHub y GitHub Actions"):
             expect(skills.get_by_text(skill_name, exact=True)).to_be_visible()
-        assert skills.locator(".skill-bubble").count() == 0
+        assert skills.locator(".skill-bubble").count() == 21
+        assert skills.locator(".skills-motion-toggle:disabled").count() == 3
         expect(page.locator("#home [data-hero-mobility]")).to_contain_text("Disponibilidad para viajar y relocalizarme en CABA")
         expect(page.locator("#education")).not_to_contain_text("en etapa final")
         if width < 768:
@@ -80,6 +81,27 @@ with sync_playwright() as p:
         page.screenshot(path=str(OUT / f"portfolio-{width}.png"), full_page=True)
         results.append({"width": width, "cv_privacy": "PASS", "links": "PASS", "overflow": False, "page_errors": errors})
         page.close()
+    page = browser.new_page(viewport={"width":390,"height":900}, reduced_motion="no-preference")
+    page.goto("http://127.0.0.1:4173/portfolio-web/", wait_until="networkidle")
+    arena = page.locator(".skills-overhaul__arena").first
+    bubble = arena.locator(".skill-bubble").first
+    initial = bubble.get_attribute("style")
+    page.wait_for_timeout(250)
+    assert bubble.get_attribute("style") != initial, "Bubbles must move with motion enabled"
+    pause = page.get_by_role("button", name="Pausar animación: Monitoreo y análisis de alertas", exact=True)
+    pause.click()
+    initial = bubble.get_attribute("style")
+    page.wait_for_timeout(250)
+    assert bubble.get_attribute("style") == initial, "Pause must stop the animation"
+    page.get_by_role("button", name="Activar animación: Monitoreo y análisis de alertas", exact=True).click()
+    bubble.dispatch_event("click")
+    assert arena.evaluate("el => el.getAnimations({subtree:true}).length") > 0, "Click must bounce the group"
+    page.emulate_media(reduced_motion="reduce")
+    expect(page.locator(".skills-motion-toggle").first).to_be_disabled()
+    initial = bubble.get_attribute("style")
+    page.wait_for_timeout(250)
+    assert bubble.get_attribute("style") == initial, "Reduced motion must stop animation"
+    page.close()
     browser.close()
     (OUT / "summary.json").write_text(json.dumps(results, indent=2))
     print(json.dumps(results, indent=2))
