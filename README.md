@@ -16,9 +16,11 @@ El sitio conecta experiencia operativa en soporte técnico y gestión de inciden
 
 **Técnico Universitario en Ciberseguridad | SOC Nivel 1 / Junior**
 
-Disponibilidad para viajar y relocalizarme en CABA. Residencia actual: Tafí Viejo, Tucumán.
+Trabajo remoto · Disponibilidad para relocalizarme en CABA para modalidad híbrida. Residencia actual: Tafí Viejo, Tucumán.
 
 Graduado en septiembre de 2026. [Solicitar CV](https://dante2617012022.github.io/portfolio-web/#cv).
+
+La experiencia laboral en Camdis abarcó de junio de 2025 a octubre de 2026. Los proyectos propios se presentan por separado, con su estado de desarrollo y evidencia disponible.
 
 El portfolio diferencia claramente:
 
@@ -40,7 +42,7 @@ Los siguientes proyectos complementan ese foco con seguridad aplicada.
 
 ### Camdis Operations Platform
 
-Proyecto principal de producción e inventario con autorización backend, idempotencia, integridad transaccional y correcciones que preservan el historial. Beta interna controlada; cambios posteriores sujetos a CI y UAT.
+Proyecto aplicado de producción e inventario con autorización backend, idempotencia, integridad transaccional y correcciones que preservan el historial. Beta interna controlada; cambios posteriores sujetos a CI y UAT.
 
 [Ver caso de seguridad e integridad](docs/case-studies/camdis-operations-security.md): resumen de dos minutos, tres controles con evidencia y arquitectura conceptual. [Guion de demostración con datos ficticios](docs/case-studies/camdis-operations-walkthrough.md) (pendiente de ejecutar).
 

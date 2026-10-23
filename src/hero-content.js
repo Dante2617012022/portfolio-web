@@ -53,7 +53,7 @@ const applyHeroContent = () => {
   const availability = document.createElement("strong");
   availability.textContent = PROFILE.mobility;
   const location = document.createElement("div");
-  location.textContent = `${PROFILE.location}. Trabajo presencial o híbrido.`;
+  location.textContent = `${PROFILE.location}.`;
   mobility.append(availability, location);
   role.insertAdjacentElement("afterend", mobility);
 

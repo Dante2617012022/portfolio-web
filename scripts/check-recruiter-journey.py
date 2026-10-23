@@ -40,7 +40,13 @@ with sync_playwright() as p:
             expect(skills.get_by_text(skill_name, exact=True)).to_be_visible()
         assert skills.locator(".skill-bubble").count() == 21
         assert skills.locator(".skills-motion-toggle:disabled").count() == 3
-        expect(page.locator("#home [data-hero-mobility]")).to_contain_text("Disponibilidad para viajar y relocalizarme en CABA")
+        for section in ("#home [data-hero-mobility]", "#cv", "#contact"):
+            expect(page.locator(section)).to_contain_text("Trabajo remoto · Disponibilidad para relocalizarme en CABA para modalidad híbrida")
+            expect(page.locator(section)).not_to_contain_text("Trabajo presencial o híbrido")
+        camdis_experience = page.locator("#experience [data-experience-overhaul] article").filter(has_text="Camdis Hamburguesas")
+        expect(camdis_experience).to_contain_text("jun. 2025 – oct. 2026")
+        expect(page.locator("#experience")).not_to_contain_text("Actualidad")
+        expect(camdis_experience).to_contain_text("El estado de los proyectos propios se detalla en la sección Proyectos")
         expect(page.locator("#education")).not_to_contain_text("en etapa final")
         if width < 768:
             page.get_by_role("button", name="Abrir menú", exact=True).click()

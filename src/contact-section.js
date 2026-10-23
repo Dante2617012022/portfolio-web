@@ -287,7 +287,7 @@ const contactMarkup = `
   <div class="contact-heading contact-reveal">
     <h2>Hablemos sobre oportunidades en ciberseguridad</h2>
     <div class="contact-title-line" aria-hidden="true"><span></span><span></span></div>
-    <p class="contact-heading-copy">Busco mi primera oportunidad en SOC Nivel 1, monitoreo u operaciones de seguridad. Disponibilidad para viajar y relocalizarme en CABA.</p>
+    <p class="contact-heading-copy">Busco mi primera oportunidad en SOC Nivel 1, monitoreo u operaciones de seguridad. ${PROFILE.mobility}.</p>
   </div>
 
   <div class="contact-layout">
@@ -297,7 +297,7 @@ const contactMarkup = `
         <p class="contact-kicker">Contacto profesional</p>
         <h3 class="contact-name" id="contact-name">Dante Gabriel Balbuena Atar</h3>
         <p class="contact-role">${PROFILE.role}</p>
-        <p class="contact-summary">Aporto experiencia en diagnóstico, tickets, SLA y escalamiento, junto con práctica de análisis de alertas en Wazuh y Suricata. Trabajo presencial o híbrido con relocalización; actualmente resido en Tucumán.</p>
+        <p class="contact-summary">Aporto experiencia en diagnóstico, tickets, SLA y escalamiento, junto con práctica de análisis de alertas en Wazuh y Suricata.</p>
 
         <div class="contact-actions" aria-label="Canales de contacto">
           <a class="contact-action contact-action-primary" href="mailto:${getEmail()}?subject=Oportunidad%20laboral%20en%20ciberseguridad"><span aria-hidden="true">✉</span>Enviar email</a>
@@ -319,13 +319,13 @@ const contactMarkup = `
       <div style="position:relative">
         <h3 id="contact-details-title">Información profesional</h3>
         <ul class="contact-side-list">
-          <li><span class="contact-side-icon" aria-hidden="true">⌖</span><span><strong>Residencia actual</strong><br>Tafí Viejo, Tucumán, Argentina<br><strong>Disponibilidad</strong><br>Viaje y relocalización a CABA</span></li>
+          <li><span class="contact-side-icon" aria-hidden="true">⌖</span><span>${PROFILE.location}<br><strong>Disponibilidad</strong><br>${PROFILE.mobility}</span></li>
           <li><span class="contact-side-icon" aria-hidden="true">SEC</span><span><strong>Objetivo</strong><br>SOC Nivel 1 / Junior · Operaciones de seguridad</span></li>
           <li><span class="contact-side-icon" aria-hidden="true">@</span><span><strong>Canal recomendado</strong><br>Contacto y seguimiento por email</span></li>
         </ul>
         <div class="contact-badges" aria-label="Estado profesional">
           <span class="contact-badge">● Abierto a oportunidades junior</span>
-          <span class="contact-badge">Viaje y relocalización a CABA</span>
+          <span class="contact-badge">${PROFILE.mobilityShort}</span>
         </div>
       </div>
     </aside>

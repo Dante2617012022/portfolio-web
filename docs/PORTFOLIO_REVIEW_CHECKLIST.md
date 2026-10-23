@@ -21,18 +21,19 @@ Abrir la URL local indicada por Vite.
 
 La sección Proyectos debe mostrar, en este orden:
 
-1. **Camdis Operations Platform** como proyecto principal.
-2. **Camdis Commerce Platform**.
-3. **Chatbot de pedidos con IA controlada**.
-4. **Hacking ético y vulnerabilidades**.
-5. **Camdis Digital Security Program**.
+1. **Mini-SOC Lab — detección y respuesta** como proyecto principal.
+2. **ERP Camdis — producción e inventario**.
+3. **E-commerce Camdis — identidad y acceso**.
+4. **Trabajos académicos — Ciberseguridad UGR**.
+5. **Chatbot de pedidos con IA controlada**.
+6. **Camdis Digital Security Program**.
 
 Comprobar:
 
-- [ ] Camdis conserva la tarjeta destacada.
+- [ ] Mini-SOC conserva la tarjeta destacada y abre el recorrido técnico recomendado.
 - [ ] La arquitectura de Camdis es conceptual y no representa topología operativa.
 - [ ] Los controles se expresan por capacidad: IAM, AppSec, DevSecOps y continuidad.
-- [ ] El chatbot aparece como repositorio público.
+- [ ] El chatbot enlaza solo a evidencia sanitizada; su repositorio operativo permanece privado.
 - [ ] Los laboratorios se presentan como académicos y autorizados.
 - [ ] No se afirma experiencia profesional como Red Team Operator.
 
@@ -40,10 +41,11 @@ Comprobar:
 
 Abrir y comprobar:
 
-- [ ] caso sanitizado de Camdis;
+- [ ] repositorio y casos de análisis de alertas del Mini-SOC;
+- [ ] casos públicos de ERP y e-commerce Camdis;
 - [ ] índice de evidencias;
 - [ ] política de divulgación pública;
-- [ ] repositorio del chatbot;
+- [ ] evidencia sanitizada del chatbot;
 - [ ] casos de Hacking Ético;
 - [ ] portfolio, GitHub y LinkedIn desde README cuando corresponda.
 
@@ -69,7 +71,7 @@ Probar al menos en 1440 × 900 y 1366 × 768:
 Probar al menos en 390 × 844 y 360 × 800:
 
 - [ ] menú y botones accesibles;
-- [ ] Camdis permanece como primer proyecto;
+- [ ] Mini-SOC permanece como primer proyecto;
 - [ ] textos no desbordan las tarjetas;
 - [ ] chips se adaptan a varias líneas;
 - [ ] enlaces pueden pulsarse sin solapamiento;
@@ -107,7 +109,10 @@ En DevTools:
 ## 7. Contenido profesional
 
 - [ ] nombre y experiencia coinciden con CV y LinkedIn;
-- [ ] el hero prioriza SOC e IAM junior y los proyectos muestran AppSec y GRC;
+- [ ] el hero prioriza SOC Nivel 1 / Junior y los proyectos complementarios muestran AppSec y GRC;
+- [ ] Inicio, CV y Contacto indican trabajo remoto y relocalización a CABA para modalidad híbrida;
+- [ ] Camdis figura como experiencia laboral de junio de 2025 a octubre de 2026;
+- [ ] el estado de los proyectos propios se presenta por separado de las fechas laborales;
 - [ ] DevSecOps está respaldado por evidencia de CI, análisis estático, detección de secretos, escaneo, SBOM y prácticas de cadena de suministro;
 - [ ] no se afirma experiencia profesional consolidada en DevSecOps ni dentro de un SOC;
 - [ ] Operations es beta interna; Commerce es piloto; el Plan Director es propuesta;
