@@ -1,4 +1,5 @@
 import ResumeSection from './ResumeSection.jsx';
+import { PROFILE } from './profile-content.js';
 import React, { useEffect, useState, useRef, useLayoutEffect } from "react";
 import { motion, useReducedMotion } from "framer-motion"; // eslint-disable-line no-unused-vars
 import FloatingLogos from "./components/FloatingLogos";
@@ -1235,7 +1236,7 @@ const Experience = () => {
                   Automatización Digital – Camdis
                 </h3>
                 <p className="text-sm text-slate-500 exp-meta">
-                  Rol: Automatización · Período: 2025 – Actualidad
+                  Rol: Automatización · Período: {PROFILE.camdisPeriod}
                 </p>
               </header>
 

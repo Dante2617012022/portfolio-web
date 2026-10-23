@@ -515,7 +515,7 @@ const markup = `
     <div class="projects-reveal text-center">
       <span class="projects-kicker">${ICONS.shield} Seguridad aplicada</span>
       <h2 class="projects-title">Proyectos y evidencias</h2>
-      <p class="projects-intro">Problemas reales, decisiones técnicas y controles verificables. Cada caso distingue su estado y el alcance de la evidencia disponible.</p>
+      <p class="projects-intro">Proyectos propios, laboratorios y casos de estudio con decisiones técnicas y controles verificables. Cada caso indica su estado de desarrollo y el alcance de la evidencia disponible.</p>
     </div>
     ${reviewPath}
     ${projectCard(projects[0], true)}

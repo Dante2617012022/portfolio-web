@@ -6,7 +6,7 @@ export default function ResumeSection() {
       <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
         <h2 id="cv-title" className="text-3xl font-extrabold">CV y disponibilidad</h2>
         <p className="mt-4 text-gray-700">CV orientado a SOC Nivel 1 / Junior, con experiencia en soporte técnico y práctica de análisis de alertas en laboratorio.</p>
-        <p className="mt-4 font-semibold text-blue-800">{PROFILE.mobility}. Trabajo presencial o híbrido.</p>
+        <p className="mt-4 font-semibold text-blue-800">{PROFILE.mobility}.</p>
         <p className="mt-2 text-gray-600">{PROFILE.location}.</p>
         <div className="mt-6 flex flex-wrap justify-center gap-4">
           <a className="inline-block rounded-lg bg-blue-700 px-6 py-3 text-white font-semibold focus:ring-4 focus:ring-blue-300"

@@ -162,11 +162,11 @@ const updateExperience = () => {
     setText(headings[0], "Desarrollo seguro y automatización aplicada – Camdis");
     setText(
       header?.querySelector("p"),
-      "Proyecto propio · Período: 2025 – Actualidad",
+      `Experiencia laboral · Período: ${PROFILE.camdisPeriod}`,
     );
     setText(
       header?.nextElementSibling,
-      "Desarrollo de soluciones operativas para una PyME gastronómica, incorporando controles de AppSec, IAM, DevSecOps y continuidad desde el diseño.",
+      "Desarrollé soluciones operativas para una PyME gastronómica, incorporando controles de seguridad desde el diseño. El estado de los proyectos propios se detalla en la sección Proyectos.",
     );
     replaceList(camdisCard.querySelector("ul"), [
       "Plataforma privada de pedidos con separación de identidades, autorización backend, seguridad de sesiones, pruebas automatizadas y controles de cadena de suministro.",
