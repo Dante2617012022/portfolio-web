@@ -1,6 +1,6 @@
 # Portfolio profesional - Dante Gabriel Balbuena Atar
 
-Portfolio web orientado a posiciones junior de **SOC Nivel 1 / Junior, monitoreo y operaciones de seguridad**.
+Portfolio web de un Técnico Universitario en Ciberseguridad con experiencia en **soporte técnico, desarrollo de ERP y automatización en Camdis**, y práctica SOC en laboratorio.
 
 El sitio conecta experiencia operativa en soporte técnico y gestión de incidentes con formación académica y proyectos aplicados de seguridad.
 
@@ -14,13 +14,13 @@ El sitio conecta experiencia operativa en soporte técnico y gestión de inciden
 
 ## Posicionamiento profesional
 
-**Técnico Universitario en Ciberseguridad | SOC Nivel 1 / Junior**
+**Técnico Universitario en Ciberseguridad · Soporte IT, ciberseguridad y desarrollo aplicado**
 
-Trabajo remoto · Disponibilidad para relocalizarme en CABA para modalidad híbrida. Residencia actual: Tafí Viejo, Tucumán.
+Trabajo remoto · Disponibilidad para relocalizarme en CABA/AMBA. Residencia actual: Tafí Viejo, Tucumán. Modalidad y fecha de incorporación a coordinar.
 
 Graduado en septiembre de 2026. [Solicitar CV](https://dante2617012022.github.io/portfolio-web/#cv).
 
-La experiencia laboral en Camdis abarcó de junio de 2025 a octubre de 2026. Los proyectos propios se presentan por separado, con su estado de desarrollo y evidencia disponible.
+Actualmente trabajo en Camdis, desde junio de 2025. Desarrollo un ERP y herramientas de automatización, con relevamiento de necesidades, pruebas y prácticas DevSecOps. Las muestras públicas documentan decisiones del trabajo aplicado; no sustituyen ni exponen el sistema privado. Cada proyecto indica su etapa de desarrollo y evidencia disponible.
 
 El portfolio diferencia claramente:
 
@@ -37,7 +37,7 @@ Proyecto principal para evaluar monitoreo y análisis de alertas con Wazuh y Sur
 
 [Repositorio](https://github.com/Dante2617012022/mini-soc-lab) · [FIM y recuperación de telemetría](https://github.com/Dante2617012022/mini-soc-lab/blob/main/docs/detections/SOC-DET-002-fim-realtime-modification.md) · [Anomalía UDP controlada](https://github.com/Dante2617012022/mini-soc-lab/blob/main/docs/detections/SOC-DET-004-controlled-udp-rate-anomaly.md)
 
-Los siguientes proyectos complementan ese foco con seguridad aplicada.
+Los proyectos de Camdis permiten evaluar desarrollo aplicado y seguridad integrada al ciclo de trabajo.
 
 
 ### Camdis Operations Platform
@@ -94,7 +94,13 @@ Plan Director con diagnóstico, riesgos, políticas propuestas y continuidad. Pl
 
 ## Objetivo laboral
 
-Primera oportunidad en SOC L1 / Junior, monitoreo u operaciones de seguridad. También se consideran funciones de soporte de seguridad compatibles con la experiencia previa. IAM, AppSec y desarrollo seguro son evidencias complementarias; no se presenta experiencia profesional especializada en todas esas áreas.
+El sitio ofrece tres recorridos con evidencia específica:
+
+- **Soporte de aplicaciones, Mesa de Ayuda y NOC junior:** experiencia profesional en diagnóstico, tickets, comunicación y SLA, junto con el conocimiento de procesos del ERP.
+- **SOC L1 / junior:** formación universitaria y laboratorio de detección y respuesta; primera oportunidad profesional en SOC.
+- **Desarrollo junior y automatización:** trabajo actual en Camdis, Node.js, PostgreSQL, pruebas y prácticas DevSecOps. Interés en posiciones trainee de desarrollo seguro compatibles con esa base.
+
+La sección CV permite solicitar una versión para cada recorrido y otra para atención al cliente/call center. El uso de controles de seguridad en proyectos no se presenta como experiencia senior en DevOps, AppSec o IAM.
 
 ## Competencias transferibles desde experiencia profesional
 

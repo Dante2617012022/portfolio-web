@@ -13,8 +13,10 @@ with sync_playwright() as p:
         errors = []
         page.on("pageerror", lambda error: errors.append(str(error)))
         page.goto("http://127.0.0.1:4173/portfolio-web/", wait_until="networkidle")
-        expect(page.locator("#home")).to_contain_text("Técnico Universitario en Ciberseguridad | SOC Nivel 1 / Junior")
-        expect(page.locator("#home [aria-live=\"polite\"]")).to_contain_text("Monitoreo y análisis de alertas")
+        expect(page.locator("#home")).to_contain_text("Técnico Universitario en Ciberseguridad")
+        expect(page.locator("#home [aria-live=\"polite\"]")).to_contain_text("Soporte, desarrollo y seguridad aplicada")
+        expect(page.locator("#career-paths article")).to_have_count(3)
+        expect(page.locator("#career-paths")).to_contain_text("Trabajo actual en Camdis")
         expect(page.get_by_role("heading", name="Mini-SOC Lab — detección y respuesta", exact=True)).to_be_visible()
         expect(page.get_by_role("heading", name="ERP Camdis — producción e inventario", exact=True)).to_be_visible()
         expect(page.get_by_role("heading", name="Recorrido técnico recomendado", exact=True)).to_be_visible()
@@ -41,12 +43,12 @@ with sync_playwright() as p:
         assert skills.locator(".skill-bubble").count() == 21
         assert skills.locator(".skills-motion-toggle:disabled").count() == 3
         for section in ("#home [data-hero-mobility]", "#cv", "#contact"):
-            expect(page.locator(section)).to_contain_text("Trabajo remoto · Disponibilidad para relocalizarme en CABA para modalidad híbrida")
+            expect(page.locator(section)).to_contain_text("Trabajo remoto · Disponibilidad para relocalizarme en CABA/AMBA")
             expect(page.locator(section)).not_to_contain_text("Trabajo presencial o híbrido")
         camdis_experience = page.locator("#experience [data-experience-overhaul] article").filter(has_text="Camdis Hamburguesas")
-        expect(camdis_experience).to_contain_text("jun. 2025 – oct. 2026")
-        expect(page.locator("#experience")).not_to_contain_text("Actualidad")
-        expect(camdis_experience).to_contain_text("El estado de los proyectos propios se detalla en la sección Proyectos")
+        expect(camdis_experience).to_contain_text("jun. 2025 – Actualidad")
+        expect(camdis_experience).to_contain_text("prácticas DevSecOps")
+        expect(camdis_experience).to_contain_text("beta interna controlada")
         expect(page.locator("#education")).not_to_contain_text("en etapa final")
         if width < 768:
             page.get_by_role("button", name="Abrir menú", exact=True).click()
@@ -57,7 +59,9 @@ with sync_playwright() as p:
         page.locator("#home").get_by_role("link", name="Solicitar CV", exact=True).click()
         expect(page.get_by_role("heading", name="CV y disponibilidad")).to_be_in_viewport()
         expect(page.locator("#cv").get_by_role("link", name="Contactar por LinkedIn")).to_have_attribute("href", "https://www.linkedin.com/in/dante-gabriel-balbuena-179963235/")
-        expect(page.locator("#cv").get_by_role("link", name="Solicitar CV por email")).to_have_attribute("href", "mailto:dantebalbuenaatar@gmail.com?subject=Solicitud%20de%20CV%20SOC%20Junior")
+        expect(page.locator("#cv").get_by_role("link", name="SOC L1 / Blue Team", exact=True)).to_have_attribute("href", "mailto:dantebalbuenaatar@gmail.com?subject=Solicitud%20de%20CV%20SOC%20Junior")
+        expect(page.locator('#cv a[href^="mailto:"]')).to_have_count(4)
+        expect(page.locator("#cv").get_by_role("link", name="Desarrollo y automatización", exact=True)).to_have_attribute("href", "mailto:dantebalbuenaatar@gmail.com?subject=Solicitud%20de%20CV%20Desarrollo%20Junior%20y%20Automatizacion")
         assert page.locator('a[download], a[href*="/cv/"], a[href$=".pdf"]').count() == 0
         assert page.locator('a[href*="chatbot-hamburgueseria-v3"]').count() == 0, "Private chatbot repository exposed"
         expect(page.locator("#projects")).to_contain_text("Proyecto privado · Evidencia sanitizada")
@@ -84,6 +88,7 @@ with sync_playwright() as p:
         page.locator("#skills").screenshot(path=str(OUT / f"skills-{width}.png"))
         page.locator("#projects").screenshot(path=str(OUT / f"projects-{width}.png"))
         page.locator("#cv").screenshot(path=str(OUT / f"cv-{width}.png"))
+        page.locator("#career-paths").screenshot(path=str(OUT / f"career-paths-{width}.png"))
         page.screenshot(path=str(OUT / f"portfolio-{width}.png"), full_page=True)
         results.append({"width": width, "cv_privacy": "PASS", "links": "PASS", "overflow": False, "page_errors": errors})
         page.close()

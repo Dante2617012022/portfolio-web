@@ -29,22 +29,22 @@ const EXPERIENCES = [
   },
   {
     order: "02",
-    eyebrow: "Automatización aplicada",
+    eyebrow: "Trabajo actual",
     period: PROFILE.camdisPeriod,
-    title: "Tecnología, automatización y seguridad aplicada",
+    title: "Desarrollo de ERP y automatización",
     company: "Camdis Hamburguesas",
     summary:
-      "Desarrollé herramientas para digitalizar operaciones e incorporar controles de seguridad en aplicaciones de una PyME gastronómica.",
+      "Desarrollo herramientas para digitalizar operaciones de una PyME gastronómica, desde el relevamiento de necesidades hasta las pruebas y la validación funcional, incorporando prácticas DevSecOps.",
     highlights: [
       "Desarrollo de Camdis Operations para producción e inventario, con autorización y trazabilidad del lado del servidor.",
       "Controles de integridad, idempotencia y correcciones que preservan el historial operativo.",
       "E-commerce en piloto técnico: separación entre clientes y personal, autorización por roles y protección de sesiones.",
-      "Casos de estudio y muestras de código con pruebas ejecutables. El estado de los proyectos propios se detalla en la sección Proyectos.",
+      "Pruebas automatizadas y controles de seguridad en CI con GitHub Actions. Publico muestras acotadas para demostrar decisiones técnicas; el ERP permanece en beta interna controlada.",
     ],
     tags: [
       "Node.js",
       "Automatización",
-      "Security by Design",
+      "Prácticas DevSecOps",
       "PostgreSQL",
       "Desarrollo aplicado",
     ],
@@ -625,7 +625,7 @@ const applyExperienceOverhaul = () => {
   [
     [PROFILE.tenure, "Operaciones y soporte técnico"],
     ["Incidentes + SLA", "Priorización y escalamiento"],
-    ["Telecom + automatización", "Base diferencial para SOC"],
+    ["Desarrollo en Camdis", "ERP y automatización en curso"],
   ].forEach(([strongText, spanText]) => {
     const metric = createElement("div", "experience-overhaul__metric");
     metric.append(createElement("strong", "", strongText), createElement("span", "", spanText));

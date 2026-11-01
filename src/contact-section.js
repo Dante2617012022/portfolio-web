@@ -285,9 +285,9 @@ const ensureContactStyles = () => {
 
 const contactMarkup = `
   <div class="contact-heading contact-reveal">
-    <h2>Hablemos sobre oportunidades en ciberseguridad</h2>
+    <h2>Hablemos sobre oportunidades en tecnología</h2>
     <div class="contact-title-line" aria-hidden="true"><span></span><span></span></div>
-    <p class="contact-heading-copy">Busco mi primera oportunidad en SOC Nivel 1, monitoreo u operaciones de seguridad. ${PROFILE.mobility}.</p>
+    <p class="contact-heading-copy">Aporto experiencia en soporte técnico, desarrollo aplicado en Camdis y práctica de seguridad en laboratorio. ${PROFILE.mobility}.</p>
   </div>
 
   <div class="contact-layout">
@@ -320,7 +320,7 @@ const contactMarkup = `
         <h3 id="contact-details-title">Información profesional</h3>
         <ul class="contact-side-list">
           <li><span class="contact-side-icon" aria-hidden="true">⌖</span><span>${PROFILE.location}<br><strong>Disponibilidad</strong><br>${PROFILE.mobility}</span></li>
-          <li><span class="contact-side-icon" aria-hidden="true">SEC</span><span><strong>Objetivo</strong><br>SOC Nivel 1 / Junior · Operaciones de seguridad</span></li>
+          <li><span class="contact-side-icon" aria-hidden="true">IT</span><span><strong>Oportunidades</strong><br>Soporte de aplicaciones / NOC · SOC L1 · Desarrollo junior</span></li>
           <li><span class="contact-side-icon" aria-hidden="true">@</span><span><strong>Canal recomendado</strong><br>Contacto y seguimiento por email</span></li>
         </ul>
         <div class="contact-badges" aria-label="Estado profesional">

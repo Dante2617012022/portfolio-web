@@ -15,6 +15,12 @@ Este documento ayuda a reclutadores y evaluadores a revisar el portfolio por com
 
 [Solicitar CV](https://dante2617012022.github.io/portfolio-web/#cv)
 
+## Experiencia actual y versiones del CV
+
+Camdis es mi trabajo actual (junio de 2025 – Actualidad). El desarrollo del ERP y las herramientas de automatización incluyen requisitos, implementación asistida por IA, pruebas, diagnóstico y validación funcional. Los casos públicos son evidencias acotadas de ese trabajo, con el estado de cada proyecto indicado.
+
+El portfolio permite solicitar CV para soporte IT/NOC, SOC L1, desarrollo/automatización y atención al cliente. Para desarrollo, comenzar por las muestras del ERP; para SOC, por las detecciones del laboratorio. La experiencia profesional en soporte y desarrollo se distingue de la práctica SOC y académica.
+
 ## Seguridad aplicada y AppSec
 
 ### Camdis Operations Platform

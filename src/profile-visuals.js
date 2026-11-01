@@ -174,7 +174,7 @@ const applyProfileVisuals = () => {
   badge.style.borderColor = "rgba(96, 165, 250, .45)";
   badge.style.background = "rgba(59, 130, 246, .16)";
   badge.style.color = "#bfdbfe";
-  badge.textContent = "SOC Nivel 1 / Junior · Monitoreo y análisis";
+  badge.textContent = "Soporte IT · Ciberseguridad · Desarrollo aplicado";
   textBlock.insertBefore(badge, textBlock.firstChild);
 
   const highlights = document.createElement("div");
