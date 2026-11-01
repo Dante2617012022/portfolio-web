@@ -59,7 +59,7 @@ const applyHeroContent = () => {
 
   actions.className = "flex flex-wrap items-center gap-3 pt-2 text-sm sm:text-base";
   actions.replaceChildren(
-    createHeroAction({ href: "#projects", label: "Ver casos SOC", primary: true }),
+    createHeroAction({ href: "#career-paths", label: "Explorar mi experiencia", primary: true }),
     createHeroAction({ href: "#cv", label: "Solicitar CV" }),
     createHeroAction({
       href: "https://github.com/Dante2617012022",

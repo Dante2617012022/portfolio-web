@@ -1,4 +1,5 @@
 import ResumeSection from './ResumeSection.jsx';
+import CareerPaths from './CareerPaths.jsx';
 import { PROFILE } from './profile-content.js';
 import React, { useEffect, useState, useRef, useLayoutEffect } from "react";
 import { motion, useReducedMotion } from "framer-motion"; // eslint-disable-line no-unused-vars
@@ -775,7 +776,7 @@ const Hero = () => {
           </h1>
 
           <div aria-live="polite" className="text-3xl sm:text-4xl font-extrabold" style={{ color: '#6ee7b7' }}>
-            Monitoreo y análisis de alertas
+            Soporte, desarrollo y seguridad aplicada
           </div>
 
           <div className="flex flex-wrap items-center gap-3 sm:gap-6 pt-2 text-base sm:text-lg">
@@ -1735,6 +1736,7 @@ export default function PortfolioDante() {
       <main className="pt-16">
   <Hero />
   <About />
+  <CareerPaths />
   <Projects />
   <Experience />
   <Skills />
