@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Redirecting...</title>
+    <script>
+      (function () {
+        const repoBase = '/portfolio-web'
+        const redirectPath = window.location.pathname.replace(repoBase, '')
+        const search = window.location.search || ''
+        const hash = window.location.hash || ''
+        sessionStorage.setItem('redirect', `${redirectPath}${search}${hash}`)
+        window.location.replace(`${repoBase}/`)
+      })()
+    </script>
+  </head>
+  <body>
+    <noscript>
+      <p>This site requires JavaScript to handle routing correctly.</p>
+      <p>
+        You can manually return to the homepage at
+        <a href="/portfolio-web/">/portfolio-web/</a>.
+      </p>
+    </noscript>
+  </body>
+</html>
